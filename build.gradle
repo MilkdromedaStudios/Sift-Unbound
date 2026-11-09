@@ -81,3 +81,18 @@ publishing {
 tasks.named("runServer") {
 	standardInput = System.in
 }
+
+// Optional shader photo shoot: tools/photoshoot.sh downloads Sodium, Iris and a shader pack into photoshoot/
+// (git-ignored) and runs `runClientGameTest -Pphotoshoot`. Nothing here affects the normal build or the mod jar.
+if (project.hasProperty("photoshoot")) {
+	dependencies {
+		gametestRuntimeOnly fileTree(dir: "photoshoot/mods", include: "*.jar")
+	}
+	tasks.named("runClientGameTest") {
+		jvmArgs "-Dsiftunbound.photoshoot=true"
+		doFirst {
+			copy { from "photoshoot/shaderpacks"; into "build/run/clientGameTest/shaderpacks" }
+			copy { from "photoshoot/config"; into "build/run/clientGameTest/config" }
+		}
+	}
+}

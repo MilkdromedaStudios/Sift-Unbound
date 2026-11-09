@@ -20,6 +20,10 @@ public class SiftClientGameTest implements FabricClientGameTest {
 
 	@Override
 	public void runTest(ClientGameTestContext context) {
+		if (Boolean.getBoolean("siftunbound.photoshoot")) {
+			SiftPhotoshoot.run(context);
+			return;
+		}
 		try (TestSingleplayerContext sp = context.worldBuilder().create()) {
 			sp.getConnection().waitForChunksRender();
 			sp.getServer().runCommand("gamerule spawn_mobs true"); // test worlds turn it off; world-gen spawns need it
@@ -151,7 +155,7 @@ public class SiftClientGameTest implements FabricClientGameTest {
 	}
 
 	/** A dry surface position inside the given Sift biome (searching outward from the origin), or null. */
-	private static BlockPos landIn(ServerLevel sift, String biome) {
+	static BlockPos landIn(ServerLevel sift, String biome) {
 		var key = net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,
 			com.milkdromedastudios.siftunbound.SiftUnbound.id(biome));
 		var found = sift.findClosestBiome3d(h -> h.is(key), new BlockPos(0, 64, 0), 4000, 32, 64);
