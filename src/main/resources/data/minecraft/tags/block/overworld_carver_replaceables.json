@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "the_rift:sift_grass_block",
+    "the_rift:sift_soil",
+    "the_rift:sift_sculk",
+    "the_rift:dark_sift_sculk",
+    "the_rift:sift_sand",
+    "the_rift:soulshale",
+    "the_rift:husk_shell"
+  ]
+}

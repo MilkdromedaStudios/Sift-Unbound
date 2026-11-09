@@ -1,0 +1,179 @@
+{
+  "entity.blub.ambient": {
+    "sounds": [
+      {
+        "name": "the_rift:blub/squeak1"
+      },
+      {
+        "name": "the_rift:blub/squeak2"
+      },
+      {
+        "name": "the_rift:blub/squeak3"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.blub.ambient"
+  },
+  "entity.blub.hurt": {
+    "sounds": [
+      {
+        "name": "the_rift:blub/hurt1"
+      },
+      {
+        "name": "the_rift:blub/hurt2"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.blub.hurt"
+  },
+  "entity.blub.death": {
+    "sounds": [
+      {
+        "name": "the_rift:blub/death"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.blub.death"
+  },
+  "entity.blub.jump": {
+    "sounds": [
+      {
+        "name": "the_rift:blub/hop1"
+      },
+      {
+        "name": "the_rift:blub/hop2"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.blub.jump"
+  },
+  "entity.soul_wisp.ambient": {
+    "sounds": [
+      {
+        "name": "the_rift:soul_wisp/chime1"
+      },
+      {
+        "name": "the_rift:soul_wisp/chime2"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.soul_wisp.ambient"
+  },
+  "entity.soul_wisp.hurt": {
+    "sounds": [
+      {
+        "name": "the_rift:soul_wisp/hurt"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.soul_wisp.hurt"
+  },
+  "entity.soul_wisp.death": {
+    "sounds": [
+      {
+        "name": "the_rift:soul_wisp/death"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.soul_wisp.death"
+  },
+  "entity.sculk_prowler.ambient": {
+    "sounds": [
+      {
+        "name": "the_rift:sculk_prowler/click1"
+      },
+      {
+        "name": "the_rift:sculk_prowler/click2"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sculk_prowler.ambient"
+  },
+  "entity.sculk_prowler.hurt": {
+    "sounds": [
+      {
+        "name": "the_rift:sculk_prowler/hurt"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sculk_prowler.hurt"
+  },
+  "entity.sculk_prowler.death": {
+    "sounds": [
+      {
+        "name": "the_rift:sculk_prowler/death"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sculk_prowler.death"
+  },
+  "block.soul_water.ambient": {
+    "sounds": [
+      {
+        "name": "the_rift:soul_water/bubble1"
+      },
+      {
+        "name": "the_rift:soul_water/bubble2"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.soul_water.ambient"
+  },
+  "block.soul_water.burn": {
+    "sounds": [
+      {
+        "name": "the_rift:soul_water/burn"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.soul_water.burn"
+  },
+  "block.sift_portal.ambient": {
+    "sounds": [
+      {
+        "name": "the_rift:portal/hum"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sift_portal.ambient"
+  },
+  "block.sift_portal.travel": {
+    "sounds": [
+      {
+        "name": "the_rift:portal/travel"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sift_portal.travel"
+  },
+  "block.sift_portal.activate": {
+    "sounds": [
+      {
+        "name": "the_rift:portal/activate"
+      }
+    ],
+    "subtitle": "subtitles.the_rift.sift_portal.activate"
+  },
+  "ambient.sift.loop": {
+    "sounds": [
+      {
+        "name": "the_rift:ambient/loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.sift.additions": {
+    "sounds": [
+      {
+        "name": "the_rift:ambient/addition1"
+      },
+      {
+        "name": "the_rift:ambient/addition2"
+      },
+      {
+        "name": "the_rift:ambient/addition3"
+      }
+    ]
+  },
+  "ambient.sift.mood": {
+    "sounds": [
+      {
+        "name": "the_rift:ambient/mood"
+      }
+    ]
+  },
+  "music.sift": {
+    "sounds": [
+      {
+        "name": "the_rift:music/sift_lullaby",
+        "stream": true
+      }
+    ]
+  }
+}

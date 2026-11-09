@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "the_rift:sift_grass_block"
+    },
+    "title": {
+      "translate": "advancements.the_rift.enter_sift.title"
+    },
+    "description": {
+      "translate": "advancements.the_rift.enter_sift.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "entered": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "the_rift:the_sift"
+      }
+    }
+  },
+  "parent": "the_rift:light_portal"
+}

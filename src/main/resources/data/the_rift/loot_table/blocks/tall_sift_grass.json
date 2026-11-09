@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_shear",
+              "name": "the_rift:short_sift_grass",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 2
+              }
+            },
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "the_rift:tall_sift_grass"
+            }
+          ]
+        }
+      ],
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "the_rift:tall_sift_grass",
+        "state": {
+          "half": "lower"
+        }
+      }
+    }
+  ],
+  "random_sequence": "the_rift:blocks/tall_sift_grass"
+}

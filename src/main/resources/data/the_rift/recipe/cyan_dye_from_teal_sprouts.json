@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "the_rift:teal_sprouts",
+    "the_rift:teal_sprouts"
+  ],
+  "result": {
+    "id": "minecraft:cyan_dye",
+    "count": 1
+  }
+}

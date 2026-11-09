@@ -1,0 +1,120 @@
+{
+  "type": "minecraft:sequence",
+  "sequence": [
+    "minecraft:bedrock_floor",
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:above_preliminary_surface"
+      },
+      "then_run": {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "the_rift:husklands"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:on_floor",
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "id": "the_rift:sift_sand"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:under_floor",
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "id": "the_rift:sift_sand"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "the_rift:lullaby_hills"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:on_floor",
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "id": "the_rift:sift_sculk"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:under_floor",
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "id": "the_rift:sift_sculk"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:on_floor",
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:not_underwater",
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "id": "the_rift:sift_grass_block"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "id": "the_rift:sift_soil"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:under_floor",
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": {
+                "id": "the_rift:sift_soil"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

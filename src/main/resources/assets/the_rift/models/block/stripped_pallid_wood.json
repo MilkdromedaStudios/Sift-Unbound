@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "the_rift:block/stripped_pallid_log",
+    "side": "the_rift:block/stripped_pallid_log"
+  }
+}

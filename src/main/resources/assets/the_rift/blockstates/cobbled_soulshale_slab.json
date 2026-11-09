@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "the_rift:block/cobbled_soulshale_slab"
+    },
+    "type=double": {
+      "model": "the_rift:block/cobbled_soulshale"
+    },
+    "type=top": {
+      "model": "the_rift:block/cobbled_soulshale_slab_top"
+    }
+  }
+}

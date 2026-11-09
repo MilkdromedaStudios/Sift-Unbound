@@ -1,0 +1,18 @@
+{
+	"schemaVersion": 1,
+	"id": "the_rift_test",
+	"version": "1.0.0",
+	"name": "The Rift - tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"com.milkdromedastudios.therift.test.RiftGameTests"
+		],
+		"fabric-client-gametest": [
+			"com.milkdromedastudios.therift.test.RiftClientGameTest"
+		]
+	},
+	"depends": {
+		"the_rift": "*"
+	}
+}
