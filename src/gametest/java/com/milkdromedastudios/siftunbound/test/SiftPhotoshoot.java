@@ -35,7 +35,8 @@ final class SiftPhotoshoot {
 				mc.gui.hud.toggle();
 			}
 		});
-		try (TestSingleplayerContext sp = context.worldBuilder().create()) {
+		// seed 2027 has an ancient city about 2 400 blocks from spawn (see tools/server_smoke_test.sh)
+		try (TestSingleplayerContext sp = context.worldBuilder().adjustSettings(s -> s.setSeed("2027")).create()) {
 			settle(context, sp, 100);
 			for (String cmd : List.of("gamerule spawn_mobs true", "gamerule advance_time false", "gamerule advance_weather false",
 				"difficulty peaceful", "time set 1000", "gamemode creative @p")) {
@@ -155,7 +156,7 @@ final class SiftPhotoshoot {
 
 	/** Finds the reinforced-deepslate frame of the nearest ancient city (it is the only reinforced deepslate there). */
 	private static Frame findAncientCityFrame(ServerLevel level) {
-		BlockPos city = level.findNearestMapStructure(StructureTags.ON_ANCIENT_CITY_MAPS, BlockPos.ZERO, 100, false);
+		BlockPos city = level.findNearestMapStructure(StructureTags.ON_ANCIENT_CITY_MAPS, BlockPos.ZERO, 250, false);
 		if (city == null) {
 			return null;
 		}
