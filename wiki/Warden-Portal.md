@@ -2,7 +2,11 @@
 
 [Home](Home.md) · [The Sift (research)](The-Sift-Research.md) · [Warden Portal](Warden-Portal.md) · [Biomes & Tides](Biomes-and-Tides.md) · [Terrain](Terrain-Blocks.md) · [Soulshale](Soulshale.md) · [Plants](Plants.md) · [Pallid Wood](Pallid-Wood.md) · [Soul Water](Soul-Water.md) · [Mobs](Mobs.md) · [Items](Items.md) · [Advancements](Advancements.md) · [Sounds](Sounds.md) · [Art pipeline](Art-Pipeline.md) · [Credits](Credits.md)
 
-![An awakened portal in the Sift](screenshots/sift_portal.png)
+| Dormant | Awakened |
+|---|---|
+| ![The Warden Portal frame in an ancient city, dormant](screenshots/warden_portal_dormant.jpg) | ![The same frame after using the Echo Tuner](screenshots/warden_portal_awakened.jpg) |
+
+![Close-up of the awakened portal](screenshots/warden_portal_close.jpg)
 
 In vanilla Minecraft the ancient city has a huge, empty **reinforced deepslate frame** in its centre. Mojang confirmed in 2026
 that it is a portal to the Sift. In *Minecraft Dungeons II* it is woken by a note block machine. In this mod you wake it with an
