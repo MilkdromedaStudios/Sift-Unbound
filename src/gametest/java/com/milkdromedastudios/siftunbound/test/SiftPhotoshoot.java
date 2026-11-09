@@ -35,8 +35,10 @@ final class SiftPhotoshoot {
 				mc.gui.hud.toggle();
 			}
 		});
-		// seed 2027 has an ancient city about 2 400 blocks from spawn (see tools/server_smoke_test.sh)
-		try (TestSingleplayerContext sp = context.worldBuilder().adjustSettings(s -> s.setSeed("2027")).create()) {
+		// A normal (not the test framework's flat "consistent") world; seed 2027 has an ancient city about 2 400 blocks
+		// from spawn (see tools/server_smoke_test.sh).
+		try (TestSingleplayerContext sp = context.worldBuilder().setUseConsistentSettings(false)
+			.adjustSettings(s -> s.setSeed("2027")).create()) {
 			settle(context, sp, 100);
 			for (String cmd : List.of("gamerule spawn_mobs true", "gamerule advance_time false", "gamerule advance_weather false",
 				"difficulty peaceful", "time set 1000", "gamemode creative @p")) {
