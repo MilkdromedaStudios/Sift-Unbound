@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "the_rift:soulshale",
+    "the_rift:cobbled_soulshale",
+    "the_rift:cobbled_soulshale_stairs",
+    "the_rift:cobbled_soulshale_slab",
+    "the_rift:cobbled_soulshale_wall",
+    "the_rift:polished_soulshale",
+    "the_rift:polished_soulshale_stairs",
+    "the_rift:polished_soulshale_slab",
+    "the_rift:polished_soulshale_wall",
+    "the_rift:soulshale_bricks",
+    "the_rift:soulshale_brick_stairs",
+    "the_rift:soulshale_brick_slab",
+    "the_rift:soulshale_brick_wall",
+    "the_rift:chiseled_soulshale",
+    "the_rift:soul_shard_ore",
+    "the_rift:soul_shard_block",
+    "the_rift:husk_shell",
+    "the_rift:sift_sculk",
+    "the_rift:dark_sift_sculk"
+  ]
+}

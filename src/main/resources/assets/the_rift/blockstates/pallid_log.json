@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "the_rift:block/pallid_log_x"
+    },
+    "axis=y": {
+      "model": "the_rift:block/pallid_log_y"
+    },
+    "axis=z": {
+      "model": "the_rift:block/pallid_log_z"
+    }
+  }
+}

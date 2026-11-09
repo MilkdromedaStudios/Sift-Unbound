@@ -1,0 +1,20 @@
+{
+  "_comment": "Crop regions (fractions of width/height: x0,y0,x1,y1) of the reference screenshots that show each Sift material. Reference images are NOT stored in this repo (they are Mojang's art); pass their folder on the command line.",
+  "sift_grass_vanilla":   {"image": "01_landscape_vanilla_reveal_orange_grass_blub.png", "boxes": [[0.0, 0.30, 0.17, 0.95], [0.72, 0.45, 1.0, 0.95]], "k": 6},
+  "sift_sky_vanilla":     {"image": "01_landscape_vanilla_reveal_orange_grass_blub.png", "boxes": [[0.25, 0.0, 0.75, 0.25]], "k": 3},
+  "sift_ground_vanilla":  {"image": "01_landscape_vanilla_reveal_orange_grass_blub.png", "boxes": [[0.30, 0.93, 0.70, 1.0]], "k": 4},
+  "blub_soul_engorged":   {"image": "22_render_blub_soul_engorged.png", "boxes": [[0.25, 0.25, 0.85, 0.85]], "k": 6, "drop_dark": true},
+  "blub_meadows":         {"image": "23_render_blub_meadows.png", "boxes": [[0.25, 0.35, 0.80, 0.85]], "k": 6, "drop_dark": true},
+  "blub_carapace":        {"image": "24_render_blub_carapace.png", "boxes": [[0.15, 0.25, 0.90, 0.85]], "k": 7, "drop_dark": true},
+  "ichor":                {"image": "10_water_pool_of_ichor.jpg", "boxes": [[0.02, 0.40, 0.40, 0.80], [0.25, 0.15, 0.55, 0.40]], "k": 8},
+  "ichor_pond":           {"image": "11_water_ichor_ponds.png", "boxes": [[0.25, 0.35, 0.75, 0.75]], "k": 8},
+  "pale_tree_leaves":     {"image": "09_tree_sculk_tree.jpeg", "boxes": [[0.05, 0.02, 0.75, 0.35]], "k": 6},
+  "pale_tree_trunk":      {"image": "03_landscape_flow_tide.png", "boxes": [[0.07, 0.55, 0.16, 0.85]], "k": 4},
+  "red_terrain":          {"image": "06_landscape_singers_meadow_grass.png", "boxes": [[0.0, 0.25, 0.45, 0.60]], "k": 6},
+  "teal_foliage":         {"image": "12_water_singers_meadow_ichor_alcove.png", "boxes": [[0.0, 0.72, 0.35, 1.0], [0.55, 0.0, 0.95, 0.12]], "k": 6},
+  "huskland_sand":        {"image": "08_landscape_humbler_huskland_desert.png", "boxes": [[0.15, 0.25, 0.85, 0.75]], "k": 6},
+  "lullaby_rock":         {"image": "07_landscape_lullaby_hills.png", "boxes": [[0.30, 0.20, 0.80, 0.70]], "k": 6},
+  "portal_glow":          {"image": "18_portal_sift_portal_echo_golems.jpg", "boxes": [[0.48, 0.02, 0.82, 0.28]], "k": 5},
+  "endure_tide_night":    {"image": "04_landscape_endure_tide.png", "boxes": [[0.0, 0.0, 1.0, 0.45]], "k": 6},
+  "hostile_sift_mobs":    {"image": "16_entities_hostile_sift_mobs.jpg", "boxes": [[0.20, 0.45, 0.70, 0.75]], "k": 7}
+}

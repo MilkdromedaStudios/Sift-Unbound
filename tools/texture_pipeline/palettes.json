@@ -1,0 +1,621 @@
+{
+  "sift_grass_vanilla": {
+    "source": "01_landscape_vanilla_reveal_orange_grass_blub.png",
+    "colors": [
+      {
+        "hex": "#f17582",
+        "share": 0.4235
+      },
+      {
+        "hex": "#dd5a5b",
+        "share": 0.2521
+      },
+      {
+        "hex": "#fa8f9c",
+        "share": 0.2174
+      },
+      {
+        "hex": "#69d4c6",
+        "share": 0.0938
+      },
+      {
+        "hex": "#bfa8a6",
+        "share": 0.0071
+      },
+      {
+        "hex": "#94c7bc",
+        "share": 0.0061
+      }
+    ],
+    "by_brightness": [
+      "#dd5a5b",
+      "#f17582",
+      "#fa8f9c",
+      "#bfa8a6",
+      "#94c7bc",
+      "#69d4c6"
+    ]
+  },
+  "sift_sky_vanilla": {
+    "source": "01_landscape_vanilla_reveal_orange_grass_blub.png",
+    "colors": [
+      {
+        "hex": "#60d5c8",
+        "share": 0.8789
+      },
+      {
+        "hex": "#5dd4c8",
+        "share": 0.1205
+      },
+      {
+        "hex": "#1f1f1f",
+        "share": 0.0006
+      }
+    ],
+    "by_brightness": [
+      "#1f1f1f",
+      "#5dd4c8",
+      "#60d5c8"
+    ]
+  },
+  "sift_ground_vanilla": {
+    "source": "01_landscape_vanilla_reveal_orange_grass_blub.png",
+    "colors": [
+      {
+        "hex": "#f67d8d",
+        "share": 0.4355
+      },
+      {
+        "hex": "#ec6d7a",
+        "share": 0.2891
+      },
+      {
+        "hex": "#fc8e9c",
+        "share": 0.1796
+      },
+      {
+        "hex": "#e15f62",
+        "share": 0.0958
+      }
+    ],
+    "by_brightness": [
+      "#e15f62",
+      "#ec6d7a",
+      "#f67d8d",
+      "#fc8e9c"
+    ]
+  },
+  "blub_soul_engorged": {
+    "source": "22_render_blub_soul_engorged.png",
+    "colors": [
+      {
+        "hex": "#88c3f0",
+        "share": 0.317
+      },
+      {
+        "hex": "#5c88aa",
+        "share": 0.2989
+      },
+      {
+        "hex": "#aaddf9",
+        "share": 0.193
+      },
+      {
+        "hex": "#6e98b8",
+        "share": 0.1141
+      },
+      {
+        "hex": "#7cabce",
+        "share": 0.0525
+      },
+      {
+        "hex": "#704350",
+        "share": 0.0244
+      }
+    ],
+    "by_brightness": [
+      "#704350",
+      "#5c88aa",
+      "#6e98b8",
+      "#7cabce",
+      "#88c3f0",
+      "#aaddf9"
+    ]
+  },
+  "blub_meadows": {
+    "source": "23_render_blub_meadows.png",
+    "colors": [
+      {
+        "hex": "#63a9a4",
+        "share": 0.3473
+      },
+      {
+        "hex": "#3e7073",
+        "share": 0.2723
+      },
+      {
+        "hex": "#569a8d",
+        "share": 0.146
+      },
+      {
+        "hex": "#8e7969",
+        "share": 0.1424
+      },
+      {
+        "hex": "#c9af9b",
+        "share": 0.0709
+      },
+      {
+        "hex": "#acd8e1",
+        "share": 0.0211
+      }
+    ],
+    "by_brightness": [
+      "#3e7073",
+      "#8e7969",
+      "#569a8d",
+      "#63a9a4",
+      "#c9af9b",
+      "#acd8e1"
+    ]
+  },
+  "blub_carapace": {
+    "source": "24_render_blub_carapace.png",
+    "colors": [
+      {
+        "hex": "#9dcdad",
+        "share": 0.2653
+      },
+      {
+        "hex": "#cbb89c",
+        "share": 0.2592
+      },
+      {
+        "hex": "#b35055",
+        "share": 0.1654
+      },
+      {
+        "hex": "#8e7f6d",
+        "share": 0.1544
+      },
+      {
+        "hex": "#698477",
+        "share": 0.084
+      },
+      {
+        "hex": "#8e9bc5",
+        "share": 0.0457
+      },
+      {
+        "hex": "#0b4559",
+        "share": 0.026
+      }
+    ],
+    "by_brightness": [
+      "#0b4559",
+      "#b35055",
+      "#698477",
+      "#8e7f6d",
+      "#8e9bc5",
+      "#cbb89c",
+      "#9dcdad"
+    ]
+  },
+  "ichor": {
+    "source": "10_water_pool_of_ichor.jpg",
+    "colors": [
+      {
+        "hex": "#7a5d5a",
+        "share": 0.1617
+      },
+      {
+        "hex": "#b776b0",
+        "share": 0.158
+      },
+      {
+        "hex": "#0cb2bc",
+        "share": 0.1405
+      },
+      {
+        "hex": "#81888e",
+        "share": 0.1403
+      },
+      {
+        "hex": "#513a34",
+        "share": 0.1152
+      },
+      {
+        "hex": "#c0b8cb",
+        "share": 0.1057
+      },
+      {
+        "hex": "#63adbe",
+        "share": 0.0964
+      },
+      {
+        "hex": "#0d897f",
+        "share": 0.0821
+      }
+    ],
+    "by_brightness": [
+      "#513a34",
+      "#7a5d5a",
+      "#0d897f",
+      "#81888e",
+      "#b776b0",
+      "#0cb2bc",
+      "#63adbe",
+      "#c0b8cb"
+    ]
+  },
+  "ichor_pond": {
+    "source": "11_water_ichor_ponds.png",
+    "colors": [
+      {
+        "hex": "#cad7a1",
+        "share": 0.2706
+      },
+      {
+        "hex": "#d7e2ca",
+        "share": 0.2625
+      },
+      {
+        "hex": "#84c9c7",
+        "share": 0.1273
+      },
+      {
+        "hex": "#bdb5c8",
+        "share": 0.1242
+      },
+      {
+        "hex": "#46bfcf",
+        "share": 0.1013
+      },
+      {
+        "hex": "#bdc482",
+        "share": 0.0647
+      },
+      {
+        "hex": "#4aa07e",
+        "share": 0.0388
+      },
+      {
+        "hex": "#287258",
+        "share": 0.0107
+      }
+    ],
+    "by_brightness": [
+      "#287258",
+      "#4aa07e",
+      "#46bfcf",
+      "#bdb5c8",
+      "#84c9c7",
+      "#bdc482",
+      "#cad7a1",
+      "#d7e2ca"
+    ]
+  },
+  "pale_tree_leaves": {
+    "source": "09_tree_sculk_tree.jpeg",
+    "colors": [
+      {
+        "hex": "#51aed3",
+        "share": 0.3514
+      },
+      {
+        "hex": "#6ec6e3",
+        "share": 0.318
+      },
+      {
+        "hex": "#bfd4f5",
+        "share": 0.1554
+      },
+      {
+        "hex": "#8a2b4f",
+        "share": 0.0816
+      },
+      {
+        "hex": "#3c79ae",
+        "share": 0.0681
+      },
+      {
+        "hex": "#2d284a",
+        "share": 0.0256
+      }
+    ],
+    "by_brightness": [
+      "#2d284a",
+      "#8a2b4f",
+      "#3c79ae",
+      "#51aed3",
+      "#6ec6e3",
+      "#bfd4f5"
+    ]
+  },
+  "pale_tree_trunk": {
+    "source": "03_landscape_flow_tide.png",
+    "colors": [
+      {
+        "hex": "#42393d",
+        "share": 0.4236
+      },
+      {
+        "hex": "#698fa9",
+        "share": 0.2675
+      },
+      {
+        "hex": "#ae9ca0",
+        "share": 0.1608
+      },
+      {
+        "hex": "#5c686e",
+        "share": 0.1481
+      }
+    ],
+    "by_brightness": [
+      "#42393d",
+      "#5c686e",
+      "#698fa9",
+      "#ae9ca0"
+    ]
+  },
+  "red_terrain": {
+    "source": "06_landscape_singers_meadow_grass.png",
+    "colors": [
+      {
+        "hex": "#8e2e2d",
+        "share": 0.3088
+      },
+      {
+        "hex": "#621e21",
+        "share": 0.2394
+      },
+      {
+        "hex": "#c54d44",
+        "share": 0.1741
+      },
+      {
+        "hex": "#793f45",
+        "share": 0.1497
+      },
+      {
+        "hex": "#518660",
+        "share": 0.0783
+      },
+      {
+        "hex": "#c79379",
+        "share": 0.0498
+      }
+    ],
+    "by_brightness": [
+      "#621e21",
+      "#8e2e2d",
+      "#793f45",
+      "#c54d44",
+      "#518660",
+      "#c79379"
+    ]
+  },
+  "teal_foliage": {
+    "source": "12_water_singers_meadow_ichor_alcove.png",
+    "colors": [
+      {
+        "hex": "#26784d",
+        "share": 0.2161
+      },
+      {
+        "hex": "#70211f",
+        "share": 0.2058
+      },
+      {
+        "hex": "#491413",
+        "share": 0.1519
+      },
+      {
+        "hex": "#4aa574",
+        "share": 0.145
+      },
+      {
+        "hex": "#124e2e",
+        "share": 0.1448
+      },
+      {
+        "hex": "#923730",
+        "share": 0.1364
+      }
+    ],
+    "by_brightness": [
+      "#491413",
+      "#70211f",
+      "#124e2e",
+      "#923730",
+      "#26784d",
+      "#4aa574"
+    ]
+  },
+  "huskland_sand": {
+    "source": "08_landscape_humbler_huskland_desert.png",
+    "colors": [
+      {
+        "hex": "#c7c18d",
+        "share": 0.2591
+      },
+      {
+        "hex": "#b4a569",
+        "share": 0.1813
+      },
+      {
+        "hex": "#d7d5ba",
+        "share": 0.1741
+      },
+      {
+        "hex": "#7e8469",
+        "share": 0.1663
+      },
+      {
+        "hex": "#5a5b44",
+        "share": 0.1249
+      },
+      {
+        "hex": "#a96f42",
+        "share": 0.0943
+      }
+    ],
+    "by_brightness": [
+      "#5a5b44",
+      "#a96f42",
+      "#7e8469",
+      "#b4a569",
+      "#c7c18d",
+      "#d7d5ba"
+    ]
+  },
+  "lullaby_rock": {
+    "source": "07_landscape_lullaby_hills.png",
+    "colors": [
+      {
+        "hex": "#55363f",
+        "share": 0.3185
+      },
+      {
+        "hex": "#5a4952",
+        "share": 0.2741
+      },
+      {
+        "hex": "#3d2c36",
+        "share": 0.2198
+      },
+      {
+        "hex": "#735f5d",
+        "share": 0.1294
+      },
+      {
+        "hex": "#a2605f",
+        "share": 0.0324
+      },
+      {
+        "hex": "#c2807e",
+        "share": 0.0257
+      }
+    ],
+    "by_brightness": [
+      "#3d2c36",
+      "#55363f",
+      "#5a4952",
+      "#735f5d",
+      "#a2605f",
+      "#c2807e"
+    ]
+  },
+  "portal_glow": {
+    "source": "18_portal_sift_portal_echo_golems.jpg",
+    "colors": [
+      {
+        "hex": "#62706d",
+        "share": 0.3604
+      },
+      {
+        "hex": "#bef0f3",
+        "share": 0.3014
+      },
+      {
+        "hex": "#67a59e",
+        "share": 0.1787
+      },
+      {
+        "hex": "#4fcdd5",
+        "share": 0.0955
+      },
+      {
+        "hex": "#1c9591",
+        "share": 0.064
+      }
+    ],
+    "by_brightness": [
+      "#62706d",
+      "#1c9591",
+      "#67a59e",
+      "#4fcdd5",
+      "#bef0f3"
+    ]
+  },
+  "endure_tide_night": {
+    "source": "04_landscape_endure_tide.png",
+    "colors": [
+      {
+        "hex": "#202b3d",
+        "share": 0.2564
+      },
+      {
+        "hex": "#6ea9d6",
+        "share": 0.1982
+      },
+      {
+        "hex": "#2e4969",
+        "share": 0.174
+      },
+      {
+        "hex": "#217bb2",
+        "share": 0.1519
+      },
+      {
+        "hex": "#b2cbe1",
+        "share": 0.1412
+      },
+      {
+        "hex": "#5c6d92",
+        "share": 0.0784
+      }
+    ],
+    "by_brightness": [
+      "#202b3d",
+      "#2e4969",
+      "#217bb2",
+      "#5c6d92",
+      "#6ea9d6",
+      "#b2cbe1"
+    ]
+  },
+  "hostile_sift_mobs": {
+    "source": "16_entities_hostile_sift_mobs.jpg",
+    "colors": [
+      {
+        "hex": "#ac4632",
+        "share": 0.289
+      },
+      {
+        "hex": "#c97b4e",
+        "share": 0.2522
+      },
+      {
+        "hex": "#8fac80",
+        "share": 0.1132
+      },
+      {
+        "hex": "#eabb7c",
+        "share": 0.103
+      },
+      {
+        "hex": "#4aa78f",
+        "share": 0.0904
+      },
+      {
+        "hex": "#dbb03e",
+        "share": 0.0876
+      },
+      {
+        "hex": "#6c6f50",
+        "share": 0.0646
+      }
+    ],
+    "by_brightness": [
+      "#ac4632",
+      "#6c6f50",
+      "#c97b4e",
+      "#4aa78f",
+      "#8fac80",
+      "#dbb03e",
+      "#eabb7c"
+    ]
+  }
+}

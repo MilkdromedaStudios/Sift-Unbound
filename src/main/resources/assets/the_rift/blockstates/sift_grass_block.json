@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "the_rift:block/sift_grass_block"
+      },
+      {
+        "model": "the_rift:block/sift_grass_block",
+        "y": 90
+      },
+      {
+        "model": "the_rift:block/sift_grass_block",
+        "y": 180
+      },
+      {
+        "model": "the_rift:block/sift_grass_block",
+        "y": 270
+      }
+    ]
+  }
+}

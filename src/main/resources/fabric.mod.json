@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "the_rift",
+	"version": "${version}",
+	"name": "The Rift",
+	"description": "An unofficial fan mod: awaken the Warden Portal in an ancient city with an Echo Tuner and travel to the Sift - a salmon-and-teal dimension of pale trees, soul water that drains your health, tides, blubs, soul wisps and sculk prowlers. Inspired by the Sift that Mojang Studios revealed for Minecraft Dungeons II and for Minecraft in 2027. Not affiliated with Mojang Studios or Microsoft. Run /rift credits in game.",
+	"authors": [
+		"MilkdromedaStudios"
+	],
+	"contributors": [
+		"Mojang Studios - creators of Minecraft, the Sift, the blub, sculk and the ancient city (inspiration only; no Mojang assets are included)",
+		"minecraft.wiki contributors - reference information (CC BY-NC-SA 3.0)"
+	],
+	"contact": {
+		"homepage": "https://github.com/MilkdromedaStudios/The-Rift",
+		"sources": "https://github.com/MilkdromedaStudios/The-Rift",
+		"issues": "https://github.com/MilkdromedaStudios/The-Rift/issues"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/the_rift/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.milkdromedastudios.therift.TheRift"
+		],
+		"client": [
+			"com.milkdromedastudios.therift.client.TheRiftClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.credits": "https://github.com/MilkdromedaStudios/The-Rift/blob/main/CREDITS.md"
+			}
+		}
+	}
+}

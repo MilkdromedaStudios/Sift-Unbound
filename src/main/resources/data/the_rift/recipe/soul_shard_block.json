@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "the_rift:soul_shard"
+  },
+  "result": {
+    "id": "the_rift:soul_shard_block",
+    "count": 1
+  }
+}

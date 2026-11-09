@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "the_rift:cobbled_soulshale_wall",
+    "the_rift:polished_soulshale_wall",
+    "the_rift:soulshale_brick_wall"
+  ]
+}
