@@ -4,13 +4,13 @@
     python3 tools/make_trailer.py SHOTS_DIR MUSIC.mp3 OUT.mp4
 
 SHOTS_DIR is build/run/clientGameTest/screenshots after `tools/photoshoot.sh` (or `runClientGameTest -Pphotoshoot`).
-The music is not part of this repository: the launch trailer uses "Minecraft - Epic Trailer" by Kalamity Music,
-credited in the end card. The edit is timed to that track (hit at 5.35 s, drop at 40.5 s, final hit at 64.85 s).
+The music is not part of this repository: the trailer uses "Minecraft - Epic Trailer" by Kalamity Music, credited in
+the end card. The edit is timed to that track (hit at 5.35 s, drop at 40.5 s, final hit at 64.85 s).
 
-Every frame is drawn with Pillow (Ken Burns moves, crossfades, flashes, camera shake, letterbox, vignette and
-titles) and piped to ffmpeg (libx264 + AAC).
+Every frame is drawn with Pillow and piped to ffmpeg (libx264 + AAC). The look is a slow, cinematic teaser: every
+shot glides to the right at one constant speed (scaled up only as much as the glide needs, no push-ins or shake), with
+crossfades, two flashes on the big hits, letterbox bars, a vignette and a light grade. The end card credits the music.
 """
-import math
 import os
 import subprocess
 import sys
@@ -93,17 +93,22 @@ def grade(img):
     return img
 
 
-def kenburns(img, t, z0, z1, c0=(0.5, 0.5), c1=(0.5, 0.5), shake=0.0):
-    """Crop a moving, zooming window out of img (t in 0..1) and scale it to W x H."""
-    z = z0 + (z1 - z0) * ease(t)
-    cx = c0[0] + (c1[0] - c0[0]) * ease(t)
-    cy = c0[1] + (c1[1] - c0[1]) * ease(t)
+SPEED = 16.0  # px per second of output: every shot glides the same way (the camera trucks right) at the same speed
+XF = 0.8  # crossfade length in seconds
+
+
+def glide(img, t, g0, g1):
+    """Slow, constant-speed slide to the right over the glide window g0..g1 (+ the next crossfade).
+
+    No push-ins and no direction changes: the image is scaled up only as much as the slide needs to stay inside it."""
+    travel = SPEED * (g1 - g0 + XF)  # output pixels covered over the whole glide
+    z = 1.0 + (travel + 6) / W
     iw, ih = img.size
     w, h = iw / z, ih / z
-    x0 = min(max(cx * iw - w / 2, 0), iw - w) + shake * math.sin(t * 90) * 6
-    y0 = min(max(cy * ih - h / 2, 0), ih - h) + shake * math.cos(t * 77) * 6
-    x0 = min(max(x0, 0), iw - w)
-    y0 = min(max(y0, 0), ih - h)
+    src_travel = travel * w / W
+    u = min(1.0, max(0.0, (t - g0) / (g1 - g0 + XF)))
+    x0 = (iw - w - src_travel) / 2 + u * src_travel
+    y0 = (ih - h) / 2
     return img.resize((W, H), Image.BICUBIC, box=(x0, y0, x0 + w, y0 + h))
 
 
@@ -122,67 +127,96 @@ def tuner_card():
     glow = icon.filter(ImageFilter.GaussianBlur(28))
     card.alpha_composite(glow, (W // 2 - 200, H // 2 - 300))
     card.alpha_composite(icon, (W // 2 - 200, H // 2 - 300))
-    card.alpha_composite(text_layer([("Find the key.", SERIF, 76, (255, 255, 255))], y=H // 2 + 220, glow=(30, 120, 115)))
     return card.convert("RGB")
+
+
+def card_text(text):
+    return text_layer([(text, SERIF, 76, (255, 255, 255))], y=H // 2 + 220, glow=(30, 120, 115))
 
 
 # ----------------------------------------------------------------------------- the edit
 def build_timeline(shots):
     S = lambda n: shots[n]  # noqa: E731
     black = Image.new("RGB", (W, H), (0, 0, 0))
-    title_bg = grade(S("06_pallid_grove_thrive_tide")).filter(ImageFilter.GaussianBlur(6))
+    title_bg = S("06_pallid_grove_thrive_tide").filter(ImageFilter.GaussianBlur(6))
     title_bg = ImageEnhance.Brightness(title_bg).enhance(0.45)
-    # (start, end, image, kenburns args, overlays [(layer, t_in, t_out)], transition-in: cut|fade|flash)
+    # (start, end, image, glide window, overlays [(layer, t_in, t_out)], transition-in: cut|fade|flash)
     T = []
 
-    def seg(a, b, img, kb=(1.0, 1.0), c0=(0.5, 0.5), c1=(0.5, 0.5), over=(), trans="fade", shake=0.0):
-        T.append(dict(a=a, b=b, img=img, kb=kb, c0=c0, c1=c1, over=list(over), trans=trans, shake=shake))
+    def seg(a, b, img, over=(), trans="fade", glide_window=None):
+        T.append(dict(a=a, b=b, img=img, g=glide_window or (a, b), over=list(over), trans=trans))
 
-    # A teaser, not a tour: no biome names, no recipe, only some of the places and creatures. The rest is
-    # left for players to find (husklands, meadows, the Thrive Tide, soul wisps, most blub variants...).
+    # A teaser, not a tour: no biome names, no recipe, only some of the places and creatures. The rest is left for
+    # players to find (husklands, meadows, the Thrive Tide, most blub variants...). Every shot glides slowly to the
+    # right at the same speed, so cuts and crossfades never change direction.
     seg(0.0, 5.35, black, over=[(text_layer([("In 2027, Mojang opens a new dimension.", SANS, 50, (230, 230, 230))]), 0.9, 4.7)])
-    seg(5.35, 12.0, S("01_warden_portal_dormant"), (1.0, 1.08), (0.5, 0.45), (0.5, 0.42), trans="flash",
-        over=[(caption("Deep inside every ancient city, a frame waits."), 6.0, 11.4)])
-    seg(12.0, 16.0, tuner_card(), (1.0, 1.04), trans="fade")
-    seg(15.95, 22.0, S("01_warden_portal_dormant"), (1.7, 1.9), (0.36, 0.42), (0.46, 0.42), trans="fade",
-        over=[(caption("Play the melody that wakes it."), 16.6, 21.4)])
-    seg(22.0, 28.5, black, trans="fade",
+    seg(5.35, 12.0, S("01_warden_portal_dormant"), over=[(caption("Deep inside every ancient city, a frame waits."), 6.0, 11.4)])
+    seg(12.0, 22.0, tuner_card(), over=[(card_text("Find the key."), 12.4, 15.8),
+                                        (card_text("Play the melody that wakes it."), 16.3, 21.5)])
+    seg(22.0, 28.5, black,
         over=[(text_layer([("The Sift arrives in Minecraft next year.", SANS, 52, (230, 230, 230))]), 22.4, 25.2),
               (text_layer([("Why wait until next year…", SERIF, 92, (255, 255, 255))], glow=(40, 140, 135)), 25.4, 28.3)])
-    seg(28.5, 36.0, S("01_warden_portal_dormant"), (1.1, 1.3), (0.5, 0.45), (0.5, 0.43), trans="fade",
+    # back to the frame; one unbroken glide from here through the moment it wakes (same camera, it just lights up)
+    portal = (28.5, 42.1)
+    seg(28.5, 40.5, S("01_warden_portal_dormant"), glide_window=portal,
         over=[(text_layer([("…when you can get it now?", SERIF, 92, (255, 255, 255))], glow=(40, 140, 135)), 29.0, 35.4)])
-    seg(36.0, 40.5, S("01_warden_portal_dormant"), (1.3, 2.1), (0.5, 0.43), (0.5, 0.42), trans="cut", shake=0.6)
-    seg(40.5, 42.1, S("02_warden_portal_awakened"), (1.25, 1.0), (0.5, 0.42), (0.5, 0.45), trans="flash", shake=1.0)
-    seg(42.1, 43.4, S("03_warden_portal_close"), (1.0, 1.08), trans="cut")
-    seg(43.4, 46.05, S("04_arrival_in_the_sift"), (1.0, 1.1), trans="fade", over=[(caption("Step through."), 43.7, 45.9)])
-    seg(46.05, 49.0, S("05_pallid_grove_flow_tide"), (1.0, 1.12), (0.4, 0.5), (0.6, 0.47), trans="fade")
-    seg(49.0, 51.6, S("09_soul_wetlands_thrive_tide"), (1.05, 1.15), (0.5, 0.55), (0.5, 0.5), trans="cut",
-        over=[(caption("Don't touch the water."), 49.3, 51.4)])
-    seg(51.6, 54.2, S("11_lullaby_hills_thrive_tide"), (1.0, 1.1), (0.6, 0.5), (0.4, 0.5), trans="fade")
-    seg(54.2, 56.8, S("07_pallid_grove_endure_tide"), (1.08, 1.16), trans="fade",
-        over=[(caption("When the tide turns…"), 54.5, 56.6)])
-    seg(56.8, 59.6, S("12_blubs_by_the_soul_water"), (1.7, 1.9), (0.5, 0.66), (0.52, 0.65), trans="cut",
-        over=[(caption("Make some friends…"), 57.0, 59.4)])
-    # the hunter itself is never shown: just the dark Endure Tide horizon
-    seg(59.6, 62.0, ImageEnhance.Brightness(S("13_sculk_prowler_endure_tide")).enhance(0.6), (1.6, 1.85), (0.55, 0.3), (0.5, 0.32),
-        trans="cut", shake=0.4,
-        over=[(caption("…and run from the rest."), 59.8, 61.8)])
-    # rapid detail flashes, no context
-    seg(62.0, 62.95, S("12_blubs_by_the_soul_water"), (2.6, 2.8), (0.22, 0.72), (0.25, 0.72), trans="cut")
-    seg(62.95, 63.9, S("05_pallid_grove_flow_tide"), (2.2, 2.4), (0.62, 0.5), (0.6, 0.5), trans="cut")
-    seg(63.9, 64.85, S("02_warden_portal_awakened"), (2.6, 3.0), (0.5, 0.45), (0.5, 0.45), trans="cut")
+    seg(40.5, 42.1, S("02_warden_portal_awakened"), trans="flash", glide_window=portal)
+    seg(42.1, 43.4, S("03_warden_portal_close"), trans="cut")
+    seg(43.4, 46.05, S("04_arrival_in_the_sift"), over=[(caption("Step through."), 43.7, 45.9)])
+    seg(46.05, 49.0, S("05_pallid_grove_flow_tide"))
+    seg(49.0, 51.6, S("09_soul_wetlands_thrive_tide"), over=[(caption("Don't touch the water."), 49.3, 51.4)])
+    seg(51.6, 54.2, S("11_lullaby_hills_thrive_tide"))
+    seg(54.2, 56.8, S("07_pallid_grove_endure_tide"), over=[(caption("When the tide turns…"), 54.5, 56.6)])
+    seg(56.8, 59.6, S("12_blubs_by_the_soul_water"), over=[(caption("Make some friends…"), 57.0, 59.4)])
+    # the hunter stays in the dark
+    seg(59.6, 63.4, ImageEnhance.Brightness(S("13_sculk_prowler_endure_tide")).enhance(0.5),
+        over=[(caption("…and run from the rest."), 59.9, 62.8)])
+    seg(63.4, 64.85, black)
     title = text_layer([("THE SIFT UNBOUND", SERIF, 128, (255, 255, 255)),
-                        ("Why wait until next year? Get it now.", SANS_B, 52, SALMON),
-                        ("Free  ·  Fabric  ·  Minecraft Java 26.3", SANS, 40, TEAL)], glow=(40, 160, 150))
-    seg(64.85, 70.6, title_bg, (1.0, 1.05), trans="flash", shake=0.5, over=[(title, 64.95, 70.3)])
+                        (" ", SANS, 14, (0, 0, 0)),
+                        ("Why wait until next year? Get it now.", SANS_B, 52, SALMON)], glow=(40, 160, 150))
+    seg(64.85, 70.6, title_bg, trans="flash", over=[(title, 64.95, 70.3)])
     credits = text_layer([("Music", SANS, 34, TEAL),
-                          ("“Minecraft – Epic Trailer” by Kalamity Music", SANS_B, 52, (255, 255, 255)),
-                          (" ", SANS, 20, (0, 0, 0)),
-                          ("The Sift Unbound is an unofficial fan mod by MilkdromedaStudios.", SANS, 34, (220, 220, 220)),
-                          ("Not affiliated with Mojang Studios or Microsoft. Minecraft and the Sift © Mojang Studios.", SANS, 30, (180, 180, 180)),
-                          ("github.com/MilkdromedaStudios/The-Rift", SANS_B, 36, SALMON)])
-    seg(70.6, 99.0, black, trans="fade", over=[(credits, 71.0, 78.2)])
+                          ("“Minecraft – Epic Trailer” by Kalamity Music", SANS_B, 52, (255, 255, 255))])
+    seg(70.6, 99.0, black, over=[(credits, 71.0, 78.2)])
     return T
+
+
+def overlays(s, t):
+    img = glide(s["img"], t, *s["g"]).convert("RGBA")
+    for layer, ti, to in s["over"]:
+        a = min(ease((t - ti) / 0.5), ease((to - t) / 0.5)) if ti <= t <= to else 0
+        if a > 0:
+            img = Image.blend(img, Image.alpha_composite(img, layer), a)
+    return img
+
+
+def compose(timeline, t, duration, vig, bars):
+    """The finished frame at time t."""
+    s = [s for s in timeline if s["a"] <= t < s["b"]][-1]
+    img = overlays(s, t)
+    since = t - s["a"]
+    idx = timeline.index(s)
+    if s["trans"] == "fade" and since < XF and idx > 0:
+        img = Image.blend(overlays(timeline[idx - 1], t), img, ease(since / XF))
+    if s["trans"] == "flash" and since < 0.7:
+        img = Image.blend(img, Image.new("RGBA", (W, H), (235, 255, 252, 255)), (1 - since / 0.7) ** 2)
+    if 39.3 <= t < 40.5:  # build-up into the drop: the frame starts to glow
+        img = Image.blend(img, Image.new("RGBA", (W, H), (190, 250, 245, 255)), 0.55 * ease((t - 39.3) / 1.2))
+    if t < 0.8:
+        img = Image.blend(Image.new("RGBA", (W, H), (0, 0, 0, 255)), img, t / 0.8)
+    if t > duration - 1.5:
+        img = Image.blend(img, Image.new("RGBA", (W, H), (0, 0, 0, 255)), min(1, (t - (duration - 1.5)) / 1.5))
+    img.alpha_composite(vig)
+    img.alpha_composite(bars)
+    return img
+
+
+def letterbox():
+    bars = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(bars).rectangle([0, 0, W, BAR], fill=(0, 0, 0, 255))
+    ImageDraw.Draw(bars).rectangle([0, H - BAR, W, H], fill=(0, 0, 0, 255))
+    return bars
 
 
 def render(shots_dir, music, out):
@@ -190,51 +224,26 @@ def render(shots_dir, music, out):
              "05_pallid_grove_flow_tide", "06_pallid_grove_thrive_tide", "07_pallid_grove_endure_tide",
              "09_soul_wetlands_thrive_tide", "11_lullaby_hills_thrive_tide", "12_blubs_by_the_soul_water",
              "13_sculk_prowler_endure_tide"]
+    missing = [n for n in names if not os.path.exists(os.path.join(shots_dir, n + ".png"))]
+    if missing:
+        sys.exit(f"missing screenshots in {shots_dir}: {', '.join(missing)} (run tools/photoshoot.sh first)")
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
     shots = {n: grade(Image.open(os.path.join(shots_dir, n + ".png"))) for n in names}
     timeline = build_timeline(shots)
     duration = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", music],
                                     capture_output=True, text=True, check=True).stdout)
     frames = int(duration * FPS)
     vig = vignette()
-    bars = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(bars).rectangle([0, 0, W, BAR], fill=(0, 0, 0, 255))
-    ImageDraw.Draw(bars).rectangle([0, H - BAR, W, H], fill=(0, 0, 0, 255))
+    bars = letterbox()
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-i", music, "-map", "0:v", "-map", "1:a",
                            "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p",
                            "-c:a", "aac", "-b:a", "192k", "-af", f"afade=t=out:st={duration - 2.5:.2f}:d=2.5",
                            "-movflags", "+faststart", "-shortest", out], stdin=subprocess.PIPE)
 
-    def frame_of(s, t):
-        u = (t - s["a"]) / max(0.001, s["b"] - s["a"])
-        img = kenburns(s["img"], u, s["kb"][0], s["kb"][1], s["c0"], s["c1"], s["shake"] * max(0, 1 - (t - s["a"]) * 2))
-        img = img.convert("RGBA")
-        for layer, ti, to in s["over"]:
-            a = min(ease((t - ti) / 0.5), ease((to - t) / 0.5)) if ti <= t <= to else 0
-            if a > 0:
-                img = Image.blend(img, Image.alpha_composite(img, layer), a)
-        return img
-
     for i in range(frames):
         t = i / FPS
-        cur = [s for s in timeline if s["a"] <= t < s["b"]]
-        s = cur[-1]
-        img = frame_of(s, t)
-        since = t - s["a"]
-        idx = timeline.index(s)
-        if s["trans"] == "fade" and since < 0.6 and idx > 0:
-            prev = timeline[idx - 1]
-            img = Image.blend(frame_of(prev, t), img, ease(since / 0.6))
-        if s["trans"] == "flash" and since < 0.7:
-            img = Image.blend(img, Image.new("RGBA", (W, H), (235, 255, 252, 255)), (1 - since / 0.7) ** 2)
-        if s["a"] == 36.0:  # build-up into the drop (36-40.5 s): glow creeping in
-            img = Image.blend(img, Image.new("RGBA", (W, H), (190, 250, 245, 255)), 0.55 * ease((t - 39.3) / 1.2))
-        if t < 0.8:
-            img = Image.blend(Image.new("RGBA", (W, H), (0, 0, 0, 255)), img, t / 0.8)
-        if t > duration - 1.5:
-            img = Image.blend(img, Image.new("RGBA", (W, H), (0, 0, 0, 255)), min(1, (t - (duration - 1.5)) / 1.5))
-        img.alpha_composite(vig)
-        img.alpha_composite(bars)
+        img = compose(timeline, t, duration, vig, bars)
         ff.stdin.write(img.convert("RGB").tobytes())
         if i % 150 == 0:
             print(f"frame {i}/{frames}", flush=True)
