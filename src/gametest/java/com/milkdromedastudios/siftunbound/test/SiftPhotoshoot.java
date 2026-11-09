@@ -29,7 +29,7 @@ final class SiftPhotoshoot {
 
 	static void run(ClientGameTestContext context) {
 		context.runOnClient(mc -> {
-			mc.options.renderDistance().set(12);
+			mc.options.renderDistance().set(8);
 			mc.options.fov().set(70);
 			if (!mc.gui.hud.isHidden()) {
 				mc.gui.hud.toggle();
@@ -133,8 +133,8 @@ final class SiftPhotoshoot {
 	/** Lets chunks (and, with shaders, the pipeline) settle. Sodium replaces vanilla chunk tracking, so don't rely on it alone. */
 	private static void settle(ClientGameTestContext context, TestSingleplayerContext sp, int ticks) {
 		try {
-			sp.getConnection().waitForChunksRender(true, 6000);
-		} catch (RuntimeException e) {
+			sp.getConnection().waitForChunksRender(true, 2400);
+		} catch (AssertionError | RuntimeException e) { // the test API reports a timeout as an AssertionError
 			log("chunk wait gave up (" + e.getMessage() + "), waiting a fixed time instead");
 		}
 		context.waitTicks(ticks);

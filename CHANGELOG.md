@@ -16,4 +16,4 @@ First public release of **The Sift Unbound** (developed as "The Rift"; mod ID `s
 - Mobs: **Blub** (soul / meadows / carapace, breedable, bucketable), **Soul Wisp**, **Sculk Prowler**.
 - 45 blocks (Sift terrain, Soulshale family, Pallid wood set, plants, Soul Shard ore/block), 8 items, 7 advancements,
   19 sound events, original music, an ancient-city loot entry for the Echo Tuner, and `/sift credits`.
-- Automated tests: 8 server GameTests and a client GameTest that travels through a portal and takes screenshots.
+- Automated tests: 9 server GameTests, a dedicated-server smoke test and a client GameTest that travels through a portal and takes screenshots.
