@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates every texture shipped with The Rift.
+"""Generates every texture shipped with The Sift Unbound.
 
 All art is ORIGINAL: it is drawn procedurally (seeded noise, shapes and
 hand-placed pixel patterns) using only the colour palettes stored in
@@ -8,7 +8,7 @@ No pixels from Mojang's images are copied.
 
 Run from the repository root:
     python3 tools/texture_pipeline/gen_textures.py
-Outputs go to src/main/resources/assets/the_rift/textures/ and the mod icon.
+Outputs go to src/main/resources/assets/sift_unbound/textures/ and the mod icon.
 A preview sheet is written to build/texture_preview.png.
 """
 import json
@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-ASSETS = os.path.join(ROOT, "src", "main", "resources", "assets", "the_rift")
+ASSETS = os.path.join(ROOT, "src", "main", "resources", "assets", "sift_unbound")
 TEX = os.path.join(ASSETS, "textures")
 PAL = json.load(open(os.path.join(HERE, "palettes.json")))
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "sift_unbound:block/cobbled_soulshale"
+  }
+}

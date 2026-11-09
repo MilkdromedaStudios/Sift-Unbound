@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sift_unbound:block/tall_sift_grass_top"
+  }
+}

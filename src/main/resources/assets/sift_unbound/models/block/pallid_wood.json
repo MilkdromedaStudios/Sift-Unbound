@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sift_unbound:block/pallid_log",
+    "side": "sift_unbound:block/pallid_log"
+  }
+}

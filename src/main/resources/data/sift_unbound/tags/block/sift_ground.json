@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "sift_unbound:sift_grass_block",
+    "sift_unbound:sift_soil",
+    "sift_unbound:sift_sculk",
+    "sift_unbound:dark_sift_sculk",
+    "sift_unbound:sift_sand"
+  ]
+}

@@ -6,11 +6,16 @@ on:
   push:
     tags:
       - 'v*'
+  # Or run it by hand (Actions tab -> release -> Run workflow): the tag v<version> is created on the chosen ref.
   workflow_dispatch:
     inputs:
-      tag:
-        description: Existing tag to (re)release, e.g. v0.1.0
+      version:
+        description: Version to release; must equal mod_version in gradle.properties (e.g. 0.1.0)
         required: true
+      ref:
+        description: Branch or commit to release
+        required: false
+        default: main
 
 permissions:
   contents: write
@@ -20,12 +25,13 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      TAG: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', inputs.version) || github.ref_name }}
+      REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          ref: ${{ env.TAG }}
+          ref: ${{ env.REF }}
       - name: Set up JDK 25
         uses: actions/setup-java@v5
         with:
@@ -58,5 +64,7 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" build/libs/*.jar --clobber
           else
-            gh release create "$TAG" build/libs/*.jar --title "The Rift $VERSION (Minecraft 26.3)" --notes-file release-notes.md
+            # creates the tag on the checked-out commit when it doesn't exist yet (manual runs)
+            gh release create "$TAG" build/libs/*.jar --target "$(git rev-parse HEAD)" \
+              --title "The Sift Unbound $VERSION (Minecraft 26.3)" --notes-file release-notes.md
           fi

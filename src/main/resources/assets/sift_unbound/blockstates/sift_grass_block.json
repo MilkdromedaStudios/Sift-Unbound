@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "sift_unbound:block/sift_grass_block"
+      },
+      {
+        "model": "sift_unbound:block/sift_grass_block",
+        "y": 90
+      },
+      {
+        "model": "sift_unbound:block/sift_grass_block",
+        "y": 180
+      },
+      {
+        "model": "sift_unbound:block/sift_grass_block",
+        "y": 270
+      }
+    ]
+  }
+}

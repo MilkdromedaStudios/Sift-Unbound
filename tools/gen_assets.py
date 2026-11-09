@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates the JSON assets and data for The Rift.
+"""Generates the JSON assets and data for The Sift Unbound.
 
 Run from the repository root:
     python3 tools/gen_assets.py --vanilla <dir with extracted 26.3 assets/ and data/>
@@ -7,7 +7,7 @@ Run from the repository root:
 The vanilla folder is only read to clone *formats* (blockstates, models,
 loot tables and recipes) for the block families that mirror vanilla ones
 (the Pallid wood set is cloned from cherry, the Soulshale stone sets from the
-deepslate family); every texture and name is The Rift's own. If you don't
+deepslate family); every texture and name is The Sift Unbound's own. If you don't
 have an extracted copy, `./gradlew genSources` plus unzipping the merged
 Minecraft jar from .gradle/loom-cache gives you one.
 
@@ -22,7 +22,7 @@ import shutil
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src", "main", "resources")
-NS = "the_rift"
+NS = "sift_unbound"
 A = os.path.join(RES, "assets", NS)
 D = os.path.join(RES, "data", NS)
 DM = os.path.join(RES, "data", "minecraft")
@@ -53,7 +53,7 @@ class Cloner:
 
     def rewrite(self, text):
         kw = self.src
-        # namespaced ids & tags: minecraft:xxx_cherry_yyy  -> the_rift:xxx_pallid_yyy
+        # namespaced ids & tags: minecraft:xxx_cherry_yyy  -> sift_unbound:xxx_pallid_yyy
         text = re.sub(r'(#?)minecraft:([a-z0-9_/]*%s[a-z0-9_/]*)' % kw,
                       lambda m: f"{m.group(1)}{NS}:{m.group(2).replace(kw, self.dst)}", text)
         # un-namespaced model / texture refs: "block/cherry_log"
@@ -240,114 +240,114 @@ def gen_items():
 
 # ============================================================================ lang
 LANG = {
-    "itemGroup.the_rift": "The Rift",
+    "itemGroup.sift_unbound": "The Sift Unbound",
     # terrain
-    "block.the_rift.sift_grass_block": "Sift Grass Block",
-    "block.the_rift.sift_soil": "Sift Soil",
-    "block.the_rift.sift_sculk": "Sift Sculk",
-    "block.the_rift.dark_sift_sculk": "Dark Sift Sculk",
-    "block.the_rift.sift_sand": "Sift Sand",
-    "block.the_rift.husk_shell": "Husk Shell",
-    "block.the_rift.soulshale": "Soulshale",
-    "block.the_rift.cobbled_soulshale": "Cobbled Soulshale",
-    "block.the_rift.cobbled_soulshale_stairs": "Cobbled Soulshale Stairs",
-    "block.the_rift.cobbled_soulshale_slab": "Cobbled Soulshale Slab",
-    "block.the_rift.cobbled_soulshale_wall": "Cobbled Soulshale Wall",
-    "block.the_rift.polished_soulshale": "Polished Soulshale",
-    "block.the_rift.polished_soulshale_stairs": "Polished Soulshale Stairs",
-    "block.the_rift.polished_soulshale_slab": "Polished Soulshale Slab",
-    "block.the_rift.polished_soulshale_wall": "Polished Soulshale Wall",
-    "block.the_rift.soulshale_bricks": "Soulshale Bricks",
-    "block.the_rift.soulshale_brick_stairs": "Soulshale Brick Stairs",
-    "block.the_rift.soulshale_brick_slab": "Soulshale Brick Slab",
-    "block.the_rift.soulshale_brick_wall": "Soulshale Brick Wall",
-    "block.the_rift.chiseled_soulshale": "Chiseled Soulshale",
-    "block.the_rift.soul_shard_ore": "Soul Shard Ore",
-    "block.the_rift.soul_shard_block": "Block of Soul Shard",
+    "block.sift_unbound.sift_grass_block": "Sift Grass Block",
+    "block.sift_unbound.sift_soil": "Sift Soil",
+    "block.sift_unbound.sift_sculk": "Sift Sculk",
+    "block.sift_unbound.dark_sift_sculk": "Dark Sift Sculk",
+    "block.sift_unbound.sift_sand": "Sift Sand",
+    "block.sift_unbound.husk_shell": "Husk Shell",
+    "block.sift_unbound.soulshale": "Soulshale",
+    "block.sift_unbound.cobbled_soulshale": "Cobbled Soulshale",
+    "block.sift_unbound.cobbled_soulshale_stairs": "Cobbled Soulshale Stairs",
+    "block.sift_unbound.cobbled_soulshale_slab": "Cobbled Soulshale Slab",
+    "block.sift_unbound.cobbled_soulshale_wall": "Cobbled Soulshale Wall",
+    "block.sift_unbound.polished_soulshale": "Polished Soulshale",
+    "block.sift_unbound.polished_soulshale_stairs": "Polished Soulshale Stairs",
+    "block.sift_unbound.polished_soulshale_slab": "Polished Soulshale Slab",
+    "block.sift_unbound.polished_soulshale_wall": "Polished Soulshale Wall",
+    "block.sift_unbound.soulshale_bricks": "Soulshale Bricks",
+    "block.sift_unbound.soulshale_brick_stairs": "Soulshale Brick Stairs",
+    "block.sift_unbound.soulshale_brick_slab": "Soulshale Brick Slab",
+    "block.sift_unbound.soulshale_brick_wall": "Soulshale Brick Wall",
+    "block.sift_unbound.chiseled_soulshale": "Chiseled Soulshale",
+    "block.sift_unbound.soul_shard_ore": "Soul Shard Ore",
+    "block.sift_unbound.soul_shard_block": "Block of Soul Shard",
     # plants
-    "block.the_rift.short_sift_grass": "Short Sift Grass",
-    "block.the_rift.tall_sift_grass": "Tall Sift Grass",
-    "block.the_rift.teal_sprouts": "Teal Sprouts",
-    "block.the_rift.lullaby_bloom": "Lullaby Bloom",
-    "block.the_rift.potted_lullaby_bloom": "Potted Lullaby Bloom",
+    "block.sift_unbound.short_sift_grass": "Short Sift Grass",
+    "block.sift_unbound.tall_sift_grass": "Tall Sift Grass",
+    "block.sift_unbound.teal_sprouts": "Teal Sprouts",
+    "block.sift_unbound.lullaby_bloom": "Lullaby Bloom",
+    "block.sift_unbound.potted_lullaby_bloom": "Potted Lullaby Bloom",
     # pallid wood
-    "block.the_rift.pallid_log": "Pallid Log", "block.the_rift.pallid_wood": "Pallid Wood",
-    "block.the_rift.stripped_pallid_log": "Stripped Pallid Log", "block.the_rift.stripped_pallid_wood": "Stripped Pallid Wood",
-    "block.the_rift.pallid_planks": "Pallid Planks", "block.the_rift.pallid_leaves": "Pallid Leaves",
-    "block.the_rift.pallid_sapling": "Pallid Sapling", "block.the_rift.potted_pallid_sapling": "Potted Pallid Sapling",
-    "block.the_rift.pallid_stairs": "Pallid Stairs", "block.the_rift.pallid_slab": "Pallid Slab",
-    "block.the_rift.pallid_fence": "Pallid Fence", "block.the_rift.pallid_fence_gate": "Pallid Fence Gate",
-    "block.the_rift.pallid_door": "Pallid Door", "block.the_rift.pallid_trapdoor": "Pallid Trapdoor",
-    "block.the_rift.pallid_button": "Pallid Button", "block.the_rift.pallid_pressure_plate": "Pallid Pressure Plate",
+    "block.sift_unbound.pallid_log": "Pallid Log", "block.sift_unbound.pallid_wood": "Pallid Wood",
+    "block.sift_unbound.stripped_pallid_log": "Stripped Pallid Log", "block.sift_unbound.stripped_pallid_wood": "Stripped Pallid Wood",
+    "block.sift_unbound.pallid_planks": "Pallid Planks", "block.sift_unbound.pallid_leaves": "Pallid Leaves",
+    "block.sift_unbound.pallid_sapling": "Pallid Sapling", "block.sift_unbound.potted_pallid_sapling": "Potted Pallid Sapling",
+    "block.sift_unbound.pallid_stairs": "Pallid Stairs", "block.sift_unbound.pallid_slab": "Pallid Slab",
+    "block.sift_unbound.pallid_fence": "Pallid Fence", "block.sift_unbound.pallid_fence_gate": "Pallid Fence Gate",
+    "block.sift_unbound.pallid_door": "Pallid Door", "block.sift_unbound.pallid_trapdoor": "Pallid Trapdoor",
+    "block.sift_unbound.pallid_button": "Pallid Button", "block.sift_unbound.pallid_pressure_plate": "Pallid Pressure Plate",
     # fluid & portal
-    "block.the_rift.soul_water": "Soul Water",
-    "block.the_rift.sift_portal": "Sift Portal",
+    "block.sift_unbound.soul_water": "Soul Water",
+    "block.sift_unbound.sift_portal": "Sift Portal",
     # items
-    "item.the_rift.echo_tuner": "Echo Tuner",
-    "item.the_rift.echo_tuner.desc": "Use inside an ancient city's Warden Portal frame",
-    "item.the_rift.soul_shard": "Soul Shard",
-    "item.the_rift.blub_jelly": "Blub Jelly",
-    "item.the_rift.soul_water_bucket": "Soul Water Bucket",
-    "item.the_rift.blub_bucket": "Bucket of Blub",
-    "item.the_rift.blub_spawn_egg": "Blub Spawn Egg",
-    "item.the_rift.sculk_prowler_spawn_egg": "Sculk Prowler Spawn Egg",
-    "item.the_rift.soul_wisp_spawn_egg": "Soul Wisp Spawn Egg",
+    "item.sift_unbound.echo_tuner": "Echo Tuner",
+    "item.sift_unbound.echo_tuner.desc": "Use inside an ancient city's Warden Portal frame",
+    "item.sift_unbound.soul_shard": "Soul Shard",
+    "item.sift_unbound.blub_jelly": "Blub Jelly",
+    "item.sift_unbound.soul_water_bucket": "Soul Water Bucket",
+    "item.sift_unbound.blub_bucket": "Bucket of Blub",
+    "item.sift_unbound.blub_spawn_egg": "Blub Spawn Egg",
+    "item.sift_unbound.sculk_prowler_spawn_egg": "Sculk Prowler Spawn Egg",
+    "item.sift_unbound.soul_wisp_spawn_egg": "Soul Wisp Spawn Egg",
     # entities
-    "entity.the_rift.blub": "Blub",
-    "entity.the_rift.sculk_prowler": "Sculk Prowler",
-    "entity.the_rift.soul_wisp": "Soul Wisp",
+    "entity.sift_unbound.blub": "Blub",
+    "entity.sift_unbound.sculk_prowler": "Sculk Prowler",
+    "entity.sift_unbound.soul_wisp": "Soul Wisp",
     # effect
-    "effect.the_rift.soulsick": "Soulsick",
-    "death.attack.the_rift.soulsick": "%1$s had their soul drained away",
-    "death.attack.the_rift.soulsick.player": "%1$s had their soul drained away while fighting %2$s",
+    "effect.sift_unbound.soulsick": "Soulsick",
+    "death.attack.sift_unbound.soulsick": "%1$s had their soul drained away",
+    "death.attack.sift_unbound.soulsick.player": "%1$s had their soul drained away while fighting %2$s",
     # biomes
-    "biome.the_rift.sift_meadows": "Sift Meadows",
-    "biome.the_rift.pallid_grove": "Pallid Grove",
-    "biome.the_rift.soul_wetlands": "Soul Wetlands",
-    "biome.the_rift.husklands": "Husklands",
-    "biome.the_rift.lullaby_hills": "Lullaby Hills",
+    "biome.sift_unbound.sift_meadows": "Sift Meadows",
+    "biome.sift_unbound.pallid_grove": "Pallid Grove",
+    "biome.sift_unbound.soul_wetlands": "Soul Wetlands",
+    "biome.sift_unbound.husklands": "Husklands",
+    "biome.sift_unbound.lullaby_hills": "Lullaby Hills",
     # messages
-    "message.the_rift.portal.lit": "The Warden Portal hums awake...",
-    "message.the_rift.portal.no_frame": "The Echo Tuner hums, but there's no complete Warden Portal frame here.",
-    "message.the_rift.portal.too_big": "This frame is too big for the Echo Tuner to fill.",
-    "message.the_rift.bed": "The tides of the Sift keep you awake",
-    "message.the_rift.tide": "Sift tide: %s",
-    "tide.the_rift.flow": "Flow Tide",
-    "tide.the_rift.endure": "Endure Tide",
-    "tide.the_rift.thrive": "Thrive Tide",
+    "message.sift_unbound.portal.lit": "The Warden Portal hums awake...",
+    "message.sift_unbound.portal.no_frame": "The Echo Tuner hums, but there's no complete Warden Portal frame here.",
+    "message.sift_unbound.portal.too_big": "This frame is too big for the Echo Tuner to fill.",
+    "message.sift_unbound.bed": "The tides of the Sift keep you awake",
+    "message.sift_unbound.tide": "Sift tide: %s",
+    "tide.sift_unbound.flow": "Flow Tide",
+    "tide.sift_unbound.endure": "Endure Tide",
+    "tide.sift_unbound.thrive": "Thrive Tide",
     # subtitles
-    "subtitles.the_rift.blub.ambient": "Blub squeaks",
-    "subtitles.the_rift.blub.hurt": "Blub hurts",
-    "subtitles.the_rift.blub.death": "Blub dies",
-    "subtitles.the_rift.blub.jump": "Blub hops",
-    "subtitles.the_rift.soul_wisp.ambient": "Soul Wisp chimes",
-    "subtitles.the_rift.soul_wisp.hurt": "Soul Wisp flickers",
-    "subtitles.the_rift.soul_wisp.death": "Soul Wisp fades",
-    "subtitles.the_rift.sculk_prowler.ambient": "Sculk Prowler clicks",
-    "subtitles.the_rift.sculk_prowler.hurt": "Sculk Prowler hurts",
-    "subtitles.the_rift.sculk_prowler.death": "Sculk Prowler dies",
-    "subtitles.the_rift.soul_water.ambient": "Soul Water bubbles",
-    "subtitles.the_rift.soul_water.burn": "Soul drains",
-    "subtitles.the_rift.sift_portal.ambient": "Sift Portal hums",
-    "subtitles.the_rift.sift_portal.travel": "Sift Portal resonates",
-    "subtitles.the_rift.sift_portal.activate": "Warden Portal awakens",
+    "subtitles.sift_unbound.blub.ambient": "Blub squeaks",
+    "subtitles.sift_unbound.blub.hurt": "Blub hurts",
+    "subtitles.sift_unbound.blub.death": "Blub dies",
+    "subtitles.sift_unbound.blub.jump": "Blub hops",
+    "subtitles.sift_unbound.soul_wisp.ambient": "Soul Wisp chimes",
+    "subtitles.sift_unbound.soul_wisp.hurt": "Soul Wisp flickers",
+    "subtitles.sift_unbound.soul_wisp.death": "Soul Wisp fades",
+    "subtitles.sift_unbound.sculk_prowler.ambient": "Sculk Prowler clicks",
+    "subtitles.sift_unbound.sculk_prowler.hurt": "Sculk Prowler hurts",
+    "subtitles.sift_unbound.sculk_prowler.death": "Sculk Prowler dies",
+    "subtitles.sift_unbound.soul_water.ambient": "Soul Water bubbles",
+    "subtitles.sift_unbound.soul_water.burn": "Soul drains",
+    "subtitles.sift_unbound.sift_portal.ambient": "Sift Portal hums",
+    "subtitles.sift_unbound.sift_portal.travel": "Sift Portal resonates",
+    "subtitles.sift_unbound.sift_portal.activate": "Warden Portal awakens",
     # advancements
-    "advancements.the_rift.root.title": "The Rift",
-    "advancements.the_rift.root.description": "Craft an Echo Tuner from echo shards found in ancient cities",
-    "advancements.the_rift.light_portal.title": "Resonance",
-    "advancements.the_rift.light_portal.description": "Awaken the Warden Portal in an ancient city",
-    "advancements.the_rift.enter_sift.title": "Beyond the Frame",
-    "advancements.the_rift.enter_sift.description": "Step through the Warden Portal into the Sift",
-    "advancements.the_rift.soulsick.title": "Ouch!",
-    "advancements.the_rift.soulsick.description": "Feel Soul Water drain your soul",
-    "advancements.the_rift.blub_friend.title": "Squeak Squeak",
-    "advancements.the_rift.blub_friend.description": "Breed two Blubs with Lullaby Blooms",
-    "advancements.the_rift.soul_shard.title": "Crystallized Souls",
-    "advancements.the_rift.soul_shard.description": "Mine a Soul Shard from Soulshale",
-    "advancements.the_rift.prowler.title": "Tide Hunter",
-    "advancements.the_rift.prowler.description": "Defeat a Sculk Prowler",
+    "advancements.sift_unbound.root.title": "The Sift Unbound",
+    "advancements.sift_unbound.root.description": "Craft an Echo Tuner from echo shards found in ancient cities",
+    "advancements.sift_unbound.light_portal.title": "Resonance",
+    "advancements.sift_unbound.light_portal.description": "Awaken the Warden Portal in an ancient city",
+    "advancements.sift_unbound.enter_sift.title": "Beyond the Frame",
+    "advancements.sift_unbound.enter_sift.description": "Step through the Warden Portal into the Sift",
+    "advancements.sift_unbound.soulsick.title": "Ouch!",
+    "advancements.sift_unbound.soulsick.description": "Feel Soul Water drain your soul",
+    "advancements.sift_unbound.blub_friend.title": "Squeak Squeak",
+    "advancements.sift_unbound.blub_friend.description": "Breed two Blubs with Lullaby Blooms",
+    "advancements.sift_unbound.soul_shard.title": "Crystallized Souls",
+    "advancements.sift_unbound.soul_shard.description": "Mine a Soul Shard from Soulshale",
+    "advancements.sift_unbound.prowler.title": "Tide Hunter",
+    "advancements.sift_unbound.prowler.description": "Defeat a Sculk Prowler",
     # commands
-    "commands.the_rift.credits": "The Rift - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios.",
+    "commands.sift_unbound.credits": "The Sift Unbound - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios.",
 }
 
 
@@ -383,7 +383,7 @@ def gen_sounds_json():
     out = {}
     for ev, files in SOUNDS.items():
         entry = {"sounds": [{"name": rid(f), **({"stream": True} if ev.startswith("music") or ev.endswith("loop") else {})} for f in files]}
-        key = "subtitles.the_rift." + ".".join(ev.split(".")[1:])
+        key = "subtitles.sift_unbound." + ".".join(ev.split(".")[1:])
         if key in LANG:
             entry["subtitle"] = key
         out[ev] = entry
@@ -405,7 +405,7 @@ GROUND = [rid(x) for x in ["sift_grass_block", "sift_soil", "sift_sculk", "dark_
 
 
 def gen_damage_type():
-    write_json(f"{D}/damage_type/soulsick.json", {"exhaustion": 0.0, "message_id": "the_rift.soulsick", "scaling": "never"})
+    write_json(f"{D}/damage_type/soulsick.json", {"exhaustion": 0.0, "message_id": "sift_unbound.soulsick", "scaling": "never"})
 
 
 def gen_tags():
@@ -509,8 +509,8 @@ def gen_entity_loot():
 
 # ============================================================================ advancements
 def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True):
-    obj = {"display": {"icon": {"id": icon}, "title": {"translate": f"advancements.the_rift.{name}.title"},
-                       "description": {"translate": f"advancements.the_rift.{name}.description"},
+    obj = {"display": {"icon": {"id": icon}, "title": {"translate": f"advancements.sift_unbound.{name}.title"},
+                       "description": {"translate": f"advancements.sift_unbound.{name}.description"},
                        "frame": frame, "show_toast": show, "announce_to_chat": show, "hidden": hidden},
            "criteria": criteria}
     if parent:
@@ -546,8 +546,8 @@ def gen_dimension():
                 "additions": {"sound": rid("ambient.sift.additions"), "tick_chance": 0.006},
                 "mood": {"block_search_extent": 8, "offset": 2.0, "sound": rid("ambient.sift.mood"), "tick_delay": 6000}},
             "minecraft:audio/background_music": {"default": {"max_delay": 18000, "min_delay": 6000, "sound": rid("music.sift")}},
-            "minecraft:gameplay/bed_rule": {"can_set_spawn": "never", "can_sleep": "never", "error_message": {"translate": "message.the_rift.bed"}},
-            "minecraft:gameplay/straw_bed_rule": {"can_set_spawn": "never", "can_sleep": "never", "error_message": {"translate": "message.the_rift.bed"}},
+            "minecraft:gameplay/bed_rule": {"can_set_spawn": "never", "can_sleep": "never", "error_message": {"translate": "message.sift_unbound.bed"}},
+            "minecraft:gameplay/straw_bed_rule": {"can_set_spawn": "never", "can_sleep": "never", "error_message": {"translate": "message.sift_unbound.bed"}},
             "minecraft:gameplay/respawn_anchor_works": False,
             "minecraft:gameplay/can_start_raid": False,
             "minecraft:gameplay/can_pillager_patrol_spawn": False,
@@ -755,14 +755,14 @@ def gen_biomes():
     common = ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]
 
     # Features in the same step must appear in the same relative order in every biome (else "feature order cycle").
-    veg_order = ["the_rift:pallid_trees_dense", "the_rift:tall_pallid_trees", "the_rift:pallid_trees_sparse", "the_rift:husk_rocks",
-                 "the_rift:patch_tall_sift_grass", "the_rift:patch_short_sift_grass", "the_rift:patch_teal_sprouts", "the_rift:patch_lullaby_bloom"]
+    veg_order = ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:pallid_trees_sparse", "sift_unbound:husk_rocks",
+                 "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_short_sift_grass", "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"]
 
     def biome(name, temp, features_veg, extra_attrs=None, spawn=None, extra_lakes=False, water="#5fd3c8"):
         features_veg = sorted(features_veg, key=veg_order.index)
-        feats = [[], ["the_rift:soul_water_lake_common" if extra_lakes else "the_rift:soul_water_lake_rare"], [], [], [], [],
-                 ["the_rift:ore_soul_shard", "the_rift:dark_sculk_disks"] if name == "husklands" else ["the_rift:ore_soul_shard"],
-                 [], ["the_rift:soul_water_springs"], features_veg, []]
+        feats = [[], ["sift_unbound:soul_water_lake_common" if extra_lakes else "sift_unbound:soul_water_lake_rare"], [], [], [], [],
+                 ["sift_unbound:ore_soul_shard", "sift_unbound:dark_sculk_disks"] if name == "husklands" else ["sift_unbound:ore_soul_shard"],
+                 [], ["sift_unbound:soul_water_springs"], features_veg, []]
         attrs = {"minecraft:visual/water_fog_color": "#3f9fa8"}
         attrs.update(extra_attrs or {})
         if spawn:
@@ -771,20 +771,20 @@ def gen_biomes():
             "effects": {"water_color": water, "grass_color": "#f17582", "foliage_color": "#9fd8ec"},
             "features": feats, "has_precipitation": False, "temperature": temp})
 
-    veg_meadow = ["the_rift:patch_short_sift_grass", "the_rift:patch_tall_sift_grass", "the_rift:patch_lullaby_bloom",
-                  "the_rift:patch_teal_sprouts", "the_rift:pallid_trees_sparse"]
+    veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",
+                  "sift_unbound:patch_teal_sprouts", "sift_unbound:pallid_trees_sparse"]
     biome("sift_meadows", 0.6, veg_meadow, spawn=spawns(creature=[blub], monster=[prowler], ambient=[wisp]))
-    biome("pallid_grove", 0.5, ["the_rift:pallid_trees_dense", "the_rift:tall_pallid_trees", "the_rift:patch_short_sift_grass",
-                                "the_rift:patch_teal_sprouts", "the_rift:patch_lullaby_bloom"],
+    biome("pallid_grove", 0.5, ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:patch_short_sift_grass",
+                                "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:sculk_soul"}, "probability": 0.0006}], "modifier": "append"}},
           spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler], ambient=[(rid("soul_wisp"), 16, 1, 3)]))
-    biome("soul_wetlands", 0.7, ["the_rift:patch_teal_sprouts", "the_rift:patch_short_sift_grass", "the_rift:pallid_trees_sparse"],
+    biome("soul_wetlands", 0.7, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_short_sift_grass", "sift_unbound:pallid_trees_sparse"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:soul"}, "probability": 0.0009}], "modifier": "append"}},
           spawn=spawns(creature=[(rid("blub"), 14, 3, 6)], monster=[(rid("sculk_prowler"), 60, 1, 1)], ambient=[(rid("soul_wisp"), 30, 2, 4)]),
           extra_lakes=True)
-    biome("husklands", 1.2, ["the_rift:husk_rocks", "the_rift:patch_teal_sprouts"],
+    biome("husklands", 1.2, ["sift_unbound:husk_rocks", "sift_unbound:patch_teal_sprouts"],
           spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3)], ambient=[wisp]))
-    biome("lullaby_hills", 0.9, ["the_rift:patch_teal_sprouts", "the_rift:patch_lullaby_bloom", "the_rift:patch_short_sift_grass"],
+    biome("lullaby_hills", 0.9, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom", "sift_unbound:patch_short_sift_grass"],
           spawn=spawns(creature=[blub], monster=[prowler], ambient=[wisp]))
 
 

@@ -94,7 +94,7 @@ the links go to each file's wiki page. (A private reference ZIP was made for the
 
 | In the mod | Official? | Notes |
 |---|---|---|
-| Dimension **The Sift** (`the_rift:the_sift`) | Name ✔ | Terrain, biomes and sky colours follow the reveal + Dungeons II art; everything else is the mod's guess. |
+| Dimension **The Sift** (`sift_unbound:the_sift`) | Name ✔ | Terrain, biomes and sky colours follow the reveal + Dungeons II art; everything else is the mod's guess. |
 | **Warden Portal** = ancient city frame, woken with an **Echo Tuner** | Frame ✔ / tuner ✘ | Dungeons II uses a note block machine; the mod's Echo Tuner "plays the melody". |
 | **Soul Water** that drains health (**Soulsick**) | Inspired ✔ | The mod's version of ichor ("ouch water"). Blubs, wisps, prowlers and the warden are immune. |
 | Sift Grass Block, Short/Tall Sift Grass | Names ✔ (wiki renders) | Original textures. |

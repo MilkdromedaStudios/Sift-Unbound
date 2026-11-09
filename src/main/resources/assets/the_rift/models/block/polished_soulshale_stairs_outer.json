@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "the_rift:block/polished_soulshale",
-    "side": "the_rift:block/polished_soulshale",
-    "top": "the_rift:block/polished_soulshale"
-  }
-}

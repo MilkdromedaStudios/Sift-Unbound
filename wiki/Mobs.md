@@ -11,7 +11,7 @@ and **squeaks every few seconds**. This model, its textures and sounds are origi
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:blub` (category: creature) |
+| ID | `sift_unbound:blub` (category: creature) |
 | Health | 6 (3 ♥) |
 | Size | 0.55 × 0.55 |
 | Looks | **Soul-engorged** (glowing light blue, default), **Meadows** (mossy green with an antenna light), **Carapace** (beige shell with red frills – spawns on sand / dark sculk) |
@@ -29,7 +29,7 @@ ground, chimes softly, glows and leaves a trail of soul particles.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soul_wisp` (category: ambient) |
+| ID | `sift_unbound:soul_wisp` (category: ambient) |
 | Health | 4 |
 | Flying | yes (no gravity, no fall damage) |
 | Spawns | Every Sift biome, most in Soul Wetlands |
@@ -41,7 +41,7 @@ A low, four-legged sculk hunter with twitching sensor tendrils and glowing cyan 
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:sculk_prowler` (category: monster) |
+| ID | `sift_unbound:sculk_prowler` (category: monster) |
 | Health / Armour | 24 / 2 |
 | Attack | 5 damage + Soulsick 4 s |
 | Speed | 0.28 (chases at ×1.2) |

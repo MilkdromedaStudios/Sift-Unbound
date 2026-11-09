@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sift_unbound:block/pallid_sapling"
+  }
+}

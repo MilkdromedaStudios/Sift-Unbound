@@ -1,0 +1,84 @@
+{
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#3f9fa8",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "creature": [
+            {
+              "type": "sift_unbound:blub",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 10
+            }
+          ],
+          "monster": [
+            {
+              "type": "sift_unbound:sculk_prowler",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 100
+            }
+          ],
+          "ambient": [
+            {
+              "type": "sift_unbound:soul_wisp",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 10
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.4,
+  "effects": {
+    "water_color": "#5fd3c8",
+    "grass_color": "#f17582",
+    "foliage_color": "#9fd8ec"
+  },
+  "features": [
+    [],
+    [
+      "sift_unbound:soul_water_lake_rare"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "sift_unbound:ore_soul_shard"
+    ],
+    [],
+    [
+      "sift_unbound:soul_water_springs"
+    ],
+    [
+      "sift_unbound:pallid_trees_sparse",
+      "sift_unbound:patch_tall_sift_grass",
+      "sift_unbound:patch_short_sift_grass",
+      "sift_unbound:patch_teal_sprouts",
+      "sift_unbound:patch_lullaby_bloom"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.6
+}

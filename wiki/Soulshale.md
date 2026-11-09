@@ -4,37 +4,37 @@
 
 | | Block |
 |---|---|
-| <img src="../src/main/resources/assets/the_rift/textures/block/soulshale.png" width="24" height="24" alt=""> | [Soulshale](#soulshale) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale](#cobbled-soulshale) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Stairs](#cobbled-soulshale-stairs) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Slab](#cobbled-soulshale-slab) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Wall](#cobbled-soulshale-wall) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale](#polished-soulshale) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Stairs](#polished-soulshale-stairs) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Slab](#polished-soulshale-slab) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Wall](#polished-soulshale-wall) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Bricks](#soulshale-bricks) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Stairs](#soulshale-brick-stairs) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Slab](#soulshale-brick-slab) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Wall](#soulshale-brick-wall) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/chiseled_soulshale.png" width="24" height="24" alt=""> | [Chiseled Soulshale](#chiseled-soulshale) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/soul_shard_block.png" width="24" height="24" alt=""> | [Block of Soul Shard](#block-of-soul-shard) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale.png" width="24" height="24" alt=""> | [Soulshale](#soulshale) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale](#cobbled-soulshale) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Stairs](#cobbled-soulshale-stairs) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Slab](#cobbled-soulshale-slab) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="24" height="24" alt=""> | [Cobbled Soulshale Wall](#cobbled-soulshale-wall) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale](#polished-soulshale) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Stairs](#polished-soulshale-stairs) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Slab](#polished-soulshale-slab) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="24" height="24" alt=""> | [Polished Soulshale Wall](#polished-soulshale-wall) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Bricks](#soulshale-bricks) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Stairs](#soulshale-brick-stairs) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Slab](#soulshale-brick-slab) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="24" height="24" alt=""> | [Soulshale Brick Wall](#soulshale-brick-wall) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/chiseled_soulshale.png" width="24" height="24" alt=""> | [Chiseled Soulshale](#chiseled-soulshale) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/soul_shard_block.png" width="24" height="24" alt=""> | [Block of Soul Shard](#block-of-soul-shard) |
 
 ### Soulshale
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale texture">
 
 The dark teal stone the whole dimension is made of (the 26.4 snapshot added a decorative 'chiseled soulshale' block to Minecraft; this mod builds a full stone family around the name). Drops Cobbled Soulshale unless mined with Silk Touch.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soulshale` |
+| ID | `sift_unbound:soulshale` |
 | Hardness | 3 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (wood+) |
 | Where to find | The Sift's bedrock-to-surface base stone |
 | Drops | Cobbled Soulshale, Soulshale (itself with Silk Touch) |
-| Tags | `#minecraft:blocks_motion_no_leaves`, `#minecraft:mineable/pickaxe`, `#minecraft:overworld_carver_replaceables`, `#the_rift:soulshale_ore_replaceables` |
+| Tags | `#minecraft:blocks_motion_no_leaves`, `#minecraft:mineable/pickaxe`, `#minecraft:overworld_carver_replaceables`, `#sift_unbound:soulshale_ore_replaceables` |
 
 **How to get it**
 
@@ -42,13 +42,13 @@ The dark teal stone the whole dimension is made of (the 26.4 snapshot added a de
 
 ### Cobbled Soulshale
 
-<img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale texture">
 
 Broken soulshale. Smelt it back into Soulshale; craft it into stairs, slabs, walls, Polished Soulshale and bricks. Works for stone tools and furnaces.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:cobbled_soulshale` |
+| ID | `sift_unbound:cobbled_soulshale` |
 | Hardness | 3.5 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (wood+) |
@@ -60,13 +60,13 @@ Broken soulshale. Smelt it back into Soulshale; craft it into stairs, slabs, wal
 
 ### Cobbled Soulshale Stairs
 
-<img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Stairs texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Stairs texture">
 
 Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:cobbled_soulshale_stairs` |
+| ID | `sift_unbound:cobbled_soulshale_stairs` |
 | Drops | Cobbled Soulshale Stairs |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:stairs` |
 
@@ -77,13 +77,13 @@ Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 ### Cobbled Soulshale Slab
 
-<img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Slab texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Slab texture">
 
 Slab version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:cobbled_soulshale_slab` |
+| ID | `sift_unbound:cobbled_soulshale_slab` |
 | Drops | Cobbled Soulshale Slab |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:slabs` |
 
@@ -96,13 +96,13 @@ Slab version.
 
 ### Cobbled Soulshale Wall
 
-<img src="../src/main/resources/assets/the_rift/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Wall texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/cobbled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Cobbled Soulshale Wall texture">
 
 Wall version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:cobbled_soulshale_wall` |
+| ID | `sift_unbound:cobbled_soulshale_wall` |
 | Drops | Cobbled Soulshale Wall |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:walls` |
 
@@ -113,13 +113,13 @@ Wall version.
 
 ### Polished Soulshale
 
-<img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale texture">
 
 Smooth bevelled soulshale. Also the platform the mod builds under return portals in the Sift.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:polished_soulshale` |
+| ID | `sift_unbound:polished_soulshale` |
 | Hardness | 3.5 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (wood+) |
@@ -136,13 +136,13 @@ Smooth bevelled soulshale. Also the platform the mod builds under return portals
 
 ### Polished Soulshale Stairs
 
-<img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Stairs texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Stairs texture">
 
 Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:polished_soulshale_stairs` |
+| ID | `sift_unbound:polished_soulshale_stairs` |
 | Drops | Polished Soulshale Stairs |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:stairs` |
 
@@ -154,13 +154,13 @@ Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 ### Polished Soulshale Slab
 
-<img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Slab texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Slab texture">
 
 Slab version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:polished_soulshale_slab` |
+| ID | `sift_unbound:polished_soulshale_slab` |
 | Drops | Polished Soulshale Slab |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:slabs` |
 
@@ -172,13 +172,13 @@ Slab version.
 
 ### Polished Soulshale Wall
 
-<img src="../src/main/resources/assets/the_rift/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Wall texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/polished_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Polished Soulshale Wall texture">
 
 Wall version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:polished_soulshale_wall` |
+| ID | `sift_unbound:polished_soulshale_wall` |
 | Drops | Polished Soulshale Wall |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:walls` |
 
@@ -190,13 +190,13 @@ Wall version.
 
 ### Soulshale Bricks
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Bricks texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Bricks texture">
 
 Neat dark-teal bricks.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soulshale_bricks` |
+| ID | `sift_unbound:soulshale_bricks` |
 | Hardness | 3.5 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (wood+) |
@@ -214,13 +214,13 @@ Neat dark-teal bricks.
 
 ### Soulshale Brick Stairs
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Stairs texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Stairs texture">
 
 Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soulshale_brick_stairs` |
+| ID | `sift_unbound:soulshale_brick_stairs` |
 | Drops | Soulshale Brick Stairs |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:stairs` |
 
@@ -233,13 +233,13 @@ Stairs version. Craftable or stonecutter-able like vanilla stairs.
 
 ### Soulshale Brick Slab
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Slab texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Slab texture">
 
 Slab version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soulshale_brick_slab` |
+| ID | `sift_unbound:soulshale_brick_slab` |
 | Drops | Soulshale Brick Slab |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:slabs` |
 
@@ -252,13 +252,13 @@ Slab version.
 
 ### Soulshale Brick Wall
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Wall texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soulshale_bricks.png" width="64" height="64" style="image-rendering: pixelated" alt="Soulshale Brick Wall texture">
 
 Wall version.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soulshale_brick_wall` |
+| ID | `sift_unbound:soulshale_brick_wall` |
 | Drops | Soulshale Brick Wall |
 | Tags | `#minecraft:mineable/pickaxe`, `#minecraft:walls` |
 
@@ -271,13 +271,13 @@ Wall version.
 
 ### Chiseled Soulshale
 
-<img src="../src/main/resources/assets/the_rift/textures/block/chiseled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Chiseled Soulshale texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/chiseled_soulshale.png" width="64" height="64" style="image-rendering: pixelated" alt="Chiseled Soulshale texture">
 
 Carved with a glowing 'resonance' ring and a little singing figure - a nod to the Singer of the Sift. Gives off a faint light.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:chiseled_soulshale` |
+| ID | `sift_unbound:chiseled_soulshale` |
 | Hardness | 3.5 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (wood+) |
@@ -293,13 +293,13 @@ Carved with a glowing 'resonance' ring and a little singing figure - a nod to th
 
 ### Block of Soul Shard
 
-<img src="../src/main/resources/assets/the_rift/textures/block/soul_shard_block.png" width="64" height="64" style="image-rendering: pixelated" alt="Block of Soul Shard texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/soul_shard_block.png" width="64" height="64" style="image-rendering: pixelated" alt="Block of Soul Shard texture">
 
 Nine soul shards fused into a softly glowing block.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:soul_shard_block` |
+| ID | `sift_unbound:soul_shard_block` |
 | Hardness | 3 |
 | Blast resistance | 6 |
 | Best tool | Pickaxe (stone+) |

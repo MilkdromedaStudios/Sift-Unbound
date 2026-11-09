@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sift_unbound:block/pallid_log_x"
+    },
+    "axis=y": {
+      "model": "sift_unbound:block/pallid_log_y"
+    },
+    "axis=z": {
+      "model": "sift_unbound:block/pallid_log_z"
+    }
+  }
+}

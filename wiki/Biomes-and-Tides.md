@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [The Sift (research)](The-Sift-Research.md) · [Warden Portal](Warden-Portal.md) · [Biomes & Tides](Biomes-and-Tides.md) · [Terrain](Terrain-Blocks.md) · [Soulshale](Soulshale.md) · [Plants](Plants.md) · [Pallid Wood](Pallid-Wood.md) · [Soul Water](Soul-Water.md) · [Mobs](Mobs.md) · [Items](Items.md) · [Advancements](Advancements.md) · [Sounds](Sounds.md) · [Art pipeline](Art-Pipeline.md) · [Credits](Credits.md)
 
-The Sift (`the_rift:the_sift`) uses the Overworld's terrain shape (hills, caves, ravines), built from **Soulshale**, with **Soul Water**
+The Sift (`sift_unbound:the_sift`) uses the Overworld's terrain shape (hills, caves, ravines), built from **Soulshale**, with **Soul Water**
 filling everything below **Y 52**. Height −64 to 320. Beds and respawn anchors don't work ("the tides of the Sift keep you awake").
 White ash drifts through the air (the "particles in the sky" seen in Dungeons II).
 
@@ -22,7 +22,7 @@ Every biome also has Soul Shard ore, Soul Water springs and rare Soul Water lake
 | **Husklands** | **Lullaby Hills** | **Arriving through a portal** |
 | ![](screenshots/biome_husklands.png) | ![](screenshots/biome_lullaby_hills.png) | ![](screenshots/sift_arrival.png) |
 
-*Screenshots are taken automatically by the client GameTest (`RiftClientGameTest`) on every CI run.*
+*Screenshots are taken automatically by the client GameTest (`SiftClientGameTest`) on every CI run.*
 
 ## Tides
 
@@ -34,8 +34,8 @@ The Sift has no sun or moon. Its 20-minute day is split into three tides (names 
 | **Endure** | 8000 – 16000 | Deep night-blue, stars ("sky particles") | Sky light drops to 30 %, so **Sculk Prowlers** can spawn on the surface. |
 | **Thrive** | 16000 – 24000 | Warm salmon-gold | Bright again. |
 
-Run `/rift tide` to see the current tide. The colours fade over 1200 ticks between tides. The cycle lives in the data-driven
-timeline `data/the_rift/timeline/sift_tides.json`, so datapacks can retune it.
+Run `/sift tide` to see the current tide. The colours fade over 1200 ticks between tides. The cycle lives in the data-driven
+timeline `data/sift_unbound/timeline/sift_tides.json`, so datapacks can retune it.
 
 | Flow | Endure | Thrive |
 |---|---|---|

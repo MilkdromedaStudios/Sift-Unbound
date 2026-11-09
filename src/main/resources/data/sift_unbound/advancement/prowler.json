@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:echo_shard"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.prowler.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.prowler.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:sculk_prowler"
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

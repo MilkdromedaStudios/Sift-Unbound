@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "sift_unbound:block/pallid_planks"
+  }
+}

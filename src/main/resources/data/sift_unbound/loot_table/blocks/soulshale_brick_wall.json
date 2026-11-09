@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sift_unbound:soulshale_brick_wall"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "sift_unbound:blocks/soulshale_brick_wall"
+}

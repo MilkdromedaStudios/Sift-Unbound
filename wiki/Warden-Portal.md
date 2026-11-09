@@ -36,5 +36,5 @@ that it is a portal to the Sift. In *Minecraft Dungeons II* it is woken by a not
 
 | Block | ID | Light | Notes |
 |---|---|---|---|
-| Sift Portal | `the_rift:sift_portal` | 12 | `axis` = x / z, unbreakable, point of interest `the_rift:sift_portal` (used to link portals) |
-| Frame | tag `#the_rift:warden_portal_frame` | – | contains `minecraft:reinforced_deepslate`; datapacks can add more frame blocks |
+| Sift Portal | `sift_unbound:sift_portal` | 12 | `axis` = x / z, unbreakable, point of interest `sift_unbound:sift_portal` (used to link portals) |
+| Frame | tag `#sift_unbound:warden_portal_frame` | – | contains `minecraft:reinforced_deepslate`; datapacks can add more frame blocks |

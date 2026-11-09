@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sift_unbound:block/pallid_sapling"
+  }
+}

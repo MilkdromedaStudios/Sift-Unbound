@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds the wiki/ folder (GitHub-flavoured Markdown) from the mod's own data.
 
-Names come from the lang file, recipes / drops / tags from data/the_rift, textures from the generated PNGs, so the
+Names come from the lang file, recipes / drops / tags from data/sift_unbound, textures from the generated PNGs, so the
 wiki never drifts from the code. Hand-written facts (hardness, where to find things, behaviour) live in INFO below.
 
 Run from the repository root:  python3 tools/gen_wiki.py
@@ -13,16 +13,16 @@ from collections import defaultdict
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src", "main", "resources")
-A = os.path.join(RES, "assets", "the_rift")
-D = os.path.join(RES, "data", "the_rift")
+A = os.path.join(RES, "assets", "sift_unbound")
+D = os.path.join(RES, "data", "sift_unbound")
 WIKI = os.path.join(ROOT, "wiki")
 LANG = json.load(open(os.path.join(A, "lang", "en_us.json")))
-TEX_REL = "../src/main/resources/assets/the_rift/textures"
+TEX_REL = "../src/main/resources/assets/sift_unbound/textures"
 
 
 def name(i):
     p = i.split(":")[-1]
-    for k in (f"block.the_rift.{p}", f"item.the_rift.{p}", f"entity.the_rift.{p}"):
+    for k in (f"block.sift_unbound.{p}", f"item.sift_unbound.{p}", f"entity.sift_unbound.{p}"):
         if k in LANG:
             return LANG[k]
     if i.startswith("minecraft:") or i.startswith("#"):
@@ -35,7 +35,7 @@ def slug(n):
 
 
 def link(i):
-    if i.startswith("the_rift:"):
+    if i.startswith("sift_unbound:"):
         p = i.split(":")[1]
         page = PAGE_OF.get(p)
         if page:
@@ -120,7 +120,7 @@ def load_recipes():
         if res:
             by_result[res.split(":")[-1]].append(r)
         txt = json.dumps({k: v for k, v in r.items() if k != "result"})
-        for m in set(__import__("re").findall(r'the_rift:[a-z_]+', txt)):
+        for m in set(__import__("re").findall(r'sift_unbound:[a-z_]+', txt)):
             uses[m.split(":")[1]].append(r)
     return by_result, uses
 
@@ -167,7 +167,7 @@ def drops(block):
 def tags_of(block):
     out = []
     for f in glob.glob(f"{RES}/data/*/tags/block/**/*.json", recursive=True):
-        if f"the_rift:{block}\"" in open(f).read():
+        if f"sift_unbound:{block}\"" in open(f).read():
             ns = f.split("/data/")[1].split("/")[0]
             out.append(f"`#{ns}:{f.split('/tags/block/')[1][:-5]}`")
     return ", ".join(sorted(out))
@@ -195,7 +195,7 @@ def family_note(block):
 # ------------------------------------------------------------------ pages
 def block_section(b, recipes, uses):
     info = INFO.get(b, {})
-    n = name(f"the_rift:{b}")
+    n = name(f"sift_unbound:{b}")
     tex = texture_for(b)
     lines = [f"### {n}", ""]
     if tex:
@@ -203,7 +203,7 @@ def block_section(b, recipes, uses):
     desc = info.get("desc") or family_note(b) or ""
     if desc:
         lines += [desc, ""]
-    lines += ["| Property | Value |", "|---|---|", f"| ID | `the_rift:{b}` |"]
+    lines += ["| Property | Value |", "|---|---|", f"| ID | `sift_unbound:{b}` |"]
     if "hardness" in info:
         lines.append(f"| Hardness | {info['hardness']} |")
     if "blast" in info:
@@ -247,7 +247,7 @@ def gen_block_pages():
         for b in blocks:
             tex = texture_for(b)
             img = f'<img src="{tex}" width="24" height="24" alt="">' if tex else ""
-            body.append(f"| {img} | [{name('the_rift:' + b)}](#{slug(name('the_rift:' + b)).lower()}) |")
+            body.append(f"| {img} | [{name('sift_unbound:' + b)}](#{slug(name('sift_unbound:' + b)).lower()}) |")
         body.append("")
         for b in blocks:
             body.append(block_section(b, recipes, uses))
@@ -266,9 +266,9 @@ def gen_items_page():
     ]
     body = ["# Items", "", NAV, ""]
     for i, kind, desc in items:
-        n = name(f"the_rift:{i}")
+        n = name(f"sift_unbound:{i}")
         body += [f"### {n}", "", f'<img src="{TEX_REL}/item/{i}.png" width="64" height="64" alt="{n} texture">', "", desc, "",
-                 "| Property | Value |", "|---|---|", f"| ID | `the_rift:{i}` |", f"| Type | {kind} |", ""]
+                 "| Property | Value |", "|---|---|", f"| ID | `sift_unbound:{i}` |", f"| Type | {kind} |", ""]
         for r in recipes.get(i, []):
             body += [f"- {recipe_md(r)}", ""]
     write("Items.md", "\n".join(body))

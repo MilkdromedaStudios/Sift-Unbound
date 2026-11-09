@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:lullaby_bloom"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.blub_friend.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.blub_friend.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bred": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "child": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:blub"
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

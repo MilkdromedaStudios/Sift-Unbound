@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "#sift_unbound:pallid_logs"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sift_unbound:pallid_planks"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:sift_grass_block"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.enter_sift.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.enter_sift.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "entered": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "sift_unbound:the_sift"
+      }
+    }
+  },
+  "parent": "sift_unbound:light_portal"
+}

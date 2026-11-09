@@ -17,7 +17,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"the_rift" {
+		"sift_unbound" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -27,7 +27,7 @@ loom {
 fabricApi {
 	configureTests {
 		createSourceSet = true
-		modId = "the_rift_test"
+		modId = "sift_unbound_test"
 		enableGameTests = true
 		enableClientGameTests = true
 		eula = true
@@ -80,4 +80,19 @@ publishing {
 // Let the dev server read console commands (handy for testing and the smoke-test script).
 tasks.named("runServer") {
 	standardInput = System.in
+}
+
+// Optional shader photo shoot: tools/photoshoot.sh downloads Sodium, Iris and a shader pack into photoshoot/
+// (git-ignored) and runs `runClientGameTest -Pphotoshoot`. Nothing here affects the normal build or the mod jar.
+if (project.hasProperty("photoshoot")) {
+	dependencies {
+		gametestRuntimeOnly fileTree(dir: "photoshoot/mods", include: "*.jar")
+	}
+	tasks.named("runClientGameTest") {
+		jvmArgs "-Dsiftunbound.photoshoot=true"
+		doFirst {
+			copy { from "photoshoot/shaderpacks"; into "build/run/clientGameTest/shaderpacks" }
+			copy { from "photoshoot/config"; into "build/run/clientGameTest/config" }
+		}
+	}
 }

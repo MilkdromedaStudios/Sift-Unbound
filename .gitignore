@@ -42,3 +42,6 @@ replay_*.log
 # local reference material (Mojang art) must never be committed
 /references/
 *.ref.png
+
+# third-party mods and shader packs downloaded by tools/photoshoot.sh (never commit)
+/photoshoot/

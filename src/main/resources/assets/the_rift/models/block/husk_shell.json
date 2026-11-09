@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "the_rift:block/husk_shell_top",
-    "side": "the_rift:block/husk_shell"
-  }
-}

@@ -1,8 +1,8 @@
-# The Rift – wiki
+# The Sift Unbound – wiki
 
 [Home](Home.md) · [The Sift (research)](The-Sift-Research.md) · [Warden Portal](Warden-Portal.md) · [Biomes & Tides](Biomes-and-Tides.md) · [Terrain](Terrain-Blocks.md) · [Soulshale](Soulshale.md) · [Plants](Plants.md) · [Pallid Wood](Pallid-Wood.md) · [Soul Water](Soul-Water.md) · [Mobs](Mobs.md) · [Items](Items.md) · [Advancements](Advancements.md) · [Sounds](Sounds.md) · [Art pipeline](Art-Pipeline.md) · [Credits](Credits.md)
 
-**The Rift** is an unofficial Fabric mod for **Minecraft Java 26.3** that lets you awaken the **Warden Portal** at the heart of
+**The Sift Unbound** is an unofficial Fabric mod for **Minecraft Java 26.3** that lets you awaken the **Warden Portal** at the heart of
 every ancient city and travel to **the Sift** – the dimension Mojang revealed for *Minecraft Dungeons II* and announced for
 Minecraft in 2027. Everything in the mod (textures, models, sounds, music) is original; see [Credits](Credits.md).
 
@@ -28,12 +28,12 @@ Minecraft in 2027. Everything in the mod (textures, models, sounds, music) is or
 | Status effects | 1 (Soulsick) | [Soul Water](Soul-Water.md#soulsick) |
 | Advancements | 7 | [Advancements](Advancements.md) |
 | Sounds | 19 events / 28 original sound files | [Sounds](Sounds.md) |
-| Commands | `/rift credits`, `/rift tide` | below |
+| Commands | `/sift credits`, `/sift tide` | below |
 
 ## Commands
 
-* `/rift credits` – shows the credits and the "not affiliated with Mojang" notice.
-* `/rift tide` – tells you whether the Sift is in its Flow, Endure or Thrive tide.
+* `/sift credits` – shows the credits and the "not affiliated with Mojang" notice.
+* `/sift tide` – tells you whether the Sift is in its Flow, Endure or Thrive tide.
 
 ## For developers
 

@@ -4,21 +4,21 @@
 
 | | Block |
 |---|---|
-| <img src="../src/main/resources/assets/the_rift/textures/block/short_sift_grass.png" width="24" height="24" alt=""> | [Short Sift Grass](#short-sift-grass) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/tall_sift_grass_top.png" width="24" height="24" alt=""> | [Tall Sift Grass](#tall-sift-grass) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/teal_sprouts.png" width="24" height="24" alt=""> | [Teal Sprouts](#teal-sprouts) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/lullaby_bloom.png" width="24" height="24" alt=""> | [Lullaby Bloom](#lullaby-bloom) |
-| <img src="../src/main/resources/assets/the_rift/textures/block/pallid_sapling.png" width="24" height="24" alt=""> | [Pallid Sapling](#pallid-sapling) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/short_sift_grass.png" width="24" height="24" alt=""> | [Short Sift Grass](#short-sift-grass) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/tall_sift_grass_top.png" width="24" height="24" alt=""> | [Tall Sift Grass](#tall-sift-grass) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/teal_sprouts.png" width="24" height="24" alt=""> | [Teal Sprouts](#teal-sprouts) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/lullaby_bloom.png" width="24" height="24" alt=""> | [Lullaby Bloom](#lullaby-bloom) |
+| <img src="../src/main/resources/assets/sift_unbound/textures/block/pallid_sapling.png" width="24" height="24" alt=""> | [Pallid Sapling](#pallid-sapling) |
 
 ### Short Sift Grass
 
-<img src="../src/main/resources/assets/the_rift/textures/block/short_sift_grass.png" width="64" height="64" style="image-rendering: pixelated" alt="Short Sift Grass texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/short_sift_grass.png" width="64" height="64" style="image-rendering: pixelated" alt="Short Sift Grass texture">
 
 Salmon tufts (the 'soft orange grasses' of the reveal). Bone meal grows it into Tall Sift Grass. Only drops with shears or Silk Touch.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:short_sift_grass` |
+| ID | `sift_unbound:short_sift_grass` |
 | Hardness | 0 |
 | Best tool | Shears |
 | Where to find | Meadows, groves, wetlands, hills |
@@ -27,13 +27,13 @@ Salmon tufts (the 'soft orange grasses' of the reveal). Bone meal grows it into 
 
 ### Tall Sift Grass
 
-<img src="../src/main/resources/assets/the_rift/textures/block/tall_sift_grass_top.png" width="64" height="64" style="image-rendering: pixelated" alt="Tall Sift Grass texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/tall_sift_grass_top.png" width="64" height="64" style="image-rendering: pixelated" alt="Tall Sift Grass texture">
 
 Two-block-tall salmon grass. Shearing gives two Short Sift Grass.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:tall_sift_grass` |
+| ID | `sift_unbound:tall_sift_grass` |
 | Hardness | 0 |
 | Best tool | Shears |
 | Where to find | Sift Meadows |
@@ -42,13 +42,13 @@ Two-block-tall salmon grass. Shearing gives two Short Sift Grass.
 
 ### Teal Sprouts
 
-<img src="../src/main/resources/assets/the_rift/textures/block/teal_sprouts.png" width="64" height="64" style="image-rendering: pixelated" alt="Teal Sprouts texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/teal_sprouts.png" width="64" height="64" style="image-rendering: pixelated" alt="Teal Sprouts texture">
 
 The teal vegetation that grows on the Sift's red ground in Dungeons II. Blubs love it (it's a breeding food). Two make cyan dye.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:teal_sprouts` |
+| ID | `sift_unbound:teal_sprouts` |
 | Hardness | 0 |
 | Best tool | Shears |
 | Where to find | Every Sift biome |
@@ -59,13 +59,13 @@ The teal vegetation that grows on the Sift's red ground in Dungeons II. Blubs lo
 
 ### Lullaby Bloom
 
-<img src="../src/main/resources/assets/the_rift/textures/block/lullaby_bloom.png" width="64" height="64" style="image-rendering: pixelated" alt="Lullaby Bloom texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/lullaby_bloom.png" width="64" height="64" style="image-rendering: pixelated" alt="Lullaby Bloom texture">
 
 A drooping pale-blue bell flower that glows. Blub breeding food; makes light blue dye; can be potted; gives Night Vision in suspicious stew.
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:lullaby_bloom` |
+| ID | `sift_unbound:lullaby_bloom` |
 | Hardness | 0 |
 | Best tool | Any |
 | Light level | 6 |
@@ -77,13 +77,13 @@ A drooping pale-blue bell flower that glows. Blub breeding food; makes light blu
 
 ### Pallid Sapling
 
-<img src="../src/main/resources/assets/the_rift/textures/block/pallid_sapling.png" width="64" height="64" style="image-rendering: pixelated" alt="Pallid Sapling texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/block/pallid_sapling.png" width="64" height="64" style="image-rendering: pixelated" alt="Pallid Sapling texture">
 
 Grows a Pallid Tree (80%) or a tall branching Pallid Tree (20%). Plant on Sift grass/soil (or any dirt-like block).
 
 | Property | Value |
 |---|---|
-| ID | `the_rift:pallid_sapling` |
+| ID | `sift_unbound:pallid_sapling` |
 | Hardness | 0 |
 | Best tool | Any |
 | Where to find | Pallid Leaves |

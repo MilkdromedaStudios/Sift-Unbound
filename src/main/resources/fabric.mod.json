@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "the_rift",
+	"id": "sift_unbound",
 	"version": "${version}",
-	"name": "The Rift",
-	"description": "An unofficial fan mod: awaken the Warden Portal in an ancient city with an Echo Tuner and travel to the Sift - a salmon-and-teal dimension of pale trees, soul water that drains your health, tides, blubs, soul wisps and sculk prowlers. Inspired by the Sift that Mojang Studios revealed for Minecraft Dungeons II and for Minecraft in 2027. Not affiliated with Mojang Studios or Microsoft. Run /rift credits in game.",
+	"name": "The Sift Unbound",
+	"description": "An unofficial fan mod: awaken the Warden Portal in an ancient city with an Echo Tuner and travel to the Sift - a salmon-and-teal dimension of pale trees, soul water that drains your health, tides, blubs, soul wisps and sculk prowlers. Inspired by the Sift that Mojang Studios revealed for Minecraft Dungeons II and for Minecraft in 2027. Not affiliated with Mojang Studios or Microsoft. Run /sift credits in game.",
 	"authors": [
 		"MilkdromedaStudios"
 	],
@@ -17,14 +17,14 @@
 		"issues": "https://github.com/MilkdromedaStudios/The-Rift/issues"
 	},
 	"license": "Apache-2.0",
-	"icon": "assets/the_rift/icon.png",
+	"icon": "assets/sift_unbound/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.milkdromedastudios.therift.TheRift"
+			"com.milkdromedastudios.siftunbound.SiftUnbound"
 		],
 		"client": [
-			"com.milkdromedastudios.therift.client.TheRiftClient"
+			"com.milkdromedastudios.siftunbound.client.SiftUnboundClient"
 		]
 	},
 	"depends": {

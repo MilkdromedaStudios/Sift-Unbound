@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "sift_unbound:block/tall_sift_grass_bottom"
+    },
+    "half=upper": {
+      "model": "sift_unbound:block/tall_sift_grass_top"
+    }
+  }
+}

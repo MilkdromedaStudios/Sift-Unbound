@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_uv_locked_y",
+  "textures": {
+    "end": "sift_unbound:block/pallid_log_top",
+    "side": "sift_unbound:block/pallid_log"
+  }
+}

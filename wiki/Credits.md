@@ -12,4 +12,4 @@
 * Built with **[Fabric](https://fabricmc.net)** (Loader, API, Loom).
 * Mod by **MilkdromedaStudios**. Code and original assets: Apache License 2.0 (see `LICENSE`).
 
-In game: run **`/rift credits`**, or see the mod description in the mods list.
+In game: run **`/sift credits`**, or see the mod description in the mods list.

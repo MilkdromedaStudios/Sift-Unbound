@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "sift_unbound:sift_meadows",
+    "sift_unbound:pallid_grove",
+    "sift_unbound:soul_wetlands",
+    "sift_unbound:husklands",
+    "sift_unbound:lullaby_hills"
+  ]
+}

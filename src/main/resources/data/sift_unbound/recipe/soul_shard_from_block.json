@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "sift_unbound:soul_shard_block"
+  ],
+  "result": {
+    "id": "sift_unbound:soul_shard",
+    "count": 9
+  }
+}

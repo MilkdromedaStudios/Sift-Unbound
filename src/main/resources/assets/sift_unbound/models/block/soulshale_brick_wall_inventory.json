@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "sift_unbound:block/soulshale_bricks"
+  }
+}
