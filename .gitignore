@@ -45,3 +45,6 @@ replay_*.log
 
 # third-party mods and shader packs downloaded by tools/photoshoot.sh (never commit)
 /photoshoot/
+
+# python
+__pycache__/
