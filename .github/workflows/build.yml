@@ -1,0 +1,101 @@
+# Builds the mod and runs every test on each push and pull request.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build + server GameTests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: Set up JDK 25
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+      - name: Check assets (models, textures, sounds, names)
+        run: python3 tools/check_assets.py
+      - name: Build
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build --stacktrace
+      - name: Server GameTests (portal, soul water, blubs...)
+        run: ./gradlew runGameTest --stacktrace
+      - name: Dedicated server smoke test (world generation, biomes, blub spawns, commands)
+        run: tools/server_smoke_test.sh
+      - name: Upload mod jar
+        uses: actions/upload-artifact@v7
+        with:
+          name: the-rift-jar
+          path: build/libs/*.jar
+          if-no-files-found: error
+      - name: Upload crash reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: crash-reports
+          path: |
+            build/run/**/crash-reports/
+            build/run/**/logs/latest.log
+            build/server-smoke.log
+            run/crash-reports/
+          if-no-files-found: ignore
+
+  client-gametest:
+    name: Client GameTest + screenshots
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up JDK 25
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+      - name: Install a software renderer (Xvfb + Mesa lavapipe Vulkan)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q xvfb mesa-vulkan-drivers libgl1-mesa-dri
+      - name: Run client GameTest
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          VK_ICD_FILENAMES: /usr/share/vulkan/icd.d/lvp_icd.json
+        run: |
+          chmod +x ./gradlew
+          xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX" ./gradlew runClientGameTest --stacktrace
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-screenshots
+          path: build/run/clientGameTest/screenshots/
+          if-no-files-found: warn
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-logs
+          path: |
+            build/run/clientGameTest/logs/
+            build/run/clientGameTest/crash-reports/
+          if-no-files-found: ignore

@@ -1,0 +1,19 @@
+# Changelog
+
+All notable changes to The Rift. Versions follow `MAJOR.MINOR.PATCH`; the release workflow reads the section for each version.
+
+## [0.1.0] - Unreleased
+
+First public build, for Minecraft Java **26.3** (Fabric Loader 0.20.1+, Fabric API 0.165.2+26.3, Java 25).
+
+### Added
+- **Warden Portal**: the Echo Tuner awakens any complete reinforced-deepslate frame (2×3 up to 23×23, including the 20×6 ancient
+  city frame). Portals link the Overworld and the Sift 1:1 and build a return portal when needed.
+- **The Sift** dimension with 5 biomes (Sift Meadows, Pallid Grove, Soul Wetlands, Husklands, Lullaby Hills), soul-water seas,
+  Pallid trees, ores, lakes, springs and husk boulders.
+- **Tides**: a data-driven sky/fog/light timeline (Flow, Endure, Thrive) and `/rift tide`.
+- **Soul Water** fluid + bucket, and the **Soulsick** effect (drains health and XP; ignores armour).
+- Mobs: **Blub** (soul / meadows / carapace, breedable, bucketable), **Soul Wisp**, **Sculk Prowler**.
+- 45 blocks (Sift terrain, Soulshale family, Pallid wood set, plants, Soul Shard ore/block), 8 items, 7 advancements,
+  19 sound events, original music, an ancient-city loot entry for the Echo Tuner, and `/rift credits`.
+- Automated tests: 8 server GameTests and a client GameTest that travels through a portal and takes screenshots.
