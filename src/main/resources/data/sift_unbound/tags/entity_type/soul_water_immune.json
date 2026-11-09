@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "sift_unbound:blub",
+    "sift_unbound:soul_wisp",
+    "sift_unbound:sculk_prowler",
+    "minecraft:warden"
+  ]
+}

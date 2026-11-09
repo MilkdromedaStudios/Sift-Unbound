@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "sift_unbound:soulshale_bricks",
+  "result": {
+    "id": "sift_unbound:soulshale_brick_wall"
+  }
+}

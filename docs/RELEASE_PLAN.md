@@ -4,7 +4,7 @@
 
 | Area | Status |
 |---|---|
-| Build | `./gradlew build` produces `the-rift-0.1.0+mc26.3.jar` (+ sources jar). CI runs it on every push. |
+| Build | `./gradlew build` produces `sift-unbound-0.1.0+mc26.3.jar` (+ sources jar). CI runs it on every push. |
 | Automated tests | **8 server GameTests** (portal on the real ancient-city template, small frame + collapse, no-frame, soul water damage + blub immunity, portal is harmless without the Sift, bucket round-trip, bone meal) and **1 client GameTest** (real world: pig + player travel through a portal into the Sift, return portal check, screenshots of every tide, the mobs and a portal). |
 | Static checks | `tools/check_assets.py`: every model/texture/sound reference resolves, every block/item/entity has a name. |
 | Manual QA still to do | Survival playthrough: find an ancient city, craft the tuner, travel, survive an Endure Tide, breed blubs. Check multiplayer (dedicated server + 2 clients). |
@@ -34,7 +34,7 @@
   not affiliated with Mojang" notice, Apache-2.0 licence, Fabric + Fabric API dependency). Then add a publish step to
   `release.yml` (for example with `Kir-Antipov/mc-publish`), using `MODRINTH_TOKEN` / `CURSEFORGE_TOKEN` repository secrets.
 * Mark it **client and server** required.
-* Keep the name "The Rift" and avoid Mojang logos or "Minecraft" in the title, per Mojang's usage guidelines.
+* Keep the name "The Sift Unbound" and avoid Mojang logos or "Minecraft" in the title, per Mojang's usage guidelines.
 
 ## Versioning
 

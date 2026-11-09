@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sift_unbound:block/husk_shell",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "sift_unbound:block/husk_shell"
+    },
+    "axis=z": {
+      "model": "sift_unbound:block/husk_shell",
+      "x": 90
+    }
+  }
+}

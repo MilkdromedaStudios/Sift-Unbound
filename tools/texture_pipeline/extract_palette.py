@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Texture/colour extraction for The Rift.
+"""Texture/colour extraction for The Sift Unbound.
 
 Reads reference screenshots of the Sift (kept OUTSIDE this repository, because
 they are Mojang's artwork), crops the regions listed in regions.json, and for

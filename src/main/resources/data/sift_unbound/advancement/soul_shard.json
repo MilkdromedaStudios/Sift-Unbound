@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:soul_shard"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.soul_shard.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.soul_shard.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "sift_unbound:soul_shard"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "the_rift:cobbled_soulshale",
-  "result": {
-    "id": "the_rift:chiseled_soulshale"
-  }
-}

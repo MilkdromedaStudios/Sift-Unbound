@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "sift_unbound:block/soulshale_bricks",
+    "side": "sift_unbound:block/soulshale_bricks",
+    "top": "sift_unbound:block/soulshale_bricks"
+  }
+}

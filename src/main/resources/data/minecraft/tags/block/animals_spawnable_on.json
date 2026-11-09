@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "the_rift:sift_grass_block",
-    "the_rift:sift_soil",
-    "the_rift:sift_sculk",
-    "the_rift:dark_sift_sculk",
-    "the_rift:sift_sand"
+    "sift_unbound:sift_grass_block",
+    "sift_unbound:sift_soil",
+    "sift_unbound:sift_sculk",
+    "sift_unbound:dark_sift_sculk",
+    "sift_unbound:sift_sand"
   ]
 }

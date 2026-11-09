@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:disk",
+  "half_height": 1,
+  "radius": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 5,
+    "min_inclusive": 2
+  },
+  "state_provider": {
+    "type": "minecraft:rule_based",
+    "fallback": {
+      "id": "sift_unbound:dark_sift_sculk"
+    },
+    "rules": []
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "sift_unbound:sift_sand",
+      "sift_unbound:sift_soil",
+      "sift_unbound:sift_grass_block"
+    ]
+  }
+}

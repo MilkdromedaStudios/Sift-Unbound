@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:spring_feature",
+  "state": {
+    "id": "sift_unbound:soul_water",
+    "properties": {
+      "falling": "true"
+    }
+  },
+  "valid_blocks": [
+    "sift_unbound:soulshale",
+    "sift_unbound:sift_soil",
+    "sift_unbound:sift_sculk"
+  ]
+}

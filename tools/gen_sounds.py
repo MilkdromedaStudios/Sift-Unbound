@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Synthesizes every sound used by The Rift (all original, no samples).
+"""Synthesizes every sound used by The Sift Unbound (all original, no samples).
 
 Requires numpy and ffmpeg (with libvorbis). Run from the repository root:
     python3 tools/gen_sounds.py
-Writes .ogg files to src/main/resources/assets/the_rift/sounds/.
+Writes .ogg files to src/main/resources/assets/sift_unbound/sounds/.
 """
 import os
 import subprocess
@@ -14,7 +14,7 @@ import numpy as np
 
 SR = 44100
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-OUT = os.path.join(ROOT, "src", "main", "resources", "assets", "the_rift", "sounds")
+OUT = os.path.join(ROOT, "src", "main", "resources", "assets", "sift_unbound", "sounds")
 rng = np.random.default_rng(2026)
 
 

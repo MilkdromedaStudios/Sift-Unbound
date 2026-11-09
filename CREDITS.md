@@ -6,7 +6,7 @@
 frame, the **Warden**, **reinforced deepslate**, the names **Soulshale** and the **Flow / Endure / Thrive tides** – were created by
 **Mojang Studios** (*Minecraft Dungeons II* with Double Eleven). Minecraft is a trademark of Mojang Studios / Microsoft.
 
-**The Rift is an unofficial fan mod.** It is not an official Minecraft product and is not approved by, endorsed by or associated
+**The Sift Unbound is an unofficial fan mod.** It is not an official Minecraft product and is not approved by, endorsed by or associated
 with Mojang Studios or Microsoft. It contains **no** Mojang textures, models, sounds, music or code. All art and audio were made
 from scratch for this project (see `tools/` and `wiki/Art-Pipeline.md`). Mojang's reference images were only used privately to
 pick colours. They are not distributed.
@@ -22,6 +22,6 @@ pick colours. They are not distributed.
 * [Fabric](https://fabricmc.net): Loader, API, Loom.
 * NumPy, Pillow and FFmpeg (libvorbis) for the asset generators.
 
-## The Rift
+## The Sift Unbound
 
 * Mod by **MilkdromedaStudios**. Code and original assets are licensed under the Apache License 2.0 (`LICENSE`).

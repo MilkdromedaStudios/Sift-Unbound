@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "sift_unbound:block/pallid_planks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "sift_unbound:block/pallid_planks"
+  }
+}

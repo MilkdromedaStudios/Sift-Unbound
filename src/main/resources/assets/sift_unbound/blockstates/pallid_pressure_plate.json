@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sift_unbound:block/pallid_pressure_plate"
+    },
+    "powered=true": {
+      "model": "sift_unbound:block/pallid_pressure_plate_down"
+    }
+  }
+}

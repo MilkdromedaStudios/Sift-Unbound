@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:echo_tuner"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.root.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "sift_unbound:block/sift_grass_block_top"
+  },
+  "criteria": {
+    "has_tuner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "sift_unbound:echo_tuner"
+          }
+        ]
+      }
+    }
+  }
+}

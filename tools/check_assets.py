@@ -17,8 +17,8 @@ import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src", "main", "resources")
-A = os.path.join(RES, "assets", "the_rift")
-JAVA = os.path.join(ROOT, "src", "main", "java", "com", "milkdromedastudios", "therift", "registry")
+A = os.path.join(RES, "assets", "sift_unbound")
+JAVA = os.path.join(ROOT, "src", "main", "java", "com", "milkdromedastudios", "siftunbound", "registry")
 
 problems = []
 
@@ -30,9 +30,9 @@ for f in glob.glob(f"{RES}/**/*.json", recursive=True) + glob.glob(f"{RES}/**/*.
 
 for f in glob.glob(f"{A}/**/*.json", recursive=True):
     text = open(f).read()
-    for ref in re.findall(r'"the_rift:((?:block|item|entity)/[a-z0-9_/]+)"', text):
+    for ref in re.findall(r'"sift_unbound:((?:block|item|entity)/[a-z0-9_/]+)"', text):
         if not (os.path.exists(f"{A}/models/{ref}.json") or os.path.exists(f"{A}/textures/{ref}.png")):
-            problems.append(f"missing model/texture the_rift:{ref} (from {os.path.relpath(f, ROOT)})")
+            problems.append(f"missing model/texture sift_unbound:{ref} (from {os.path.relpath(f, ROOT)})")
 
 sounds = json.load(open(f"{A}/sounds.json"))
 for event, entry in sounds.items():
@@ -46,19 +46,19 @@ lang = json.load(open(f"{A}/lang/en_us.json"))
 blocks = re.findall(r'reg\("([a-z_]+)",.*?, (true|false)\);', open(f"{JAVA}/ModBlocks.java").read(), re.S)
 blocks += [(m, "true") for m in re.findall(r'stairs\("([a-z_]+)"', open(f"{JAVA}/ModBlocks.java").read())]
 for name, has_item in blocks:
-    if f"block.the_rift.{name}" not in lang:
+    if f"block.sift_unbound.{name}" not in lang:
         problems.append(f"no English name for block {name}")
     if not os.path.exists(f"{A}/blockstates/{name}.json"):
         problems.append(f"no blockstate for block {name}")
     if has_item == "true" and not os.path.exists(f"{A}/items/{name}.json"):
         problems.append(f"no item definition for block item {name}")
 for name in re.findall(r'register\("([a-z_]+)"', open(f"{JAVA}/ModItems.java").read()):
-    if f"item.the_rift.{name}" not in lang:
+    if f"item.sift_unbound.{name}" not in lang:
         problems.append(f"no English name for item {name}")
     if not os.path.exists(f"{A}/items/{name}.json"):
         problems.append(f"no item definition for item {name}")
 for name in re.findall(r'register\("([a-z_]+)",\s*EntityType', open(f"{JAVA}/ModEntities.java").read()):
-    if f"entity.the_rift.{name}" not in lang:
+    if f"entity.sift_unbound.{name}" not in lang:
         problems.append(f"no English name for entity {name}")
 
 if problems:

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "the_rift:block/sift_grass_block_top",
-    "side": "the_rift:block/sift_grass_block_side",
-    "bottom": "the_rift:block/sift_soil"
-  }
-}

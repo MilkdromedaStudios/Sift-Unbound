@@ -17,7 +17,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"the_rift" {
+		"sift_unbound" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -27,7 +27,7 @@ loom {
 fabricApi {
 	configureTests {
 		createSourceSet = true
-		modId = "the_rift_test"
+		modId = "sift_unbound_test"
 		enableGameTests = true
 		enableClientGameTests = true
 		eula = true

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "the_rift:potted_lullaby_bloom",
-    "the_rift:potted_pallid_sapling"
+    "sift_unbound:potted_lullaby_bloom",
+    "sift_unbound:potted_pallid_sapling"
   ]
 }

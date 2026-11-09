@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_rift:cobbled_soulshale_stairs",
-    "the_rift:polished_soulshale_stairs",
-    "the_rift:soulshale_brick_stairs"
+    "sift_unbound:cobbled_soulshale_stairs",
+    "sift_unbound:polished_soulshale_stairs",
+    "sift_unbound:soulshale_brick_stairs"
   ]
 }

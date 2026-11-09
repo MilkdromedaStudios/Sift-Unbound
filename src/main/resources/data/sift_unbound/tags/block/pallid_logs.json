@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "sift_unbound:pallid_log",
+    "sift_unbound:pallid_wood",
+    "sift_unbound:stripped_pallid_log",
+    "sift_unbound:stripped_pallid_wood"
+  ]
+}

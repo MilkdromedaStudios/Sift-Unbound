@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:soul_water_bucket"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.soulsick.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.soulsick.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sick": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "sift_unbound:soulsick": {}
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

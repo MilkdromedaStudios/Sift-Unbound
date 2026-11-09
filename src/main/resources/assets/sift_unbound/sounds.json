@@ -1,0 +1,179 @@
+{
+  "entity.blub.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:blub/squeak1"
+      },
+      {
+        "name": "sift_unbound:blub/squeak2"
+      },
+      {
+        "name": "sift_unbound:blub/squeak3"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.blub.ambient"
+  },
+  "entity.blub.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:blub/hurt1"
+      },
+      {
+        "name": "sift_unbound:blub/hurt2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.blub.hurt"
+  },
+  "entity.blub.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:blub/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.blub.death"
+  },
+  "entity.blub.jump": {
+    "sounds": [
+      {
+        "name": "sift_unbound:blub/hop1"
+      },
+      {
+        "name": "sift_unbound:blub/hop2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.blub.jump"
+  },
+  "entity.soul_wisp.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:soul_wisp/chime1"
+      },
+      {
+        "name": "sift_unbound:soul_wisp/chime2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.soul_wisp.ambient"
+  },
+  "entity.soul_wisp.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:soul_wisp/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.soul_wisp.hurt"
+  },
+  "entity.soul_wisp.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:soul_wisp/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.soul_wisp.death"
+  },
+  "entity.sculk_prowler.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sculk_prowler/click1"
+      },
+      {
+        "name": "sift_unbound:sculk_prowler/click2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sculk_prowler.ambient"
+  },
+  "entity.sculk_prowler.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sculk_prowler/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sculk_prowler.hurt"
+  },
+  "entity.sculk_prowler.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sculk_prowler/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sculk_prowler.death"
+  },
+  "block.soul_water.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:soul_water/bubble1"
+      },
+      {
+        "name": "sift_unbound:soul_water/bubble2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.soul_water.ambient"
+  },
+  "block.soul_water.burn": {
+    "sounds": [
+      {
+        "name": "sift_unbound:soul_water/burn"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.soul_water.burn"
+  },
+  "block.sift_portal.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:portal/hum"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sift_portal.ambient"
+  },
+  "block.sift_portal.travel": {
+    "sounds": [
+      {
+        "name": "sift_unbound:portal/travel"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sift_portal.travel"
+  },
+  "block.sift_portal.activate": {
+    "sounds": [
+      {
+        "name": "sift_unbound:portal/activate"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sift_portal.activate"
+  },
+  "ambient.sift.loop": {
+    "sounds": [
+      {
+        "name": "sift_unbound:ambient/loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.sift.additions": {
+    "sounds": [
+      {
+        "name": "sift_unbound:ambient/addition1"
+      },
+      {
+        "name": "sift_unbound:ambient/addition2"
+      },
+      {
+        "name": "sift_unbound:ambient/addition3"
+      }
+    ]
+  },
+  "ambient.sift.mood": {
+    "sounds": [
+      {
+        "name": "sift_unbound:ambient/mood"
+      }
+    ]
+  },
+  "music.sift": {
+    "sounds": [
+      {
+        "name": "sift_unbound:music/sift_lullaby",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "sift_unbound:block/pallid_planks"
+  }
+}

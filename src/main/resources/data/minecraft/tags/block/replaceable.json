@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "the_rift:short_sift_grass",
-    "the_rift:tall_sift_grass",
-    "the_rift:teal_sprouts",
-    "the_rift:soul_water"
+    "sift_unbound:short_sift_grass",
+    "sift_unbound:tall_sift_grass",
+    "sift_unbound:teal_sprouts",
+    "sift_unbound:soul_water"
   ]
 }

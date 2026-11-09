@@ -1,0 +1,174 @@
+{
+  "type": "sift_unbound:the_sift",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "sift_unbound:the_sift",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "sift_unbound:sift_meadows",
+          "parameters": {
+            "temperature": [
+              -1,
+              0.2
+            ],
+            "humidity": [
+              -1,
+              0.1
+            ],
+            "continentalness": [
+              -0.2,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:pallid_grove",
+          "parameters": {
+            "temperature": [
+              -1,
+              0.2
+            ],
+            "humidity": [
+              0.1,
+              1
+            ],
+            "continentalness": [
+              -0.2,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:husklands",
+          "parameters": {
+            "temperature": [
+              0.2,
+              1
+            ],
+            "humidity": [
+              -1,
+              0.0
+            ],
+            "continentalness": [
+              -0.2,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:lullaby_hills",
+          "parameters": {
+            "temperature": [
+              0.2,
+              1
+            ],
+            "humidity": [
+              0.0,
+              1
+            ],
+            "continentalness": [
+              0.1,
+              1
+            ],
+            "erosion": [
+              -1,
+              -0.2
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:soul_wetlands",
+          "parameters": {
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              -0.2
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:lullaby_hills",
+          "parameters": {
+            "temperature": [
+              0.2,
+              1
+            ],
+            "humidity": [
+              0.0,
+              1
+            ],
+            "continentalness": [
+              0.1,
+              1
+            ],
+            "erosion": [
+              -0.2,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0.1
+          }
+        }
+      ]
+    }
+  }
+}

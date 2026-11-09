@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sift_unbound:block/polished_soulshale_slab"
+    },
+    "type=double": {
+      "model": "sift_unbound:block/polished_soulshale"
+    },
+    "type=top": {
+      "model": "sift_unbound:block/polished_soulshale_slab_top"
+    }
+  }
+}

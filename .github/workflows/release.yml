@@ -58,5 +58,5 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" build/libs/*.jar --clobber
           else
-            gh release create "$TAG" build/libs/*.jar --title "The Rift $VERSION (Minecraft 26.3)" --notes-file release-notes.md
+            gh release create "$TAG" build/libs/*.jar --title "The Sift Unbound $VERSION (Minecraft 26.3)" --notes-file release-notes.md
           fi

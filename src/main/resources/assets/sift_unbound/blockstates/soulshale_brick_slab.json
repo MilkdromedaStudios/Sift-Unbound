@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sift_unbound:block/soulshale_brick_slab"
+    },
+    "type=double": {
+      "model": "sift_unbound:block/soulshale_bricks"
+    },
+    "type=top": {
+      "model": "sift_unbound:block/soulshale_brick_slab_top"
+    }
+  }
+}

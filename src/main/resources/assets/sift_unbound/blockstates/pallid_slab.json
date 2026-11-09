@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sift_unbound:block/pallid_slab"
+    },
+    "type=double": {
+      "model": "sift_unbound:block/pallid_planks"
+    },
+    "type=top": {
+      "model": "sift_unbound:block/pallid_slab_top"
+    }
+  }
+}

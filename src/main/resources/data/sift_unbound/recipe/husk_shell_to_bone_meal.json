@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": "sift_unbound:husk_shell"
+  },
+  "result": {
+    "id": "minecraft:bone_meal",
+    "count": 6
+  }
+}

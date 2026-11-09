@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "the_rift:soul_shard_ore",
-    "the_rift:soul_shard_block"
+    "sift_unbound:soul_shard_ore",
+    "sift_unbound:soul_shard_block"
   ]
 }
