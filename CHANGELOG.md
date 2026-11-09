@@ -2,6 +2,16 @@
 
 All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; the release workflow reads the section for each version.
 
+## [Unreleased]
+
+### Changed
+- Built against **Fabric API 0.166.0+26.3** (still Minecraft Java 26.3 only).
+- README and wiki screenshots retaken with shaders (Iris + Complementary Unbound).
+- `tools/photoshoot.sh` downloads the Sodium build that Iris asks for, uses Complementary Unbound by default
+  (`SHADER=<modrinth slug>` to change it) and forces the OpenGL backend that Iris needs.
+- Trailer builder (`tools/make_trailer.py`): a slower, more cinematic teaser. Every shot glides the same way at one
+  constant speed, with no zoom-ins or shake, and the end card only credits the music.
+
 ## [0.1.0] - 2026-11-09
 
 First public release of **The Sift Unbound** (developed as "The Rift"; mod ID `sift_unbound`, commands `/sift credits` and `/sift tide`), for Minecraft Java **26.3** (Fabric Loader 0.20.1+, Fabric API 0.165.2+26.3, Java 25).

@@ -90,6 +90,8 @@ if (project.hasProperty("photoshoot")) {
 	}
 	tasks.named("runClientGameTest") {
 		jvmArgs "-Dsiftunbound.photoshoot=true"
+		// Iris draws shader packs with OpenGL, so never let the game fall back to its Vulkan backend for the shoot.
+		args "--graphicsBackend", "opengl"
 		doFirst {
 			copy { from "photoshoot/shaderpacks"; into "build/run/clientGameTest/shaderpacks" }
 			copy { from "photoshoot/config"; into "build/run/clientGameTest/config" }

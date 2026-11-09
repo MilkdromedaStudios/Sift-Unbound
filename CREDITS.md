@@ -22,6 +22,13 @@ pick colours. They are not distributed.
 * [Fabric](https://fabricmc.net): Loader, API, Loom.
 * NumPy, Pillow and FFmpeg (libvorbis) for the asset generators.
 
+## Screenshots and trailer
+
+* The screenshots in the README and the wiki were taken with [Iris Shaders](https://modrinth.com/mod/iris) and
+  [Sodium](https://modrinth.com/mod/sodium) running [Complementary Shaders – Unbound](https://modrinth.com/shader/complementary-unbound)
+  by EminGT. None of them is included in or required by the mod.
+* Trailer music: **“Minecraft – Epic Trailer” by Kalamity Music** (not included in this repository).
+
 ## The Sift Unbound
 
 * Mod by **MilkdromedaStudios**. Code and original assets are licensed under the Apache License 2.0 (`LICENSE`).
