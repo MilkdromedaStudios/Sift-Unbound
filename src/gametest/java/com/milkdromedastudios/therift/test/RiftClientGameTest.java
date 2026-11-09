@@ -74,7 +74,9 @@ public class RiftClientGameTest implements FabricClientGameTest {
 				if (spot == null) {
 					throw new AssertionError("biome the_rift:" + biome + " was not found within 4000 blocks");
 				}
-				shot(context, sp, spot.getX() + 0.5, spot.getY() + 12, spot.getZ() + 0.5, 35, 32, "biome_" + biome);
+				// the husklands are cut by deep ravines, so look further down there
+				float pitch = biome.equals("husklands") ? 55 : 32;
+				shot(context, sp, spot.getX() + 0.5, spot.getY() + 12, spot.getZ() + 0.5, 35, pitch, "biome_" + biome);
 			}
 
 			// --- creatures spawned by world generation along the way (logged, so CI shows them)
@@ -88,6 +90,9 @@ public class RiftClientGameTest implements FabricClientGameTest {
 			System.out.println("[RiftClientGameTest] entities loaded in the Sift: " + census);
 			if (!census.contains("the_rift:blub")) {
 				throw new AssertionError("no blubs were spawned by world generation in the Sift: " + census);
+			}
+			if (census.contains("the_rift:sculk_prowler")) {
+				throw new AssertionError("Sculk Prowlers must not spawn on Peaceful: " + census);
 			}
 
 			// --- the same meadow view at each tide

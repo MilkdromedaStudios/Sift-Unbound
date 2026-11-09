@@ -171,6 +171,8 @@ public class RiftGameTests {
 		copy.loadFromBucketTag(bucket.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag());
 		h.assertValueEqual(copy.getVariant(), BlubVariant.CARAPACE, Component.literal("variant"));
 		h.assertTrue(bucket.is(ModItems.BLUB_BUCKET), Component.literal("bucket item"));
+		// blubs are the Sift's resident animals: like other animals they must not despawn when the player walks away
+		h.assertTrue(!blub.removeWhenFarAway(1.0E6), Component.literal("blubs should not despawn"));
 		h.succeed();
 	}
 

@@ -208,11 +208,6 @@ public class Blub extends Animal implements Bucketable {
 	}
 
 	@Override
-	public boolean removeWhenFarAway(double distSqr) {
-		return !fromBucket() && !hasCustomName();
-	}
-
-	@Override
 	public void saveToBucketTag(ItemStack bucket) {
 		Bucketable.saveDefaultDataToBucketTag(this, bucket);
 		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, tag -> {

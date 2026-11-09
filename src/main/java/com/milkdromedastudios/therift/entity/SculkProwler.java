@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -49,6 +50,9 @@ public class SculkProwler extends Monster {
 	}
 
 	public static boolean checkProwlerSpawnRules(EntityType<SculkProwler> type, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		if (level.getDifficulty() == Difficulty.PEACEFUL) {
+			return false;
+		}
 		return Monster.checkMonsterSpawnRules(type, level, reason, pos, random)
 			|| (level.getBlockState(pos.below()).is(ModTags.SIFT_GROUND) && level.getRawBrightness(pos, 0) < 4);
 	}

@@ -16,6 +16,14 @@ White ash drifts through the air (the "particles in the sky" seen in Dungeons II
 
 Every biome also has Soul Shard ore, Soul Water springs and rare Soul Water lakes.
 
+| Sift Meadows | Pallid Grove | Soul Wetlands |
+|---|---|---|
+| ![](screenshots/biome_sift_meadows.png) | ![](screenshots/biome_pallid_grove.png) | ![](screenshots/biome_soul_wetlands.png) |
+| **Husklands** | **Lullaby Hills** | **Arriving through a portal** |
+| ![](screenshots/biome_husklands.png) | ![](screenshots/biome_lullaby_hills.png) | ![](screenshots/sift_arrival.png) |
+
+*Screenshots are taken automatically by the client GameTest (`RiftClientGameTest`) on every CI run.*
+
 ## Tides
 
 The Sift has no sun or moon. Its 20-minute day is split into three tides (names from *Minecraft Dungeons II*):
