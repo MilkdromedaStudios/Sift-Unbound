@@ -18,11 +18,11 @@ Every biome also has Soul Shard ore, Soul Water springs and rare Soul Water lake
 
 | Sift Meadows | Pallid Grove | Soul Wetlands |
 |---|---|---|
-| ![](screenshots/biome_sift_meadows.png) | ![](screenshots/biome_pallid_grove.png) | ![](screenshots/biome_soul_wetlands.png) |
+| ![](screenshots/biome_sift_meadows.jpg) | ![](screenshots/biome_pallid_grove.jpg) | ![](screenshots/biome_soul_wetlands.jpg) |
 | **Husklands** | **Lullaby Hills** | **Arriving through a portal** |
-| ![](screenshots/biome_husklands.png) | ![](screenshots/biome_lullaby_hills.png) | ![](screenshots/sift_arrival.png) |
+| ![](screenshots/biome_husklands.jpg) | ![](screenshots/biome_lullaby_hills.jpg) | ![](screenshots/sift_arrival.jpg) |
 
-*Screenshots are taken automatically by the client GameTest (`SiftClientGameTest`) on every CI run.*
+*Screenshots from the photo shoot (`./gradlew runClientGameTest -Pphotoshoot`, HUD hidden). Every CI run also uploads fresh ones from the client GameTest as artifacts.*
 
 ## Tides
 
@@ -39,4 +39,4 @@ timeline `data/sift_unbound/timeline/sift_tides.json`, so datapacks can retune i
 
 | Flow | Endure | Thrive |
 |---|---|---|
-| ![](screenshots/sift_flow_tide.png) | ![](screenshots/sift_endure_tide.png) | ![](screenshots/sift_thrive_tide.png) |
+| ![](screenshots/sift_flow_tide.jpg) | ![](screenshots/sift_endure_tide.jpg) | ![](screenshots/sift_thrive_tide.jpg) |

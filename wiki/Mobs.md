@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [The Sift (research)](The-Sift-Research.md) · [Warden Portal](Warden-Portal.md) · [Biomes & Tides](Biomes-and-Tides.md) · [Terrain](Terrain-Blocks.md) · [Soulshale](Soulshale.md) · [Plants](Plants.md) · [Pallid Wood](Pallid-Wood.md) · [Soul Water](Soul-Water.md) · [Mobs](Mobs.md) · [Items](Items.md) · [Advancements](Advancements.md) · [Sounds](Sounds.md) · [Art pipeline](Art-Pipeline.md) · [Credits](Credits.md)
 
-![Blubs, a Sculk Prowler and a Soul Wisp](screenshots/sift_creatures.png)
+![Blubs, a Sculk Prowler and a Soul Wisp](screenshots/sift_creatures.jpg)
 
 ## Blub
 

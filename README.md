@@ -2,7 +2,11 @@
 
 **An unofficial Fabric mod for Minecraft Java 26.3 that opens the ancient city's Warden Portal into _the Sift_.**
 
-![The Sift at Flow Tide](wiki/screenshots/sift_flow_tide.png)
+![The Sift at Thrive Tide](wiki/screenshots/biome_lullaby_hills.jpg)
+
+| The Warden Portal, dormant… | …and awakened |
+|---|---|
+| ![Dormant Warden Portal in an ancient city](wiki/screenshots/warden_portal_dormant.jpg) | ![Awakened Warden Portal](wiki/screenshots/warden_portal_awakened.jpg) |
 
 Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecraft in 2027. This mod lets you visit it now:
 
