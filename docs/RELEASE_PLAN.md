@@ -24,8 +24,10 @@
    git push origin v0.1.0
    ```
 
-5. The **release** workflow checks the tag matches `mod_version`, rebuilds, runs the asset checks and server GameTests, then creates
-   the GitHub release with the jar and the changelog section as notes.
+   Or, without pushing a tag: **Actions → release → Run workflow**, enter the version (e.g. `0.1.0`) and the branch or commit; the
+   workflow creates the `v<version>` tag itself.
+5. The **release** workflow checks the tag matches `mod_version`, rebuilds, runs the asset checks, server GameTests and the server
+   smoke test, then creates the GitHub release with the jar and the changelog section as notes.
 6. Download the jar from the release and smoke-test it in a normal (non-dev) Fabric install.
 
 ## Distribution (after the first GitHub release)
