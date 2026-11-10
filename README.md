@@ -18,6 +18,9 @@ Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecr
 * 🐰 **Blubs** (3 looks, breedable, bucketable), 👻 **Soul Wisps**, 🕷 **Sculk Prowlers**.
 * 🧱 **45 blocks**: the Pallid wood set, the Soulshale stone family, Sift grass and plants, Soul Shard ore…
 * 🏆 7 advancements, 19 original sound events and an original music track.
+* 🖼 A Sift **title screen**: a 360° panorama of the Lullaby Hills (shot in game with shaders) and Sift splash texts.
+
+![The Sift title screen](wiki/screenshots/title_screen.jpg)
 
 Everything (textures, models, sounds, music) is original and made for this project. See the **[wiki](wiki/Home.md)**.
 

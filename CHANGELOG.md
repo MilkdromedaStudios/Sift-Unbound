@@ -9,7 +9,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
   tagged, released on GitHub and uploaded to Modrinth by the new **auto-release** workflow.
 - **Modrinth publishing**: releases also upload the jar to [Modrinth](https://modrinth.com/project/w1FbpX4X) (needs
   the `MODRINTH_API_KEY` secret); the manual **modrinth** workflow uploads an existing release.
-- **Sift splash texts** on the title screen (*"The Sift!"*, *"Blub!"*, *"Mind the tide!"*…). They replace Minecraft's
+- **Sift title screen**: the main-menu panorama is a 360° view of the Lullaby Hills at Thrive Tide (shot in game with
+  shaders), and the splash texts are Sift ones (*"The Sift!"*, *"Blub!"*, *"Mind the tide!"*…). Both replace Minecraft's
   while the mod is installed.
 
 ### Changed
