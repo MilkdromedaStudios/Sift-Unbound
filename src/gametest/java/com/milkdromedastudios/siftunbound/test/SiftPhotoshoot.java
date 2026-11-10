@@ -9,6 +9,7 @@ import java.util.Locale;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 import net.fabricmc.fabric.api.client.gametest.v1.screenshot.TestScreenshotOptions;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -18,11 +19,14 @@ import net.minecraft.world.level.levelgen.Heightmap;
 
 /**
  * "Beauty shots" for the README and the release page, run by tools/photoshoot.sh with Iris + a shader pack installed
- * (only when -Dsiftunbound.photoshoot=true). Not part of CI: it needs third-party mods and is slow on a software GPU.
+ * (only when -Dsiftunbound.photoshoot=true; without Iris it shoots with the vanilla renderer). Not part of CI: it needs
+ * third-party mods and is slow on a software GPU.
  */
 final class SiftPhotoshoot {
 	private static final int W = 1920;
 	private static final int H = 1080;
+	/** 1024 px at 90 degrees after cropping a 100-degree shot: 1024 * tan(50) / tan(45). */
+	private static final int PANORAMA_CAPTURE = 1220;
 
 	private record Frame(BlockPos inside, Direction.Axis axis, int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
 	}
@@ -122,7 +126,36 @@ final class SiftPhotoshoot {
 			sp.getServer().runCommand("time set 12000");
 			shot(context, sp, "sift_unbound:the_sift", px - 1.5, py + 1.3, pz - 3.0, -40, 10, "13_sculk_prowler_endure_tide");
 			sp.getServer().runCommand("difficulty peaceful");
+
+			// ------------------------------------------------------------ 5. title-screen panoramas (tools/make_panorama.py)
+			for (String biome : List.of("pallid_grove", "lullaby_hills")) {
+				BlockPos spot = sp.getServer().computeOnServer(server -> SiftClientGameTest.landIn(server.getLevel(SiftTravel.THE_SIFT), biome));
+				sp.getServer().runCommand("time set 20000");
+				panorama(context, sp, spot.getX() + 0.5, spot.getY() + 9, spot.getZ() + 0.5, 30, biome);
+			}
 		}
+	}
+
+	/**
+	 * The six faces of a title-screen cube map, in the order and orientation Minecraft's own panorama capture uses
+	 * (front, right, back, left, up, down). Each face is shot at 100 degrees and cropped to 90 by tools/make_panorama.py, so
+	 * screen-edge effects of the shader pack never reach a seam.
+	 */
+	private static void panorama(ClientGameTestContext context, TestSingleplayerContext sp, double x, double y, double z, float yaw, String name) {
+		context.runOnClient(mc -> {
+			mc.options.fov().set(100);
+			mc.options.fovEffectScale().set(0.0);
+		});
+		float[][] faces = {{yaw, 0}, {yaw + 90, 0}, {yaw + 180, 0}, {yaw - 90, 0}, {yaw, -90}, {yaw, 90}};
+		for (int i = 0; i < faces.length; i++) {
+			sp.getServer().runCommand(String.format(Locale.ROOT, "execute in sift_unbound:the_sift run tp @p %.2f %.2f %.2f %.1f %.1f",
+				x, y, z, faces[i][0], faces[i][1]));
+			settle(context, sp, i == 0 ? 240 : 160);
+			context.takeScreenshot(TestScreenshotOptions.of("panorama_" + name + "_" + i).withSize(PANORAMA_CAPTURE, PANORAMA_CAPTURE)
+				.disableCounterPrefix());
+			log("panorama " + name + " face " + i);
+		}
+		context.runOnClient(mc -> mc.options.fov().set(70));
 	}
 
 	private static void fly(TestSingleplayerContext sp) {
@@ -133,20 +166,47 @@ final class SiftPhotoshoot {
 		});
 	}
 
-	/** Lets chunks (and, with shaders, the pipeline) settle. Sodium replaces vanilla chunk tracking, so don't rely on it alone. */
+	/**
+	 * With Iris + Sodium, Sodium never reports "all sections rendered" (the shadow pass keeps scheduling graph updates), so
+	 * the test API's chunk wait would always run into its timeout. With shaders, only try it briefly, then wait until the
+	 * client's loaded-chunk count has stopped changing.
+	 */
+	private static final boolean SHADERS = FabricLoader.getInstance().isModLoaded("iris");
+
+	/** Lets chunks (and, with shaders, the pipeline) settle. */
 	private static void settle(ClientGameTestContext context, TestSingleplayerContext sp, int ticks) {
 		try {
-			sp.getConnection().waitForChunksRender(true, 2400);
+			sp.getConnection().waitForChunksRender(true, SHADERS ? 100 : 2400);
 		} catch (AssertionError | RuntimeException e) { // the test API reports a timeout as an AssertionError
-			log("chunk wait gave up (" + e.getMessage() + "), waiting a fixed time instead");
+			if (SHADERS) {
+				waitForLoadedChunks(context);
+			} else {
+				log("chunk wait gave up (" + e.getMessage() + "), waiting a fixed time instead");
+			}
 		}
 		context.waitTicks(ticks);
+	}
+
+	private static void waitForLoadedChunks(ClientGameTestContext context) {
+		int[] last = {-1};
+		int[] steady = {0};
+		try {
+			int waited = context.waitFor(mc -> {
+				int loaded = mc.level == null ? 0 : mc.level.getChunkSource().getLoadedChunksCount();
+				steady[0] = loaded == last[0] ? steady[0] + 1 : 0;
+				last[0] = loaded;
+				return loaded > 100 && steady[0] >= 60;
+			}, 2400);
+			log("chunks loaded (" + last[0] + ") after " + waited + " ticks");
+		} catch (AssertionError | RuntimeException e) {
+			log("loaded-chunk wait gave up at " + last[0] + " chunks");
+		}
 	}
 
 	private static void shot(ClientGameTestContext context, TestSingleplayerContext sp, String dim, double x, double y, double z,
 		float yaw, float pitch, String name) {
 		sp.getServer().runCommand(String.format(Locale.ROOT, "execute in %s run tp @p %.2f %.2f %.2f %.1f %.1f", dim, x, y, z, yaw, pitch));
-		settle(context, sp, 120);
+		settle(context, sp, SHADERS ? 240 : 120); // shader packs also need a few seconds of temporal accumulation
 		context.takeScreenshot(TestScreenshotOptions.of(name).withSize(W, H).disableCounterPrefix());
 		log("shot " + name);
 	}

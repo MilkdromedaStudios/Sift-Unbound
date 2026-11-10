@@ -38,5 +38,5 @@ Minecraft in 2027. Everything in the mod (textures, models, sounds, music) is or
 ## For developers
 
 * Build: `./gradlew build` (Java 25). Tests: `./gradlew runGameTest` (server) and `xvfb-run ./gradlew runClientGameTest` (client, takes the screenshots on these pages).
-* Beauty shots: `tools/photoshoot.sh` (with shaders) or `./gradlew runClientGameTest -Pphotoshoot` (vanilla renderer); trailer: `python3 tools/make_trailer.py <shots> <music.mp3> out.mp4`.
+* Beauty shots: `tools/photoshoot.sh` (with shaders) or `./gradlew runClientGameTest -Pphotoshoot` (vanilla renderer); trailer: `python3 tools/make_trailer.py <shots> <music.mp3> out.mp4`; title-screen panorama: `python3 tools/make_panorama.py <shots> pallid_grove`.
 * Assets are generated: `python3 tools/texture_pipeline/gen_textures.py`, `python3 tools/gen_sounds.py`, `python3 tools/gen_assets.py --vanilla <extracted 26.3 jar>`, `python3 tools/gen_wiki.py`. See [Art pipeline](Art-Pipeline.md).
