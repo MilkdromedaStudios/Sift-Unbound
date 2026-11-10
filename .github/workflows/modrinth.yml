@@ -1,0 +1,44 @@
+# Uploads the jar of an existing GitHub release to Modrinth, e.g. a release made before Modrinth was set up.
+# Actions tab -> modrinth -> Run workflow. Needs the secret MODRINTH_API_KEY and the variable MODRINTH_PROJECT.
+name: modrinth
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version of an existing GitHub release (e.g. 0.1.0)
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      VERSION: ${{ inputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Check the version
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.+-][0-9A-Za-z.+-]+)?$ ]]; then
+            echo "::error::'$VERSION' is not a version like 0.1.0"; exit 1
+          fi
+      - name: Download the release jar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "v$VERSION" --pattern '*.jar' --dir dist
+      - name: Extract release notes
+        run: |
+          awk -v v="$VERSION" '$0 ~ "^## \\[?"v"\\]?" {on=1; next} on && /^## / {exit} on {print}' CHANGELOG.md > release-notes.md
+          if [ ! -s release-notes.md ]; then echo "See CHANGELOG.md" > release-notes.md; fi
+          cat release-notes.md
+      - name: Publish to Modrinth
+        env:
+          MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
+          MODRINTH_PROJECT: ${{ vars.MODRINTH_PROJECT }}
+        run: |
+          jar=$(ls dist/*.jar | grep -v -- '-sources\.jar$')
+          python3 tools/publish_modrinth.py --version "$VERSION" --jar "$jar" --changelog release-notes.md
