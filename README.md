@@ -22,7 +22,7 @@ Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecr
 
 ![The Sift title screen](wiki/screenshots/title_screen.jpg)
 
-Everything (textures, models, sounds, music) is original and made for this project. See the **[wiki](wiki/Home.md)**.
+Everything (textures, models, sounds, music) is original and made for this project. See the **[GitHub Wiki](https://github.com/MilkdromedaStudios/Sift-Unbound/wiki)**.
 
 ## Install
 
