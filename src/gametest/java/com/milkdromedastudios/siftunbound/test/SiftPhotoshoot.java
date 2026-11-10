@@ -3,6 +3,7 @@ package com.milkdromedastudios.siftunbound.test;
 import com.milkdromedastudios.siftunbound.SiftUnbound;
 import com.milkdromedastudios.siftunbound.portal.SiftTravel;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -148,6 +149,9 @@ final class SiftPhotoshoot {
 		});
 		float[][] faces = {{yaw, 0}, {yaw + 90, 0}, {yaw + 180, 0}, {yaw - 90, 0}, {yaw, -90}, {yaw, 90}};
 		for (int i = 0; i < faces.length; i++) {
+			if (alreadyTaken("panorama_" + name + "_" + i)) {
+				continue;
+			}
 			sp.getServer().runCommand(String.format(Locale.ROOT, "execute in sift_unbound:the_sift run tp @p %.2f %.2f %.2f %.1f %.1f",
 				x, y, z, faces[i][0], faces[i][1]));
 			settle(context, sp, i == 0 ? 240 : 160);
@@ -203,8 +207,22 @@ final class SiftPhotoshoot {
 		}
 	}
 
+	/** -Pphotoshoot=resume: keep the shots an interrupted shoot already took and only take the missing ones. */
+	private static final boolean RESUME = Boolean.getBoolean("siftunbound.photoshoot.resume");
+
+	private static boolean alreadyTaken(String name) {
+		boolean taken = RESUME && Files.exists(FabricLoader.getInstance().getGameDir().resolve("screenshots").resolve(name + ".png"));
+		if (taken) {
+			log("keeping " + name + " from the earlier run");
+		}
+		return taken;
+	}
+
 	private static void shot(ClientGameTestContext context, TestSingleplayerContext sp, String dim, double x, double y, double z,
 		float yaw, float pitch, String name) {
+		if (alreadyTaken(name)) {
+			return;
+		}
 		sp.getServer().runCommand(String.format(Locale.ROOT, "execute in %s run tp @p %.2f %.2f %.2f %.1f %.1f", dim, x, y, z, yaw, pitch));
 		settle(context, sp, SHADERS ? 240 : 120); // shader packs also need a few seconds of temporal accumulation
 		context.takeScreenshot(TestScreenshotOptions.of(name).withSize(W, H).disableCounterPrefix());
