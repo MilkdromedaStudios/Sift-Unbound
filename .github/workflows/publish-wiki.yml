@@ -1,0 +1,34 @@
+name: Publish wiki
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "wiki/**"
+      - "tools/gen_wiki.py"
+      - "src/main/resources/assets/sift_unbound/lang/en_us.json"
+      - "src/main/resources/assets/sift_unbound/textures/**"
+      - "src/main/resources/data/sift_unbound/**"
+      - ".github/workflows/publish-wiki.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Generate and publish GitHub wiki
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v6
+
+      - name: Generate data-driven wiki pages
+        run: python3 tools/gen_wiki.py
+
+      - name: Publish wiki folder to the GitHub repository wiki
+        uses: Andrew-Chen-Wang/github-wiki-action@v5
