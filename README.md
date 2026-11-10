@@ -24,7 +24,7 @@ Everything (textures, models, sounds, music) is original and made for this proje
 ## Install
 
 1. Install [Fabric Loader](https://fabricmc.net/use/) ≥ 0.20.1 for **Minecraft 26.3**, plus [Fabric API](https://modrinth.com/mod/fabric-api).
-2. Drop `sift-unbound-<version>+mc26.3.jar` (from [Releases](https://github.com/MilkdromedaStudios/The-Rift/releases) or the
+2. Drop `sift-unbound-<version>+mc26.3.jar` (from [Releases](https://github.com/MilkdromedaStudios/Sift-Unbound/releases) or the
    `build` workflow's artifacts) into your `mods` folder. Java 25 is required, as for Minecraft 26.3.
 3. The mod is needed on **both** the server and every client.
 

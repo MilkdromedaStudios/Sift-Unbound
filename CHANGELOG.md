@@ -5,6 +5,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 ## [Unreleased]
 
 ### Changed
+- The repository is now **[MilkdromedaStudios/Sift-Unbound](https://github.com/MilkdromedaStudios/Sift-Unbound)** (was `The-Rift`).
+  The mod's homepage, sources, issues and credits links point there.
 - Built against **Fabric API 0.166.0+26.3** (still Minecraft Java 26.3 only).
 - README and wiki screenshots retaken with shaders (Iris + Complementary Unbound).
 - `tools/photoshoot.sh` downloads the Sodium build that Iris asks for, uses Complementary Unbound by default

@@ -12,9 +12,9 @@
 		"minecraft.wiki contributors - reference information (CC BY-NC-SA 3.0)"
 	],
 	"contact": {
-		"homepage": "https://github.com/MilkdromedaStudios/The-Rift",
-		"sources": "https://github.com/MilkdromedaStudios/The-Rift",
-		"issues": "https://github.com/MilkdromedaStudios/The-Rift/issues"
+		"homepage": "https://github.com/MilkdromedaStudios/Sift-Unbound",
+		"sources": "https://github.com/MilkdromedaStudios/Sift-Unbound",
+		"issues": "https://github.com/MilkdromedaStudios/Sift-Unbound/issues"
 	},
 	"license": "Apache-2.0",
 	"icon": "assets/sift_unbound/icon.png",
@@ -36,7 +36,7 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.credits": "https://github.com/MilkdromedaStudios/The-Rift/blob/main/CREDITS.md"
+				"modmenu.credits": "https://github.com/MilkdromedaStudios/Sift-Unbound/blob/main/CREDITS.md"
 			}
 		}
 	}
