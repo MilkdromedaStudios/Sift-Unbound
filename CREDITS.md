@@ -24,7 +24,7 @@ pick colours. They are not distributed.
 
 ## Screenshots and trailer
 
-* The screenshots in the README and the wiki were taken with [Iris Shaders](https://modrinth.com/mod/iris) and
+* The screenshots in the README and the wiki, and the title-screen panorama, were taken with [Iris Shaders](https://modrinth.com/mod/iris) and
   [Sodium](https://modrinth.com/mod/sodium) running [Complementary Shaders – Unbound](https://modrinth.com/shader/complementary-unbound)
   by EminGT. None of them is included in or required by the mod.
 * Trailer music: **“Minecraft – Epic Trailer” by Kalamity Music** (not included in this repository).
