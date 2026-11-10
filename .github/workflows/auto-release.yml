@@ -1,0 +1,68 @@
+# Releases the mod automatically. When a push to main changes anything that goes into the mod jar (src/main,
+# src/client, the Gradle build files), this picks the next version, dates the CHANGELOG's [Unreleased] section,
+# commits and tags that on main, then runs release.yml (build, tests, GitHub release, Modrinth upload).
+# Pushes that only touch docs, the wiki, screenshots, tools, tests or workflows never release anything.
+# Version: a mod_version in gradle.properties newer than the last tag wins (bump it by hand to choose); otherwise the
+# next minor version if [Unreleased] has "### Added" or "### Removed", else the next patch (tools/auto_release.py).
+name: auto-release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/main/**'
+      - 'src/client/**'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle.properties'
+      - 'gradle/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      release: ${{ steps.plan.outputs.release }}
+      version: ${{ steps.plan.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Did the mod change since the last release?
+        id: plan
+        run: python3 tools/auto_release.py plan
+      - name: Bump the version, date the changelog, commit and tag
+        if: steps.plan.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+          PREVIOUS: ${{ steps.plan.outputs.previous }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
+            echo "::error::Tag v$VERSION already exists"; exit 1
+          fi
+          python3 tools/auto_release.py prepare "$VERSION" "$PREVIOUS"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Release $VERSION"
+          git tag "v$VERSION"
+          # pushes made with the workflow token never start other workflows, so this cannot loop
+          git push --atomic origin HEAD:main "v$VERSION"
+
+  release:
+    needs: prepare
+    if: needs.prepare.outputs.release == 'true'
+    uses: ./.github/workflows/release.yml
+    with:
+      version: ${{ needs.prepare.outputs.version }}
+      ref: v${{ needs.prepare.outputs.version }}
+    secrets: inherit

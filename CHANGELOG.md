@@ -5,6 +5,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 ## [Unreleased]
 
 ### Added
+- **Automatic releases**: every push to `main` that changes the mod (not just docs, tools or tests) is versioned,
+  tagged, released on GitHub and uploaded to Modrinth by the new **auto-release** workflow.
 - **Modrinth publishing**: releases also upload the jar to [Modrinth](https://modrinth.com/project/w1FbpX4X) (needs
   the `MODRINTH_API_KEY` secret); the manual **modrinth** workflow uploads an existing release.
 - **Sift splash texts** on the title screen (*"The Sift!"*, *"Blub!"*, *"Mind the tide!"*…). They replace Minecraft's

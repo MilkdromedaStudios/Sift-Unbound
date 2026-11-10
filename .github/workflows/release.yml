@@ -18,6 +18,15 @@ on:
         description: Branch or commit to release
         required: false
         default: main
+  # Called by auto-release.yml after it has committed and tagged the new version on main.
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+      ref:
+        type: string
+        required: true
 
 permissions:
   contents: write
@@ -27,8 +36,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      TAG: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', inputs.version) || github.ref_name }}
-      REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref }}
+      TAG: ${{ inputs.version && format('v{0}', inputs.version) || github.ref_name }}
+      REF: ${{ inputs.ref || github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6

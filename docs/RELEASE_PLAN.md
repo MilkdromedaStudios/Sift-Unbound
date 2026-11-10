@@ -9,10 +9,28 @@
 | Static checks | `tools/check_assets.py`: every model/texture/sound reference resolves, every block/item/entity has a name. |
 | Manual QA still to do | Survival playthrough: find an ancient city, craft the tuner, travel, survive an Endure Tide, breed blubs. Check multiplayer (dedicated server + 2 clients). |
 
-## Release checklist
+## Automatic releases
+
+Every push to `main` that changes the mod itself (`src/main`, `src/client`, `build.gradle`, `settings.gradle`,
+`gradle.properties`, `gradle/`) is released automatically by the **auto-release** workflow:
+
+1. `tools/auto_release.py plan` compares those paths with the last `v*` tag. Docs, the wiki, screenshots, tools, tests and
+   workflows don't count, so changing only those never makes a release.
+2. It picks the version: a `mod_version` in `gradle.properties` newer than the last tag wins (bump it by hand to choose a
+   version); otherwise the next **minor** version if `[Unreleased]` in `CHANGELOG.md` has `### Added` or `### Removed`,
+   else the next **patch** version.
+3. It turns `[Unreleased]` into `[<version>] - <date>` (or, if it is empty, lists the titles of the merged changes),
+   sets `mod_version`, commits "Release <version>" to `main`, tags `v<version>` and pushes both.
+4. It then runs the **release** workflow on that tag: build, asset checks, server GameTests, smoke test, GitHub release and
+   the Modrinth upload.
+
+Keep `[Unreleased]` up to date in each PR and releases write themselves. If `main` is protected so that the workflow
+token can't push, allow GitHub Actions to bypass the rule (or release by hand as below).
+
+## Release checklist (by hand)
 
 1. Run the manual QA above on a fresh survival world and a dedicated server. Note anything odd in an issue.
-2. Update `CHANGELOG.md`: rename `## [0.1.0] - Unreleased` to today's date.
+2. Update `CHANGELOG.md`: rename `## [Unreleased]` to `## [<version>] - <today>`.
 3. Make sure `mod_version` in `gradle.properties` is the version you're releasing.
 4. Tag and push:
 
