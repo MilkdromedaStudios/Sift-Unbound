@@ -1,7 +1,7 @@
 # Publishes a GitHub release when a version tag (v0.1.0, v1.2.3 ...) is pushed, then uploads the jar to Modrinth.
 # The tag must match mod_version in gradle.properties; release notes come from CHANGELOG.md.
-# Modrinth: set the secret MODRINTH_API_KEY and the variable MODRINTH_PROJECT (slug or ID) in the repository's
-# Settings -> Secrets and variables -> Actions. Without them the Modrinth step is skipped.
+# Modrinth: the project is w1FbpX4X (override with a MODRINTH_PROJECT repository variable); set the secret
+# MODRINTH_API_KEY in Settings -> Secrets and variables -> Actions. Without the key the Modrinth step is skipped.
 name: release
 
 on:
@@ -73,7 +73,7 @@ jobs:
       - name: Publish to Modrinth
         env:
           MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
-          MODRINTH_PROJECT: ${{ vars.MODRINTH_PROJECT }}
+          MODRINTH_PROJECT: ${{ vars.MODRINTH_PROJECT || 'w1FbpX4X' }}  # The Sift Unbound on Modrinth
         run: |
           jar=$(ls build/libs/*.jar | grep -v -- '-sources\.jar$')
           python3 tools/publish_modrinth.py --version "$VERSION" --jar "$jar" --changelog release-notes.md
