@@ -32,9 +32,17 @@
 
 ## Distribution (after the first GitHub release)
 
-* **Modrinth / CurseForge**: create the project pages by hand first (summary, the `wiki/screenshots`, the credits and "unofficial,
-  not affiliated with Mojang" notice, Apache-2.0 licence, Fabric + Fabric API dependency). Then add a publish step to
-  `release.yml` (for example with `Kir-Antipov/mc-publish`), using `MODRINTH_TOKEN` / `CURSEFORGE_TOKEN` repository secrets.
+* **Modrinth** (automatic): create the project page by hand once (summary, the `wiki/screenshots`, the credits and
+  "unofficial, not affiliated with Mojang" notice, Apache-2.0 licence). Then, in the repository's
+  *Settings -> Secrets and variables -> Actions*, add:
+  * the secret **`MODRINTH_API_KEY`**: a Modrinth personal access token with the *Create versions* and *Read projects* scopes;
+  * the variable **`MODRINTH_PROJECT`**: the project's slug (from its URL) or ID.
+
+  From then on every run of `release.yml` also uploads the jar to Modrinth (`tools/publish_modrinth.py`: Fabric,
+  Minecraft from `gradle.properties`, Fabric API as a required dependency, the changelog section as notes). To upload a
+  release that already exists, such as v0.1.0, run the **modrinth** workflow by hand with its version. A version that is
+  already on Modrinth is skipped, and without the secret or the variable the step is skipped.
+* **CurseForge**: same idea with a `CURSEFORGE_TOKEN` secret when a project page exists.
 * Mark it **client and server** required.
 * Keep the name "The Sift Unbound" and avoid Mojang logos or "Minecraft" in the title, per Mojang's usage guidelines.
 
