@@ -1,5 +1,5 @@
 # Uploads the jar of an existing GitHub release to Modrinth, e.g. a release made before Modrinth was set up.
-# Actions tab -> modrinth -> Run workflow. Needs the secret MODRINTH_API_KEY and the variable MODRINTH_PROJECT.
+# Actions tab -> modrinth -> Run workflow. Needs the secret MODRINTH_API_KEY (project: w1FbpX4X).
 name: modrinth
 
 on:
@@ -38,7 +38,7 @@ jobs:
       - name: Publish to Modrinth
         env:
           MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
-          MODRINTH_PROJECT: ${{ vars.MODRINTH_PROJECT }}
+          MODRINTH_PROJECT: ${{ vars.MODRINTH_PROJECT || 'w1FbpX4X' }}  # The Sift Unbound on Modrinth
         run: |
           jar=$(ls dist/*.jar | grep -v -- '-sources\.jar$')
           python3 tools/publish_modrinth.py --version "$VERSION" --jar "$jar" --changelog release-notes.md
