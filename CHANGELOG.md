@@ -4,6 +4,10 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Added
+- **Sift splash texts** on the title screen (*"The Sift!"*, *"Blub!"*, *"Mind the tide!"*…). They replace Minecraft's
+  while the mod is installed.
+
 ### Changed
 - The repository is now **[MilkdromedaStudios/Sift-Unbound](https://github.com/MilkdromedaStudios/Sift-Unbound)** (was `The-Rift`).
   The mod's homepage, sources, issues and credits links point there.
