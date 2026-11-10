@@ -88,6 +88,7 @@ def vignette():
 
 def grade(img):
     img = img.convert("RGB")
+    img = img.point(lambda v: round(255 * (v / 255) ** 0.9))  # open the shadows a touch (shader shots run dark)
     img = ImageEnhance.Contrast(img).enhance(1.12)
     img = ImageEnhance.Color(img).enhance(1.18)
     return img
