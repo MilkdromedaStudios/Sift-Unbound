@@ -14,7 +14,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 GRADLE=${GRADLE:-./gradlew}
 MC=26.3
-UA="SiftUnbound-photoshoot/0.1 (github.com/MilkdromedaStudios)"
+UA="SiftUnbound-photoshoot/0.1 (github.com/MilkdromedaStudios/Sift-Unbound)"
 mkdir -p photoshoot/mods photoshoot/shaderpacks photoshoot/config
 
 python3 -I - "$UA" "$MC" "${SHADER:-complementary-unbound}" <<'PY'
