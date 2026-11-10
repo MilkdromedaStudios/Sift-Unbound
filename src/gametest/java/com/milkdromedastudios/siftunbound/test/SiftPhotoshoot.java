@@ -3,7 +3,11 @@ package com.milkdromedastudios.siftunbound.test;
 import com.milkdromedastudios.siftunbound.SiftUnbound;
 import com.milkdromedastudios.siftunbound.portal.SiftTravel;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -155,8 +159,7 @@ final class SiftPhotoshoot {
 			sp.getServer().runCommand(String.format(Locale.ROOT, "execute in sift_unbound:the_sift run tp @p %.2f %.2f %.2f %.1f %.1f",
 				x, y, z, faces[i][0], faces[i][1]));
 			settle(context, sp, i == 0 ? 240 : 160);
-			context.takeScreenshot(TestScreenshotOptions.of("panorama_" + name + "_" + i).withSize(PANORAMA_CAPTURE, PANORAMA_CAPTURE)
-				.disableCounterPrefix());
+			capture(context, "panorama_" + name + "_" + i, PANORAMA_CAPTURE, PANORAMA_CAPTURE);
 			log("panorama " + name + " face " + i);
 		}
 		context.runOnClient(mc -> mc.options.fov().set(70));
@@ -207,15 +210,37 @@ final class SiftPhotoshoot {
 		}
 	}
 
-	/** -Pphotoshoot=resume: keep the shots an interrupted shoot already took and only take the missing ones. */
+	/**
+	 * -Pphotoshoot=resume: keep the shots an interrupted shoot already took and only take the missing ones. The test
+	 * framework empties screenshots/ when the game starts, so every finished shot is also copied to photoshoot_kept/.
+	 */
 	private static final boolean RESUME = Boolean.getBoolean("siftunbound.photoshoot.resume");
+	private static final Path SCREENSHOTS = FabricLoader.getInstance().getGameDir().resolve("screenshots");
+	private static final Path KEPT = FabricLoader.getInstance().getGameDir().resolve("photoshoot_kept");
 
 	private static boolean alreadyTaken(String name) {
-		boolean taken = RESUME && Files.exists(FabricLoader.getInstance().getGameDir().resolve("screenshots").resolve(name + ".png"));
-		if (taken) {
-			log("keeping " + name + " from the earlier run");
+		Path kept = KEPT.resolve(name + ".png");
+		if (!RESUME || !Files.exists(kept)) {
+			return false;
 		}
-		return taken;
+		try {
+			Files.createDirectories(SCREENSHOTS);
+			Files.copy(kept, SCREENSHOTS.resolve(name + ".png"), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
+		log("keeping " + name + " from the earlier run");
+		return true;
+	}
+
+	private static void capture(ClientGameTestContext context, String name, int width, int height) {
+		context.takeScreenshot(TestScreenshotOptions.of(name).withSize(width, height).disableCounterPrefix());
+		try {
+			Files.createDirectories(KEPT);
+			Files.copy(SCREENSHOTS.resolve(name + ".png"), KEPT.resolve(name + ".png"), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
 	}
 
 	private static void shot(ClientGameTestContext context, TestSingleplayerContext sp, String dim, double x, double y, double z,
@@ -225,7 +250,7 @@ final class SiftPhotoshoot {
 		}
 		sp.getServer().runCommand(String.format(Locale.ROOT, "execute in %s run tp @p %.2f %.2f %.2f %.1f %.1f", dim, x, y, z, yaw, pitch));
 		settle(context, sp, SHADERS ? 240 : 120); // shader packs also need a few seconds of temporal accumulation
-		context.takeScreenshot(TestScreenshotOptions.of(name).withSize(W, H).disableCounterPrefix());
+		capture(context, name, W, H);
 		log("shot " + name);
 	}
 
