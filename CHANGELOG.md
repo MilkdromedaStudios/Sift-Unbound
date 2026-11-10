@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-10
+
 ### Added
 - **Automatic releases**: every push to `main` that changes the mod (not just docs, tools or tests) is versioned,
   tagged, released on GitHub and uploaded to Modrinth by the new **auto-release** workflow.
