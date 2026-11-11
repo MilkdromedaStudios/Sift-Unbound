@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-11
+
 The Sift, as it really is: this release brings the mod in line with the Sift that Minecraft Dungeons II shipped
 (names, mechanics and creatures from the Minecraft Wiki), still with 100% original textures and sounds.
 
