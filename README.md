@@ -23,7 +23,7 @@ Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecr
 * 🖼 A Sift **title screen**: a 360° panorama of the Lullaby Hills (shot in game with shaders) and Sift splash texts.
 
 * ✨ **Sift Unbound Shaders** – an original Iris shader pack made for the Sift (tide-coloured light, shadows, blocky
-  clouds, Potato to Ultra profiles), released separately as `shaders-v*` on the
+  clouds, Potato to Ultra profiles), attached to every release on the
   [Releases](https://github.com/MilkdromedaStudios/Sift-Unbound/releases) page.
 
 ![The Sift title screen](wiki/screenshots/title_screen.jpg)

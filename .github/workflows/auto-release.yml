@@ -1,5 +1,5 @@
 # Releases the mod automatically. When a push to main changes anything that goes into the mod jar (src/main,
-# src/client, the Gradle build files), this picks the next version, dates the CHANGELOG's [Unreleased] section,
+# src/client, the Gradle build files) or the shader pack (shaderpack/), this picks the next version, dates the CHANGELOG's [Unreleased] section,
 # commits and tags that on main, then runs release.yml (build, tests, GitHub release, Modrinth upload).
 # Pushes that only touch docs, the wiki, screenshots, tools, tests or workflows never release anything.
 # Version: a mod_version in gradle.properties newer than the last tag wins (bump it by hand to choose); otherwise the
@@ -16,6 +16,8 @@ on:
       - 'settings.gradle'
       - 'gradle.properties'
       - 'gradle/**'
+      - 'shaderpack/**'
+      - 'tools/build_shaderpack.py'
   workflow_dispatch:
 
 permissions:

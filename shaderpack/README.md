@@ -11,6 +11,6 @@ An original Iris shader pack made for **The Sift Unbound**, and at home in every
 * Quality profiles: **Potato**, Low, Medium, High, Ultra, plus every option on its own.
 
 Needs **Iris** (with Sodium). Put the zip in `.minecraft/shaderpacks` and pick it in Options → Video Settings → Shader Packs.
-No OptiFine support.
+No OptiFine support. Each release of the mod includes the pack, with the same version number.
 
 All code is original, written for this project. Part of [The Sift Unbound](https://github.com/MilkdromedaStudios/Sift-Unbound).

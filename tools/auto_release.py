@@ -20,7 +20,8 @@ import subprocess
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-MOD_PATHS = ["src/main", "src/client", "build.gradle", "settings.gradle", "gradle.properties", "gradle"]
+MOD_PATHS = ["src/main", "src/client", "build.gradle", "settings.gradle", "gradle.properties", "gradle", "shaderpack",
+             "tools/build_shaderpack.py"]  # the shader pack ships with every release
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 
 

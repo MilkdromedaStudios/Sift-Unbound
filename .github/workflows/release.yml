@@ -1,4 +1,5 @@
 # Publishes a GitHub release when a version tag (v0.1.0, v1.2.3 ...) is pushed, then uploads the jar to Modrinth.
+# The release also carries Sift Unbound Shaders (the Iris pack in shaderpack/), zipped with the same version.
 # The tag must match mod_version in gradle.properties; release notes come from CHANGELOG.md.
 # Modrinth: the project is w1FbpX4X (override with a MODRINTH_PROJECT repository variable); set the secret
 # MODRINTH_API_KEY in Settings -> Secrets and variables -> Actions. Without the key the Modrinth step is skipped.
@@ -63,6 +64,8 @@ jobs:
           python3 tools/check_assets.py
           ./gradlew build runGameTest --stacktrace
           tools/server_smoke_test.sh
+      - name: Build the shader pack
+        run: python3 tools/build_shaderpack.py
       - name: Extract release notes
         run: |
           awk -v v="$VERSION" '$0 ~ "^## \\[?"v"\\]?" {on=1; next} on && /^## / {exit} on {print}' CHANGELOG.md > release-notes.md
@@ -73,10 +76,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" build/libs/*.jar --clobber
+            gh release upload "$TAG" build/libs/*.jar build/shaderpack/*.zip --clobber
           else
             # creates the tag on the checked-out commit when it doesn't exist yet (manual runs)
-            gh release create "$TAG" build/libs/*.jar --target "$(git rev-parse HEAD)" \
+            gh release create "$TAG" build/libs/*.jar build/shaderpack/*.zip --target "$(git rev-parse HEAD)" \
               --title "The Sift Unbound $VERSION (Minecraft 26.3)" --notes-file release-notes.md
           fi
       - name: Publish to Modrinth
