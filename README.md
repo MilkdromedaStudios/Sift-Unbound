@@ -10,14 +10,16 @@
 
 Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecraft in 2027. This mod lets you visit it now:
 
-* 🌀 **Warden Portal** – craft an **Echo Tuner** from echo shards and use it on the reinforced-deepslate frame in any ancient city.
-* 🌸 **The Sift** – salmon grass under a teal sky, pale droopy trees, red sculk hills, sandy husklands, and soul-water wetlands.
-  5 biomes, built from **Soulshale**.
-* 🌊 **Soul Water** – a shimmering rainbow liquid that makes Overworld creatures **Soulsick**, draining health (and XP).
-* 🌗 **Tides** – the sky cycles through **Flow**, **Endure** (dark, prowlers come out) and **Thrive**.
-* 🐰 **Blubs** (3 looks, breedable, bucketable), 👻 **Soul Wisps**, 🕷 **Sculk Prowlers**.
-* 🧱 **45 blocks**: the Pallid wood set, the Soulshale stone family, Sift grass and plants, Soul Shard ore…
-* 🏆 7 advancements, 19 original sound events and an original music track.
+* 🌀 **Warden Portal** – play the Sift's melody (F♯ A C♯ B A E C♯ F♯) on eight **note blocks** by the reinforced-deepslate
+  frame in any ancient city, as in Dungeons II, or use an **Echo Tuner** crafted from echo shards.
+* 🌸 **The Sift** – 6 regions: **Singer's Meadow**, the **Sifter Canyons**, the **Pallid Grove**, the **Ichor Ponds**, the
+  **Humbler Huskland** and the **Lullaby Hills**, with soulshale monoliths, sculk formations and colossal humbler fossils.
+* 🌊 **Ichor** – a thick, oily liquid that makes Overworlders **Soulsick**; the Sift's own creatures bathe in it.
+* 🌗 **Tides** – **Flow**, **Endure** (no natural healing, stronger monsters) and **Thrive** (faster healing).
+* 🐾 **Wildlife** – blubs, nuzzles, slabbers, echo golems and **the Singer** at the Singer's Portal.
+* 🌿 **The Sifters** – seedlings, nesters, pollinators, sentinels and sprouts, the **Harmonizer** mini-boss, and enraging.
+* 🦂 **Sculkers** – stalkers and scavengers, and **the Monarch** boss in its **sculker nest** in the Ravines.
+* 🏆 26 advancements that explain each mechanic as you meet it; all-original textures, models, sounds and music.
 * 🖼 A Sift **title screen**: a 360° panorama of the Lullaby Hills (shot in game with shaders) and Sift splash texts.
 
 ![The Sift title screen](wiki/screenshots/title_screen.jpg)
@@ -35,7 +37,9 @@ Everything (textures, models, sounds, music) is original and made for this proje
 
 1. `/locate structure minecraft:ancient_city`, or explore the Deep Dark below Y 0. Collect **echo shards** from the chests.
 2. Craft the **Echo Tuner**: 3 echo shards (top, left and right) around an **amethyst shard**, with a **note block** in the bottom-middle.
-3. Use it on the big frame in the centre of the city. Step in and wait.
+3. Use it on the big frame in the centre of the city, **or** put eight note blocks in front of the frame and play
+   F♯ A C♯ B A E C♯ F♯ (note block clicks 12, 15, 19, 17, 15, 10, 7, 12). Sneak-use the tuner to hear the melody.
+4. Step in and wait.
 
 ## Building from source
 

@@ -38,9 +38,11 @@ import net.minecraft.world.level.material.FluidState;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Soul Water: the shimmering, oil-on-water liquid of the Sift (inspired by Minecraft Dungeons II's ichor, "ouch water").
- * Creatures of the Sift bathe in it happily; anything from the Overworld becomes Soulsick and has its health drained.
- * It flows like water but never forms new sources, so it can't be farmed infinitely.
+ * Ichor: the liquid of the Sift (Minecraft Dungeons II). It looks and acts much like lava: thick and slow, with patches
+ * that shift between green, blue, pink and yellow like oil on water, bubbles on the surface and souls drifting in it.
+ * Creatures of the Sift (blubs, echo golems, sculkers...) bathe in it happily; anything from the Overworld becomes
+ * Soulsick and has its health and souls (experience) drained. It never forms new sources, so it can't be farmed.
+ * (Registered as sift_unbound:soul_water, its name before 0.3.0, so existing worlds keep their ichor.)
  */
 public abstract class SoulWaterFluid extends FlowingFluid {
 	@Override
@@ -64,9 +66,15 @@ public abstract class SoulWaterFluid extends FlowingFluid {
 			level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ModSounds.SOUL_WATER_AMBIENT, SoundSource.AMBIENT,
 				random.nextFloat() * 0.25F + 0.4F, random.nextFloat() * 0.4F + 0.8F, false);
 		}
-		if (fluidState.isSource() && random.nextInt(14) == 0 && level.getBlockState(pos.above()).isAir()) {
-			level.addParticle(random.nextInt(4) == 0 ? ParticleTypes.SOUL : ParticleTypes.SCULK_SOUL,
-				pos.getX() + random.nextDouble(), pos.getY() + 0.9, pos.getZ() + random.nextDouble(), 0.0, 0.03, 0.0);
+		if (fluidState.isSource() && level.getBlockState(pos.above()).isAir()) {
+			if (random.nextInt(14) == 0) { // souls drifting up out of it
+				level.addParticle(random.nextInt(4) == 0 ? ParticleTypes.SOUL : ParticleTypes.SCULK_SOUL,
+					pos.getX() + random.nextDouble(), pos.getY() + 0.9, pos.getZ() + random.nextDouble(), 0.0, 0.03, 0.0);
+			}
+			if (random.nextInt(9) == 0) { // thick bubbles popping on the surface
+				level.addParticle(ParticleTypes.BUBBLE_POP, pos.getX() + random.nextDouble(), pos.getY() + 0.88,
+					pos.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+			}
 		}
 	}
 
@@ -106,7 +114,7 @@ public abstract class SoulWaterFluid extends FlowingFluid {
 
 	@Override
 	public int getSlopeFindDistance(LevelReader level) {
-		return 4;
+		return 2;
 	}
 
 	@Override
@@ -121,12 +129,12 @@ public abstract class SoulWaterFluid extends FlowingFluid {
 
 	@Override
 	public int getDropOff(LevelReader level) {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public int getTickDelay(LevelReader level) {
-		return 10;
+		return 20;
 	}
 
 	@Override

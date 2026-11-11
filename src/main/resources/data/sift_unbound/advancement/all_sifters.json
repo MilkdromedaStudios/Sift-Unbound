@@ -1,0 +1,92 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:pollen_glob"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.all_sifters.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.all_sifters.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "seedling": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:seedling"
+          }
+        }
+      }
+    },
+    "nester": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:nester"
+          }
+        }
+      }
+    },
+    "pollinator": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:pollinator"
+          }
+        }
+      }
+    },
+    "sentinel": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:sentinel"
+          }
+        }
+      }
+    },
+    "sprout": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:sprout"
+          }
+        }
+      }
+    },
+    "harmonizer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:harmonizer"
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:harmonizer"
+}

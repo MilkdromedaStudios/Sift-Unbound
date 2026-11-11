@@ -274,7 +274,42 @@ def gen_items_page():
     write("Items.md", "\n".join(body))
 
 
+def gen_advancements_page():
+    """The advancement tab, in tree order, straight from the advancement files and their (explanatory) descriptions."""
+    advs = {}
+    for f in glob.glob(os.path.join(D, "advancement", "*.json")):
+        advs[os.path.basename(f)[:-5]] = json.load(open(f))
+    children = defaultdict(list)
+    for name, a in advs.items():
+        children[a.get("parent", "").split(":")[-1]].append(name)
+    rows = []
+
+    def walk(name, depth):
+        a = advs[name]
+        d = a["display"]
+        title = LANG.get(d["title"]["translate"], name)
+        desc = LANG.get(d["description"]["translate"], "")
+        rows.append(f"| {'&nbsp;&nbsp;' * depth}{'↳ ' if depth else ''}**{title}** | {desc} | {d.get('frame', 'task')} |")
+        for child in sorted(children[name]):
+            walk(child, depth + 1)
+    for root in sorted(children[""]):
+        walk(root, 0)
+    write("Advancements.md", f"""# Advancements
+
+{NAV}
+
+A new advancement tab, **The Sift Unbound**, with a Sift-grass background. It doubles as a guide: each advancement's
+description explains the mechanic it is about, so the tab teaches the Sift as you meet it ({len(advs)} in all).
+The mod's own `sift_unbound:sift_event` trigger lets datapacks react to the same moments (humming or playing the
+melody, an echo golem waking a portal, shearing a nuzzle, the Endure and Thrive tides, enraging the sifters).
+
+| Advancement | How to get it, and what it teaches | Frame |
+|---|---|---|
+""" + "\n".join(rows))
+
+
 if __name__ == "__main__":
     gen_block_pages()
     gen_items_page()
+    gen_advancements_page()
     print("wiki pages generated in", os.path.relpath(WIKI, ROOT))

@@ -4,6 +4,19 @@
     "sift_unbound:blub",
     "sift_unbound:soul_wisp",
     "sift_unbound:sculk_prowler",
-    "minecraft:warden"
+    "sift_unbound:nuzzle",
+    "sift_unbound:slabber",
+    "sift_unbound:echo_golem",
+    "sift_unbound:singer",
+    "minecraft:warden",
+    "sift_unbound:seedling",
+    "sift_unbound:nester",
+    "sift_unbound:pollinator",
+    "sift_unbound:sentinel",
+    "sift_unbound:sprout",
+    "sift_unbound:harmonizer",
+    "sift_unbound:scavenger",
+    "sift_unbound:monarch",
+    "sift_unbound:monarch_echo"
   ]
 }

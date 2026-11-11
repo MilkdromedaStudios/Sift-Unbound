@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "sift_unbound:sculk_prowler",
+    "sift_unbound:scavenger",
+    "sift_unbound:monarch",
+    "sift_unbound:monarch_echo"
+  ]
+}

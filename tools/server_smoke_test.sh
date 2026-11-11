@@ -22,9 +22,11 @@ printf 'online-mode=false\nlevel-seed=2027\nview-distance=6\nsimulation-distance
   echo "execute in sift_unbound:the_sift run forceload add -64 -64 63 63"
   for _ in $(seq 1 240); do grep -q 'Marked .* chunks\|chunks in .* to be force loaded\|Chunk at .* is now force loaded' "$LOG" 2>/dev/null && break; sleep 1; done
   sleep 20
-  for b in sift_meadows pallid_grove soul_wetlands husklands lullaby_hills; do
+  for b in sift_meadows pallid_grove soul_wetlands husklands lullaby_hills sifter_canyons; do
     echo "execute in sift_unbound:the_sift run locate biome sift_unbound:$b"; sleep 4
   done
+  echo "execute in sift_unbound:the_sift run locate structure sift_unbound:sculker_nest"; sleep 6
+  echo "execute in sift_unbound:the_sift run place structure sift_unbound:sculker_nest 40 70 40"; sleep 6
   echo "execute in sift_unbound:the_sift if entity @e[type=sift_unbound:blub]"
   sleep 3
   echo "stop"
@@ -35,7 +37,9 @@ check() { if grep -qE "$1" "$LOG"; then echo "ok   - $2"; else echo "FAIL - $2";
 check 'Done \(' "server started"
 check 'unofficial fan mod' "/sift credits"
 check 'Sift tide: ' "/sift tide"
-for b in sift_meadows pallid_grove soul_wetlands husklands lullaby_hills; do check "nearest sift_unbound:$b is at" "biome $b generates"; done
+for b in sift_meadows pallid_grove soul_wetlands husklands lullaby_hills sifter_canyons; do check "nearest sift_unbound:$b is at" "biome $b generates"; done
+check 'nearest sift_unbound:sculker_nest is at' "a sculker nest can be located"
+check 'Generated structure "sift_unbound:sculker_nest"' "a sculker nest generates"
 check 'Test passed\. Count: [1-9]' "world generation spawned blubs"
 if grep -E '\[(Server thread|Worker-Main-[0-9]+)/ERROR\]' "$LOG" | grep -vE 'server.properties' | head -5 | grep -q .; then
   echo "FAIL - errors in the server log:"; grep -E '/ERROR\]' "$LOG" | grep -v server.properties | head -10; fail=1

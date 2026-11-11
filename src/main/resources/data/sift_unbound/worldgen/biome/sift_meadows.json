@@ -14,6 +14,33 @@
                 "max_inclusive": 4
               },
               "weight": 10
+            },
+            {
+              "type": "sift_unbound:nuzzle",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 8
+            },
+            {
+              "type": "sift_unbound:slabber",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 5
+            },
+            {
+              "type": "sift_unbound:echo_golem",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 2
             }
           ],
           "monster": [
@@ -25,6 +52,60 @@
                 "max_inclusive": 2
               },
               "weight": 100
+            },
+            {
+              "type": "sift_unbound:seedling",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 40
+            },
+            {
+              "type": "sift_unbound:nester",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 25
+            },
+            {
+              "type": "sift_unbound:pollinator",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 20
+            },
+            {
+              "type": "sift_unbound:sentinel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 25
+            },
+            {
+              "type": "sift_unbound:sprout",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 12
+            },
+            {
+              "type": "sift_unbound:harmonizer",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 1
             }
           ],
           "ambient": [
@@ -59,7 +140,10 @@
     [
       "sift_unbound:soul_water_lake_rare"
     ],
-    [],
+    [
+      "sift_unbound:soulshale_monoliths",
+      "sift_unbound:sifter_nests_rare"
+    ],
     [],
     [],
     [],

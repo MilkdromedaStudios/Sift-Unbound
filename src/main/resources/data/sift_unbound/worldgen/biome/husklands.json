@@ -25,6 +25,24 @@
                 "max_inclusive": 3
               },
               "weight": 120
+            },
+            {
+              "type": "sift_unbound:scavenger",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 60
+            },
+            {
+              "type": "sift_unbound:seedling",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 10
             }
           ],
           "ambient": [
@@ -59,7 +77,11 @@
     [
       "sift_unbound:soul_water_lake_rare"
     ],
-    [],
+    [
+      "sift_unbound:soulshale_monoliths_rare",
+      "sift_unbound:sculk_formations",
+      "sift_unbound:humbler_husks"
+    ],
     [],
     [],
     [],

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:lullaby_bloom"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.sprout_enrage.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.sprout_enrage.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enraged": {
+      "trigger": "sift_unbound:sift_event",
+      "conditions": {
+        "event": "sifters_enraged"
+      }
+    }
+  },
+  "parent": "sift_unbound:sifter"
+}

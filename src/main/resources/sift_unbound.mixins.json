@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.milkdromedastudios.siftunbound.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "FoodDataMixin",
+    "NoteBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

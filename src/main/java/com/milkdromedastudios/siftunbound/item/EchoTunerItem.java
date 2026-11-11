@@ -1,13 +1,17 @@
 package com.milkdromedastudios.siftunbound.item;
 
+import com.milkdromedastudios.siftunbound.portal.NoteBlockMachine;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +22,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 /**
  * The Echo Tuner hums the melody that wakes the Warden Portal (in Dungeons II a note block machine plays it).
- * Use it on (or inside) a reinforced-deepslate frame such as the one at the heart of every ancient city.
+ * Use it on (or inside) a reinforced-deepslate frame such as the one at the heart of every ancient city to light it
+ * (costs durability). Used while sneaking, it just hums the melody and shows its notes, so it can be played on a
+ * {@link com.milkdromedastudios.siftunbound.portal.NoteBlockMachine note block machine} instead.
  */
 public class EchoTunerItem extends Item {
 	public EchoTunerItem(Item.Properties properties) {
@@ -26,7 +32,27 @@ public class EchoTunerItem extends Item {
 	}
 
 	@Override
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
+		if (!player.isSecondaryUseActive()) {
+			return InteractionResult.PASS;
+		}
+		if (level instanceof ServerLevel server) {
+			NoteBlockMachine.hum(server, player.position());
+			player.sendOverlayMessage(Component.translatable("message.sift_unbound.melody", NoteBlockMachine.melodyText()));
+			player.getCooldowns().addCooldown(player.getItemInHand(hand), 60);
+			if (player instanceof ServerPlayer serverPlayer) {
+				ModCriteria.award(serverPlayer, ModCriteria.HUMMED_MELODY);
+			}
+		}
+		return InteractionResult.SUCCESS;
+	}
+
+	@Override
 	public InteractionResult useOn(UseOnContext context) {
+		Player sneaker = context.getPlayer();
+		if (sneaker != null && sneaker.isSecondaryUseActive()) {
+			return use(context.getLevel(), sneaker, context.getHand());
+		}
 		Level level = context.getLevel();
 		BlockPos clicked = context.getClickedPos();
 		Player player = context.getPlayer();

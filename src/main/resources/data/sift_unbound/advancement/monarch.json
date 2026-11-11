@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:monarch_feather"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.monarch.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.monarch.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:monarch"
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:sculker_nest"
+}

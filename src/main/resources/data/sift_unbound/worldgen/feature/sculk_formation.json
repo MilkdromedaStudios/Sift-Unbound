@@ -1,0 +1,14 @@
+{
+  "type": "sift_unbound:sculk_formation",
+  "radius": 5,
+  "spires": {
+    "type": "minecraft:uniform",
+    "min_inclusive": 2,
+    "max_inclusive": 5
+  },
+  "spire_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": 6,
+    "max_inclusive": 13
+  }
+}

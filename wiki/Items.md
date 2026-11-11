@@ -39,9 +39,9 @@ A wobbly treat dropped by blubs (0-1, Looting adds more). Always edible; makes y
 | ID | `sift_unbound:blub_jelly` |
 | Type | Food (3 hunger, 0.4 saturation) |
 
-### Soul Water Bucket
+### Ichor Bucket
 
-<img src="../src/main/resources/assets/sift_unbound/textures/item/soul_water_bucket.png" width="64" height="64" alt="Soul Water Bucket texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/item/soul_water_bucket.png" width="64" height="64" alt="Ichor Bucket texture">
 
 Scoop up Soul Water. Use it on a Blub to carry it in a Bucket of Blub.
 
@@ -72,9 +72,9 @@ Spawns a Blub.
 | ID | `sift_unbound:blub_spawn_egg` |
 | Type | Spawn egg |
 
-### Sculk Prowler Spawn Egg
+### Stalker Spawn Egg
 
-<img src="../src/main/resources/assets/sift_unbound/textures/item/sculk_prowler_spawn_egg.png" width="64" height="64" alt="Sculk Prowler Spawn Egg texture">
+<img src="../src/main/resources/assets/sift_unbound/textures/item/sculk_prowler_spawn_egg.png" width="64" height="64" alt="Stalker Spawn Egg texture">
 
 Spawns a Sculk Prowler.
 

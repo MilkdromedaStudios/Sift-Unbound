@@ -1,0 +1,104 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:recovery_compass"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.explore_sift.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.explore_sift.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sift_meadows": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:sift_meadows"
+            }
+          }
+        }
+      }
+    },
+    "pallid_grove": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:pallid_grove"
+            }
+          }
+        }
+      }
+    },
+    "soul_wetlands": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:soul_wetlands"
+            }
+          }
+        }
+      }
+    },
+    "husklands": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:husklands"
+            }
+          }
+        }
+      }
+    },
+    "lullaby_hills": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:lullaby_hills"
+            }
+          }
+        }
+      }
+    },
+    "sifter_canyons": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "sift_unbound:sifter_canyons"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

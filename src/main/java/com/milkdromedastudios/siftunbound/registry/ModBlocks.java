@@ -79,7 +79,9 @@ public final class ModBlocks {
 	public static final Block SOULSHALE_BRICK_STAIRS = stairs("soulshale_brick_stairs", SOULSHALE_BRICKS);
 	public static final Block SOULSHALE_BRICK_SLAB = reg("soulshale_brick_slab", SlabBlock::new, stone(3.5F), true);
 	public static final Block SOULSHALE_BRICK_WALL = reg("soulshale_brick_wall", WallBlock::new, stone(3.5F).forceSolidOn(), true);
-	public static final Block CHISELED_SOULSHALE = reg("chiseled_soulshale", Block::new, stone(3.5F).lightLevel(s -> 3), true);
+	// vanilla 26.4's chiseled soulshale "depicts a singer", is teal on maps and has hardness 2 / blast resistance 6
+	public static final Block CHISELED_SOULSHALE = reg("chiseled_soulshale", Block::new,
+		stone(2.0F).mapColor(MapColor.WARPED_STEM).lightLevel(s -> 3), true);
 	public static final Block SOUL_SHARD_ORE = reg("soul_shard_ore", p -> new DropExperienceBlock(UniformInt.of(2, 5), p),
 		stone(4.0F).lightLevel(s -> 4), true);
 	public static final Block SOUL_SHARD_BLOCK = reg("soul_shard_block", Block::new,

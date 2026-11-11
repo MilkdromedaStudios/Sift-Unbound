@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:note_block"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.note_block_machine.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.note_block_machine.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "played": {
+      "trigger": "sift_unbound:sift_event",
+      "conditions": {
+        "event": "played_melody"
+      }
+    }
+  },
+  "parent": "sift_unbound:hum_melody"
+}

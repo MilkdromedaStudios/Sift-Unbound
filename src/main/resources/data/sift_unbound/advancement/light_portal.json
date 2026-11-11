@@ -25,7 +25,33 @@
           }
         }
       }
+    },
+    "played": {
+      "trigger": "sift_unbound:sift_event",
+      "conditions": {
+        "event": "played_melody"
+      }
+    },
+    "golem": {
+      "trigger": "sift_unbound:sift_event",
+      "conditions": {
+        "event": "golem_woke_portal"
+      }
+    },
+    "touched": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "sift_unbound:sift_portal"
+      }
     }
   },
+  "requirements": [
+    [
+      "lit",
+      "played",
+      "golem",
+      "touched"
+    ]
+  ],
   "parent": "sift_unbound:root"
 }
