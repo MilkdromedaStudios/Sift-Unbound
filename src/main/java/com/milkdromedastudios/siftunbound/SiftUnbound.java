@@ -7,6 +7,7 @@ import com.milkdromedastudios.siftunbound.registry.ModCreativeTab;
 import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModEffects;
 import com.milkdromedastudios.siftunbound.registry.ModEntities;
+import com.milkdromedastudios.siftunbound.registry.ModFeatures;
 import com.milkdromedastudios.siftunbound.registry.ModFluids;
 import com.milkdromedastudios.siftunbound.registry.ModGameplay;
 import com.milkdromedastudios.siftunbound.registry.ModItems;
@@ -42,6 +43,7 @@ public class SiftUnbound implements ModInitializer {
 		ModCreativeTab.init();
 		ModGameplay.init();
 		ModCriteria.init();
+		ModFeatures.init();
 		SiftCommand.init();
 		SiftTides.init();
 		NoteBlockMachine.init();

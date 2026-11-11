@@ -28,6 +28,11 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
     then (or when you ask), and creates echo golems.
 - **The Singer's Portal**: the first return portal in the Sift is ringed with red sculk and tall grass, with the Singer
   and two echo golems standing by.
+- **Soulshale monoliths**: old carved steles on polished plinths, a Chiseled Soulshale singer set into both faces, in
+  Singer's Meadow and the Lullaby Hills (rarer elsewhere). Some have toppled and lie broken among rubble and creeping
+  sculk.
+- **Sculk formations**: mounds of red sculk, darkest at the heart, with curved horn-like spires, common in the Humbler
+  Huskland and rarer in the Pallid Grove and Ichor Ponds.
 - **Guide advancements** that teach each mechanic the first time you meet it: humming and playing the melody, the note
   block machine, chiseled soulshale, ichor and soulsickness, both tides, blub jelly, shearing nuzzles, feeding slabbers,
   the Singer, echo golems (and letting one wake a portal), and visiting every region (19 in all). A new

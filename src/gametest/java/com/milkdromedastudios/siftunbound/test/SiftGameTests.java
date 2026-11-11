@@ -13,17 +13,21 @@ import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModEffects;
 import com.milkdromedastudios.siftunbound.registry.ModEntities;
 import com.milkdromedastudios.siftunbound.registry.ModItems;
+import com.milkdromedastudios.siftunbound.world.feature.SoulshaleMonolithFeature;
 import java.util.List;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -33,9 +37,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NoteBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.phys.AABB;
 
 public class SiftGameTests {
@@ -232,6 +239,60 @@ public class SiftGameTests {
 			h.fail(Component.literal("an unrelated event awarded Thrive"));
 		}
 		h.succeed();
+	}
+
+	/** The soulshale monolith configured in the datapack generates on Sift ground, plinth first. */
+	@GameTest(maxTicks = 20)
+	public void monolithGenerates(GameTestHelper h) {
+		int[] counts = placeFeature(h, configured(h, "soulshale_monolith"), ModBlocks.SOULSHALE_BRICKS, ModBlocks.POLISHED_SOULSHALE);
+		if (counts[1] < 10) {
+			h.fail(Component.literal("no plinth: " + counts[1] + " polished soulshale"));
+		}
+		h.succeed();
+	}
+
+	/** A monolith left standing has its singer relief set into both faces, and a stele of bricks above the plinth. */
+	@GameTest(maxTicks = 20)
+	public void standingMonolithHasReliefs(GameTestHelper h) {
+		int[] counts = placeFeature(h, new SoulshaleMonolithFeature(ConstantInt.of(7), 0.0F), ModBlocks.CHISELED_SOULSHALE, ModBlocks.POLISHED_SOULSHALE);
+		if (counts[0] != 2) {
+			h.fail(Component.literal("expected 2 singer reliefs, found " + counts[0]));
+		}
+		h.succeed();
+	}
+
+	/** A sculk formation turns the ground to sculk and grows dark-cored spires. */
+	@GameTest(maxTicks = 20)
+	public void sculkFormationGenerates(GameTestHelper h) {
+		int[] counts = placeFeature(h, configured(h, "sculk_formation"), ModBlocks.SIFT_SCULK, ModBlocks.DARK_SIFT_SCULK);
+		if (counts[0] + counts[1] < 20) {
+			h.fail(Component.literal("too little sculk: " + counts[0] + " + " + counts[1]));
+		}
+		h.succeed();
+	}
+
+	private static Feature configured(GameTestHelper h, String name) {
+		return h.getLevel().registryAccess().lookupOrThrow(Registries.FEATURE).getOptional(SiftUnbound.id(name)).orElseThrow();
+	}
+
+	/** Lays Sift grass, places a feature in the middle, and counts two kinds of block around it. */
+	private static int[] placeFeature(GameTestHelper h, Feature feature, Block a, Block b) {
+		for (int x = 0; x < 8; x++) {
+			for (int z = 0; z < 8; z++) {
+				h.setBlock(new BlockPos(x, 1, z), ModBlocks.SIFT_GRASS_BLOCK);
+			}
+		}
+		ServerLevel level = h.getLevel();
+		if (!feature.place(level, level.getChunkSource().getGenerator(), RandomSource.create(5), h.absolutePos(new BlockPos(4, 2, 4)))) {
+			h.fail(Component.literal("the feature refused to place"));
+		}
+		int[] counts = new int[2];
+		for (BlockPos p : BlockPos.betweenClosed(h.absolutePos(new BlockPos(-6, 0, -6)), h.absolutePos(new BlockPos(13, 18, 13)))) {
+			BlockState state = level.getBlockState(p);
+			counts[0] += state.is(a) ? 1 : 0;
+			counts[1] += state.is(b) ? 1 : 0;
+		}
+		return counts;
 	}
 
 	/** Using the tuner on plain blocks does nothing. */

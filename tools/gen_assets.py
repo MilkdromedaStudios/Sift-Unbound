@@ -871,6 +871,19 @@ def gen_features():
         {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform", "max_inclusive": {"absolute": 160}, "min_inclusive": {"above_bottom": 8}}},
         {"type": "minecraft:biome"}])
 
+    # The mod's own feature types (ModFeatures): carved soulshale monoliths and red sculk formations.
+    surface = lambda chance: [{"type": "minecraft:rarity_filter", "chance": chance}, {"type": "minecraft:in_square"},
+                              {"type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG"}, {"type": "minecraft:biome"}]
+    feature("soulshale_monolith", {"type": rid("monolith"), "toppled_chance": 0.3,
+                                   "height": {"type": "minecraft:uniform", "min_inclusive": 6, "max_inclusive": 11}})
+    placed("soulshale_monoliths", rid("soulshale_monolith"), surface(9))
+    placed("soulshale_monoliths_rare", rid("soulshale_monolith"), surface(24))
+    feature("sculk_formation", {"type": rid("sculk_formation"), "radius": 5,
+                                "spires": {"type": "minecraft:uniform", "min_inclusive": 2, "max_inclusive": 5},
+                                "spire_height": {"type": "minecraft:uniform", "min_inclusive": 6, "max_inclusive": 13}})
+    placed("sculk_formations", rid("sculk_formation"), surface(5))
+    placed("sculk_formations_rare", rid("sculk_formation"), surface(16))
+
 
 def gen_biomes():
     def spawns(creature=(), monster=(), ambient=()):
@@ -891,9 +904,13 @@ def gen_biomes():
     veg_order = ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:pallid_trees_sparse", "sift_unbound:husk_rocks",
                  "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_short_sift_grass", "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"]
 
-    def biome(name, temp, features_veg, extra_attrs=None, spawn=None, extra_lakes=False, water="#5fd3c8"):
+    local_order = ["sift_unbound:soulshale_monoliths", "sift_unbound:soulshale_monoliths_rare",
+                   "sift_unbound:sculk_formations", "sift_unbound:sculk_formations_rare"]
+
+    def biome(name, temp, features_veg, extra_attrs=None, spawn=None, extra_lakes=False, water="#5fd3c8", local=()):
         features_veg = sorted(features_veg, key=veg_order.index)
-        feats = [[], ["sift_unbound:soul_water_lake_common" if extra_lakes else "sift_unbound:soul_water_lake_rare"], [], [], [], [],
+        feats = [[], ["sift_unbound:soul_water_lake_common" if extra_lakes else "sift_unbound:soul_water_lake_rare"],
+                 sorted(local, key=local_order.index), [], [], [],
                  ["sift_unbound:ore_soul_shard", "sift_unbound:dark_sculk_disks"] if name == "husklands" else ["sift_unbound:ore_soul_shard"],
                  [], ["sift_unbound:soul_water_springs"], features_veg, []]
         attrs = {"minecraft:visual/water_fog_color": "#3f9fa8"}
@@ -906,18 +923,21 @@ def gen_biomes():
 
     veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",
                   "sift_unbound:patch_teal_sprouts", "sift_unbound:pallid_trees_sparse"]
-    biome("sift_meadows", 0.6, veg_meadow, spawn=spawns(creature=[blub, nuzzle, slabber, golem], monster=[prowler], ambient=[wisp]))
+    biome("sift_meadows", 0.6, veg_meadow, local=["sift_unbound:soulshale_monoliths"], spawn=spawns(creature=[blub, nuzzle, slabber, golem], monster=[prowler], ambient=[wisp]))
     biome("pallid_grove", 0.5, ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:patch_short_sift_grass",
                                 "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:sculk_soul"}, "probability": 0.0006}], "modifier": "append"}},
-          spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler], ambient=[(rid("soul_wisp"), 16, 1, 3)]))
+          spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler], ambient=[(rid("soul_wisp"), 16, 1, 3)]),
+          local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations_rare"])
     biome("soul_wetlands", 0.7, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_short_sift_grass", "sift_unbound:pallid_trees_sparse"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:soul"}, "probability": 0.0009}], "modifier": "append"}},
           spawn=spawns(creature=[(rid("blub"), 14, 3, 6), slabber], monster=[(rid("sculk_prowler"), 60, 1, 1)], ambient=[(rid("soul_wisp"), 30, 2, 4)]),
-          extra_lakes=True)
+          extra_lakes=True, local=["sift_unbound:sculk_formations_rare"])
     biome("husklands", 1.2, ["sift_unbound:husk_rocks", "sift_unbound:patch_teal_sprouts"],
+          local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations"],
           spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3)], ambient=[wisp]))
     biome("lullaby_hills", 0.9, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom", "sift_unbound:patch_short_sift_grass"],
+          local=["sift_unbound:soulshale_monoliths"],
           spawn=spawns(creature=[blub, nuzzle, golem], monster=[prowler], ambient=[wisp]))
 
 
