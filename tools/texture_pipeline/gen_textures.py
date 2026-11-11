@@ -254,14 +254,39 @@ def gen_soulshale():
                 br.putpixel((x, y0), SHALE[4] + (255,))
     save(br, "block/soulshale_bricks")
 
-    # chiseled: a carved "resonance" glyph (concentric rings + a singing figure)
+    # chiseled: a carved singer (vanilla 26.4: chiseled soulshale "depicts a singer"). A healthy warden with curling horns,
+    # an open singing mouth and raised arms, a soul glowing in its chest, and the song rising around it.
     ch = pol.copy(); d = ImageDraw.Draw(ch)
-    d.rectangle([2, 2, 13, 13], outline=SHALE[0] + (255,))
-    d.ellipse([4, 4, 11, 11], outline=SOUL_CYAN[2] + (255,))
-    d.rectangle([7, 6, 8, 9], fill=SOUL_CYAN[3] + (255,))
-    d.point([(6, 5), (9, 5)], fill=SOUL_CYAN[3] + (255,))
-    for x, y in ((2, 7), (13, 8), (7, 2), (8, 13)):
-        ch.putpixel((x, y), SOUL_CYAN[1] + (255,))
+    d.rectangle([1, 1, 14, 14], outline=SHALE[0] + (255,))
+    panel = value_noise(16, 16, 67, 4, 1)
+    for y in range(2, 14):  # a lighter recessed panel, so the carved figure reads as a silhouette
+        for x in range(2, 14):
+            ch.putpixel((x, y), SHALE[3 if panel[y, x] < 0.6 else 4] + (255,))
+    singer = [
+        ".#........#.",
+        ".##......##.",
+        "..##.##.##..",
+        "...######...",
+        "...#.##.#...",
+        "...######...",
+        "....#..#....",
+        "#..######..#",
+        ".#.##OO##.#.",
+        "..###OO###..",
+        "....####....",
+        "...##..##...",
+    ]
+    for y, row in enumerate(singer):
+        for x, c in enumerate(row):
+            px, py = x + 2, y + 2
+            if c == "#":
+                ch.putpixel((px, py), SHALE[0] + (255,))
+            elif c == "O":
+                ch.putpixel((px, py), SOUL_CYAN[3] + (255,))
+    for x, y in ((2, 9), (13, 9)):  # the eyes catch the light
+        pass
+    for x, y in ((1, 4), (14, 4), (1, 6), (14, 6)):  # the song rising on both sides, cut into the frame
+        ch.putpixel((x, y), SOUL_CYAN[2] + (255,))
     save(ch, "block/chiseled_soulshale")
 
     # soul shard ore

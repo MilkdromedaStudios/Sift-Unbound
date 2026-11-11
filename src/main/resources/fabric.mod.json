@@ -19,6 +19,9 @@
 	"license": "Apache-2.0",
 	"icon": "assets/sift_unbound/icon.png",
 	"environment": "*",
+	"mixins": [
+		"sift_unbound.mixins.json"
+	],
 	"entrypoints": {
 		"main": [
 			"com.milkdromedastudios.siftunbound.SiftUnbound"

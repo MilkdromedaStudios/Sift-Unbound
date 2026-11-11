@@ -5,10 +5,12 @@ import com.milkdromedastudios.siftunbound.item.EchoTunerItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,13 +26,17 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.block.Block;
 
 public final class ModItems {
 	public static final List<Item> CREATIVE_ORDER = new ArrayList<>();
 
-	public static final Item ECHO_TUNER = register("echo_tuner", EchoTunerItem::new, new Item.Properties().stacksTo(1).durability(16).rarity(Rarity.RARE));
+	public static final Item ECHO_TUNER = register("echo_tuner", EchoTunerItem::new, new Item.Properties().stacksTo(1).durability(16).rarity(Rarity.RARE)
+		.component(DataComponents.LORE, new ItemLore(List.of(
+			Component.translatable("item.sift_unbound.echo_tuner.desc").withStyle(ChatFormatting.GRAY),
+			Component.translatable("item.sift_unbound.echo_tuner.desc2").withStyle(ChatFormatting.GRAY)))));
 	public static final Item SOUL_SHARD = register("soul_shard", Item::new, new Item.Properties());
 	public static final Item BLUB_JELLY = register("blub_jelly", Item::new, new Item.Properties()
 		.food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.4F).alwaysEdible().build(),

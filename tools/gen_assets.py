@@ -280,34 +280,40 @@ LANG = {
     "block.sift_unbound.pallid_door": "Pallid Door", "block.sift_unbound.pallid_trapdoor": "Pallid Trapdoor",
     "block.sift_unbound.pallid_button": "Pallid Button", "block.sift_unbound.pallid_pressure_plate": "Pallid Pressure Plate",
     # fluid & portal
-    "block.sift_unbound.soul_water": "Soul Water",
+    "block.sift_unbound.soul_water": "Ichor",
     "block.sift_unbound.sift_portal": "Sift Portal",
     # items
     "item.sift_unbound.echo_tuner": "Echo Tuner",
     "item.sift_unbound.echo_tuner.desc": "Use inside an ancient city's Warden Portal frame",
+    "item.sift_unbound.echo_tuner.desc2": "Sneak-use to hum the Sift's melody",
     "item.sift_unbound.soul_shard": "Soul Shard",
     "item.sift_unbound.blub_jelly": "Blub Jelly",
-    "item.sift_unbound.soul_water_bucket": "Soul Water Bucket",
+    "item.sift_unbound.soul_water_bucket": "Ichor Bucket",
     "item.sift_unbound.blub_bucket": "Bucket of Blub",
     "item.sift_unbound.blub_spawn_egg": "Blub Spawn Egg",
-    "item.sift_unbound.sculk_prowler_spawn_egg": "Sculk Prowler Spawn Egg",
+    "item.sift_unbound.sculk_prowler_spawn_egg": "Stalker Spawn Egg",
     "item.sift_unbound.soul_wisp_spawn_egg": "Soul Wisp Spawn Egg",
     # entities
     "entity.sift_unbound.blub": "Blub",
-    "entity.sift_unbound.sculk_prowler": "Sculk Prowler",
+    "entity.sift_unbound.sculk_prowler": "Stalker",
     "entity.sift_unbound.soul_wisp": "Soul Wisp",
     # effect
     "effect.sift_unbound.soulsick": "Soulsick",
     "death.attack.sift_unbound.soulsick": "%1$s had their soul drained away",
     "death.attack.sift_unbound.soulsick.player": "%1$s had their soul drained away while fighting %2$s",
     # biomes
-    "biome.sift_unbound.sift_meadows": "Sift Meadows",
+    "biome.sift_unbound.sift_meadows": "Singer's Meadow",
     "biome.sift_unbound.pallid_grove": "Pallid Grove",
-    "biome.sift_unbound.soul_wetlands": "Soul Wetlands",
-    "biome.sift_unbound.husklands": "Husklands",
+    "biome.sift_unbound.soul_wetlands": "Ichor Ponds",
+    "biome.sift_unbound.husklands": "Humbler Huskland",
     "biome.sift_unbound.lullaby_hills": "Lullaby Hills",
     # messages
     "message.sift_unbound.portal.lit": "The Warden Portal hums awake...",
+    "message.sift_unbound.portal.machine": "The note blocks ring out the Sift's melody. The Warden Portal hums awake...",
+    "message.sift_unbound.melody": "The Sift's melody: %s. Play it on eight note blocks in front of a Warden Portal frame.",
+    "message.sift_unbound.tide.flow": "The Flow Tide returns",
+    "message.sift_unbound.tide.endure": "The Endure Tide rises. Wounds will not mend on their own.",
+    "message.sift_unbound.tide.thrive": "The Thrive Tide blooms. Wounds mend quickly.",
     "message.sift_unbound.portal.no_frame": "The Echo Tuner hums, but there's no complete Warden Portal frame here.",
     "message.sift_unbound.portal.too_big": "This frame is too big for the Echo Tuner to fill.",
     "message.sift_unbound.bed": "The tides of the Sift keep you awake",
@@ -323,10 +329,10 @@ LANG = {
     "subtitles.sift_unbound.soul_wisp.ambient": "Soul Wisp chimes",
     "subtitles.sift_unbound.soul_wisp.hurt": "Soul Wisp flickers",
     "subtitles.sift_unbound.soul_wisp.death": "Soul Wisp fades",
-    "subtitles.sift_unbound.sculk_prowler.ambient": "Sculk Prowler clicks",
-    "subtitles.sift_unbound.sculk_prowler.hurt": "Sculk Prowler hurts",
-    "subtitles.sift_unbound.sculk_prowler.death": "Sculk Prowler dies",
-    "subtitles.sift_unbound.soul_water.ambient": "Soul Water bubbles",
+    "subtitles.sift_unbound.sculk_prowler.ambient": "Stalker clicks",
+    "subtitles.sift_unbound.sculk_prowler.hurt": "Stalker hurts",
+    "subtitles.sift_unbound.sculk_prowler.death": "Stalker dies",
+    "subtitles.sift_unbound.soul_water.ambient": "Ichor bubbles",
     "subtitles.sift_unbound.soul_water.burn": "Soul drains",
     "subtitles.sift_unbound.sift_portal.ambient": "Sift Portal hums",
     "subtitles.sift_unbound.sift_portal.travel": "Sift Portal resonates",
@@ -335,17 +341,17 @@ LANG = {
     "advancements.sift_unbound.root.title": "The Sift Unbound",
     "advancements.sift_unbound.root.description": "Craft an Echo Tuner from echo shards found in ancient cities",
     "advancements.sift_unbound.light_portal.title": "Resonance",
-    "advancements.sift_unbound.light_portal.description": "Awaken the Warden Portal in an ancient city",
+    "advancements.sift_unbound.light_portal.description": "Awaken the Warden Portal with the Sift's melody",
     "advancements.sift_unbound.enter_sift.title": "Beyond the Frame",
     "advancements.sift_unbound.enter_sift.description": "Step through the Warden Portal into the Sift",
     "advancements.sift_unbound.soulsick.title": "Ouch!",
-    "advancements.sift_unbound.soulsick.description": "Feel Soul Water drain your soul",
+    "advancements.sift_unbound.soulsick.description": "Feel ichor drain your soul",
     "advancements.sift_unbound.blub_friend.title": "Squeak Squeak",
     "advancements.sift_unbound.blub_friend.description": "Breed two Blubs with Lullaby Blooms",
     "advancements.sift_unbound.soul_shard.title": "Crystallized Souls",
     "advancements.sift_unbound.soul_shard.description": "Mine a Soul Shard from Soulshale",
     "advancements.sift_unbound.prowler.title": "Tide Hunter",
-    "advancements.sift_unbound.prowler.description": "Defeat a Sculk Prowler",
+    "advancements.sift_unbound.prowler.description": "Defeat a Stalker, a sculker of the Endure Tide",
     # commands
     "commands.sift_unbound.credits": "The Sift Unbound - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios.",
 }
@@ -508,11 +514,13 @@ def gen_entity_loot():
 
 
 # ============================================================================ advancements
-def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True):
+def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True, any_of=False):
     obj = {"display": {"icon": {"id": icon}, "title": {"translate": f"advancements.sift_unbound.{name}.title"},
                        "description": {"translate": f"advancements.sift_unbound.{name}.description"},
                        "frame": frame, "show_toast": show, "announce_to_chat": show, "hidden": hidden},
            "criteria": criteria}
+    if any_of:  # any one criterion is enough
+        obj["requirements"] = [list(criteria)]
     if parent:
         obj["parent"] = rid(parent)
     else:
@@ -522,8 +530,11 @@ def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True):
 
 def gen_advancements():
     adv("root", None, rid("echo_tuner"), {"has_tuner": {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": rid("echo_tuner")}]}}})
-    adv("light_portal", "root", "minecraft:reinforced_deepslate", {"lit": {"trigger": "minecraft:item_used_on_block", "conditions": {
-        "location": {"type": "minecraft:match_tool", "predicate": {"items": rid("echo_tuner")}}}}}, frame="goal")
+    # awakened with the Echo Tuner, or by playing the melody on a note block machine and stepping into the portal
+    adv("light_portal", "root", "minecraft:reinforced_deepslate", {
+        "lit": {"trigger": "minecraft:item_used_on_block", "conditions": {
+            "location": {"type": "minecraft:match_tool", "predicate": {"items": rid("echo_tuner")}}}},
+        "touched": {"trigger": "minecraft:enter_block", "conditions": {"block": rid("sift_portal")}}}, frame="goal", any_of=True)
     adv("enter_sift", "light_portal", rid("sift_grass_block"), {"entered": {"trigger": "minecraft:changed_dimension", "conditions": {"to": rid("the_sift")}}}, frame="challenge")
     adv("soulsick", "enter_sift", rid("soul_water_bucket"), {"sick": {"trigger": "minecraft:effects_changed", "conditions": {"effects": {rid("soulsick"): {}}}}})
     adv("blub_friend", "enter_sift", rid("lullaby_bloom"), {"bred": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:entity_type": rid("blub")}}}}})

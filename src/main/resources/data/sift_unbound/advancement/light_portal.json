@@ -25,7 +25,19 @@
           }
         }
       }
+    },
+    "touched": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "sift_unbound:sift_portal"
+      }
     }
   },
+  "requirements": [
+    [
+      "lit",
+      "touched"
+    ]
+  ],
   "parent": "sift_unbound:root"
 }

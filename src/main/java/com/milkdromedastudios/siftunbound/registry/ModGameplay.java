@@ -30,15 +30,18 @@ public final class ModGameplay {
 		flammable.add(ModBlocks.TEAL_SPROUTS, 60, 100);
 		flammable.add(ModBlocks.LULLABY_BLOOM, 60, 100);
 
-		// Soul water is swimmable like water (Sift creatures bathe in it; everyone else just gets Soulsick).
+		// Ichor is swimmable (Sift creatures bathe in it; everyone else just gets Soulsick).
 		EntityFluidInteractionRegistry.register(ModTags.SOUL_WATER, FluidBehavior.WATER_LIKE);
 
-		// Ancient city chests occasionally hold a ready-made Echo Tuner.
+		// Ancient city chests occasionally hold a ready-made Echo Tuner, and (as in vanilla 26.4) chiseled soulshale.
 		LootTableEvents.MODIFY.register((key, builder, source, registries) -> {
 			if (source.isBuiltin() && key.equals(BuiltInLootTables.ANCIENT_CITY)) {
 				builder.withPool(LootPool.lootPool()
 					.add(LootItem.lootTableItem(ModItems.ECHO_TUNER))
 					.when(LootItemRandomChanceCondition.randomChance(0.12F)));
+				builder.withPool(LootPool.lootPool()
+					.add(LootItem.lootTableItem(ModBlocks.CHISELED_SOULSHALE))
+					.when(LootItemRandomChanceCondition.randomChance(0.23F)));
 			}
 		});
 	}

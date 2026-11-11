@@ -4,6 +4,30 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+The Sift, as it really is: this release brings the mod in line with the Sift that Minecraft Dungeons II shipped
+(names, mechanics and creatures from the Minecraft Wiki), still with 100% original textures and sounds.
+
+### Added
+- **The note block machine**: as in Dungeons II, eight note blocks in front of the Warden Portal play the Sift's melody
+  (F♯ A C♯ B A E C♯ F♯) to wake it, by hand or by redstone. Each correct note sends up a soul. The **Echo Tuner** still
+  lights a frame directly, and now hums the melody (and shows its notes) when used while sneaking.
+- **Tides change gameplay**: during the **Endure Tide** wounds don't heal on their own in the Sift and its monsters spawn
+  stronger; during the **Thrive Tide** wounds heal 50% faster. Players in the Sift are told when the tide turns.
+- **Chiseled Soulshale depicts a singer** (as in the 26.4 snapshot), is teal on maps, and turns up in 23% of ancient city
+  chests.
+- Blubs **bathe in ichor**: they wander to nearby pools for a soak and shed **Blub Jelly** when they climb out, and a
+  baby blub drops one when it grows up.
+
+### Changed
+- **Soul Water is now Ichor**, the Sift's liquid in Dungeons II: thick and slow like lava (it flows 4 blocks instead of 8),
+  with bubbles popping on the surface. Existing worlds keep their ichor (the block ID is unchanged).
+- Official region names: **Singer's Meadow** (was Sift Meadows), **Ichor Ponds** (was Soul Wetlands) and
+  **Humbler Huskland** (was Husklands).
+- **Blubs are true to the official ones**: they can't be hurt (only `/kill` and the void get through) or pushed.
+- The **Sculk Prowler is now the Stalker**, the official clawed sculker: 30 health, a double claw strike, and a lunge
+  from up to 10 blocks away that leaves a trail of souls. Existing worlds keep their stalkers.
+- The light-the-portal advancement also counts the note block machine.
+
 ## [0.2.0] - 2026-11-10
 
 ### Added
