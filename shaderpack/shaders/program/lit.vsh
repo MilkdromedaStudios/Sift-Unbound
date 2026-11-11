@@ -33,7 +33,8 @@ void main() {
 	vec4 vpos = gl_ModelViewMatrix * gl_Vertex;
 	vec3 playerPos = (gbufferModelViewInverse * vpos).xyz;
 
-#if defined WAVING_PLANTS && defined PROGRAM_TERRAIN
+#ifdef WAVING_PLANTS
+#ifdef PROGRAM_TERRAIN
 	// 10000: short plants (top edge sways), 10001: leaves (gentle), 10002: upper half of tall plants (whole quad sways)
 	bool top = gl_MultiTexCoord0.t < mc_midTexCoord.t;
 	float amount = (blockId == 10000.0 && top) ? 1.0 : blockId == 10002.0 ? 1.0 : blockId == 10001.0 ? 0.35 : 0.0;
@@ -44,6 +45,7 @@ void main() {
 		playerPos.xz += wave * 0.07 * amount * lmcoord.y;
 		vpos = gbufferModelView * vec4(playerPos, 1.0);
 	}
+#endif
 #endif
 
 	viewPos = vpos.xyz;

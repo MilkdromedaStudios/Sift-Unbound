@@ -10,6 +10,7 @@ uniform float fogStart;
 uniform float fogEnd;
 uniform float rainStrength;
 uniform int worldTime;
+uniform int isEyeInWater;
 
 varying vec2 texcoord;
 varying vec2 lmcoord;
@@ -18,6 +19,7 @@ varying vec3 viewPos;
 varying vec3 worldNormal;
 
 #include "/lib/light.glsl"
+#include "/lib/sky.glsl"
 
 /* DRAWBUFFERS:0 */
 void main() {
@@ -28,8 +30,12 @@ void main() {
 #endif
 
 #if defined PROGRAM_SKYBASIC
-	// the sky as the game colours it, a little brighter so it survives tonemapping
-	c.rgb = toLinear(c.rgb) * 1.35;
+	// a gradient sky built from the game's own sky and fog colours, with a glow around the sun
+	#if defined DIM_NETHER || defined DIM_END
+	c.rgb = toLinear(c.rgb) * 1.2;
+	#else
+	c.rgb = skyGradient(normalize(viewPos));
+	#endif
 #elif defined PROGRAM_SKYTEXTURED || defined PROGRAM_EMISSIVE
 	c.rgb = toLinear(c.rgb) * 1.6; // sun, moon, glowing eyes, beacon beams
 #elif defined PROGRAM_CLOUDS
@@ -56,12 +62,11 @@ void main() {
 #endif
 
 #if !defined PROGRAM_SKYBASIC && !defined PROGRAM_SKYTEXTURED
-	float dist = length(viewPos);
-	float fog = clamp((dist - fogStart) / max(fogEnd - fogStart, 1.0), 0.0, 1.0);
 	#ifdef PROGRAM_CLOUDS
-	fog *= 0.6;
+	c.rgb = mix(c.rgb, applyFog(c.rgb, viewPos), 0.5);
+	#else
+	c.rgb = applyFog(c.rgb, viewPos);
 	#endif
-	c.rgb = mix(c.rgb, toLinear(fogColor), fog * fog);
 #endif
 	gl_FragData[0] = c;
 }
