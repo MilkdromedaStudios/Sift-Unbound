@@ -3,6 +3,8 @@
 # The tag must match mod_version in gradle.properties; release notes come from CHANGELOG.md.
 # Modrinth: the project is w1FbpX4X (override with a MODRINTH_PROJECT repository variable); set the secret
 # MODRINTH_API_KEY in Settings -> Secrets and variables -> Actions. Without the key the Modrinth step is skipped.
+# CurseForge: the project is 1798861 (override with a CURSEFORGE_PROJECT variable); set the secret CURSEFORGE_API_KEY.
+# Without it the CurseForge step is skipped.
 name: release
 
 on:
@@ -89,3 +91,10 @@ jobs:
         run: |
           jar=$(ls build/libs/*.jar | grep -v -- '-sources\.jar$')
           python3 tools/publish_modrinth.py --version "$VERSION" --jar "$jar" --changelog release-notes.md
+      - name: Publish to CurseForge
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          CURSEFORGE_PROJECT: ${{ vars.CURSEFORGE_PROJECT || '1798861' }}  # The Sift Unbound on CurseForge
+        run: |
+          jar=$(ls build/libs/*.jar | grep -v -- '-sources\.jar$')
+          python3 tools/publish_curseforge.py --version "$VERSION" --jar "$jar" --changelog release-notes.md
