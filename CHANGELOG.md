@@ -55,9 +55,23 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
 - **Sculkers hunt sifters**: stalkers and scavengers attack any sifter they see.
 - New drops: **Pollen Globs** (throw them: they stick and burst into slowing goo) and **Sentinel Quills**; spawn eggs for
   all seven; five new guide advancements, from defeating your first sifter to every kind of sifter.
+- **The Monarch**, the sculker boss (boss bar). It strides slowly and every melee hit it lands heals it. Up close it
+  stomps in a twirl; it roars for two stalkers and two scavengers; its dash strike leaves feathers hanging along its path,
+  and its hover loop a ring of eight, that fly at you five seconds later. Once it has lost a quarter of its health its
+  spectral **Monarch Echo** joins in (another forms if you kill it first; it fades when the Monarch falls). Drops echo
+  shards, soul shards and **Monarch Feathers**.
+- **Sculker nests** in the Ravines, under Singer's Meadow, the Humbler Huskland, the Lullaby Hills and the Sifter
+  Canyons: a soulshale doorway in the hillside opens on a tunnel down to a dim cavern of dark red sculk, its floor broken
+  by ichor pools and sculk spires, where the Monarch waits beside a chest on an obsidian plinth. Stalkers and scavengers
+  haunt it. `/locate structure sift_unbound:sculker_nest` finds one.
+- **Humbler husks**: the colossal fossil remains of humblers across the Humbler Huskland: rib cages with a spine arching
+  over them and a curling tail, great half-buried carapaces broken open in places, and hollow skulls with a jaw of teeth.
+- **Sifter Canyons**, a new region of Singer's Meadow cut by deep canyons, with the woven **sifter nests** the sifters live
+  in, and sifters everywhere.
+- Two more guide advancements: finding a sculker nest, and defeating the Monarch.
 - **Guide advancements** that teach each mechanic the first time you meet it: humming and playing the melody, the note
   block machine, chiseled soulshale, ichor and soulsickness, both tides, blub jelly, shearing nuzzles, feeding slabbers,
-  the Singer, echo golems (and letting one wake a portal), and visiting every region (19 in all). A new
+  the Singer, echo golems (and letting one wake a portal), and visiting every region (26 in all). A new
   `sift_unbound:sift_event` trigger lets datapacks hook the same moments.
 
 ### Changed

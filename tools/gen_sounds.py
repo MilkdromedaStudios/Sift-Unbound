@@ -372,13 +372,28 @@ def gen_sifters():
     save("sifter/dodge", layer(0.3, (whoosh(0.25, False), 0, 1.0), (rustle(0.3, 30, 0.3), 0, 0.5)), 0.7)
 
 
+# ------------------------------------------------------------------ the Monarch (phase 4)
+def gen_monarch():
+    save("monarch/ambient1", layer(1.6, (clicks(9, 0.12, 1.4), 0, 0.7), (growl(1.4, 38), 0.1, 0.9), (bell(196, 1.2), 0.3, 0.2)), 0.7)
+    save("monarch/ambient2", layer(1.5, (clicks(6, 0.2, 1.4), 0, 0.7), (growl(1.3, 33), 0.0, 1.0)), 0.7)
+    save("monarch/hurt", layer(0.6, (clicks(5, 0.03, 0.4), 0, 0.9), (growl(0.5, 70), 0, 1.0)), 0.8)
+    save("monarch/death", layer(3.5, (growl(2.5, 40), 0, 1.0), (growl(2.0, 28), 0.6, 0.9), (clicks(24, 0.12, 3.2), 0, 0.6),
+                                (pad([82, 123, 165], 3.0, detune=1.0), 0.4, 0.5)), 0.85)
+    save("monarch/roar", layer(2.4, (growl(2.0, 36), 0, 1.0), (growl(1.8, 54), 0.15, 0.8), (clicks(14, 0.08, 1.6), 0, 0.5),
+                               (whoosh(1.2, True), 0, 0.4)), 0.9)
+    save("monarch/dash", layer(0.7, (whoosh(0.6, False), 0, 1.0), (clicks(4, 0.05, 0.3), 0.05, 0.6)), 0.8)
+    save("monarch/echo", layer(2.0, (pad([165, 247, 330], 1.8, detune=1.5), 0, 0.7), (bell(659, 1.5), 0.2, 0.5), (whoosh(1.2, True), 0, 0.4)), 0.7)
+
+
 if __name__ == "__main__":
     import sys
     if sys.argv[1:] == ["wildlife"]:  # only the 0.3.0 creatures
         gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()
     elif sys.argv[1:] == ["sifters"]:  # only the sifters and the scavenger
         gen_sifters()
+    elif sys.argv[1:] == ["monarch"]:
+        gen_monarch()
     else:
         gen_blub(); gen_wisp(); gen_prowler(); gen_water(); gen_portal(); gen_ambient(); gen_music()
         gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()
-        gen_sifters()
+        gen_sifters(); gen_monarch()

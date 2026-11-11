@@ -28,6 +28,33 @@
             "depth": 0.0,
             "weirdness": [
               -1,
+              0.45
+            ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "sift_unbound:sifter_canyons",
+          "parameters": {
+            "temperature": [
+              -1,
+              0.2
+            ],
+            "humidity": [
+              -1,
+              0.1
+            ],
+            "continentalness": [
+              -0.2,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": 0.0,
+            "weirdness": [
+              0.45,
               1
             ],
             "offset": 0.0

@@ -64,6 +64,8 @@ public final class ModItems {
 	public static final Item SPROUT_SPAWN_EGG = register("sprout_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SPROUT));
 	public static final Item HARMONIZER_SPAWN_EGG = register("harmonizer_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.HARMONIZER));
 	public static final Item SCAVENGER_SPAWN_EGG = register("scavenger_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SCAVENGER));
+	public static final Item MONARCH_FEATHER = register("monarch_feather", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+	public static final Item MONARCH_SPAWN_EGG = register("monarch_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.MONARCH));
 	/** Only the look of a Scavenger's soul bolt in flight; not in the creative tab. */
 	public static final Item SOUL_BOLT = registerHidden("soul_bolt");
 

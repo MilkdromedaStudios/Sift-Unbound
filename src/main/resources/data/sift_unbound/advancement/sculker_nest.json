@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "sift_unbound:dark_sift_sculk"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.sculker_nest.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.sculker_nest.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "found": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "sift_unbound:sculker_nest"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:scavenger"
+}

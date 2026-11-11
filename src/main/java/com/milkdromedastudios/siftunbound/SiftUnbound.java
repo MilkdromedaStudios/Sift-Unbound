@@ -13,6 +13,7 @@ import com.milkdromedastudios.siftunbound.registry.ModGameplay;
 import com.milkdromedastudios.siftunbound.registry.ModItems;
 import com.milkdromedastudios.siftunbound.registry.ModPoi;
 import com.milkdromedastudios.siftunbound.registry.ModSounds;
+import com.milkdromedastudios.siftunbound.registry.ModStructures;
 import com.milkdromedastudios.siftunbound.world.SiftTides;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
@@ -44,6 +45,7 @@ public class SiftUnbound implements ModInitializer {
 		ModGameplay.init();
 		ModCriteria.init();
 		ModFeatures.init();
+		ModStructures.init();
 		SiftCommand.init();
 		SiftTides.init();
 		NoteBlockMachine.init();

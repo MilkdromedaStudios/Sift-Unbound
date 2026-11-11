@@ -1,7 +1,10 @@
 package com.milkdromedastudios.siftunbound.client;
 
 import com.milkdromedastudios.siftunbound.client.model.EchoGolemModel;
+import com.milkdromedastudios.siftunbound.client.model.MonarchModel;
 import com.milkdromedastudios.siftunbound.client.model.NesterModel;
+import com.milkdromedastudios.siftunbound.client.render.SiftMobRenderState;
+import com.milkdromedastudios.siftunbound.entity.Monarch;
 import com.milkdromedastudios.siftunbound.client.model.PollinatorModel;
 import com.milkdromedastudios.siftunbound.client.model.ScavengerModel;
 import com.milkdromedastudios.siftunbound.client.model.SeedlingModel;
@@ -50,6 +53,7 @@ public class SiftUnboundClient implements ClientModInitializer {
 	public static final ModelLayerLocation SLABBER_LAYER = new ModelLayerLocation(SiftUnbound.id("slabber"), "main");
 	public static final ModelLayerLocation ECHO_GOLEM_LAYER = new ModelLayerLocation(SiftUnbound.id("echo_golem"), "main");
 	public static final ModelLayerLocation SINGER_LAYER = new ModelLayerLocation(SiftUnbound.id("singer"), "main");
+	public static final ModelLayerLocation MONARCH_LAYER = new ModelLayerLocation(SiftUnbound.id("monarch"), "main");
 	public static final ModelLayerLocation SEEDLING_LAYER = new ModelLayerLocation(SiftUnbound.id("seedling"), "main");
 	public static final ModelLayerLocation NESTER_LAYER = new ModelLayerLocation(SiftUnbound.id("nester"), "main");
 	public static final ModelLayerLocation POLLINATOR_LAYER = new ModelLayerLocation(SiftUnbound.id("pollinator"), "main");
@@ -101,6 +105,12 @@ public class SiftUnboundClient implements ClientModInitializer {
 			new Material(SiftUnbound.id("block/soul_water_flow")),
 			new Material(SiftUnbound.id("block/soul_water_overlay")),
 			null));
+	}
+
+	private static void monarchState(Monarch e, SiftMobRenderState s) {
+		s.extra = e.twirlTicks > 0 ? 1.0F - e.twirlTicks / 16.0F : 0.0F;
+		s.special = Math.min(1.0F, e.roarTicks / 6.0F);
+		s.attack = e.dashTicks > 10 ? 1.0F : e.dashTicks / 10.0F;
 	}
 
 	/** Phase 3: the sifters, the scavenger and their projectiles. */
@@ -160,6 +170,13 @@ public class SiftUnboundClient implements ClientModInitializer {
 				s.attack = Math.min(1.0F, e.castTicks / 5.0F);
 				s.special = e.dashTicks / 10.0F;
 			}));
+		ModelLayerRegistry.registerModelLayer(MONARCH_LAYER, MonarchModel::createBodyLayer);
+		Identifier monarch = tex("monarch"), monarchGlow = tex("monarch_glow"), monarchEcho = tex("monarch_echo");
+		EntityRendererRegistry.register(ModEntities.MONARCH, ctx -> new SiftMobRenderer<Monarch, MonarchModel>(ctx,
+			new MonarchModel(ctx.bakeLayer(MONARCH_LAYER), false), 1.0F, 1.15F, s -> monarch, s -> monarchGlow, SiftUnboundClient::monarchState));
+		EntityRendererRegistry.register(ModEntities.MONARCH_ECHO, ctx -> new SiftMobRenderer<Monarch, MonarchModel>(ctx,
+			new MonarchModel(ctx.bakeLayer(MONARCH_LAYER), true), 0.0F, 1.15F, s -> monarchEcho, s -> monarchGlow, SiftUnboundClient::monarchState));
+		EntityRendererRegistry.register(ModEntities.MONARCH_FEATHER, ctx -> new ThrownItemRenderer<>(ctx, 1.0F, true));
 		EntityRendererRegistry.register(ModEntities.POLLEN_GLOB, ctx -> new ThrownItemRenderer<>(ctx, 1.0F, false));
 		EntityRendererRegistry.register(ModEntities.SENTINEL_QUILL, ctx -> new ThrownItemRenderer<>(ctx, 0.8F, false));
 		EntityRendererRegistry.register(ModEntities.SOUL_BOLT, ctx -> new ThrownItemRenderer<>(ctx, 1.2F, true));

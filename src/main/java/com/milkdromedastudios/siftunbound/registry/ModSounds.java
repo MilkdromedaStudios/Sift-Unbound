@@ -64,6 +64,13 @@ public final class ModSounds {
 	public static final SoundEvent HARMONIZER_ROAR = register("entity.harmonizer.roar");
 	public static final SoundEvent SCAVENGER_CAST = register("entity.scavenger.cast");
 	public static final SoundEvent SCAVENGER_DASH = register("entity.scavenger.dash");
+	// Phase 4: the Monarch
+	public static final SoundEvent MONARCH_AMBIENT = register("entity.monarch.ambient");
+	public static final SoundEvent MONARCH_HURT = register("entity.monarch.hurt");
+	public static final SoundEvent MONARCH_DEATH = register("entity.monarch.death");
+	public static final SoundEvent MONARCH_ROAR = register("entity.monarch.roar");
+	public static final SoundEvent MONARCH_DASH = register("entity.monarch.dash");
+	public static final SoundEvent MONARCH_ECHO = register("entity.monarch.echo");
 	public static final Holder<SoundEvent> AMBIENT_LOOP = registerHolder("ambient.sift.loop");
 	public static final Holder<SoundEvent> AMBIENT_ADDITIONS = registerHolder("ambient.sift.additions");
 	public static final Holder<SoundEvent> AMBIENT_MOOD = registerHolder("ambient.sift.mood");

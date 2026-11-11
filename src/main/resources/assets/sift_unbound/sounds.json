@@ -445,6 +445,57 @@
     ],
     "subtitle": "subtitles.sift_unbound.sifter.enrage"
   },
+  "entity.monarch.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/ambient1"
+      },
+      {
+        "name": "sift_unbound:monarch/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.ambient"
+  },
+  "entity.monarch.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.hurt"
+  },
+  "entity.monarch.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.death"
+  },
+  "entity.monarch.roar": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/roar"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.roar"
+  },
+  "entity.monarch.dash": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/dash"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.dash"
+  },
+  "entity.monarch.echo": {
+    "sounds": [
+      {
+        "name": "sift_unbound:monarch/echo"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.monarch.echo"
+  },
   "entity.sifter.dodge": {
     "sounds": [
       {

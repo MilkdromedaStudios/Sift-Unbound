@@ -4,6 +4,7 @@ import com.milkdromedastudios.siftunbound.SiftUnbound;
 import com.milkdromedastudios.siftunbound.entity.Blub;
 import com.milkdromedastudios.siftunbound.entity.BlubVariant;
 import com.milkdromedastudios.siftunbound.entity.EchoGolem;
+import com.milkdromedastudios.siftunbound.entity.Monarch;
 import com.milkdromedastudios.siftunbound.entity.Nuzzle;
 import com.milkdromedastudios.siftunbound.entity.Scavenger;
 import com.milkdromedastudios.siftunbound.entity.Singer;
@@ -230,7 +231,7 @@ public class SiftGameTests {
 		for (String name : List.of("root", "hum_melody", "note_block_machine", "chiseled_soulshale", "light_portal", "enter_sift",
 			"soulsick", "soul_shard", "tide_endure", "tide_thrive", "explore_sift", "blub_jelly", "blub_friend", "shear_nuzzle",
 			"feed_slabber", "singer", "echo_golem", "golem_portal", "prowler", "scavenger", "sifter", "sprout_enrage", "harmonizer",
-			"all_sifters")) {
+			"all_sifters", "sculker_nest", "monarch")) {
 			if (advancements.get(SiftUnbound.id(name)) == null) {
 				h.fail(Component.literal("advancement " + name + " did not load"));
 			}
@@ -383,6 +384,65 @@ public class SiftGameTests {
 				h.fail(Component.literal("only " + band + " sifters answered the roar"));
 			}
 		});
+	}
+
+	/** Every melee hit the Monarch lands heals it. */
+	@GameTest(maxTicks = 20)
+	public void monarchHealsOnMeleeHits(GameTestHelper h) {
+		ServerLevel level = h.getLevel();
+		Monarch monarch = h.spawn(ModEntities.MONARCH, new BlockPos(3, 2, 3));
+		monarch.setNoAi(true);
+		monarch.setHealth(100.0F);
+		Pig pig = h.spawn(EntityTypes.PIG, new BlockPos(4, 2, 3));
+		monarch.doHurtTarget(level, pig);
+		h.succeedIf(() -> {
+			if (monarch.getHealth() <= 100.0F) {
+				h.fail(Component.literal("the Monarch did not heal (" + monarch.getHealth() + ")"));
+			}
+		});
+	}
+
+	/** Once the Monarch has lost a quarter of its health its Echo joins in, and the Echo fades when the Monarch dies. */
+	@GameTest(maxTicks = 100)
+	public void monarchEchoJoinsAndFades(GameTestHelper h) {
+		ServerLevel level = h.getLevel();
+		Monarch monarch = h.spawn(ModEntities.MONARCH, new BlockPos(3, 2, 3));
+		Pig pig = h.spawn(EntityTypes.PIG, new BlockPos(6, 2, 6));
+		pig.setNoAi(true);
+		monarch.setTarget(pig);
+		monarch.setHealth(monarch.getMaxHealth() * 0.6F);
+		h.startSequence()
+			.thenWaitUntil(() -> {
+				if (h.getEntities(ModEntities.MONARCH_ECHO, new BlockPos(3, 2, 3), 8.0).isEmpty()) {
+					h.fail(Component.literal("no Monarch Echo yet"));
+				}
+			})
+			.thenExecute(() -> monarch.hurtServer(level, level.damageSources().genericKill(), Float.MAX_VALUE))
+			.thenWaitUntil(() -> {
+				if (!h.getEntities(ModEntities.MONARCH_ECHO, new BlockPos(3, 2, 3), 12.0).isEmpty()) {
+					h.fail(Component.literal("the Echo outlived its Monarch"));
+				}
+			})
+			.thenSucceed();
+	}
+
+	/** Humbler husk fossils and sifter nests (as configured in the datapack) generate on Sift ground. */
+	@GameTest(maxTicks = 20)
+	public void huskAndNestGenerate(GameTestHelper h) {
+		int[] husk = placeFeature(h, configured(h, "humbler_husk"), ModBlocks.HUSK_SHELL, ModBlocks.HUSK_SHELL);
+		if (husk[0] < 20) {
+			h.fail(Component.literal("too little husk shell: " + husk[0]));
+		}
+		h.succeed();
+	}
+
+	@GameTest(maxTicks = 20)
+	public void sifterNestGenerates(GameTestHelper h) {
+		int[] nest = placeFeature(h, configured(h, "sifter_nest"), ModBlocks.PALLID_WOOD, ModBlocks.PALLID_LEAVES);
+		if (nest[0] < 8 || nest[1] < 5) {
+			h.fail(Component.literal("no proper nest: " + nest[0] + " wood, " + nest[1] + " leaves"));
+		}
+		h.succeed();
 	}
 
 	/** Using the tuner on plain blocks does nothing. */

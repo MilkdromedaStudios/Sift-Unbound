@@ -1225,6 +1225,101 @@ def gen_sifters():
     gen_scavenger(); gen_sifter_items(); gen_sifter_eggs()
 
 
+# --------------------------------------------------------------------------- the Monarch (phase 4)
+MONARCH_HIDE = ramp([hexrgb("#0a1220"), hexrgb("#111d31"), hexrgb("#182a44"), hexrgb("#213a56"), hexrgb("#2c4d68")], 5)
+
+
+def gen_monarch():
+    """The Monarch (128x64). Model in MonarchModel.java: body (0,0) 10x16x6; head (32,0) 7x7x8; crown (62,0) 7x5x0 and
+    sides (62,6) 0x5x3; mantle (64,16) 14x20x0; arms (0,22) 3x22x3; claws (12,22) 1x9x1; legs (16,22) 3x22x3.
+    Glow: eyes, the soul in its chest, claw tips and feather tips. The Echo is a pale, see-through copy."""
+    img = Image.new("RGBA", (128, 64), (0, 0, 0, 0))
+
+    def body(w, h, side):
+        p_ = skin(MONARCH_HIDE, 400)(w, h, side); pp = p_.load()
+        if side == "north":  # ribs over a glowing soul
+            for y in range(3, 10, 2):
+                for x in range(1, w - 1):
+                    pp[x, y] = shade(CAGE[1], 0.8) + (255,)
+            for y in range(4, 9):
+                for x in range(4, 6):
+                    pp[x, y] = SOUL_CYAN[4] + (255,)
+        return p_
+    paint_box(img, 0, 0, 10, 16, 6, {"default": body})
+
+    def head(w, h, side):
+        p_ = skin(MONARCH_HIDE, 401, scale=2)(w, h, side); pp = p_.load()
+        if side == "north":
+            for x in (1, 2, 4, 5):
+                pp[x, 3] = SOUL_CYAN[5] + (255,)
+            for x in range(1, w - 1):
+                pp[x, h - 2] = shade(CAGE[2], 0.9) + (255,)
+        return p_
+    paint_box(img, 32, 0, 7, 7, 8, {"default": head})
+    crown = Image.new("RGBA", (7, 5), (0, 0, 0, 0)); cp = crown.load()
+    for x, top in zip(range(7), (2, 0, 2, 0, 2, 0, 2)):
+        for y in range(top, 5):
+            cp[x, y] = (CAGE[4] if y == top else CAGE[2]) + (255,)
+    img.paste(crown, (62, 0)); img.paste(crown, (69, 0))
+    spike = Image.new("RGBA", (3, 5), (0, 0, 0, 0)); sp = spike.load()
+    for y in range(5):
+        for x in range(3):
+            if x == 1 or y > 2:
+                sp[x, y] = (CAGE[4] if y == 0 else CAGE[2]) + (255,)
+    img.paste(spike, (62, 9)); img.paste(spike, (65, 9))
+    mantle = Image.new("RGBA", (14, 20), (0, 0, 0, 0)); mp = mantle.load()
+    for x in range(14):  # hanging feathers of uneven length, dark at the shoulder, cyan at the tip
+        length = 14 + (x * 7 + 3) % 6
+        for y in range(length):
+            if x % 2 == 1 and y > 3 and y < length - 1:
+                continue
+            t_ = y / max(1, length - 1)
+            mp[x, y] = (mix(MONARCH_HIDE[1], SOUL_CYAN[2], t_ ** 2) if y < length - 1 else SOUL_CYAN[4]) + (255,)
+    img.paste(mantle, (64, 16)); img.paste(mantle.transpose(Image.FLIP_LEFT_RIGHT), (78, 16))
+    paint_box(img, 0, 22, 3, 22, 3, {"default": skin(MONARCH_HIDE, 402)})
+
+    def claw(w, h, side):
+        p_ = Image.new("RGBA", (w, h), (0, 0, 0, 0)); pp = p_.load()
+        for y in range(h):
+            for x in range(w):
+                pp[x, y] = (SOUL_CYAN[4] if y >= h - 2 else CAGE[3 if y % 3 else 2]) + (255,)
+        return p_
+    paint_box(img, 12, 22, 1, 9, 1, {"default": claw})
+    paint_box(img, 16, 22, 3, 22, 3, {"default": skin(MONARCH_HIDE, 403)})
+    save(img, "entity/monarch")
+    glow = glow_from(img, lambda x, y, c: c[:3] in (SOUL_CYAN[4], SOUL_CYAN[5]))
+    save(glow, "entity/monarch_glow")
+    # the Echo: a pale, see-through spectre of the Monarch
+    echo = img.copy(); ep = echo.load()
+    for y in range(64):
+        for x in range(128):
+            c = ep[x, y]
+            if c[3]:
+                lum = (c[0] * 3 + c[1] * 6 + c[2]) / 10
+                ep[x, y] = mix(SOUL_CYAN[1], SOUL_CYAN[5], min(1.0, lum / 160)) + (150,)
+    save(echo, "entity/monarch_echo")
+    # items
+    f_ = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); fp = f_.load()
+    for i in range(2, 14):
+        fp[i, 15 - i] = CAGE[2] + (255,)  # the quill
+        for w_ in range(1, 3 if 4 < i < 12 else 2):
+            col = mix(MONARCH_HIDE[2], SOUL_CYAN[3], i / 14)
+            if 0 <= i - w_ < 16:
+                fp[i - w_, 15 - i] = col + (255,)
+            if 0 <= 15 - i + w_ < 16 and i + 1 < 16:
+                fp[i, 15 - i + w_] = col + (255,)
+    fp[13, 2] = SOUL_CYAN[5] + (255,); fp[12, 3] = SOUL_CYAN[4] + (255,)
+    save(outline(f_, MONARCH_HIDE[0]), "item/monarch_feather")
+    e = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); d = ImageDraw.Draw(e)
+    d.ellipse([3, 1, 12, 14], fill=MONARCH_HIDE[3] + (255,))
+    r = rng(410)
+    for _ in range(7):
+        x, y = int(r.integers(5, 11)), int(r.integers(3, 13))
+        d.rectangle([x, y, x + 1, y], fill=CAGE[3] + (255,))
+    e.putpixel((5, 4), SOUL_CYAN[4] + (255,))
+    save(outline(e, MONARCH_HIDE[0]), "item/monarch_spawn_egg")
+
+
 def preview():
     tiles = [(n, im) for n, im in GENERATED]
     cell = 72
@@ -1248,6 +1343,6 @@ if __name__ == "__main__":
     gen_terrain(); gen_soulshale(); gen_plants(); gen_wood(); gen_fluids(); gen_portal()
     gen_items(); gen_blub(); gen_wisp(); gen_prowler(); gen_misc()
     gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer(); gen_wildlife_eggs()
-    gen_sifters()
+    gen_sifters(); gen_monarch()
     preview()
     print(f"generated {len(GENERATED)} textures")

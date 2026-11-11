@@ -239,7 +239,7 @@ def gen_items():
     for n in ["echo_tuner", "soul_shard", "blub_jelly", "soul_water_bucket", "blub_bucket",
               "blub_spawn_egg", "sculk_prowler_spawn_egg", "soul_wisp_spawn_egg",
               "nuzzle_spawn_egg", "slabber_spawn_egg", "echo_golem_spawn_egg", "singer_spawn_egg",
-              "pollen_glob", "sentinel_quill", "soul_bolt"] + [f"{m}_spawn_egg" for m in SIFTER_MOBS]:
+              "pollen_glob", "sentinel_quill", "soul_bolt", "monarch_feather", "monarch_spawn_egg"] + [f"{m}_spawn_egg" for m in SIFTER_MOBS]:
         flat_item(n)
 
 
@@ -341,6 +341,22 @@ LANG = {
     "biome.sift_unbound.soul_wetlands": "Ichor Ponds",
     "biome.sift_unbound.husklands": "Humbler Huskland",
     "biome.sift_unbound.lullaby_hills": "Lullaby Hills",
+    "biome.sift_unbound.sifter_canyons": "Sifter Canyons",
+    "entity.sift_unbound.monarch": "The Monarch",
+    "entity.sift_unbound.monarch_echo": "Monarch Echo",
+    "entity.sift_unbound.monarch_feather": "Monarch Feather",
+    "item.sift_unbound.monarch_feather": "Monarch Feather",
+    "item.sift_unbound.monarch_spawn_egg": "Monarch Spawn Egg",
+    "subtitles.sift_unbound.monarch.ambient": "Monarch clicks",
+    "subtitles.sift_unbound.monarch.hurt": "Monarch hurts",
+    "subtitles.sift_unbound.monarch.death": "Monarch dies",
+    "subtitles.sift_unbound.monarch.roar": "Monarch roars",
+    "subtitles.sift_unbound.monarch.dash": "Monarch dashes",
+    "subtitles.sift_unbound.monarch.echo": "Monarch Echo forms",
+    "advancements.sift_unbound.sculker_nest.title": "Into the Ravines",
+    "advancements.sift_unbound.sculker_nest.description": "Find a sculker nest: a tunnel behind a soulshale doorway in the hillside leads down to the Monarch's cavern",
+    "advancements.sift_unbound.monarch.title": "Dethroned",
+    "advancements.sift_unbound.monarch.description": "Defeat the Monarch in its nest. Every melee hit it lands heals it, and once wounded its Echo joins the fight",
     # messages
     "message.sift_unbound.portal.lit": "The Warden Portal hums awake...",
     "message.sift_unbound.portal.machine": "The note blocks ring out the Sift's melody. The Warden Portal hums awake...",
@@ -521,6 +537,12 @@ SOUNDS = {
     "entity.scavenger.cast": ["scavenger/cast"],
     "entity.scavenger.dash": ["scavenger/dash"],
     "entity.sifter.enrage": ["sifter/enrage"],
+    "entity.monarch.ambient": ["monarch/ambient1", "monarch/ambient2"],
+    "entity.monarch.hurt": ["monarch/hurt"],
+    "entity.monarch.death": ["monarch/death"],
+    "entity.monarch.roar": ["monarch/roar"],
+    "entity.monarch.dash": ["monarch/dash"],
+    "entity.monarch.echo": ["monarch/echo"],
     "entity.sifter.dodge": ["sifter/dodge"],
     "block.soul_water.ambient": ["soul_water/bubble1", "soul_water/bubble2"],
     "block.soul_water.burn": ["soul_water/burn"],
@@ -574,8 +596,9 @@ def gen_tags():
     tag("item", NS, "slabber_food", [rid("teal_sprouts")])
     tag("fluid", NS, "soul_water", [rid("soul_water"), rid("flowing_soul_water")])
     tag("entity_type", NS, "soul_water_immune", [rid("blub"), rid("soul_wisp"), rid("sculk_prowler"), rid("nuzzle"), rid("slabber"),
-                                                  rid("echo_golem"), rid("singer"), "minecraft:warden"] + [rid(m) for m in SIFTER_MOBS])
-    tag("entity_type", NS, "sculkers", [rid("sculk_prowler"), rid("scavenger")])
+                                                  rid("echo_golem"), rid("singer"), "minecraft:warden"] + [rid(m) for m in SIFTER_MOBS] + [rid("monarch"), rid("monarch_echo")])
+    tag("entity_type", NS, "sculkers", [rid("sculk_prowler"), rid("scavenger"), rid("monarch"), rid("monarch_echo")])
+    tag("worldgen/biome", NS, "has_structure/sculker_nest", [rid("husklands"), rid("sift_meadows"), rid("lullaby_hills"), rid("sifter_canyons")])
     tag("timeline", NS, "in_sift", [rid("sift_tides")])
     tag("worldgen/biome", NS, "is_sift", [rid(b) for b in BIOMES])
 
@@ -696,6 +719,15 @@ def gen_entity_loot():
     drops("sprout", (rid("soul_shard"), 1, 1, 0.5), (rid("lullaby_bloom"), 0, 1, 1))
     drops("harmonizer", (rid("soul_shard"), 3, 6, 1), (rid("lullaby_bloom"), 2, 4, 1), (rid("sentinel_quill"), 2, 5, 1))
     drops("scavenger", (rid("soul_shard"), 0, 2, 1), ("minecraft:echo_shard", 1, 1, 0.1))
+    drops("monarch", ("minecraft:echo_shard", 3, 6, 1), (rid("soul_shard"), 8, 16, 1), (rid("monarch_feather"), 4, 8, 1))
+    write_json(f"{D}/loot_table/entities/monarch_echo.json", {"type": "minecraft:entity", "pools": [], "random_sequence": rid("entities/monarch_echo")})
+    entries = [(rid("soul_shard"), 3, 8, 20), ("minecraft:echo_shard", 1, 3, 12), (rid("monarch_feather"), 1, 2, 6), ("minecraft:golden_apple", 1, 2, 8),
+               ("minecraft:diamond", 1, 3, 8), (rid("chiseled_soulshale"), 1, 2, 10), ("minecraft:enchanted_golden_apple", 1, 1, 1),
+               ("minecraft:music_disc_5", 1, 1, 2), (rid("blub_jelly"), 2, 5, 10)]
+    write_json(f"{D}/loot_table/chests/sculker_nest.json", {"type": "minecraft:chest", "random_sequence": rid("chests/sculker_nest"), "pools": [{
+        "rolls": {"type": "minecraft:uniform", "min": 5, "max": 8},
+        "entries": [{"type": "minecraft:item", "name": n, "weight": wt, "modifier": [
+            {"type": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": lo, "max": hi}}]} for n, lo, hi, wt in entries]}]})
 
 
 # ============================================================================ advancements
@@ -773,6 +805,9 @@ def gen_advancements():
     adv("golem_portal", "echo_golem", "minecraft:reinforced_deepslate", {"woke": sift_event("golem_woke_portal")}, frame="goal")
     adv("prowler", "enter_sift", "minecraft:echo_shard", {"killed": killed(rid("sculk_prowler"))})
     adv("scavenger", "prowler", rid("soul_bolt"), {"killed": killed(rid("scavenger"))})
+    adv("sculker_nest", "scavenger", rid("dark_sift_sculk"), {"found": {"trigger": "minecraft:location", "conditions": {"player": {
+        "type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:location": {"structures": rid("sculker_nest")}}}}}})
+    adv("monarch", "sculker_nest", rid("monarch_feather"), {"killed": killed(rid("monarch"))}, frame="challenge")
     # the sifters
     sifters = ["seedling", "nester", "pollinator", "sentinel", "sprout", "harmonizer"]
     adv("sifter", "enter_sift", rid("sentinel_quill"), {m: killed(rid(m)) for m in sifters[:5]}, any_of=True)
@@ -784,7 +819,7 @@ def gen_advancements():
 # ============================================================================ dimension + worldgen
 SKY = "#60d5c8"        # vanilla reveal sky (teal) - from palettes.json sift_sky_vanilla
 FOG = "#a8e6dc"
-BIOMES = ["sift_meadows", "pallid_grove", "soul_wetlands", "husklands", "lullaby_hills"]
+BIOMES = ["sift_meadows", "pallid_grove", "soul_wetlands", "husklands", "lullaby_hills", "sifter_canyons"]
 
 
 def gen_dimension():
@@ -851,7 +886,8 @@ def gen_dimension():
     write_json(f"{D}/dimension/the_sift.json", {
         "type": rid("the_sift"),
         "generator": {"type": "minecraft:noise", "settings": rid("the_sift"), "biome_source": {"type": "minecraft:multi_noise", "biomes": [
-            {"biome": rid("sift_meadows"), "parameters": P(t=(-1, 0.2), h=(-1, 0.1), c=(-0.2, 1), e=(-1, 1), w=(-1, 1))},
+            {"biome": rid("sift_meadows"), "parameters": P(t=(-1, 0.2), h=(-1, 0.1), c=(-0.2, 1), e=(-1, 1), w=(-1, 0.45))},
+            {"biome": rid("sifter_canyons"), "parameters": P(t=(-1, 0.2), h=(-1, 0.1), c=(-0.2, 1), e=(-1, 1), w=(0.45, 1))},
             {"biome": rid("pallid_grove"), "parameters": P(t=(-1, 0.2), h=(0.1, 1), c=(-0.2, 1), e=(-1, 1), w=(-1, 1))},
             {"biome": rid("husklands"), "parameters": P(t=(0.2, 1), h=(-1, 0.0), c=(-0.2, 1), e=(-1, 1), w=(-1, 1))},
             {"biome": rid("lullaby_hills"), "parameters": P(t=(0.2, 1), h=(0.0, 1), c=(0.1, 1), e=(-1, -0.2), w=(-1, 1))},
@@ -1003,6 +1039,26 @@ def gen_features():
                                 "spire_height": {"type": "minecraft:uniform", "min_inclusive": 6, "max_inclusive": 13}})
     placed("sculk_formations", rid("sculk_formation"), surface(5))
     placed("sculk_formations_rare", rid("sculk_formation"), surface(16))
+    feature("humbler_husk", {"type": rid("humbler_husk"), "size": 16})
+    placed("humbler_husks", rid("humbler_husk"), surface(7))
+    feature("sifter_nest", {"type": rid("sifter_nest")})
+    placed("sifter_nests", rid("sifter_nest"), surface(2))
+    placed("sifter_nests_rare", rid("sifter_nest"), surface(14))
+    # the Ravines: sculker nests under Singer's Meadow, the Humbler Huskland and the Lullaby Hills
+    write_json(f"{D}/worldgen/structure/sculker_nest.json", {"type": rid("sculker_nest"), "biomes": "#" + rid("has_structure/sculker_nest"),
+        "step": "underground_structures", "spawn_overrides": {"monster": {"bounding_box": "piece", "spawns": [
+            {"type": rid("sculk_prowler"), "weight": 10, "count": {"type": "minecraft:uniform", "min_inclusive": 1, "max_inclusive": 2}},
+            {"type": rid("scavenger"), "weight": 6, "count": {"type": "minecraft:uniform", "min_inclusive": 1, "max_inclusive": 1}}]}}})
+    write_json(f"{D}/worldgen/structure_set/sculker_nests.json", {"placement": {"type": "minecraft:random_spread", "salt": 7341823,
+        "separation": 12, "spacing": 30}, "structures": [{"structure": rid("sculker_nest"), "weight": 1}]})
+    # the Sifter Canyons: deep, frequent canyons
+    write_json(f"{D}/worldgen/carver/sifter_canyon.json", {"type": "minecraft:canyon", "probability": 0.09, "shape": {
+        "distance_factor": {"type": "minecraft:uniform", "max_exclusive": 1.0, "min_inclusive": 0.75},
+        "horizontal_radius_factor": {"type": "minecraft:uniform", "max_exclusive": 1.4, "min_inclusive": 0.9},
+        "thickness": {"type": "minecraft:trapezoid", "max": 8.0, "min": 2.0, "plateau": 3.0},
+        "vertical_radius_center_factor": 0.0, "vertical_radius_default_factor": 1.0, "width_smoothness": 3, "y_scale": 3.5},
+        "vertical_rotation": {"type": "minecraft:uniform", "max_exclusive": 0.125, "min_inclusive": -0.125},
+        "y": {"type": "minecraft:uniform", "max_inclusive": {"absolute": 82}, "min_inclusive": {"absolute": 48}}})
 
 
 def gen_biomes():
@@ -1029,9 +1085,10 @@ def gen_biomes():
                  "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_short_sift_grass", "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"]
 
     local_order = ["sift_unbound:soulshale_monoliths", "sift_unbound:soulshale_monoliths_rare",
-                   "sift_unbound:sculk_formations", "sift_unbound:sculk_formations_rare"]
+                   "sift_unbound:sculk_formations", "sift_unbound:sculk_formations_rare", "sift_unbound:humbler_husks",
+                   "sift_unbound:sifter_nests", "sift_unbound:sifter_nests_rare"]
 
-    def biome(name, temp, features_veg, extra_attrs=None, spawn=None, extra_lakes=False, water="#5fd3c8", local=()):
+    def biome(name, temp, features_veg, extra_attrs=None, spawn=None, extra_lakes=False, water="#5fd3c8", local=(), carvers=None):
         features_veg = sorted(features_veg, key=veg_order.index)
         feats = [[], ["sift_unbound:soul_water_lake_common" if extra_lakes else "sift_unbound:soul_water_lake_rare"],
                  sorted(local, key=local_order.index), [], [], [],
@@ -1041,13 +1098,13 @@ def gen_biomes():
         attrs.update(extra_attrs or {})
         if spawn:
             attrs["minecraft:gameplay/natural_mob_spawns"] = spawn
-        write_json(f"{D}/worldgen/biome/{name}.json", {"attributes": attrs, "carvers": common, "downfall": 0.4,
+        write_json(f"{D}/worldgen/biome/{name}.json", {"attributes": attrs, "carvers": carvers or common, "downfall": 0.4,
             "effects": {"water_color": water, "grass_color": "#f17582", "foliage_color": "#9fd8ec"},
             "features": feats, "has_precipitation": False, "temperature": temp})
 
     veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",
                   "sift_unbound:patch_teal_sprouts", "sift_unbound:pallid_trees_sparse"]
-    biome("sift_meadows", 0.6, veg_meadow, local=["sift_unbound:soulshale_monoliths"], spawn=spawns(creature=[blub, nuzzle, slabber, golem],
+    biome("sift_meadows", 0.6, veg_meadow, local=["sift_unbound:soulshale_monoliths", "sift_unbound:sifter_nests_rare"], spawn=spawns(creature=[blub, nuzzle, slabber, golem],
           monster=[prowler, seedling, nester, pollinator, sentinel, sprout, harmonizer], ambient=[wisp]))
     biome("pallid_grove", 0.5, ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:patch_short_sift_grass",
                                 "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"],
@@ -1061,13 +1118,17 @@ def gen_biomes():
                        ambient=[(rid("soul_wisp"), 30, 2, 4)]),
           extra_lakes=True, local=["sift_unbound:sculk_formations_rare"])
     biome("husklands", 1.2, ["sift_unbound:husk_rocks", "sift_unbound:patch_teal_sprouts"],
-          local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations"],
+          local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations", "sift_unbound:humbler_husks"],
           spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3), scavenger, (rid("seedling"), 10, 1, 2)], ambient=[wisp]))
     biome("lullaby_hills", 0.9, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom", "sift_unbound:patch_short_sift_grass"],
           local=["sift_unbound:soulshale_monoliths"],
           spawn=spawns(creature=[blub, nuzzle, golem], monster=[prowler, (rid("seedling"), 30, 2, 4), (rid("nester"), 15, 1, 2), (rid("pollinator"), 15, 1, 2),
                                                                   (rid("sentinel"), 20, 1, 2), (rid("sprout"), 10, 1, 1), harmonizer], ambient=[wisp]))
 
+    biome("sifter_canyons", 0.6, veg_meadow, local=["sift_unbound:sifter_nests"], carvers=common + [rid("sifter_canyon")],
+          spawn=spawns(creature=[blub, nuzzle], monster=[(rid("seedling"), 45, 2, 4), (rid("nester"), 30, 1, 3), (rid("pollinator"), 20, 1, 2),
+                                                         (rid("sentinel"), 30, 1, 2), (rid("sprout"), 15, 1, 1), (rid("harmonizer"), 2, 1, 1)],
+                       ambient=[wisp]))
 
 VANILLA = None
 

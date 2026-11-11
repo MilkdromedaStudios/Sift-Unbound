@@ -5,7 +5,9 @@ import com.milkdromedastudios.siftunbound.entity.Blub;
 import com.milkdromedastudios.siftunbound.entity.EchoGolem;
 import com.milkdromedastudios.siftunbound.entity.Nuzzle;
 import com.milkdromedastudios.siftunbound.entity.SculkProwler;
+import com.milkdromedastudios.siftunbound.entity.Monarch;
 import com.milkdromedastudios.siftunbound.entity.Scavenger;
+import com.milkdromedastudios.siftunbound.entity.projectile.MonarchFeather;
 import com.milkdromedastudios.siftunbound.entity.projectile.PollenGlob;
 import com.milkdromedastudios.siftunbound.entity.projectile.SentinelQuill;
 import com.milkdromedastudios.siftunbound.entity.projectile.SoulBolt;
@@ -62,6 +64,12 @@ public final class ModEntities {
 		EntityType.Builder.of(Harmonizer::new, MobCategory.MONSTER).sized(1.8F, 3.6F).eyeHeight(2.9F).clientTrackingRange(10));
 	public static final EntityType<Scavenger> SCAVENGER = register("scavenger",
 		EntityType.Builder.of(Scavenger::new, MobCategory.MONSTER).sized(0.9F, 2.2F).eyeHeight(1.9F).clientTrackingRange(8));
+	public static final EntityType<Monarch> MONARCH = register("monarch",
+		EntityType.Builder.of(Monarch::new, MobCategory.MONSTER).sized(1.4F, 3.6F).eyeHeight(3.1F).clientTrackingRange(12).fireImmune());
+	public static final EntityType<Monarch> MONARCH_ECHO = register("monarch_echo",
+		EntityType.Builder.of(Monarch::new, MobCategory.MONSTER).sized(1.4F, 3.6F).eyeHeight(3.1F).clientTrackingRange(12).fireImmune());
+	public static final EntityType<MonarchFeather> MONARCH_FEATHER = register("monarch_feather",
+		EntityType.Builder.<MonarchFeather>of(MonarchFeather::new, MobCategory.MISC).sized(0.3F, 0.3F).clientTrackingRange(6).updateInterval(2));
 	public static final EntityType<PollenGlob> POLLEN_GLOB = register("pollen_glob",
 		EntityType.Builder.<PollenGlob>of(PollenGlob::new, MobCategory.MISC).sized(0.35F, 0.35F).clientTrackingRange(4).updateInterval(10));
 	public static final EntityType<SentinelQuill> SENTINEL_QUILL = register("sentinel_quill",
@@ -94,6 +102,8 @@ public final class ModEntities {
 		FabricDefaultAttributeRegistry.register(SPROUT, Sprout.createAttributes());
 		FabricDefaultAttributeRegistry.register(HARMONIZER, Harmonizer.createAttributes());
 		FabricDefaultAttributeRegistry.register(SCAVENGER, Scavenger.createAttributes());
+		FabricDefaultAttributeRegistry.register(MONARCH, Monarch.createAttributes());
+		FabricDefaultAttributeRegistry.register(MONARCH_ECHO, Monarch.createEchoAttributes());
 		for (EntityType<? extends AbstractSifter> sifter : List.of(SEEDLING, NESTER, POLLINATOR, SENTINEL, SPROUT, HARMONIZER)) {
 			sifterPlacement(sifter);
 		}
