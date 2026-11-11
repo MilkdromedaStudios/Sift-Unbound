@@ -4,6 +4,9 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Changed
+- The Sift Unbound is now also published on **CurseForge**, alongside GitHub and Modrinth.
+
 ## [0.3.2] - 2026-11-11
 
 ### Fixed
