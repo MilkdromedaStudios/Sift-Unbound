@@ -37,3 +37,5 @@ option.VIBRANCE.comment=Boosts dull colours more than bright ones, so details po
 option.SHARPEN=Sharpening
 option.SHARPEN.comment=Crisper block textures and edges.
 option.VIGNETTE=Vignette
+option.FOG_DENSITY=Haze
+option.FOG_DENSITY.comment=Atmospheric haze over distant land, tinted by the sky.

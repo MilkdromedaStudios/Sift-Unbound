@@ -17,8 +17,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PACK = os.path.join(ROOT, "shaderpack")
 SHADERS = os.path.join(PACK, "shaders")
 
-DIMENSIONS = {  # folder -> defines
-    "world0": ["DIM_OVERWORLD", "HAS_SHADOWS"],
+DIMENSIONS = {  # folder -> defines ("" = the shaders/ root: the Overworld, and the fallback for every other dimension)
+    "": ["DIM_OVERWORLD", "HAS_SHADOWS"],
     "world-1": ["DIM_NETHER"],
     "world1": ["DIM_END"],
     "sift": ["DIM_SIFT", "HAS_SHADOWS"],

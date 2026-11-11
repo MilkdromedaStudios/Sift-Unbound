@@ -4,6 +4,13 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Fixed
+- **Sift Unbound Shaders** looked almost like vanilla: the light was too even for shadows to show, and the sky and fog were
+  the game's own. Sunlight is now much stronger than the shade, shadows are darker (90% by default), the sky is a
+  gradient with a glow around the sun, distant land fades into a sky-tinted haze (new **Haze** option), and colours have
+  more contrast and vibrance. The Overworld's programs now live in the pack's root folder, so any dimension without its
+  own folder is sure to get them, and the Sift Tide Light, Water Shine and Waving Plants options show up in the menu.
+
 ## [0.3.1] - 2026-11-11
 
 ### Changed
