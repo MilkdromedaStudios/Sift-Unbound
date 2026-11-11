@@ -1,0 +1,34 @@
+# Builds Sift Unbound Shaders (the Iris shader pack in shaderpack/) and publishes it as its own GitHub release,
+# tagged shaders-v<version from shaderpack/VERSION>. Runs when the pack changes on main, or by hand.
+# Bump shaderpack/VERSION for a new release; an existing tag is never overwritten.
+name: shaders
+
+on:
+  push:
+    branches: [main]
+    paths: ["shaderpack/**", "tools/build_shaderpack.py"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the pack
+        run: python3 tools/build_shaderpack.py
+      - name: Release it
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(cat shaderpack/VERSION)
+          tag="shaders-v$version"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag is already released; bump shaderpack/VERSION for a new one."
+            exit 0
+          fi
+          { cat shaderpack/README.md; echo; echo "Download **Sift-Unbound-Shaders-$version.zip** below."; } > notes.md
+          gh release create "$tag" "build/shaderpack/Sift-Unbound-Shaders-$version.zip" \
+            --title "Sift Unbound Shaders $version" --notes-file notes.md --latest=false
