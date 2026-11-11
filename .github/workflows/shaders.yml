@@ -1,6 +1,8 @@
-# Builds Sift Unbound Shaders (the Iris shader pack in shaderpack/) and publishes it as its own GitHub release,
-# tagged shaders-v<version from shaderpack/VERSION>. Runs when the pack changes on main, or by hand.
-# Bump shaderpack/VERSION for a new release; an existing tag is never overwritten.
+# Releases Sift Unbound Shaders (the Iris shader pack in shaderpack/) automatically, as its own GitHub release.
+# When a push to main changes the pack, this picks the next version, commits it to shaderpack/VERSION, tags
+# shaders-v<version> on main, zips the pack and publishes the release. No manual step is needed.
+# Version: a shaderpack/VERSION newer than the last shaders-v* tag wins (bump it by hand to choose, e.g. 1.1.0 or
+# 2.0.0); otherwise the patch number goes up by one. Pushes that don't touch the pack never release anything.
 name: shaders
 
 on:
@@ -12,23 +14,78 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: shaders-release
+  cancel-in-progress: false
+
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - name: Build the pack
-        run: python3 tools/build_shaderpack.py
-      - name: Release it
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Pick the version
+        id: plan
         run: |
-          version=$(cat shaderpack/VERSION)
-          tag="shaders-v$version"
-          if gh release view "$tag" >/dev/null 2>&1; then
-            echo "$tag is already released; bump shaderpack/VERSION for a new one."
+          file=$(tr -d '[:space:]' < shaderpack/VERSION)
+          last=$(git tag --list 'shaders-v*' | sed 's/^shaders-v//' | sort -V | tail -n1)
+          if [ -z "$last" ]; then
+            echo "release=true" >> "$GITHUB_OUTPUT"; echo "version=$file" >> "$GITHUB_OUTPUT"; echo "previous=" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          { cat shaderpack/README.md; echo; echo "Download **Sift-Unbound-Shaders-$version.zip** below."; } > notes.md
-          gh release create "$tag" "build/shaderpack/Sift-Unbound-Shaders-$version.zip" \
-            --title "Sift Unbound Shaders $version" --notes-file notes.md --latest=false
+          if git diff --quiet "shaders-v$last" HEAD -- shaderpack tools/build_shaderpack.py; then
+            echo "The pack hasn't changed since shaders-v$last; nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          newest=$(printf '%s\n%s\n' "$last" "$file" | sort -V | tail -n1)
+          if [ "$newest" = "$file" ] && [ "$file" != "$last" ]; then
+            version="$file"                                   # bumped by hand
+          else
+            IFS=. read -r major minor patch <<< "$last"
+            version="$major.$minor.$((patch + 1))"            # automatic patch release
+          fi
+          echo "release=true" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "previous=$last" >> "$GITHUB_OUTPUT"
+
+      - name: Commit the version and tag it
+        if: steps.plan.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/shaders-v$VERSION" >/dev/null; then
+            echo "::error::Tag shaders-v$VERSION already exists"; exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$(tr -d '[:space:]' < shaderpack/VERSION)" != "$VERSION" ]; then
+            echo "$VERSION" > shaderpack/VERSION
+            git commit -am "Sift Unbound Shaders $VERSION"
+          fi
+          git tag "shaders-v$VERSION"
+          # pushes made with the workflow token never start other workflows, so this cannot loop
+          git push --atomic origin HEAD:main "shaders-v$VERSION"
+
+      - name: Build and publish the release
+        if: steps.plan.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.plan.outputs.version }}
+          PREVIOUS: ${{ steps.plan.outputs.previous }}
+        run: |
+          python3 tools/build_shaderpack.py
+          {
+            cat shaderpack/README.md
+            if [ -n "$PREVIOUS" ]; then
+              echo; echo "## Changes since $PREVIOUS"
+              git log --format='- %s' "shaders-v$PREVIOUS..HEAD" -- shaderpack tools/build_shaderpack.py \
+                | grep -v "^- Sift Unbound Shaders [0-9]" || true
+            fi
+            echo; echo "Download **Sift-Unbound-Shaders-$VERSION.zip** below and put it in \`.minecraft/shaderpacks\`."
+          } > notes.md
+          gh release create "shaders-v$VERSION" "build/shaderpack/Sift-Unbound-Shaders-$VERSION.zip" \
+            --title "Sift Unbound Shaders $VERSION" --notes-file notes.md --latest=false
