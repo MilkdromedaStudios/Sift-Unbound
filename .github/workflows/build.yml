@@ -47,6 +47,14 @@ jobs:
           name: sift-unbound-jar
           path: build/libs/*.jar
           if-no-files-found: error
+      - name: Build and upload the shader pack
+        run: python3 tools/build_shaderpack.py
+      - name: Upload shader pack
+        uses: actions/upload-artifact@v7
+        with:
+          name: sift-unbound-shaders
+          path: build/shaderpack/*.zip
+          if-no-files-found: error
       - name: Upload crash reports
         if: failure()
         uses: actions/upload-artifact@v7

@@ -5,6 +5,8 @@ The real GLSL lives in shaderpack/shaders/program and shaderpack/shaders/lib. Ea
 wrapper programs (named in dimension.properties) that set DIM_* / PROGRAM_* defines and include the shared code, so
 the Overworld, the Nether, the End, the Sift and any other mod's dimension each get the right lighting.
 
+It ships with every mod release (release.yml attaches the zip) and every CI build (an artifact), versioned with the mod.
+
 Run from the repository root:
     python3 tools/build_shaderpack.py          # regenerate the wrappers and zip the pack into build/shaderpack/
 """
@@ -55,15 +57,14 @@ def gen_wrappers():
 
 
 def zip_pack():
-    version = open(os.path.join(PACK, "VERSION")).read().strip()
+    props = open(os.path.join(ROOT, "gradle.properties")).read()
+    version = next(line.split("=", 1)[1].strip() for line in props.splitlines() if line.startswith("mod_version="))
     dest_dir = os.path.join(ROOT, "build", "shaderpack")
     os.makedirs(dest_dir, exist_ok=True)
     dest = os.path.join(dest_dir, f"Sift-Unbound-Shaders-{version}.zip")
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
         for base, _, files in os.walk(PACK):
             for name in sorted(files):
-                if name == "VERSION":
-                    continue
                 full = os.path.join(base, name)
                 z.write(full, os.path.relpath(full, PACK))
     return dest

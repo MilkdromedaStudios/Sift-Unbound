@@ -4,6 +4,11 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Changed
+- **Sift Unbound Shaders** now comes with every release: the zip of the Iris shader pack is attached to each GitHub
+  release next to the mod jar, with the same version number, and each CI build uploads it as an artifact. Changing
+  the pack releases a new version like any change to the mod.
+
 ## [0.3.0] - 2026-11-11
 
 The Sift, as it really is: this release brings the mod in line with the Sift that Minecraft Dungeons II shipped
