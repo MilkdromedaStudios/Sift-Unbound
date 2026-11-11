@@ -45,6 +45,24 @@
                 "max_inclusive": 1
               },
               "weight": 60
+            },
+            {
+              "type": "sift_unbound:pollinator",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 20
+            },
+            {
+              "type": "sift_unbound:sprout",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 8
             }
           ],
           "ambient": [

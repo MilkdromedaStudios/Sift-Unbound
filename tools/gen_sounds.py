@@ -300,10 +300,85 @@ def gen_singer():
     save("singer/song2", layer(2.0, (voice(165, 1.8, (450, 850)), 0, 1.0), (voice(247, 1.4, (650, 1100)), 0.4, 0.5)), 0.55)
 
 
+# ------------------------------------------------------------------ the sifters and the scavenger (phase 3)
+def rustle(dur, rate=14.0, a=0.6):
+    """Leafy rustling: dark noise with a fluttering tremolo."""
+    tt = t(dur)
+    trem = 0.55 + 0.45 * np.abs(np.sin(2 * np.pi * rate * tt + rng.uniform(0, 6)))
+    return lowpass(noise(dur), a) * trem * env(len(tt), 0.02, dur * 0.5)
+
+
+def croak(f, dur, pulses=38.0):
+    """A frog-like croak: a pulse train through a resonant low-pass."""
+    tt = t(dur)
+    train = (np.sin(2 * np.pi * pulses * tt) > 0.6).astype(float)
+    tone = np.sin(2 * np.pi * f * tt) * 0.6 + np.sin(2 * np.pi * f * 2.02 * tt) * 0.3
+    return lowpass(train * tone, 0.6) * env(len(tt), 0.01, dur * 0.4)
+
+
+def whoosh(dur, up=True):
+    tt = t(dur)
+    x = lowpass(noise(dur), 0.3 if up else 0.6)
+    shape = np.linspace(0.2, 1.0, len(tt)) if up else np.linspace(1.0, 0.2, len(tt))
+    return x * shape * env(len(tt), 0.02, dur * 0.4)
+
+
+def gen_sifters():
+    save("seedling/ambient1", layer(0.5, (squeak(900, 1400, 0.12, 30), 0, 0.8), (squeak(1100, 800, 0.1, 30), 0.15, 0.7), (rustle(0.5), 0, 0.5)), 0.6)
+    save("seedling/ambient2", layer(0.45, (squeak(1300, 900, 0.09, 40), 0.0, 0.7), (squeak(1250, 1500, 0.08, 40), 0.12, 0.7),
+                                    (squeak(1000, 1300, 0.08, 40), 0.24, 0.6), (rustle(0.45, 20), 0, 0.4)), 0.6)
+    save("seedling/hurt", layer(0.25, (squeak(1600, 900, 0.2, 50), 0, 1.0), (rustle(0.25, 30, 0.4), 0, 0.5)), 0.75)
+    save("seedling/death", layer(0.8, (squeak(1200, 300, 0.6, 25), 0, 1.0), (rustle(0.8, 10), 0, 0.6)), 0.75)
+
+    save("nester/ambient1", layer(0.8, (warble(140, 0.5, depth=0.04, rate=5), 0, 0.9), (rustle(0.8, 8), 0.1, 0.5)), 0.6)
+    save("nester/ambient2", layer(0.9, (warble(170, 0.25, depth=0.05), 0, 0.8), (warble(120, 0.45, depth=0.03), 0.3, 0.9), (rustle(0.9, 6), 0, 0.4)), 0.6)
+    save("nester/hurt", layer(0.3, (warble(260, 0.25, depth=0.2, rate=20), 0, 1.0), (rustle(0.3, 25, 0.4), 0, 0.5)), 0.75)
+    save("nester/death", layer(1.1, (warble(200, 0.4, depth=0.1, rate=10), 0, 0.9), (warble(110, 0.7, depth=0.05), 0.35, 0.9), (rustle(1.1, 7), 0, 0.6)), 0.75)
+
+    save("pollinator/ambient1", layer(0.6, (croak(95, 0.35), 0, 1.0), (croak(110, 0.2), 0.38, 0.8)), 0.65)
+    save("pollinator/ambient2", layer(0.5, (croak(80, 0.45, 30), 0, 1.0)), 0.65)
+    save("pollinator/hurt", layer(0.3, (croak(160, 0.25, 50), 0, 1.0), (squeak(700, 500, 0.15), 0, 0.4)), 0.75)
+    save("pollinator/death", layer(0.9, (croak(120, 0.4, 40), 0, 1.0), (croak(70, 0.5, 25), 0.35, 1.0)), 0.75)
+    save("pollinator/puff", layer(0.6, (whoosh(0.5, True), 0, 0.8), (chirp(120, 260, 0.55) * env(int(SR * 0.55), 0.05, 0.1), 0, 0.5)), 0.65)
+
+    save("sentinel/ambient1", layer(0.8, (clicks(4, 0.12, 0.8), 0, 0.8), (warble(190, 0.6, depth=0.02, rate=3), 0.1, 0.5), (rustle(0.8, 5), 0, 0.4)), 0.6)
+    save("sentinel/ambient2", layer(0.7, (clicks(3, 0.18, 0.7), 0, 0.9), (rustle(0.7, 9), 0, 0.5)), 0.6)
+    save("sentinel/hurt", layer(0.3, (clicks(5, 0.04, 0.3), 0, 1.0), (warble(300, 0.2, depth=0.2, rate=16), 0, 0.7)), 0.75)
+    save("sentinel/death", layer(1.0, (clicks(10, 0.08, 1.0), 0, 0.9), (warble(220, 0.8, depth=0.08, rate=6), 0.1, 0.7)), 0.75)
+    save("sentinel/shake", layer(0.8, (clicks(16, 0.045, 0.8), 0, 1.0), (rustle(0.8, 22, 0.3), 0, 0.7)), 0.7)
+    save("sentinel/quills", layer(0.5, (whoosh(0.18, False), 0, 1.0), (whoosh(0.18, False), 0.08, 0.9), (whoosh(0.18, False), 0.16, 0.8)), 0.75)
+
+    save("sprout/ambient1", layer(1.0, (bell(660, 0.8), 0, 0.5), (bell(990, 0.6), 0.25, 0.35), (bubble(300, 0.15), 0.5, 0.4)), 0.5)
+    save("sprout/ambient2", layer(0.9, (bell(740, 0.7), 0, 0.5), (bubble(260, 0.15), 0.3, 0.5), (bubble(340, 0.12), 0.45, 0.4)), 0.5)
+    save("sprout/hurt", layer(0.3, (bell(1200, 0.25), 0, 0.8), (squeak(900, 600, 0.2), 0, 0.6)), 0.7)
+    save("sprout/death", layer(1.4, (bell(880, 1.2), 0, 0.6), (bell(587, 1.2), 0.2, 0.6), (bell(440, 1.2), 0.4, 0.6)), 0.7)
+    save("sprout/link", layer(1.6, *[(bell(f, 1.0), i * 0.18, 0.5) for i, f in enumerate([440, 554, 659, 880, 1109])]), 0.6)
+
+    save("harmonizer/ambient1", layer(2.0, (pad([110, 165, 220], 1.8, detune=0.5), 0, 0.8), (rustle(2.0, 4), 0, 0.3)), 0.55)
+    save("harmonizer/ambient2", layer(2.0, (pad([98, 147, 196], 1.8, detune=0.6), 0, 0.8), (bell(392, 1.2), 0.5, 0.3)), 0.55)
+    save("harmonizer/hurt", layer(0.5, (growl(0.4, 90), 0, 0.8), (bell(700, 0.4), 0, 0.5)), 0.75)
+    save("harmonizer/death", layer(3.0, (pad([110, 138, 165], 2.6, detune=0.8), 0, 0.9), (growl(1.5, 50), 0, 0.8), (bell(220, 2.5), 0.5, 0.5)), 0.8)
+    save("harmonizer/roar", layer(2.2, (growl(1.8, 45), 0, 1.0), (growl(1.6, 67), 0.1, 0.7), (pad([110, 165, 247], 2.0, detune=1.2), 0.1, 0.6),
+                                  (rustle(2.0, 30, 0.2), 0, 0.5)), 0.9)
+
+    save("scavenger/ambient1", layer(0.8, (clicks(7, 0.07, 0.8), 0, 0.9), (growl(0.7, 75), 0.05, 0.4)), 0.65)
+    save("scavenger/ambient2", layer(0.7, (clicks(5, 0.1, 0.7), 0, 0.9), (growl(0.6, 95), 0.1, 0.35)), 0.65)
+    save("scavenger/hurt", layer(0.3, (clicks(4, 0.03, 0.3), 0, 1.0), (growl(0.25, 120), 0, 0.8)), 0.75)
+    save("scavenger/death", layer(1.2, (clicks(14, 0.07, 1.2), 0, 0.9), (growl(1.0, 60), 0, 0.8)), 0.8)
+    save("scavenger/cast", layer(1.0, (whoosh(0.8, True), 0, 0.7), (bell(523, 0.7), 0.2, 0.4), (bell(784, 0.6), 0.35, 0.3)), 0.7)
+    save("scavenger/dash", layer(0.4, (whoosh(0.35, False), 0, 1.0), (clicks(3, 0.05, 0.3), 0, 0.5)), 0.75)
+
+    save("sifter/enrage", layer(1.0, (squeak(400, 1400, 0.5, 40), 0, 0.7), (growl(0.8, 85), 0.1, 0.8), (rustle(1.0, 35, 0.3), 0, 0.6)), 0.8)
+    save("sifter/dodge", layer(0.3, (whoosh(0.25, False), 0, 1.0), (rustle(0.3, 30, 0.3), 0, 0.5)), 0.7)
+
+
 if __name__ == "__main__":
     import sys
     if sys.argv[1:] == ["wildlife"]:  # only the 0.3.0 creatures
         gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()
+    elif sys.argv[1:] == ["sifters"]:  # only the sifters and the scavenger
+        gen_sifters()
     else:
         gen_blub(); gen_wisp(); gen_prowler(); gen_water(); gen_portal(); gen_ambient(); gen_music()
         gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()
+        gen_sifters()

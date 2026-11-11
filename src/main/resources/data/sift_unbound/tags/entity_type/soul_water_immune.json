@@ -8,6 +8,13 @@
     "sift_unbound:slabber",
     "sift_unbound:echo_golem",
     "sift_unbound:singer",
-    "minecraft:warden"
+    "minecraft:warden",
+    "sift_unbound:seedling",
+    "sift_unbound:nester",
+    "sift_unbound:pollinator",
+    "sift_unbound:sentinel",
+    "sift_unbound:sprout",
+    "sift_unbound:harmonizer",
+    "sift_unbound:scavenger"
   ]
 }

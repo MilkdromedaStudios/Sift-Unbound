@@ -232,10 +232,14 @@ def gen_handmade_blocks():
     write_json(f"{A}/models/block/soul_water.json", {"textures": {"particle": rid("block/soul_water_still")}})
 
 
+SIFTER_MOBS = ["seedling", "nester", "pollinator", "sentinel", "sprout", "harmonizer", "scavenger"]
+
+
 def gen_items():
     for n in ["echo_tuner", "soul_shard", "blub_jelly", "soul_water_bucket", "blub_bucket",
               "blub_spawn_egg", "sculk_prowler_spawn_egg", "soul_wisp_spawn_egg",
-              "nuzzle_spawn_egg", "slabber_spawn_egg", "echo_golem_spawn_egg", "singer_spawn_egg"]:
+              "nuzzle_spawn_egg", "slabber_spawn_egg", "echo_golem_spawn_egg", "singer_spawn_egg",
+              "pollen_glob", "sentinel_quill", "soul_bolt"] + [f"{m}_spawn_egg" for m in SIFTER_MOBS]:
         flat_item(n)
 
 
@@ -298,6 +302,17 @@ LANG = {
     "item.sift_unbound.slabber_spawn_egg": "Slabber Spawn Egg",
     "item.sift_unbound.echo_golem_spawn_egg": "Echo Golem Spawn Egg",
     "item.sift_unbound.singer_spawn_egg": "Singer Spawn Egg",
+    "item.sift_unbound.seedling_spawn_egg": "Seedling Spawn Egg",
+    "item.sift_unbound.nester_spawn_egg": "Nester Spawn Egg",
+    "item.sift_unbound.pollinator_spawn_egg": "Pollinator Spawn Egg",
+    "item.sift_unbound.sentinel_spawn_egg": "Sentinel Spawn Egg",
+    "item.sift_unbound.sprout_spawn_egg": "Sprout Spawn Egg",
+    "item.sift_unbound.harmonizer_spawn_egg": "Harmonizer Spawn Egg",
+    "item.sift_unbound.scavenger_spawn_egg": "Scavenger Spawn Egg",
+    "item.sift_unbound.pollen_glob": "Pollen Glob",
+    "item.sift_unbound.pollen_glob.desc": "Thrown, it sticks and bursts into slowing goo",
+    "item.sift_unbound.sentinel_quill": "Sentinel Quill",
+    "item.sift_unbound.soul_bolt": "Soul Bolt",
     # entities
     "entity.sift_unbound.blub": "Blub",
     "entity.sift_unbound.sculk_prowler": "Stalker",
@@ -306,6 +321,16 @@ LANG = {
     "entity.sift_unbound.slabber": "Slabber",
     "entity.sift_unbound.echo_golem": "Echo Golem",
     "entity.sift_unbound.singer": "Singer",
+    "entity.sift_unbound.seedling": "Seedling",
+    "entity.sift_unbound.nester": "Nester",
+    "entity.sift_unbound.pollinator": "Pollinator",
+    "entity.sift_unbound.sentinel": "Sentinel",
+    "entity.sift_unbound.sprout": "Sprout",
+    "entity.sift_unbound.harmonizer": "Harmonizer",
+    "entity.sift_unbound.scavenger": "Scavenger",
+    "entity.sift_unbound.pollen_glob": "Pollen Glob",
+    "entity.sift_unbound.sentinel_quill": "Sentinel Quill",
+    "entity.sift_unbound.soul_bolt": "Soul Bolt",
     # effect
     "effect.sift_unbound.soulsick": "Soulsick",
     "death.attack.sift_unbound.soulsick": "%1$s had their soul drained away",
@@ -352,6 +377,36 @@ LANG = {
     "subtitles.sift_unbound.echo_golem.hurt": "Echo Golem hurts",
     "subtitles.sift_unbound.echo_golem.death": "Echo Golem falls silent",
     "subtitles.sift_unbound.singer.ambient": "Singer sings",
+    "subtitles.sift_unbound.seedling.ambient": "Seedling chitters",
+    "subtitles.sift_unbound.seedling.hurt": "Seedling hurts",
+    "subtitles.sift_unbound.seedling.death": "Seedling dies",
+    "subtitles.sift_unbound.nester.ambient": "Nester hoots",
+    "subtitles.sift_unbound.nester.hurt": "Nester hurts",
+    "subtitles.sift_unbound.nester.death": "Nester dies",
+    "subtitles.sift_unbound.pollinator.ambient": "Pollinator croaks",
+    "subtitles.sift_unbound.pollinator.hurt": "Pollinator hurts",
+    "subtitles.sift_unbound.pollinator.death": "Pollinator dies",
+    "subtitles.sift_unbound.sentinel.ambient": "Sentinel rattles",
+    "subtitles.sift_unbound.sentinel.hurt": "Sentinel hurts",
+    "subtitles.sift_unbound.sentinel.death": "Sentinel dies",
+    "subtitles.sift_unbound.sprout.ambient": "Sprout chimes",
+    "subtitles.sift_unbound.sprout.hurt": "Sprout hurts",
+    "subtitles.sift_unbound.sprout.death": "Sprout dies",
+    "subtitles.sift_unbound.harmonizer.ambient": "Harmonizer hums",
+    "subtitles.sift_unbound.harmonizer.hurt": "Harmonizer hurts",
+    "subtitles.sift_unbound.harmonizer.death": "Harmonizer dies",
+    "subtitles.sift_unbound.scavenger.ambient": "Scavenger clicks",
+    "subtitles.sift_unbound.scavenger.hurt": "Scavenger hurts",
+    "subtitles.sift_unbound.scavenger.death": "Scavenger dies",
+    "subtitles.sift_unbound.pollinator.puff": "Pollinator puffs up",
+    "subtitles.sift_unbound.sentinel.shake": "Sentinel shakes its head",
+    "subtitles.sift_unbound.sentinel.quills": "Quills fly",
+    "subtitles.sift_unbound.sprout.link": "Sprout links",
+    "subtitles.sift_unbound.harmonizer.roar": "Harmonizer roars",
+    "subtitles.sift_unbound.scavenger.cast": "Scavenger casts",
+    "subtitles.sift_unbound.scavenger.dash": "Scavenger dashes",
+    "subtitles.sift_unbound.sifter.enrage": "Sifters are enraged",
+    "subtitles.sift_unbound.sifter.dodge": "Sifter dodges",
     "subtitles.sift_unbound.soul_water.ambient": "Ichor bubbles",
     "subtitles.sift_unbound.soul_water.burn": "Soul drains",
     "subtitles.sift_unbound.sift_portal.ambient": "Sift Portal hums",
@@ -394,6 +449,16 @@ LANG = {
     "advancements.sift_unbound.golem_portal.description": "Let an Echo Golem wake a Warden Portal for you",
     "advancements.sift_unbound.prowler.title": "Tide Hunter",
     "advancements.sift_unbound.prowler.description": "Defeat a Stalker, a sculker of the Endure Tide",
+    "advancements.sift_unbound.sifter.title": "Weeding",
+    "advancements.sift_unbound.sifter.description": "Defeat a sifter, one of the Sift's plant-like natives. Hurt one and its whole band comes for you",
+    "advancements.sift_unbound.sprout_enrage.title": "Root of the Problem",
+    "advancements.sift_unbound.sprout_enrage.description": "Defeat a Sprout with other sifters nearby. Its death enrages them for good: faster, stronger and tougher",
+    "advancements.sift_unbound.all_sifters.title": "Sifted",
+    "advancements.sift_unbound.all_sifters.description": "Defeat every kind of sifter: Seedling, Nester, Pollinator, Sentinel, Sprout and Harmonizer",
+    "advancements.sift_unbound.harmonizer.title": "Discord",
+    "advancements.sift_unbound.harmonizer.description": "Defeat a Harmonizer, the massive sprout. Keep jumping to escape its vortex",
+    "advancements.sift_unbound.scavenger.title": "Golden Afterimage",
+    "advancements.sift_unbound.scavenger.description": "Defeat a Scavenger. Its soul bolts chase you down and leave pools of soulsickness; get close and it dashes away",
     "advancements.sift_unbound.explore_sift.title": "Sift Explorer",
     "advancements.sift_unbound.explore_sift.description": "Visit every region of the Sift",
     # commands
@@ -427,6 +492,36 @@ SOUNDS = {
     "entity.echo_golem.hurt": ["echo_golem/hurt"],
     "entity.echo_golem.death": ["echo_golem/death"],
     "entity.singer.ambient": ["singer/song1", "singer/song2"],
+    "entity.seedling.ambient": ["seedling/ambient1", "seedling/ambient2"],
+    "entity.seedling.hurt": ["seedling/hurt"],
+    "entity.seedling.death": ["seedling/death"],
+    "entity.nester.ambient": ["nester/ambient1", "nester/ambient2"],
+    "entity.nester.hurt": ["nester/hurt"],
+    "entity.nester.death": ["nester/death"],
+    "entity.pollinator.ambient": ["pollinator/ambient1", "pollinator/ambient2"],
+    "entity.pollinator.hurt": ["pollinator/hurt"],
+    "entity.pollinator.death": ["pollinator/death"],
+    "entity.sentinel.ambient": ["sentinel/ambient1", "sentinel/ambient2"],
+    "entity.sentinel.hurt": ["sentinel/hurt"],
+    "entity.sentinel.death": ["sentinel/death"],
+    "entity.sprout.ambient": ["sprout/ambient1", "sprout/ambient2"],
+    "entity.sprout.hurt": ["sprout/hurt"],
+    "entity.sprout.death": ["sprout/death"],
+    "entity.harmonizer.ambient": ["harmonizer/ambient1", "harmonizer/ambient2"],
+    "entity.harmonizer.hurt": ["harmonizer/hurt"],
+    "entity.harmonizer.death": ["harmonizer/death"],
+    "entity.scavenger.ambient": ["scavenger/ambient1", "scavenger/ambient2"],
+    "entity.scavenger.hurt": ["scavenger/hurt"],
+    "entity.scavenger.death": ["scavenger/death"],
+    "entity.pollinator.puff": ["pollinator/puff"],
+    "entity.sentinel.shake": ["sentinel/shake"],
+    "entity.sentinel.quills": ["sentinel/quills"],
+    "entity.sprout.link": ["sprout/link"],
+    "entity.harmonizer.roar": ["harmonizer/roar"],
+    "entity.scavenger.cast": ["scavenger/cast"],
+    "entity.scavenger.dash": ["scavenger/dash"],
+    "entity.sifter.enrage": ["sifter/enrage"],
+    "entity.sifter.dodge": ["sifter/dodge"],
     "block.soul_water.ambient": ["soul_water/bubble1", "soul_water/bubble2"],
     "block.soul_water.burn": ["soul_water/burn"],
     "block.sift_portal.ambient": ["portal/hum"],
@@ -479,7 +574,8 @@ def gen_tags():
     tag("item", NS, "slabber_food", [rid("teal_sprouts")])
     tag("fluid", NS, "soul_water", [rid("soul_water"), rid("flowing_soul_water")])
     tag("entity_type", NS, "soul_water_immune", [rid("blub"), rid("soul_wisp"), rid("sculk_prowler"), rid("nuzzle"), rid("slabber"),
-                                                  rid("echo_golem"), rid("singer"), "minecraft:warden"])
+                                                  rid("echo_golem"), rid("singer"), "minecraft:warden"] + [rid(m) for m in SIFTER_MOBS])
+    tag("entity_type", NS, "sculkers", [rid("sculk_prowler"), rid("scavenger")])
     tag("timeline", NS, "in_sift", [rid("sift_tides")])
     tag("worldgen/biome", NS, "is_sift", [rid(b) for b in BIOMES])
 
@@ -584,6 +680,23 @@ def gen_entity_loot():
         "random_sequence": rid("entities/echo_golem")})
     write_json(f"{D}/loot_table/entities/singer.json", {"type": "minecraft:entity", "pools": [], "random_sequence": rid("entities/singer")})
 
+    def drops(name, *entries):
+        pools = []
+        for item, lo, hi, chance in entries:
+            pool = {"rolls": 1, "entries": [{"type": "minecraft:item", "name": item, "modifier": [
+                {"type": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": lo, "max": hi}}]}]}
+            if chance < 1:
+                pool["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance}]
+            pools.append(pool)
+        write_json(f"{D}/loot_table/entities/{name}.json", {"type": "minecraft:entity", "pools": pools, "random_sequence": rid(f"entities/{name}")})
+    drops("seedling", (rid("teal_sprouts"), 0, 2, 1))
+    drops("nester", ("minecraft:stick", 1, 3, 1), (rid("teal_sprouts"), 0, 1, 1))
+    drops("pollinator", (rid("pollen_glob"), 1, 2, 1))
+    drops("sentinel", (rid("sentinel_quill"), 1, 3, 1))
+    drops("sprout", (rid("soul_shard"), 1, 1, 0.5), (rid("lullaby_bloom"), 0, 1, 1))
+    drops("harmonizer", (rid("soul_shard"), 3, 6, 1), (rid("lullaby_bloom"), 2, 4, 1), (rid("sentinel_quill"), 2, 5, 1))
+    drops("scavenger", (rid("soul_shard"), 0, 2, 1), ("minecraft:echo_shard", 1, 1, 0.1))
+
 
 # ============================================================================ advancements
 def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True, any_of=False):
@@ -659,6 +772,13 @@ def gen_advancements():
     adv("echo_golem", "singer", "minecraft:soul_lantern", {"shard": interacted(rid("echo_golem"), "minecraft:echo_shard")})
     adv("golem_portal", "echo_golem", "minecraft:reinforced_deepslate", {"woke": sift_event("golem_woke_portal")}, frame="goal")
     adv("prowler", "enter_sift", "minecraft:echo_shard", {"killed": killed(rid("sculk_prowler"))})
+    adv("scavenger", "prowler", rid("soul_bolt"), {"killed": killed(rid("scavenger"))})
+    # the sifters
+    sifters = ["seedling", "nester", "pollinator", "sentinel", "sprout", "harmonizer"]
+    adv("sifter", "enter_sift", rid("sentinel_quill"), {m: killed(rid(m)) for m in sifters[:5]}, any_of=True)
+    adv("sprout_enrage", "sifter", rid("lullaby_bloom"), {"enraged": sift_event("sifters_enraged")})
+    adv("harmonizer", "sprout_enrage", rid("harmonizer_spawn_egg"), {"killed": killed(rid("harmonizer"))}, frame="goal")
+    adv("all_sifters", "harmonizer", rid("pollen_glob"), {m: killed(rid(m)) for m in sifters}, frame="challenge")
 
 
 # ============================================================================ dimension + worldgen
@@ -898,6 +1018,10 @@ def gen_biomes():
     nuzzle = (rid("nuzzle"), 8, 2, 4)
     slabber = (rid("slabber"), 5, 1, 2)
     golem = (rid("echo_golem"), 2, 1, 1)
+    # the sifters (any light; they are the Sift's own) and the scavenger
+    seedling, nester, pollinator = (rid("seedling"), 40, 2, 4), (rid("nester"), 25, 1, 2), (rid("pollinator"), 20, 1, 2)
+    sentinel, sprout, harmonizer = (rid("sentinel"), 25, 1, 2), (rid("sprout"), 12, 1, 1), (rid("harmonizer"), 1, 1, 1)
+    scavenger = (rid("scavenger"), 60, 1, 2)
     common = ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]
 
     # Features in the same step must appear in the same relative order in every biome (else "feature order cycle").
@@ -923,22 +1047,26 @@ def gen_biomes():
 
     veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",
                   "sift_unbound:patch_teal_sprouts", "sift_unbound:pallid_trees_sparse"]
-    biome("sift_meadows", 0.6, veg_meadow, local=["sift_unbound:soulshale_monoliths"], spawn=spawns(creature=[blub, nuzzle, slabber, golem], monster=[prowler], ambient=[wisp]))
+    biome("sift_meadows", 0.6, veg_meadow, local=["sift_unbound:soulshale_monoliths"], spawn=spawns(creature=[blub, nuzzle, slabber, golem],
+          monster=[prowler, seedling, nester, pollinator, sentinel, sprout, harmonizer], ambient=[wisp]))
     biome("pallid_grove", 0.5, ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:patch_short_sift_grass",
                                 "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:sculk_soul"}, "probability": 0.0006}], "modifier": "append"}},
-          spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler], ambient=[(rid("soul_wisp"), 16, 1, 3)]),
+          spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler, (rid("seedling"), 20, 2, 3), (rid("sentinel"), 15, 1, 2), (rid("sprout"), 8, 1, 1)],
+                       ambient=[(rid("soul_wisp"), 16, 1, 3)]),
           local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations_rare"])
     biome("soul_wetlands", 0.7, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_short_sift_grass", "sift_unbound:pallid_trees_sparse"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:soul"}, "probability": 0.0009}], "modifier": "append"}},
-          spawn=spawns(creature=[(rid("blub"), 14, 3, 6), slabber], monster=[(rid("sculk_prowler"), 60, 1, 1)], ambient=[(rid("soul_wisp"), 30, 2, 4)]),
+          spawn=spawns(creature=[(rid("blub"), 14, 3, 6), slabber], monster=[(rid("sculk_prowler"), 60, 1, 1), (rid("pollinator"), 20, 1, 2), (rid("sprout"), 8, 1, 1)],
+                       ambient=[(rid("soul_wisp"), 30, 2, 4)]),
           extra_lakes=True, local=["sift_unbound:sculk_formations_rare"])
     biome("husklands", 1.2, ["sift_unbound:husk_rocks", "sift_unbound:patch_teal_sprouts"],
           local=["sift_unbound:soulshale_monoliths_rare", "sift_unbound:sculk_formations"],
-          spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3)], ambient=[wisp]))
+          spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3), scavenger, (rid("seedling"), 10, 1, 2)], ambient=[wisp]))
     biome("lullaby_hills", 0.9, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom", "sift_unbound:patch_short_sift_grass"],
           local=["sift_unbound:soulshale_monoliths"],
-          spawn=spawns(creature=[blub, nuzzle, golem], monster=[prowler], ambient=[wisp]))
+          spawn=spawns(creature=[blub, nuzzle, golem], monster=[prowler, (rid("seedling"), 30, 2, 4), (rid("nester"), 15, 1, 2), (rid("pollinator"), 15, 1, 2),
+                                                                  (rid("sentinel"), 20, 1, 2), (rid("sprout"), 10, 1, 1), harmonizer], ambient=[wisp]))
 
 
 VANILLA = None

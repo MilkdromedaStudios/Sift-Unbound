@@ -33,6 +33,28 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
   sculk.
 - **Sculk formations**: mounds of red sculk, darkest at the heart, with curved horn-like spires, common in the Humbler
   Huskland and rarer in the Pallid Grove and Ichor Ponds.
+- **The Sifters**, the Sift's own plant-like natives, hostile bands that roam Singer's Meadow and the Lullaby Hills by day
+  and night (hurt one and its band joins in):
+  - **Seedling**: small and quick; it scurries up, lunges and bites, and now and then catches an arrow and eats it.
+  - **Nester**: tall, with a nest on its back; it gallops in on stilt legs, lunges and bites, and sidesteps one blow in four.
+  - **Pollinator**: frog-like; it keeps its distance, puffs up its throat and spits pollen globs that burst into sticky,
+    slowing yellow goo, and lashes out with its tongue up close.
+  - **Sentinel**: bearded and crested; it shakes its head, then looses three homing quills that swing round toward you
+    before flying straight, then stands still for a moment.
+  - **Sprout**: squid-like, drifting on dangling tendrils and glowing turquoise when roused; its **Life Link** beam makes an
+    ally (pollinators first) faster, stronger, tougher and quick to heal until the sprout is hit. With no one to link it
+    whips with its tendrils.
+  - **Harmonizer** (rare mini-boss with a boss bar): a massive sprout whose roar is a shockwave that calls a band of sifters
+    it then strengthens through beams; it slaps with a tentacle and conjures a vortex that drags in anyone on the ground
+    (keep jumping) before it slams down.
+  - Killing a **Sprout or a Harmonizer enrages** every sifter around it for good: faster, harder-hitting, tougher, with
+    glowing purple details, and out for the killer.
+- **Scavenger**: the yellowish, cage-bodied sculker of the Humbler Huskland. Its hands ignite and it hurls two soul bolts
+  that chase their target and burst into pools of soulsickness; get close and it dashes away backwards in a blur of golden
+  afterimages.
+- **Sculkers hunt sifters**: stalkers and scavengers attack any sifter they see.
+- New drops: **Pollen Globs** (throw them: they stick and burst into slowing goo) and **Sentinel Quills**; spawn eggs for
+  all seven; five new guide advancements, from defeating your first sifter to every kind of sifter.
 - **Guide advancements** that teach each mechanic the first time you meet it: humming and playing the melody, the note
   block machine, chiseled soulshale, ichor and soulsickness, both tides, blub jelly, shearing nuzzles, feeding slabbers,
   the Singer, echo golems (and letting one wake a portal), and visiting every region (19 in all). A new

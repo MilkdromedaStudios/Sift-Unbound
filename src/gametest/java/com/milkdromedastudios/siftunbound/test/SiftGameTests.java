@@ -5,7 +5,15 @@ import com.milkdromedastudios.siftunbound.entity.Blub;
 import com.milkdromedastudios.siftunbound.entity.BlubVariant;
 import com.milkdromedastudios.siftunbound.entity.EchoGolem;
 import com.milkdromedastudios.siftunbound.entity.Nuzzle;
+import com.milkdromedastudios.siftunbound.entity.Scavenger;
 import com.milkdromedastudios.siftunbound.entity.Singer;
+import com.milkdromedastudios.siftunbound.entity.projectile.PollenGlob;
+import com.milkdromedastudios.siftunbound.entity.projectile.SoulBolt;
+import com.milkdromedastudios.siftunbound.entity.sifter.AbstractSifter;
+import com.milkdromedastudios.siftunbound.entity.sifter.Harmonizer;
+import com.milkdromedastudios.siftunbound.entity.sifter.Nester;
+import com.milkdromedastudios.siftunbound.entity.sifter.Seedling;
+import com.milkdromedastudios.siftunbound.entity.sifter.Sprout;
 import com.milkdromedastudios.siftunbound.portal.NoteBlockMachine;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
 import com.milkdromedastudios.siftunbound.registry.ModBlocks;
@@ -20,6 +28,7 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
@@ -220,7 +229,8 @@ public class SiftGameTests {
 		ServerAdvancementManager advancements = h.getLevel().getServer().getAdvancements();
 		for (String name : List.of("root", "hum_melody", "note_block_machine", "chiseled_soulshale", "light_portal", "enter_sift",
 			"soulsick", "soul_shard", "tide_endure", "tide_thrive", "explore_sift", "blub_jelly", "blub_friend", "shear_nuzzle",
-			"feed_slabber", "singer", "echo_golem", "golem_portal", "prowler")) {
+			"feed_slabber", "singer", "echo_golem", "golem_portal", "prowler", "scavenger", "sifter", "sprout_enrage", "harmonizer",
+			"all_sifters")) {
 			if (advancements.get(SiftUnbound.id(name)) == null) {
 				h.fail(Component.literal("advancement " + name + " did not load"));
 			}
@@ -293,6 +303,86 @@ public class SiftGameTests {
 			counts[1] += state.is(b) ? 1 : 0;
 		}
 		return counts;
+	}
+
+	/** Killing a Sprout enrages the sifters around it for good: +50% health, and they turn on the killer. */
+	@GameTest(maxTicks = 20)
+	public void sproutDeathEnragesSifters(GameTestHelper h) {
+		ServerLevel level = h.getLevel();
+		Sprout sprout = h.spawn(ModEntities.SPROUT, new BlockPos(4, 2, 4));
+		Seedling a = h.spawn(ModEntities.SEEDLING, new BlockPos(2, 2, 2));
+		Nester b = h.spawn(ModEntities.NESTER, new BlockPos(6, 2, 6));
+		float before = a.getMaxHealth();
+		Pig culprit = h.spawn(EntityTypes.PIG, new BlockPos(1, 2, 6));
+		sprout.hurtServer(level, level.damageSources().mobAttack(culprit), 1000.0F);
+		h.succeedIf(() -> {
+			if (!a.isEnraged() || !b.isEnraged()) {
+				h.fail(Component.literal("nearby sifters were not enraged"));
+			}
+			if (a.getMaxHealth() < before * 1.49F) {
+				h.fail(Component.literal("enraged max health " + a.getMaxHealth() + " (was " + before + ")"));
+			}
+			if (a.getTarget() != culprit) {
+				h.fail(Component.literal("the enraged seedling did not turn on the killer"));
+			}
+		});
+	}
+
+	/** A pollen glob sticks where it lands and bursts into a cloud of slowing yellow goo. */
+	@GameTest(maxTicks = 100)
+	public void pollenGlobBurstsIntoGoo(GameTestHelper h) {
+		h.setBlock(new BlockPos(4, 1, 4), Blocks.STONE);
+		PollenGlob glob = h.spawn(ModEntities.POLLEN_GLOB, new BlockPos(4, 3, 4));
+		glob.setDeltaMovement(0, -0.2, 0);
+		h.succeedWhen(() -> {
+			boolean goo = !h.getEntities(EntityTypes.AREA_EFFECT_CLOUD, new BlockPos(4, 2, 4), 3.0).isEmpty();
+			if (!goo || glob.isAlive()) {
+				h.fail(Component.literal("no goo yet"));
+			}
+		});
+	}
+
+	/** A scavenger's soul bolt bursts into a pool of soulsickness. */
+	@GameTest(maxTicks = 60)
+	public void soulBoltLeavesASoulsicknessPool(GameTestHelper h) {
+		h.setBlock(new BlockPos(4, 1, 4), Blocks.STONE);
+		SoulBolt bolt = h.spawn(ModEntities.SOUL_BOLT, new BlockPos(4, 4, 4));
+		bolt.setDeltaMovement(0, -0.4, 0);
+		h.succeedWhen(() -> {
+			var pools = h.getEntities(EntityTypes.AREA_EFFECT_CLOUD, new BlockPos(4, 2, 4), 3.0);
+			if (pools.isEmpty() || pools.get(0).getParticle() != ParticleTypes.SCULK_SOUL) {
+				h.fail(Component.literal("no soulsickness pool"));
+			}
+		});
+	}
+
+	/** Sculkers hunt sifters. */
+	@GameTest(maxTicks = 100)
+	public void sculkersHuntSifters(GameTestHelper h) {
+		Scavenger scavenger = h.spawn(ModEntities.SCAVENGER, new BlockPos(1, 2, 1));
+		Seedling seedling = h.spawn(ModEntities.SEEDLING, new BlockPos(6, 2, 6));
+		seedling.setNoAi(true);
+		h.succeedWhen(() -> {
+			if (scavenger.getTarget() != seedling) {
+				h.fail(Component.literal("the scavenger has not targeted the seedling"));
+			}
+		});
+	}
+
+	/** The Harmonizer's roar calls a band of sifters. */
+	@GameTest(maxTicks = 120)
+	public void harmonizerRoarSummonsSifters(GameTestHelper h) {
+		Harmonizer harmonizer = h.spawn(ModEntities.HARMONIZER, new BlockPos(4, 2, 4));
+		Pig target = h.spawn(EntityTypes.PIG, new BlockPos(1, 2, 1));
+		target.setNoAi(true);
+		harmonizer.setTarget(target);
+		h.succeedWhen(() -> {
+			int band = h.getLevel().getEntitiesOfClass(AbstractSifter.class, new AABB(h.absolutePos(new BlockPos(4, 2, 4))).inflate(8.0),
+				s -> s != harmonizer).size();
+			if (band < 3) {
+				h.fail(Component.literal("only " + band + " sifters answered the roar"));
+			}
+		});
 	}
 
 	/** Using the tuner on plain blocks does nothing. */

@@ -16,7 +16,8 @@ import net.minecraft.world.entity.Mob;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A renderer for the Sift's newer mobs: a texture chosen from the render state, an optional emissive (glowing) layer,
+ * A renderer for the Sift's newer mobs: a texture chosen from the render state, an optional emissive (glowing) layer
+ * (whose texture may be null when nothing glows, and which can be tinted),
  * baby scaling, and a hook that copies entity fields into {@link SiftMobRenderState}.
  */
 public class SiftMobRenderer<T extends Mob, M extends EntityModel<SiftMobRenderState>> extends MobRenderer<T, SiftMobRenderState, M> {
@@ -69,8 +70,11 @@ public class SiftMobRenderer<T extends Mob, M extends EntityModel<SiftMobRenderS
 
 		@Override
 		public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light, SiftMobRenderState state, float yRot, float xRot) {
-			collector.order(1).submitModel(getParentModel(), state, poseStack, RenderTypes.eyes(glow.apply(state)), light, OverlayTexture.NO_OVERLAY,
-				state.outlineColor);
+			Identifier texture = glow.apply(state);
+			if (texture != null) { // no glow at the moment
+				collector.order(1).submitModel(getParentModel(), state, poseStack, RenderTypes.eyes(texture), light, OverlayTexture.NO_OVERLAY,
+					state.glowTint, null, state.outlineColor);
+			}
 		}
 	}
 }

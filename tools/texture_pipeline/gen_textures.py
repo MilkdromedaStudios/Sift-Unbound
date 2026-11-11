@@ -901,6 +901,330 @@ def gen_wildlife_eggs():
     save(egg(WARDEN_TEAL[2], SOUL_CYAN[4], 244), "item/singer_spawn_egg")
 
 
+# --------------------------------------------------------------------------- the sifters and the scavenger (phase 3)
+SIFTER = ramp([hexrgb("#24423c"), hexrgb("#33594e"), hexrgb("#467562"), hexrgb("#609479"), hexrgb("#86b595")], 5)
+BARK = ramp([hexrgb("#3a2f2a"), hexrgb("#55433a"), hexrgb("#6e5a4b"), hexrgb("#8b745f")], 5)
+CREAM = ramp([hexrgb("#a99f86"), hexrgb("#c6bea3"), hexrgb("#e0d9c0"), hexrgb("#f3eedb")], 4)
+POLLEN = ramp([hexrgb("#c98a1c"), hexrgb("#e2b22c"), hexrgb("#f2d24a"), hexrgb("#fbe98a")], 4)
+GUM = ramp([hexrgb("#5a1f2e"), hexrgb("#8a3445"), hexrgb("#b4525f")], 3)
+SPROUT_SKIN = ramp([hexrgb("#1d4d55"), hexrgb("#246773"), hexrgb("#2f8790"), hexrgb("#45a9aa"), hexrgb("#76cbc4")], 5)
+HARMONY = ramp([hexrgb("#2a1f4a"), hexrgb("#3b2c66"), hexrgb("#4f3f82"), hexrgb("#5f6aa0"), hexrgb("#76a3b8")], 5)
+CAGE = ramp([hexrgb("#7a5a1c"), hexrgb("#a5802c"), hexrgb("#c9a33e"), hexrgb("#e3c55c"), hexrgb("#f2df8c")], 5)
+RAGE = hexrgb("#b45cff")
+TURQ = hexrgb("#5ff0dc")
+
+
+def skin(shades, seed, scale=3, belly=None, dark_edge=False):
+    """A noisy hide; optionally a lighter belly (on the given side) and darker edges."""
+    def f(w, h, side):
+        img = from_levels(value_noise(max(w, 1), max(h, 1), seed + len(side) * 13, scale, 2), shades)
+        px = img.load()
+        if belly and side == belly:
+            for y in range(h):
+                for x in range(1, w - 1):
+                    px[x, y] = shade(px[x, y][:3], 1.18) + (255,)
+        if dark_edge:
+            for x in range(w):
+                px[x, h - 1] = shade(px[x, h - 1][:3], 0.75) + (255,)
+        return img
+    return f
+
+
+def veins(img, seed, color, density=0.035, regions=None):
+    """An emissive layer of thin wandering veins over the opaque pixels (in the given regions, default everywhere)."""
+    out = Image.new("RGBA", img.size, (0, 0, 0, 0)); op = out.load(); ip = img.load()
+    w, h = img.size
+    lv = value_noise(w, h, seed, 6, 2)
+    for y in range(h):
+        for x in range(w):
+            if ip[x, y][3] == 0:
+                continue
+            if regions and not any(x0 <= x < x1 and y0 <= y < y1 for x0, y0, x1, y1 in regions):
+                continue
+            if abs(lv[y, x] - 0.5) < density:
+                op[x, y] = color + (255,)
+    return out
+
+
+def merge(*layers):
+    out = Image.new("RGBA", layers[0].size, (0, 0, 0, 0))
+    for layer in layers:
+        out.alpha_composite(layer)
+    return out
+
+
+def eye_pixels(img, pts, color):
+    """Return a glow layer with just these eye pixels (also painted onto img)."""
+    out = Image.new("RGBA", img.size, (0, 0, 0, 0)); op = out.load(); ip = img.load()
+    for x, y in pts:
+        ip[x, y] = color + (255,)
+        op[x, y] = color + (255,)
+    return out
+
+
+def gen_seedling():
+    """Seedling (64x32). Model in SeedlingModel.java: body (0,0) 7x5x7; jaw (0,12) 7x2x7; legs (28,0) 1x2x1; leaves (32,0) 0x6x4."""
+    img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+
+    def body(w, h, side):
+        p_ = skin(SIFTER, 300)(w, h, side); pp = p_.load()
+        if side == "north":  # the upper teeth along the mouth line
+            for x in range(w):
+                pp[x, h - 1] = (CREAM[3] if x % 2 == 0 else GUM[0]) + (255,)
+        if side == "bottom":
+            for y in range(h):
+                for x in range(w):
+                    pp[x, y] = GUM[1] + (255,)
+        return p_
+    paint_box(img, 0, 0, 7, 5, 7, {"default": body})
+
+    def jaw(w, h, side):
+        p_ = skin(SIFTER, 301)(w, h, side); pp = p_.load()
+        if side == "top":  # inside of the mouth
+            for y in range(h):
+                for x in range(w):
+                    pp[x, y] = (GUM[2] if (x + y) % 5 else GUM[1]) + (255,)
+            for x in range(0, w, 2):
+                pp[x, 0] = CREAM[3] + (255,)
+        if side == "north":
+            for x in range(w):
+                pp[x, 0] = (CREAM[3] if x % 2 else GUM[0]) + (255,)
+        return p_
+    paint_box(img, 0, 12, 7, 2, 7, {"default": jaw})
+    paint_box(img, 28, 0, 1, 2, 1, {"default": BARK[1]})
+    leaf = Image.new("RGBA", (4, 6), (0, 0, 0, 0)); lp = leaf.load()
+    for y in range(6):
+        half = [0, 1, 2, 2, 1, 1][y]
+        for x in range(2 - half, 2 + half):
+            lp[x, y] = (SIFTER[4] if x == 2 else SIFTER[3]) + (255,)
+    img.paste(leaf, (32, 4)); img.paste(leaf.transpose(Image.FLIP_LEFT_RIGHT), (36, 4))
+    eyes = eye_pixels(img, [(9, 8), (12, 8)], POLLEN[3])  # north face of the body: u 7..14, v 7..12
+    save(img, "entity/seedling")
+    save(merge(veins(img, 302, RAGE, 0.04), eye_pixels(Image.new("RGBA", img.size), [(9, 8), (12, 8)], RAGE)), "entity/seedling_rage")
+
+
+def gen_nester():
+    """Nester (64x64). Model in NesterModel.java: body (0,0) 6x6x14; nest (0,20) 7x2x7; neck (40,0) 3x11x3; head (28,20) 5x3x7;
+    jaw (28,30) 4x1x6; legs (52,0) 2x16x2."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    paint_box(img, 0, 0, 6, 6, 14, {"default": skin(SIFTER, 310, belly="bottom")})
+
+    def nest(w, h, side):
+        p_ = from_levels(value_noise(w, h, 311 + len(side), 5, 2), BARK); pp = p_.load(); r = rng(312 + len(side))
+        for _ in range(w * h // 4):  # woven twigs
+            x, y = int(r.integers(w)), int(r.integers(h))
+            pp[x, y] = BARK[4] + (255,)
+        if side == "top":  # seed pods resting in the nest
+            for x, y in ((2, 2), (4, 3), (3, 5)):
+                pp[x, y] = CREAM[3] + (255,); pp[x + 1, y] = CREAM[2] + (255,)
+        return p_
+    paint_box(img, 0, 20, 7, 2, 7, {"default": nest})
+    paint_box(img, 40, 0, 3, 11, 3, {"default": skin(SIFTER, 313)})
+
+    def head(w, h, side):
+        p_ = skin(CREAM, 314, scale=2)(w, h, side); pp = p_.load()
+        if side in ("east", "west"):
+            pp[1, 0] = hexrgb("#1a1414") + (255,)
+        return p_
+    paint_box(img, 28, 20, 5, 3, 7, {"default": head})
+    paint_box(img, 28, 30, 4, 1, 6, {"default": skin(CREAM, 315, scale=2), "top": GUM[1]})
+    paint_box(img, 52, 0, 2, 16, 2, {"default": skin(BARK, 316, scale=2)})
+    eye_pts = [(28 + 7 + 1, 20 + 7), (28 + 7 + 5 + 1, 20 + 7)]  # east/west faces of the head, top row
+    eye_pts = [(29, 27), (41, 27)]
+    save(img, "entity/nester")
+    save(merge(veins(img, 317, RAGE, 0.035), eye_pixels(Image.new("RGBA", img.size), eye_pts, RAGE)), "entity/nester_rage")
+
+
+def gen_pollinator():
+    """Pollinator (64x64). Model in PollinatorModel.java: body (0,0) 10x5x11; flowers (42,0) planes 0x5x6 + 6x5x0 at (42,11);
+    head (0,16) 11x4x6; eyes (34,16) 3x2x3; throat (0,26) 7x3x5; tongue (24,26) 2x1x12; hind legs (0,34) 3x4x6; front legs (18,34) 2x4x2."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+    def spotted(seed):
+        def f(w, h, side):
+            p_ = skin(SIFTER, seed, belly="bottom")(w, h, side); pp = p_.load(); r = rng(seed + 7 + len(side))
+            for _ in range(max(1, w * h // 18)):
+                pp[int(r.integers(w)), int(r.integers(h))] = POLLEN[1] + (255,)
+            return p_
+        return f
+    paint_box(img, 0, 0, 10, 5, 11, {"default": spotted(320)})
+    flower = Image.new("RGBA", (6, 5), (0, 0, 0, 0)); fp = flower.load()
+    for x in range(6):
+        for y in range(2, 5):
+            if x in (1, 4) or y == 4:
+                fp[x, y] = SIFTER[2] + (255,)  # stems
+    for cx in (1, 4):
+        for dx, dy in ((0, 0), (-1, 1), (1, 1), (0, 1)):
+            x, y = cx + dx, dy
+            if 0 <= x < 6:
+                fp[x, y] = POLLEN[3] + (255,)
+        fp[cx, 1] = POLLEN[0] + (255,)
+    for at in ((42, 6), (48, 6), (42, 11), (48, 11)):
+        img.paste(flower, at)
+
+    def head(w, h, side):
+        p_ = spotted(321)(w, h, side); pp = p_.load()
+        if side == "north":  # the wide mouth
+            for x in range(1, w - 1):
+                pp[x, h - 1] = GUM[0] + (255,)
+        return p_
+    paint_box(img, 0, 16, 11, 4, 6, {"default": head})
+
+    def eye(w, h, side):
+        p_ = Image.new("RGBA", (w, h), POLLEN[2] + (255,)); pp = p_.load()
+        if side in ("north", "top"):
+            pp[w // 2, h // 2] = hexrgb("#1a1414") + (255,)
+        return p_
+    paint_box(img, 34, 16, 3, 2, 3, {"default": eye})
+    paint_box(img, 0, 26, 7, 3, 5, {"default": skin(ramp([POLLEN[2], POLLEN[3], CREAM[3]], 3), 322, scale=2)})
+    paint_box(img, 24, 26, 2, 1, 12, {"default": GUM[2]})
+    paint_box(img, 0, 34, 3, 4, 6, {"default": spotted(323)})
+    paint_box(img, 18, 34, 2, 4, 2, {"default": skin(SIFTER, 324)})
+    save(img, "entity/pollinator")
+    save(merge(veins(img, 325, RAGE, 0.04, regions=[(0, 0, 42, 26), (0, 34, 26, 44)]),
+               eye_pixels(Image.new("RGBA", img.size), [(37, 19), (40, 17), (38, 17)], RAGE)), "entity/pollinator_rage")
+
+
+def gen_sentinel():
+    """Sentinel (64x64). Model in SentinelModel.java: body (0,0) 8x10x5; head (26,0) 7x7x7; beard (0,15) 6x9x1;
+    crest (14,15) 0x7x10 (faces at (14,25) and (24,25)); arms (36,15) 3x13x3; legs (48,15) 3x14x3."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    paint_box(img, 0, 0, 8, 10, 5, {"default": skin(SIFTER, 330, belly="north")})
+
+    def head(w, h, side):
+        p_ = skin(SIFTER, 331)(w, h, side); pp = p_.load()
+        if side == "north":
+            for x in (1, 2, 4, 5):
+                pp[x, 3] = hexrgb("#101a18") + (255,)
+        return p_
+    paint_box(img, 26, 0, 7, 7, 7, {"default": head})
+
+    def beard(w, h, side):
+        p_ = Image.new("RGBA", (w, h), (0, 0, 0, 0)); pp = p_.load(); r = rng(332 + len(side))
+        for x in range(w):
+            length = int(r.integers(max(1, h - 4), h + 1)) if h > 1 else h
+            for y in range(length):
+                pp[x, y] = (BARK[1] if (x + y) % 3 else SIFTER[0]) + (255,)
+        return p_
+    paint_box(img, 0, 15, 6, 9, 1, {"default": beard})
+    crest = Image.new("RGBA", (10, 7), (0, 0, 0, 0)); cp = crest.load()
+    for i, x in enumerate(range(0, 10, 2)):  # a fan of quills, longest in the middle
+        tall = [3, 5, 7, 6, 4][i]
+        for y in range(7 - tall, 7):
+            cp[x, y] = (TEAL[3] if y == 7 - tall else CREAM[2 if y % 2 else 3]) + (255,)
+    img.paste(crest, (14, 25)); img.paste(crest.transpose(Image.FLIP_LEFT_RIGHT), (24, 25))
+    paint_box(img, 36, 15, 3, 13, 3, {"default": skin(SIFTER, 333)})
+    paint_box(img, 48, 15, 3, 14, 3, {"default": skin(BARK, 334, scale=2)})
+    eye_pts = [(26 + 7 + 1, 7 + 3), (26 + 7 + 2, 7 + 3), (26 + 7 + 4, 7 + 3), (26 + 7 + 5, 7 + 3)]
+    save(img, "entity/sentinel")
+    save(merge(veins(img, 335, RAGE, 0.035, regions=[(0, 0, 54, 15), (36, 15, 48, 31)]),
+               eye_pixels(Image.new("RGBA", img.size), eye_pts, RAGE)), "entity/sentinel_rage")
+
+
+def sprout_like(name, shades, seed, glow_color):
+    """Sprout (64x64) and the Harmonizer (the same model at twice the size). Model in SproutModel.java: mantle (0,0) 8x9x8;
+    frill (0,17) 10x1x10; tendril (32,0) 1.5x8x1.5; tendril tip (38,0) 1x8x1."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+    def mantle(w, h, side):
+        p_ = skin(shades, seed, scale=2)(w, h, side); pp = p_.load()
+        if side == "north":
+            for x in (2, 5):
+                pp[x, 4] = hexrgb("#0b1416") + (255,); pp[x, 5] = hexrgb("#0b1416") + (255,)
+        return p_
+    paint_box(img, 0, 0, 8, 9, 8, {"default": mantle})
+    paint_box(img, 0, 17, 10, 1, 10, {"default": skin(shades, seed + 1, scale=2)})
+    for u, v, w, h, d in ((32, 0, 2, 8, 2), (38, 0, 1, 8, 1)):
+        paint_box(img, u, v, w, h, d, {"default": skin(shades, seed + 2, scale=1)})
+    base = img.copy()
+    markings = veins(img, seed + 3, glow_color, 0.05, regions=[(0, 0, 32, 28)])
+    eyes = [(8 + 2, 8 + 4), (8 + 5, 8 + 4)]
+    save(img, f"entity/{name}")
+    save(merge(markings, eye_pixels(Image.new("RGBA", img.size), eyes, glow_color),
+               glow_from(base, lambda x, y, c: 32 <= x < 42 and y < 10 and (y + x) % 3 == 0)), f"entity/{name}_glow")
+    save(merge(veins(img, seed + 4, RAGE, 0.05, regions=[(0, 0, 42, 28)]), eye_pixels(Image.new("RGBA", img.size), eyes, RAGE)), f"entity/{name}_rage")
+
+
+def gen_scavenger():
+    """Scavenger (64x64). Model in ScavengerModel.java: cage (0,0) 9x13x6 (see-through between the ribs); soul (30,0) 4x5x3;
+    head (0,19) 5x5x7; arms (44,0) 2x15x2 with hands (52,0) 3x3x3; legs (24,19) 3x14x3."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+    def cage(w, h, side):
+        p_ = Image.new("RGBA", (w, h), (0, 0, 0, 0)); pp = p_.load()
+        lv = value_noise(w, h, 340 + len(side), 3, 2)
+        for y in range(h):
+            for x in range(w):
+                rib = y % 3 == 0 or side in ("top", "bottom")
+                bar = (side in ("north", "south") and x == w // 2) or x in (0, w - 1)
+                if rib or bar:
+                    pp[x, y] = CAGE[min(4, int(lv[y, x] * 5))] + (255,)
+        return p_
+    paint_box(img, 0, 0, 9, 13, 6, {"default": cage})
+    paint_box(img, 30, 0, 4, 5, 3, {"default": skin(SOUL_CYAN[2:], 341, scale=2)})
+
+    def head(w, h, side):
+        p_ = skin(CAGE, 342, scale=2)(w, h, side); pp = p_.load()
+        if side == "north":
+            pp[1, 1] = hexrgb("#fff6c8") + (255,); pp[3, 1] = hexrgb("#fff6c8") + (255,)
+            for x in range(w):
+                pp[x, h - 2] = hexrgb("#2a1f0a") + (255,)
+        return p_
+    paint_box(img, 0, 19, 5, 5, 7, {"default": head})
+    paint_box(img, 44, 0, 2, 15, 2, {"default": skin(CAGE, 343, scale=2)})
+    paint_box(img, 52, 0, 3, 3, 3, {"default": skin(ramp([CAGE[0], CAGE[2]], 3), 344, scale=1)})
+    paint_box(img, 24, 19, 3, 14, 3, {"default": skin(CAGE, 345, scale=2)})
+    save(img, "entity/scavenger")
+    save(glow_from(img, lambda x, y, c: (30 <= x < 44 and y < 8) or c[:3] == hexrgb("#fff6c8") or (52 <= x < 64 and y < 6 and (x + y) % 2 == 0)),
+         "entity/scavenger_glow")
+
+
+def gen_sifter_items():
+    # pollen glob: a sticky yellow blob
+    g = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); d = ImageDraw.Draw(g)
+    d.ellipse([3, 4, 12, 12], fill=POLLEN[2] + (255,)); d.ellipse([5, 3, 10, 8], fill=POLLEN[3] + (255,))
+    d.point([(6, 5), (7, 4)], fill=(255, 255, 240, 255)); d.point([(9, 12), (10, 13)], fill=POLLEN[1] + (255,))
+    save(outline(g, shade(POLLEN[0], 0.6)), "item/pollen_glob")
+    # sentinel quill: a long pale quill with a teal tip
+    q = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); qp = q.load()
+    for i in range(2, 14):
+        qp[i, 15 - i] = (TEAL[3] if i > 11 else CREAM[3 if i % 2 else 2]) + (255,)
+        if 3 < i < 11:
+            qp[i - 1, 15 - i] = CREAM[1] + (255,)
+    save(outline(q, BARK[0]), "item/sentinel_quill")
+    # soul bolt: a glowing orb of souls
+    b = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.ellipse([2, 2, 13, 13], fill=SOUL_CYAN[1] + (255,)); d.ellipse([4, 4, 11, 11], fill=SOUL_CYAN[3] + (255,))
+    d.ellipse([6, 6, 9, 9], fill=SOUL_CYAN[5] + (255,))
+    save(b, "item/soul_bolt")
+
+
+def gen_sifter_eggs():
+    def egg(base, spots, seed):
+        e = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); d = ImageDraw.Draw(e)
+        d.ellipse([3, 1, 12, 14], fill=base + (255,))
+        r = rng(seed)
+        for _ in range(7):
+            x, y = int(r.integers(5, 11)), int(r.integers(3, 13))
+            d.rectangle([x, y, x + 1, y], fill=spots + (255,))
+        e.putpixel((5, 4), shade(base, 1.3) + (255,))
+        return outline(e, shade(base, 0.45))
+    save(egg(SIFTER[2], GUM[2], 351), "item/seedling_spawn_egg")
+    save(egg(SIFTER[1], BARK[3], 352), "item/nester_spawn_egg")
+    save(egg(SIFTER[3], POLLEN[2], 353), "item/pollinator_spawn_egg")
+    save(egg(SIFTER[2], CREAM[3], 354), "item/sentinel_spawn_egg")
+    save(egg(SPROUT_SKIN[2], TURQ, 355), "item/sprout_spawn_egg")
+    save(egg(HARMONY[2], RAGE, 356), "item/harmonizer_spawn_egg")
+    save(egg(CAGE[2], SOUL_CYAN[3], 357), "item/scavenger_spawn_egg")
+
+
+def gen_sifters():
+    gen_seedling(); gen_nester(); gen_pollinator(); gen_sentinel()
+    sprout_like("sprout", SPROUT_SKIN, 360, TURQ)
+    sprout_like("harmonizer", HARMONY, 370, hexrgb("#c07cff"))
+    gen_scavenger(); gen_sifter_items(); gen_sifter_eggs()
+
+
 def preview():
     tiles = [(n, im) for n, im in GENERATED]
     cell = 72
@@ -924,5 +1248,6 @@ if __name__ == "__main__":
     gen_terrain(); gen_soulshale(); gen_plants(); gen_wood(); gen_fluids(); gen_portal()
     gen_items(); gen_blub(); gen_wisp(); gen_prowler(); gen_misc()
     gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer(); gen_wildlife_eggs()
+    gen_sifters()
     preview()
     print(f"generated {len(GENERATED)} textures")

@@ -192,6 +192,267 @@
     ],
     "subtitle": "subtitles.sift_unbound.singer.ambient"
   },
+  "entity.seedling.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:seedling/ambient1"
+      },
+      {
+        "name": "sift_unbound:seedling/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.seedling.ambient"
+  },
+  "entity.seedling.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:seedling/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.seedling.hurt"
+  },
+  "entity.seedling.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:seedling/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.seedling.death"
+  },
+  "entity.nester.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nester/ambient1"
+      },
+      {
+        "name": "sift_unbound:nester/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nester.ambient"
+  },
+  "entity.nester.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nester/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nester.hurt"
+  },
+  "entity.nester.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nester/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nester.death"
+  },
+  "entity.pollinator.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:pollinator/ambient1"
+      },
+      {
+        "name": "sift_unbound:pollinator/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.pollinator.ambient"
+  },
+  "entity.pollinator.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:pollinator/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.pollinator.hurt"
+  },
+  "entity.pollinator.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:pollinator/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.pollinator.death"
+  },
+  "entity.sentinel.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sentinel/ambient1"
+      },
+      {
+        "name": "sift_unbound:sentinel/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sentinel.ambient"
+  },
+  "entity.sentinel.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sentinel/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sentinel.hurt"
+  },
+  "entity.sentinel.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sentinel/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sentinel.death"
+  },
+  "entity.sprout.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sprout/ambient1"
+      },
+      {
+        "name": "sift_unbound:sprout/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sprout.ambient"
+  },
+  "entity.sprout.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sprout/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sprout.hurt"
+  },
+  "entity.sprout.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sprout/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sprout.death"
+  },
+  "entity.harmonizer.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:harmonizer/ambient1"
+      },
+      {
+        "name": "sift_unbound:harmonizer/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.harmonizer.ambient"
+  },
+  "entity.harmonizer.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:harmonizer/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.harmonizer.hurt"
+  },
+  "entity.harmonizer.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:harmonizer/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.harmonizer.death"
+  },
+  "entity.scavenger.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:scavenger/ambient1"
+      },
+      {
+        "name": "sift_unbound:scavenger/ambient2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.scavenger.ambient"
+  },
+  "entity.scavenger.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:scavenger/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.scavenger.hurt"
+  },
+  "entity.scavenger.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:scavenger/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.scavenger.death"
+  },
+  "entity.pollinator.puff": {
+    "sounds": [
+      {
+        "name": "sift_unbound:pollinator/puff"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.pollinator.puff"
+  },
+  "entity.sentinel.shake": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sentinel/shake"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sentinel.shake"
+  },
+  "entity.sentinel.quills": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sentinel/quills"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sentinel.quills"
+  },
+  "entity.sprout.link": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sprout/link"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sprout.link"
+  },
+  "entity.harmonizer.roar": {
+    "sounds": [
+      {
+        "name": "sift_unbound:harmonizer/roar"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.harmonizer.roar"
+  },
+  "entity.scavenger.cast": {
+    "sounds": [
+      {
+        "name": "sift_unbound:scavenger/cast"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.scavenger.cast"
+  },
+  "entity.scavenger.dash": {
+    "sounds": [
+      {
+        "name": "sift_unbound:scavenger/dash"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.scavenger.dash"
+  },
+  "entity.sifter.enrage": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sifter/enrage"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sifter.enrage"
+  },
+  "entity.sifter.dodge": {
+    "sounds": [
+      {
+        "name": "sift_unbound:sifter/dodge"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.sifter.dodge"
+  },
   "block.soul_water.ambient": {
     "sounds": [
       {

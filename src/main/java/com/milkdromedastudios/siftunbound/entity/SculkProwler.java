@@ -1,5 +1,6 @@
 package com.milkdromedastudios.siftunbound.entity;
 
+import com.milkdromedastudios.siftunbound.entity.sifter.AbstractSifter;
 import com.milkdromedastudios.siftunbound.world.SiftTides;
 import java.util.EnumSet;
 import net.minecraft.core.particles.ParticleTypes;
@@ -88,6 +89,7 @@ public class SculkProwler extends Monster {
 		goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractSifter.class, true)); // sculkers hunt sifters
 	}
 
 	@Override

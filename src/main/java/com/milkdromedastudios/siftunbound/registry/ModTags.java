@@ -16,6 +16,8 @@ public final class ModTags {
 	public static final TagKey<Item> NUZZLE_FOOD = TagKey.create(Registries.ITEM, SiftUnbound.id("nuzzle_food"));
 	public static final TagKey<Item> SLABBER_FOOD = TagKey.create(Registries.ITEM, SiftUnbound.id("slabber_food"));
 	public static final TagKey<Fluid> SOUL_WATER = TagKey.create(Registries.FLUID, SiftUnbound.id("soul_water"));
+	/** The sculkers (stalkers, scavengers, ...): their soul bolts pass through one another. */
+	public static final TagKey<EntityType<?>> SCULKERS = TagKey.create(Registries.ENTITY_TYPE, SiftUnbound.id("sculkers"));
 	public static final TagKey<EntityType<?>> SOUL_WATER_IMMUNE = TagKey.create(Registries.ENTITY_TYPE, SiftUnbound.id("soul_water_immune"));
 
 	private ModTags() {
