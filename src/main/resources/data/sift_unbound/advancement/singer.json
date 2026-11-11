@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:sculk_catalyst"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.singer.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.singer.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sang": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "sift_unbound:singer"
+          }
+        }
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

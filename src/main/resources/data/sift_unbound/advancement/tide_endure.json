@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:sculk_shrieker"
+    },
+    "title": {
+      "translate": "advancements.sift_unbound.tide_endure.title"
+    },
+    "description": {
+      "translate": "advancements.sift_unbound.tide_endure.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "endure": {
+      "trigger": "sift_unbound:sift_event",
+      "conditions": {
+        "event": "tide_endure"
+      }
+    }
+  },
+  "parent": "sift_unbound:enter_sift"
+}

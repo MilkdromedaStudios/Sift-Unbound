@@ -2,11 +2,13 @@ package com.milkdromedastudios.siftunbound.item;
 
 import com.milkdromedastudios.siftunbound.portal.NoteBlockMachine;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +40,9 @@ public class EchoTunerItem extends Item {
 			NoteBlockMachine.hum(server, player.position());
 			player.sendOverlayMessage(Component.translatable("message.sift_unbound.melody", NoteBlockMachine.melodyText()));
 			player.getCooldowns().addCooldown(player.getItemInHand(hand), 60);
+			if (player instanceof ServerPlayer serverPlayer) {
+				ModCriteria.award(serverPlayer, ModCriteria.HUMMED_MELODY);
+			}
 		}
 		return InteractionResult.SUCCESS;
 	}

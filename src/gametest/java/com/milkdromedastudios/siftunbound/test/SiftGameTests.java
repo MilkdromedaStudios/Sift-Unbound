@@ -1,5 +1,6 @@
 package com.milkdromedastudios.siftunbound.test;
 
+import com.milkdromedastudios.siftunbound.SiftUnbound;
 import com.milkdromedastudios.siftunbound.entity.Blub;
 import com.milkdromedastudios.siftunbound.entity.BlubVariant;
 import com.milkdromedastudios.siftunbound.entity.EchoGolem;
@@ -8,16 +9,21 @@ import com.milkdromedastudios.siftunbound.entity.Singer;
 import com.milkdromedastudios.siftunbound.portal.NoteBlockMachine;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
 import com.milkdromedastudios.siftunbound.registry.ModBlocks;
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModEffects;
 import com.milkdromedastudios.siftunbound.registry.ModEntities;
 import com.milkdromedastudios.siftunbound.registry.ModItems;
+import java.util.List;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -199,6 +205,33 @@ public class SiftGameTests {
 				h.fail(Component.literal("the singer took damage"));
 			}
 		});
+	}
+
+	/** Every guide advancement loads, and the mod's sift_event trigger awards them. */
+	@GameTest(maxTicks = 20)
+	public void guideAdvancementsLoadAndAward(GameTestHelper h) {
+		ServerAdvancementManager advancements = h.getLevel().getServer().getAdvancements();
+		for (String name : List.of("root", "hum_melody", "note_block_machine", "chiseled_soulshale", "light_portal", "enter_sift",
+			"soulsick", "soul_shard", "tide_endure", "tide_thrive", "explore_sift", "blub_jelly", "blub_friend", "shear_nuzzle",
+			"feed_slabber", "singer", "echo_golem", "golem_portal", "prowler")) {
+			if (advancements.get(SiftUnbound.id(name)) == null) {
+				h.fail(Component.literal("advancement " + name + " did not load"));
+			}
+		}
+		ServerPlayer player = h.makeMockServerPlayerInLevel();
+		AdvancementHolder hum = advancements.get(SiftUnbound.id("hum_melody"));
+		AdvancementHolder thrive = advancements.get(SiftUnbound.id("tide_thrive"));
+		ModCriteria.award(player, ModCriteria.HUMMED_MELODY);
+		boolean humDone = player.getAdvancements().getOrStartProgress(hum).isDone();
+		boolean thriveDone = player.getAdvancements().getOrStartProgress(thrive).isDone();
+		h.getLevel().getServer().getPlayerList().remove(player);
+		if (!humDone) {
+			h.fail(Component.literal("the hummed_melody event did not award Hum Along"));
+		}
+		if (thriveDone) {
+			h.fail(Component.literal("an unrelated event awarded Thrive"));
+		}
+		h.succeed();
 	}
 
 	/** Using the tuner on plain blocks does nothing. */

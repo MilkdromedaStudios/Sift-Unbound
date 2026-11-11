@@ -28,6 +28,10 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
     then (or when you ask), and creates echo golems.
 - **The Singer's Portal**: the first return portal in the Sift is ringed with red sculk and tall grass, with the Singer
   and two echo golems standing by.
+- **Guide advancements** that teach each mechanic the first time you meet it: humming and playing the melody, the note
+  block machine, chiseled soulshale, ichor and soulsickness, both tides, blub jelly, shearing nuzzles, feeding slabbers,
+  the Singer, echo golems (and letting one wake a portal), and visiting every region (19 in all). A new
+  `sift_unbound:sift_event` trigger lets datapacks hook the same moments.
 
 ### Changed
 - **Soul Water is now Ichor**, the Sift's liquid in Dungeons II: thick and slow like lava (it flows 4 blocks instead of 8),
@@ -37,7 +41,7 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
 - **Blubs are true to the official ones**: they can't be hurt (only `/kill` and the void get through) or pushed.
 - The **Sculk Prowler is now the Stalker**, the official clawed sculker: 30 health, a double claw strike, and a lunge
   from up to 10 blocks away that leaves a trail of souls. Existing worlds keep their stalkers.
-- The light-the-portal advancement also counts the note block machine.
+- The light-the-portal advancement also counts the note block machine and echo golems.
 
 ## [0.2.0] - 2026-11-10
 

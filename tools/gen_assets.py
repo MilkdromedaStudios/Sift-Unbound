@@ -360,18 +360,42 @@ LANG = {
     # advancements
     "advancements.sift_unbound.root.title": "The Sift Unbound",
     "advancements.sift_unbound.root.description": "Craft an Echo Tuner from echo shards found in ancient cities",
+    "advancements.sift_unbound.hum_melody.title": "Hum Along",
+    "advancements.sift_unbound.hum_melody.description": "Sneak and use the Echo Tuner to hum the Sift's melody and see its notes",
+    "advancements.sift_unbound.note_block_machine.title": "Note Block Machine",
+    "advancements.sift_unbound.note_block_machine.description": "Play the melody (F♯ A C♯ B A E C♯ F♯) on eight note blocks by a Warden Portal. Each right note sends up a soul",
+    "advancements.sift_unbound.chiseled_soulshale.title": "Singer in Stone",
+    "advancements.sift_unbound.chiseled_soulshale.description": "Find Chiseled Soulshale, carved with a singer, in an ancient city chest",
     "advancements.sift_unbound.light_portal.title": "Resonance",
-    "advancements.sift_unbound.light_portal.description": "Awaken the Warden Portal with the Sift's melody",
+    "advancements.sift_unbound.light_portal.description": "Wake a Warden Portal with the Sift's melody: use an Echo Tuner on its frame, or play the melody on note blocks",
     "advancements.sift_unbound.enter_sift.title": "Beyond the Frame",
     "advancements.sift_unbound.enter_sift.description": "Step through the Warden Portal into the Sift",
     "advancements.sift_unbound.soulsick.title": "Ouch!",
-    "advancements.sift_unbound.soulsick.description": "Feel ichor drain your soul",
-    "advancements.sift_unbound.blub_friend.title": "Squeak Squeak",
-    "advancements.sift_unbound.blub_friend.description": "Breed two Blubs with Lullaby Blooms",
+    "advancements.sift_unbound.soulsick.description": "Wade into ichor and feel Soulsickness drain your soul. The Sift's own creatures are immune",
     "advancements.sift_unbound.soul_shard.title": "Crystallized Souls",
     "advancements.sift_unbound.soul_shard.description": "Mine a Soul Shard from Soulshale",
+    "advancements.sift_unbound.tide_endure.title": "Endure",
+    "advancements.sift_unbound.tide_endure.description": "Be in the Sift when the Endure Tide rises: wounds stop mending on their own and monsters grow stronger",
+    "advancements.sift_unbound.tide_thrive.title": "Thrive",
+    "advancements.sift_unbound.tide_thrive.description": "Be in the Sift when the Thrive Tide comes: wounds mend 50% faster. Check the tide any time with /sift tide",
+    "advancements.sift_unbound.blub_jelly.title": "Jelly Squeeze",
+    "advancements.sift_unbound.blub_jelly.description": "Collect Blub Jelly, which blubs shed after a soak in ichor",
+    "advancements.sift_unbound.blub_friend.title": "Squeak Squeak",
+    "advancements.sift_unbound.blub_friend.description": "Breed two Blubs with Lullaby Blooms",
+    "advancements.sift_unbound.shear_nuzzle.title": "Pink and Fluffy",
+    "advancements.sift_unbound.shear_nuzzle.description": "Shear a Nuzzle for pink wool. Its fleece grows back when it grazes Sift grass",
+    "advancements.sift_unbound.feed_slabber.title": "Is That a Rock?",
+    "advancements.sift_unbound.feed_slabber.description": "Feed a Slabber Teal Sprouts. Slabbers doze through the Endure Tide, tucked in like part of the ground",
+    "advancements.sift_unbound.singer.title": "The Singer's Song",
+    "advancements.sift_unbound.singer.description": "Ask the Singer to sing. The healthy warden keeps the Singer's Portal and creates echo golems",
+    "advancements.sift_unbound.echo_golem.title": "Caretaker",
+    "advancements.sift_unbound.echo_golem.description": "Hand an Echo Golem an Echo Shard: it hums the melody, and wakes a dormant Warden Portal nearby. Golems recharge in ichor",
+    "advancements.sift_unbound.golem_portal.title": "Golem at Work",
+    "advancements.sift_unbound.golem_portal.description": "Let an Echo Golem wake a Warden Portal for you",
     "advancements.sift_unbound.prowler.title": "Tide Hunter",
     "advancements.sift_unbound.prowler.description": "Defeat a Stalker, a sculker of the Endure Tide",
+    "advancements.sift_unbound.explore_sift.title": "Sift Explorer",
+    "advancements.sift_unbound.explore_sift.description": "Visit every region of the Sift",
     # commands
     "commands.sift_unbound.credits": "The Sift Unbound - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios.",
 }
@@ -576,18 +600,65 @@ def adv(name, parent, icon, criteria, frame="task", hidden=False, show=True, any
     write_json(f"{D}/advancement/{name}.json", obj)
 
 
+def is_entity(entity_type):
+    return {"type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:entity_type": entity_type}}
+
+
+def killed(entity_type):
+    return {"trigger": "minecraft:player_killed_entity", "conditions": {"entity": is_entity(entity_type)}}
+
+
+def has_item(item):
+    return {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": item}]}}
+
+
+def interacted(entity_type, item=None):
+    conditions = {"entity": is_entity(entity_type)}
+    if item:
+        conditions["item"] = {"items": item}
+    return {"trigger": "minecraft:player_interacted_with_entity", "conditions": conditions}
+
+
+def sift_event(event):
+    """The mod's own trigger (ModCriteria): things no vanilla trigger sees, such as the melody or the tides."""
+    return {"trigger": rid("sift_event"), "conditions": {"event": event}}
+
+
+def in_biome(biome):
+    return {"trigger": "minecraft:location", "conditions": {"player": {
+        "type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:location": {"biomes": biome}}}}}
+
+
 def gen_advancements():
-    adv("root", None, rid("echo_tuner"), {"has_tuner": {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": rid("echo_tuner")}]}}})
-    # awakened with the Echo Tuner, or by playing the melody on a note block machine and stepping into the portal
+    """A guide: each advancement teaches one of the Sift's mechanics the first time the player meets it."""
+    adv("root", None, rid("echo_tuner"), {"has_tuner": has_item(rid("echo_tuner"))})
+    # the melody
+    adv("hum_melody", "root", "minecraft:music_disc_5", {"hummed": sift_event("hummed_melody")})
+    adv("note_block_machine", "hum_melody", "minecraft:note_block", {"played": sift_event("played_melody")}, frame="goal")
+    adv("chiseled_soulshale", "root", rid("chiseled_soulshale"), {"found": has_item(rid("chiseled_soulshale"))})
+    # awakened with the Echo Tuner, the note block machine or an echo golem (or just stepping into a lit portal)
     adv("light_portal", "root", "minecraft:reinforced_deepslate", {
         "lit": {"trigger": "minecraft:item_used_on_block", "conditions": {
             "location": {"type": "minecraft:match_tool", "predicate": {"items": rid("echo_tuner")}}}},
+        "played": sift_event("played_melody"),
+        "golem": sift_event("golem_woke_portal"),
         "touched": {"trigger": "minecraft:enter_block", "conditions": {"block": rid("sift_portal")}}}, frame="goal", any_of=True)
     adv("enter_sift", "light_portal", rid("sift_grass_block"), {"entered": {"trigger": "minecraft:changed_dimension", "conditions": {"to": rid("the_sift")}}}, frame="challenge")
+    # the land
     adv("soulsick", "enter_sift", rid("soul_water_bucket"), {"sick": {"trigger": "minecraft:effects_changed", "conditions": {"effects": {rid("soulsick"): {}}}}})
-    adv("blub_friend", "enter_sift", rid("lullaby_bloom"), {"bred": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:entity_type": rid("blub")}}}}})
-    adv("soul_shard", "enter_sift", rid("soul_shard"), {"shard": {"trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items": rid("soul_shard")}]}}})
-    adv("prowler", "enter_sift", "minecraft:echo_shard", {"killed": {"trigger": "minecraft:player_killed_entity", "conditions": {"entity": {"type": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:entity_type": rid("sculk_prowler")}}}}})
+    adv("soul_shard", "enter_sift", rid("soul_shard"), {"shard": has_item(rid("soul_shard"))})
+    adv("tide_endure", "enter_sift", "minecraft:sculk_shrieker", {"endure": sift_event("tide_endure")})
+    adv("tide_thrive", "tide_endure", "minecraft:glistering_melon_slice", {"thrive": sift_event("tide_thrive")})
+    adv("explore_sift", "enter_sift", "minecraft:recovery_compass", {b: in_biome(rid(b)) for b in BIOMES}, frame="challenge")
+    # its creatures
+    adv("blub_jelly", "enter_sift", rid("blub_jelly"), {"jelly": has_item(rid("blub_jelly"))})
+    adv("blub_friend", "blub_jelly", rid("lullaby_bloom"), {"bred": {"trigger": "minecraft:bred_animals", "conditions": {"child": is_entity(rid("blub"))}}})
+    adv("shear_nuzzle", "enter_sift", "minecraft:shears", {"sheared": sift_event("sheared_nuzzle")})
+    adv("feed_slabber", "enter_sift", rid("teal_sprouts"), {"fed": interacted(rid("slabber"), "#" + rid("slabber_food"))})
+    adv("singer", "enter_sift", "minecraft:sculk_catalyst", {"sang": interacted(rid("singer"))})
+    adv("echo_golem", "singer", "minecraft:soul_lantern", {"shard": interacted(rid("echo_golem"), "minecraft:echo_shard")})
+    adv("golem_portal", "echo_golem", "minecraft:reinforced_deepslate", {"woke": sift_event("golem_woke_portal")}, frame="goal")
+    adv("prowler", "enter_sift", "minecraft:echo_shard", {"killed": killed(rid("sculk_prowler"))})
 
 
 # ============================================================================ dimension + worldgen

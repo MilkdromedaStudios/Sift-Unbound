@@ -1,6 +1,7 @@
 package com.milkdromedastudios.siftunbound.world;
 
 import com.milkdromedastudios.siftunbound.portal.SiftTravel;
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -85,6 +86,9 @@ public final class SiftTides {
 		Component message = Component.translatable("message.sift_unbound.tide." + tide.name().toLowerCase(Locale.ROOT));
 		for (ServerPlayer player : level.players()) {
 			player.sendOverlayMessage(message);
+			if (tide != Tide.FLOW) {
+				ModCriteria.award(player, tide == Tide.ENDURE ? ModCriteria.TIDE_ENDURE : ModCriteria.TIDE_THRIVE);
+			}
 			level.playSound(null, player.getX(), player.getY(), player.getZ(),
 				tide == Tide.ENDURE ? SoundEvents.SCULK_SHRIEKER_SHRIEK : SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.AMBIENT,
 				0.6F, tide == Tide.ENDURE ? 0.6F : 1.2F);

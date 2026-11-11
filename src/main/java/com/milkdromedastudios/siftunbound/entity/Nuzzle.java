@@ -2,6 +2,7 @@ package com.milkdromedastudios.siftunbound.entity;
 
 import com.milkdromedastudios.siftunbound.SiftUnbound;
 import com.milkdromedastudios.siftunbound.registry.ModBlocks;
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModEntities;
 import com.milkdromedastudios.siftunbound.registry.ModSounds;
 import com.milkdromedastudios.siftunbound.registry.ModTags;
@@ -13,6 +14,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -144,6 +146,9 @@ public class Nuzzle extends Animal implements Shearable {
 				shear(server, SoundSource.PLAYERS, stack);
 				gameEvent(GameEvent.SHEAR, player);
 				stack.hurtAndBreak(1, player, hand.asEquipmentSlot());
+				if (player instanceof ServerPlayer serverPlayer) {
+					ModCriteria.award(serverPlayer, ModCriteria.SHEARED_NUZZLE);
+				}
 				return InteractionResult.SUCCESS_SERVER;
 			}
 			return InteractionResult.CONSUME;

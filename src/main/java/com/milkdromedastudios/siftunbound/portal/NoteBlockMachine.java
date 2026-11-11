@@ -1,5 +1,6 @@
 package com.milkdromedastudios.siftunbound.portal;
 
+import com.milkdromedastudios.siftunbound.registry.ModCriteria;
 import com.milkdromedastudios.siftunbound.registry.ModSounds;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public final class NoteBlockMachine {
 	private static final String[] NAMES = {"F♯", "G", "G♯", "A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F"};
 	private static final long WINDOW = 20 * 20;
 	private static final int SEARCH_RADIUS = 24;
+	/** Players this close to a portal when the melody wakes it are credited with it. */
+	private static final double AWARD_RADIUS = 32;
 
 	private record Played(BlockPos pos, int note, long time) {
 	}
@@ -106,6 +109,7 @@ public final class NoteBlockMachine {
 			List<BlockPos> blocks = recent.stream().map(Played::pos).toList();
 			if (wakeNearestPortal(level, blocks)) {
 				recent.clear();
+				ModCriteria.awardNearby(level, centre(blocks), AWARD_RADIUS, ModCriteria.PLAYED_MELODY);
 			}
 		}
 	}
@@ -137,7 +141,11 @@ public final class NoteBlockMachine {
 
 	/** Wakes the nearest dormant Warden Portal around {@code pos} (used by echo golems). */
 	public static boolean wakePortalNear(ServerLevel level, BlockPos pos) {
-		return wakeNearestPortal(level, List.of(pos));
+		if (!wakeNearestPortal(level, List.of(pos))) {
+			return false;
+		}
+		ModCriteria.awardNearby(level, pos, AWARD_RADIUS, ModCriteria.GOLEM_WOKE_PORTAL);
+		return true;
 	}
 
 	/** Whether a complete, still dormant Warden Portal frame is within reach of {@code pos}. */
