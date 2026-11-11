@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-11-11
+
 ### Fixed
 - **Sift Unbound Shaders** looked almost like vanilla: the light was too even for shadows to show, and the sky and fog were
   the game's own. Sunlight is now much stronger than the shade, shadows are darker (90% by default), the sky is a
