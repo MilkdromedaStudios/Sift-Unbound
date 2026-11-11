@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-11
+
 ### Changed
 - **Sift Unbound Shaders** now comes with every release: the zip of the Iris shader pack is attached to each GitHub
   release next to the mod jar, with the same version number, and each CI build uploads it as an artifact. Changing
