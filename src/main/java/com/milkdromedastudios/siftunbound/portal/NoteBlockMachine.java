@@ -127,7 +127,28 @@ public final class NoteBlockMachine {
 
 	/** Finds a complete Warden Portal frame near the note blocks and lights it. */
 	static boolean wakeNearestPortal(ServerLevel level, List<BlockPos> noteBlocks) {
-		BlockPos centre = centre(noteBlocks);
+		Optional<Found> found = findDormant(level, centre(noteBlocks));
+		if (found.isPresent() && WardenPortal.tryLight(level, found.get().start()) == WardenPortal.Result.LIT) {
+			celebrate(level, noteBlocks, found.get().shape());
+			return true;
+		}
+		return false;
+	}
+
+	/** Wakes the nearest dormant Warden Portal around {@code pos} (used by echo golems). */
+	public static boolean wakePortalNear(ServerLevel level, BlockPos pos) {
+		return wakeNearestPortal(level, List.of(pos));
+	}
+
+	/** Whether a complete, still dormant Warden Portal frame is within reach of {@code pos}. */
+	public static boolean dormantPortalNear(ServerLevel level, BlockPos pos) {
+		return findDormant(level, pos).isPresent();
+	}
+
+	private record Found(BlockPos start, WardenPortal.Shape shape) {
+	}
+
+	private static Optional<Found> findDormant(ServerLevel level, BlockPos centre) {
 		List<BlockPos> frames = new ArrayList<>();
 		for (BlockPos p : BlockPos.betweenClosed(centre.offset(-SEARCH_RADIUS, -8, -SEARCH_RADIUS), centre.offset(SEARCH_RADIUS, 12, SEARCH_RADIUS))) {
 			if (WardenPortal.isFrame(level.getBlockState(p))) {
@@ -143,16 +164,15 @@ public final class NoteBlockMachine {
 					continue;
 				}
 				Optional<WardenPortal.Shape> shape = WardenPortal.find(level, start);
-				if (shape.isPresent() && WardenPortal.tryLight(level, start) == WardenPortal.Result.LIT) {
-					celebrate(level, noteBlocks, shape.get());
-					return true;
+				if (shape.isPresent() && !level.getBlockState(shape.get().bottomLeft()).is(com.milkdromedastudios.siftunbound.registry.ModBlocks.SIFT_PORTAL)) {
+					return Optional.of(new Found(start, shape.get()));
 				}
 			}
 			if (++tries > 48) {
 				break;
 			}
 		}
-		return false;
+		return Optional.empty();
 	}
 
 	private static void celebrate(ServerLevel level, List<BlockPos> noteBlocks, WardenPortal.Shape shape) {

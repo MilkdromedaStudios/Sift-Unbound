@@ -2,6 +2,9 @@ package com.milkdromedastudios.siftunbound.test;
 
 import com.milkdromedastudios.siftunbound.entity.Blub;
 import com.milkdromedastudios.siftunbound.entity.BlubVariant;
+import com.milkdromedastudios.siftunbound.entity.EchoGolem;
+import com.milkdromedastudios.siftunbound.entity.Nuzzle;
+import com.milkdromedastudios.siftunbound.entity.Singer;
 import com.milkdromedastudios.siftunbound.portal.NoteBlockMachine;
 import com.milkdromedastudios.siftunbound.portal.WardenPortal;
 import com.milkdromedastudios.siftunbound.registry.ModBlocks;
@@ -19,12 +22,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 
 public class SiftGameTests {
 	/** Frame position inside minecraft:ancient_city/city_center/city_center_1 (found by reading the template). */
@@ -143,6 +149,54 @@ public class SiftGameTests {
 		h.succeedIf(() -> {
 			if (blub.isAlive()) {
 				h.fail(Component.literal("/kill damage should still work"));
+			}
+		});
+	}
+
+	/** Nuzzles are sheared for pink wool like sheep, and can't be sheared twice until they graze. */
+	@GameTest(maxTicks = 40)
+	public void nuzzleShearsForPinkWool(GameTestHelper h) {
+		Nuzzle nuzzle = h.spawn(ModEntities.NUZZLE, new BlockPos(3, 2, 3));
+		Player player = h.makeMockPlayer(GameType.SURVIVAL);
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.SHEARS));
+		nuzzle.mobInteract(player, InteractionHand.MAIN_HAND);
+		if (!nuzzle.isSheared() || nuzzle.readyForShearing()) {
+			h.fail(Component.literal("nuzzle should be sheared"));
+		}
+		h.succeedWhen(() -> {
+			boolean wool = h.getLevel().getEntities(EntityTypes.ITEM, new AABB(h.absolutePos(new BlockPos(3, 2, 3))).inflate(4.0),
+				e -> e.getItem().is(Items.WOOL.pick(DyeColor.PINK))).size() > 0;
+			if (!wool) {
+				h.fail(Component.literal("no pink wool dropped"));
+			}
+		});
+	}
+
+	/** Handed an echo shard near a dormant Warden Portal, an echo golem sings the melody and wakes it. */
+	@GameTest(maxTicks = 160)
+	public void echoGolemWakesThePortal(GameTestHelper h) {
+		BlockPos base = new BlockPos(3, 2, 3);
+		frame(h, base, Direction.EAST, 2, 3);
+		EchoGolem golem = h.spawn(ModEntities.ECHO_GOLEM, new BlockPos(3, 2, 6));
+		Player player = h.makeMockPlayer(GameType.SURVIVAL);
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.ECHO_SHARD, 2));
+		golem.mobInteract(player, InteractionHand.MAIN_HAND);
+		if (player.getItemInHand(InteractionHand.MAIN_HAND).getCount() != 1) {
+			h.fail(Component.literal("the golem should take one echo shard"));
+		}
+		h.succeedWhen(() -> h.assertBlockPresent(ModBlocks.SIFT_PORTAL, base));
+	}
+
+	/** The Singer can't be hurt, and sings when asked. */
+	@GameTest(maxTicks = 20)
+	public void singerCannotBeHurt(GameTestHelper h) {
+		Singer singer = h.spawn(ModEntities.SINGER, new BlockPos(3, 2, 3));
+		ServerLevel level = h.getLevel();
+		singer.hurtServer(level, level.damageSources().playerAttack(h.makeMockPlayer(GameType.SURVIVAL)), 50.0F);
+		singer.mobInteract(h.makeMockPlayer(GameType.SURVIVAL), InteractionHand.MAIN_HAND);
+		h.succeedIf(() -> {
+			if (singer.getHealth() < singer.getMaxHealth()) {
+				h.fail(Component.literal("the singer took damage"));
 			}
 		});
 	}

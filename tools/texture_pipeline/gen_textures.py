@@ -707,6 +707,200 @@ def gen_misc():
     path = os.path.join(ASSETS, "icon.png"); icon.save(path); GENERATED.append(("icon", icon))
 
 
+# --------------------------------------------------------------------------- Sift wildlife (0.3.0)
+GOLEM = ramp([hexrgb("#4d5a50"), hexrgb("#66776a"), hexrgb("#7f9483"), hexrgb("#9cb09f"), hexrgb("#b8c9b9")], 5)
+WARDEN_TEAL = ramp([hexrgb("#0f3a40"), hexrgb("#17545a"), hexrgb("#1f6a6c"), hexrgb("#2c837f"), hexrgb("#47a59a")], 5)
+FLEECE = ramp([hexrgb("#c45a66"), hexrgb("#dc7882"), hexrgb("#ec96a0"), hexrgb("#f6b7bd"), hexrgb("#fcd6d8")], 5)
+
+
+def glow_from(img, test):
+    """An emissive layer holding only the pixels for which test(x, y, rgba) is true."""
+    out = Image.new("RGBA", img.size, (0, 0, 0, 0)); op = out.load(); ip = img.load()
+    for y in range(img.size[1]):
+        for x in range(img.size[0]):
+            c = ip[x, y]
+            if c[3] and test(x, y, c):
+                op[x, y] = c
+    return out
+
+
+def fleece(seed):
+    def f(w, h, side):
+        lv = np.clip(value_noise(w, h, seed + len(side), 2, 3) * 0.7 + value_noise(w, h, seed + 9, 1, 1) * 0.3, 0, 1)
+        return from_levels(lv * 0.8 + 0.2, FLEECE)
+    return f
+
+
+def gen_nuzzle():
+    """Nuzzle (64x64). Model in NuzzleModel.java: body (0,0) 8x8x12; head (0,20) 6x6x6; legs (24,20) 3x7x3;
+    ears (36,20) 1x5x3; tuft (44,20) 4x2x4. Sheared variant shows the soft teal skin under the fleece."""
+    skin = ramp([TEAL[1], TEAL[2], TEAL[3]], 4)
+    for name, sheared in (("nuzzle", False), ("nuzzle_sheared", True)):
+        img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+        paint_box(img, 0, 0, 8, 8, 12, {"default": textured(skin, 201, 3) if sheared else fleece(200)})
+
+        def face(w, h, side, sheared=sheared):
+            p_ = textured(skin, 202, 2)(w, h, side); pp = p_.load()
+            if side == "top" and not sheared:
+                p_ = fleece(203)(w, h, side)
+            if side == "north":
+                for x, y in ((1, 2), (1, 3), (4, 2), (4, 3)):
+                    pp[x, y] = (24, 28, 36, 255)
+                pp[1, 2] = (230, 245, 245, 255); pp[4, 2] = (230, 245, 245, 255)  # eye glints
+                pp[2, 5] = FLEECE[0] + (255,); pp[3, 5] = FLEECE[0] + (255,)       # nose
+            return p_
+        paint_box(img, 0, 20, 6, 6, 6, {"default": face})
+
+        def leg(w, h, side):
+            p_ = textured(skin, 204, 2)(w, h, side)
+            if side not in ("top", "bottom"):
+                for x in range(w):
+                    p_.putpixel((x, h - 1), (40, 44, 52, 255))
+            return p_
+        paint_box(img, 24, 20, 3, 7, 3, {"default": leg})
+        paint_box(img, 36, 20, 1, 5, 3, {"default": textured(skin, 205, 2) if sheared else fleece(205)})
+        paint_box(img, 44, 20, 4, 2, 4, {"default": fleece(206) if not sheared else textured(skin, 206, 2)})
+        save(img, f"entity/{name}")
+
+
+def gen_slabber():
+    """Slabber (64x64). Model in SlabberModel.java: shell (0,0) 14x5x14; head (0,19) 4x4x5; legs (18,19) 3x3x3.
+    The shell is a slab of mossy soulshale (its codename was "Camo"), so asleep it passes for part of the ground."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+    def shell(w, h, side):
+        if side == "top":
+            p_ = from_levels(value_noise(w, h, 210, 3, 2), SHALE[1:]); pp = p_.load()
+            moss = value_noise(w, h, 211, 3, 2)
+            for y in range(h):
+                for x in range(w):
+                    if moss[y, x] > 0.58:
+                        pp[x, y] = TEAL[2 if moss[y, x] < 0.75 else 3] + (255,)
+            r = rng(212)
+            for _ in range(5):
+                pp[int(r.integers(w)), int(r.integers(h))] = GRASS[3] + (255,)
+            return p_
+        if side == "bottom":
+            return from_levels(value_noise(w, h, 213, 2, 1), HUSK[1:])
+        p_ = from_levels(value_noise(w, h, 214 + len(side), 4, 2), SHALE[:4]); pp = p_.load()
+        for x in range(w):  # slab edge: a light top band and the half-slab seam
+            pp[x, 0] = SHALE[4] + (255,)
+            pp[x, h // 2] = SHALE[0] + (255,)
+        return p_
+    paint_box(img, 0, 0, 14, 5, 14, {"default": shell})
+    skin = ramp([hexrgb("#5d6b6b"), hexrgb("#748585"), hexrgb("#8d9e9b")], 4)
+
+    def head(w, h, side):
+        p_ = textured(skin, 215, 2)(w, h, side)
+        if side == "north":
+            p_.putpixel((0, 1), (20, 24, 28, 255)); p_.putpixel((3, 1), (20, 24, 28, 255))
+            p_.putpixel((1, 3), shade(skin[0], 0.7) + (255,)); p_.putpixel((2, 3), shade(skin[0], 0.7) + (255,))
+        return p_
+    paint_box(img, 0, 19, 4, 4, 5, {"default": head})
+    paint_box(img, 18, 19, 3, 3, 3, {"default": textured(ramp([skin[0], skin[1]], 3), 216, 2)})
+    save(img, "entity/slabber")
+
+
+def gen_echo_golem():
+    """Echo golem (64x64). Model in EchoGolemModel.java: body (0,0) 10x10x8; soul-block head (36,0) 6x6x6;
+    arms (0,18) 3x10x3; legs (12,18) 3x6x3. Glow layer: the soul block's veins and eyes."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+
+    def body(w, h, side):
+        p_ = textured(GOLEM, 220, 3)(w, h, side); pp = p_.load()
+        if side == "north":  # a soft, slightly darker belly
+            for y in range(3, h - 1):
+                for x in range(2, w - 2):
+                    c = pp[x, y]
+                    pp[x, y] = shade(c[:3], 0.88) + (255,)
+        return p_
+    paint_box(img, 0, 0, 10, 10, 8, {"default": body})
+
+    def soul_block(w, h, side):
+        p_ = from_levels(value_noise(w, h, 221 + len(side), 2, 2), SHALE[:3]); pp = p_.load()
+        r = rng(222 + len(side))
+        x, y = int(r.integers(w)), int(r.integers(h))
+        for _ in range(8):  # a glowing soul vein wandering across each face
+            pp[x % w, y % h] = SOUL_CYAN[3] + (255,)
+            x += int(r.integers(-1, 2)); y += int(r.integers(-1, 2))
+        if side == "north":
+            for ex in (1, 4):
+                pp[ex, 2] = SOUL_CYAN[5] + (255,); pp[ex, 3] = SOUL_CYAN[4] + (255,)
+        return p_
+    paint_box(img, 36, 0, 6, 6, 6, {"default": soul_block})
+    paint_box(img, 0, 18, 3, 10, 3, {"default": textured(GOLEM, 223, 2)})
+    paint_box(img, 12, 18, 3, 6, 3, {"default": textured(ramp(GOLEM[:3], 3), 224, 2)})
+    save(img, "entity/echo_golem")
+    save(glow_from(img, lambda x, y, c: 36 <= x < 60 and y < 12 and c[1] > 150), "entity/echo_golem_glow")
+
+
+def gen_singer():
+    """Singer (128x64). Model in SingerModel.java: torso (0,0) 12x16x7; head (38,0) 10x10x8; arms (74,0) 4x18x4;
+    legs (90,0) 4x13x4; horns (106,0) 3x8x1. A healthy warden: teal where the warden is dark, with pale ribs and a soul
+    glowing in its chest, singing with its mouth open. Glow layer: the soul, the mouth and the horn tips."""
+    img = Image.new("RGBA", (128, 64), (0, 0, 0, 0))
+
+    def torso(w, h, side):
+        p_ = textured(WARDEN_TEAL, 230, 3)(w, h, side); pp = p_.load()
+        if side == "north":
+            for ry in (3, 6, 9):  # pale ribs
+                for x in list(range(1, 4)) + list(range(w - 4, w - 1)):
+                    pp[x, ry] = WARDEN_TEAL[4] + (255,)
+            for y in range(4, 9):  # the soul in its chest
+                for x in range(4, 8):
+                    pp[x, y] = SOUL_CYAN[5 if 5 <= y <= 7 and 5 <= x <= 6 else 3] + (255,)
+        return p_
+    paint_box(img, 0, 0, 12, 16, 7, {"default": torso})
+
+    def head(w, h, side):
+        p_ = textured(WARDEN_TEAL, 231, 3)(w, h, side); pp = p_.load()
+        if side == "north":  # open singing mouth with a soft glow inside; small pale cheek marks
+            for y in range(5, 9):
+                for x in range(3, 7):
+                    pp[x, y] = (10, 26, 30, 255)
+            for x in range(4, 6):
+                pp[x, 7] = SOUL_CYAN[3] + (255,)
+            pp[1, 4] = WARDEN_TEAL[4] + (255,); pp[8, 4] = WARDEN_TEAL[4] + (255,)
+        return p_
+    paint_box(img, 38, 0, 10, 10, 8, {"default": head})
+
+    def limb(seed):
+        def f(w, h, side):
+            p_ = textured(WARDEN_TEAL, seed, 3)(w, h, side); pp = p_.load()
+            if side not in ("top", "bottom"):
+                for x in range(w):
+                    pp[x, h - 1] = WARDEN_TEAL[0] + (255,)
+                    pp[x, h - 2] = WARDEN_TEAL[1] + (255,)
+            return p_
+        return f
+    paint_box(img, 74, 0, 4, 18, 4, {"default": limb(232)})
+    paint_box(img, 90, 0, 4, 13, 4, {"default": limb(233)})
+
+    def horn(w, h, side):
+        lv = np.tile(np.linspace(0, 1, h)[:, None], (1, w))
+        p_ = from_levels(1 - lv, [WARDEN_TEAL[3], WARDEN_TEAL[4], SOUL_CYAN[3], SOUL_CYAN[4]])
+        return p_
+    paint_box(img, 106, 0, 3, 8, 1, {"default": horn})
+    save(img, "entity/singer")
+    save(glow_from(img, lambda x, y, c: c[1] > 190 and c[2] > 190), "entity/singer_glow")
+
+
+def gen_wildlife_eggs():
+    def egg(base, spots, seed):
+        e = Image.new("RGBA", (16, 16), (0, 0, 0, 0)); d = ImageDraw.Draw(e)
+        d.ellipse([3, 1, 12, 14], fill=base + (255,))
+        r = rng(seed)
+        for _ in range(7):
+            x, y = int(r.integers(5, 11)), int(r.integers(3, 13))
+            d.rectangle([x, y, x + 1, y], fill=spots + (255,))
+        e.putpixel((5, 4), shade(base, 1.3) + (255,))
+        return outline(e, shade(base, 0.45))
+    save(egg(FLEECE[2], TEAL[2], 241), "item/nuzzle_spawn_egg")
+    save(egg(SHALE[2], TEAL[3], 242), "item/slabber_spawn_egg")
+    save(egg(GOLEM[2], SOUL_CYAN[3], 243), "item/echo_golem_spawn_egg")
+    save(egg(WARDEN_TEAL[2], SOUL_CYAN[4], 244), "item/singer_spawn_egg")
+
+
 def preview():
     tiles = [(n, im) for n, im in GENERATED]
     cell = 72
@@ -729,5 +923,6 @@ def preview():
 if __name__ == "__main__":
     gen_terrain(); gen_soulshale(); gen_plants(); gen_wood(); gen_fluids(); gen_portal()
     gen_items(); gen_blub(); gen_wisp(); gen_prowler(); gen_misc()
+    gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer(); gen_wildlife_eggs()
     preview()
     print(f"generated {len(GENERATED)} textures")

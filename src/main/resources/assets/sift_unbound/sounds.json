@@ -97,6 +97,101 @@
     ],
     "subtitle": "subtitles.sift_unbound.sculk_prowler.death"
   },
+  "entity.nuzzle.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nuzzle/hum1"
+      },
+      {
+        "name": "sift_unbound:nuzzle/hum2"
+      },
+      {
+        "name": "sift_unbound:nuzzle/hum3"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nuzzle.ambient"
+  },
+  "entity.nuzzle.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nuzzle/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nuzzle.hurt"
+  },
+  "entity.nuzzle.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:nuzzle/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.nuzzle.death"
+  },
+  "entity.slabber.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:slabber/grunt1"
+      },
+      {
+        "name": "sift_unbound:slabber/grunt2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.slabber.ambient"
+  },
+  "entity.slabber.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:slabber/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.slabber.hurt"
+  },
+  "entity.slabber.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:slabber/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.slabber.death"
+  },
+  "entity.echo_golem.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:echo_golem/hum1"
+      },
+      {
+        "name": "sift_unbound:echo_golem/hum2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.echo_golem.ambient"
+  },
+  "entity.echo_golem.hurt": {
+    "sounds": [
+      {
+        "name": "sift_unbound:echo_golem/hurt"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.echo_golem.hurt"
+  },
+  "entity.echo_golem.death": {
+    "sounds": [
+      {
+        "name": "sift_unbound:echo_golem/death"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.echo_golem.death"
+  },
+  "entity.singer.ambient": {
+    "sounds": [
+      {
+        "name": "sift_unbound:singer/song1"
+      },
+      {
+        "name": "sift_unbound:singer/song2"
+      }
+    ],
+    "subtitle": "subtitles.sift_unbound.singer.ambient"
+  },
   "block.soul_water.ambient": {
     "sounds": [
       {

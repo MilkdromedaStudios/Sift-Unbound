@@ -4,6 +4,10 @@
     "sift_unbound:blub",
     "sift_unbound:soul_wisp",
     "sift_unbound:sculk_prowler",
+    "sift_unbound:nuzzle",
+    "sift_unbound:slabber",
+    "sift_unbound:echo_golem",
+    "sift_unbound:singer",
     "minecraft:warden"
   ]
 }

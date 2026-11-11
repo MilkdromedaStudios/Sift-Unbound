@@ -92,7 +92,11 @@ public final class SiftTravel {
 		});
 		BlockState platform = level.dimension() == THE_SIFT ? ModBlocks.POLISHED_SOULSHALE.defaultBlockState() : Blocks.POLISHED_DEEPSLATE.defaultBlockState();
 		SiftUnbound.LOGGER.debug("Building a Sift portal in {} at {}", level.dimension().identifier(), base);
-		return WardenPortal.buildSmallPortal(level, base, axis, platform);
+		WardenPortal.Shape shape = WardenPortal.buildSmallPortal(level, base, axis, platform);
+		if (level.dimension() == THE_SIFT) {
+			SingersPortal.decorate(level, shape);
+		}
+		return shape;
 	}
 
 	/**

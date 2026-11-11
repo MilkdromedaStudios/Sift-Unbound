@@ -234,7 +234,8 @@ def gen_handmade_blocks():
 
 def gen_items():
     for n in ["echo_tuner", "soul_shard", "blub_jelly", "soul_water_bucket", "blub_bucket",
-              "blub_spawn_egg", "sculk_prowler_spawn_egg", "soul_wisp_spawn_egg"]:
+              "blub_spawn_egg", "sculk_prowler_spawn_egg", "soul_wisp_spawn_egg",
+              "nuzzle_spawn_egg", "slabber_spawn_egg", "echo_golem_spawn_egg", "singer_spawn_egg"]:
         flat_item(n)
 
 
@@ -293,10 +294,18 @@ LANG = {
     "item.sift_unbound.blub_spawn_egg": "Blub Spawn Egg",
     "item.sift_unbound.sculk_prowler_spawn_egg": "Stalker Spawn Egg",
     "item.sift_unbound.soul_wisp_spawn_egg": "Soul Wisp Spawn Egg",
+    "item.sift_unbound.nuzzle_spawn_egg": "Nuzzle Spawn Egg",
+    "item.sift_unbound.slabber_spawn_egg": "Slabber Spawn Egg",
+    "item.sift_unbound.echo_golem_spawn_egg": "Echo Golem Spawn Egg",
+    "item.sift_unbound.singer_spawn_egg": "Singer Spawn Egg",
     # entities
     "entity.sift_unbound.blub": "Blub",
     "entity.sift_unbound.sculk_prowler": "Stalker",
     "entity.sift_unbound.soul_wisp": "Soul Wisp",
+    "entity.sift_unbound.nuzzle": "Nuzzle",
+    "entity.sift_unbound.slabber": "Slabber",
+    "entity.sift_unbound.echo_golem": "Echo Golem",
+    "entity.sift_unbound.singer": "Singer",
     # effect
     "effect.sift_unbound.soulsick": "Soulsick",
     "death.attack.sift_unbound.soulsick": "%1$s had their soul drained away",
@@ -311,6 +320,7 @@ LANG = {
     "message.sift_unbound.portal.lit": "The Warden Portal hums awake...",
     "message.sift_unbound.portal.machine": "The note blocks ring out the Sift's melody. The Warden Portal hums awake...",
     "message.sift_unbound.melody": "The Sift's melody: %s. Play it on eight note blocks in front of a Warden Portal frame.",
+    "message.sift_unbound.singer": "The Singer sings the Sift's melody: %s",
     "message.sift_unbound.tide.flow": "The Flow Tide returns",
     "message.sift_unbound.tide.endure": "The Endure Tide rises. Wounds will not mend on their own.",
     "message.sift_unbound.tide.thrive": "The Thrive Tide blooms. Wounds mend quickly.",
@@ -332,6 +342,16 @@ LANG = {
     "subtitles.sift_unbound.sculk_prowler.ambient": "Stalker clicks",
     "subtitles.sift_unbound.sculk_prowler.hurt": "Stalker hurts",
     "subtitles.sift_unbound.sculk_prowler.death": "Stalker dies",
+    "subtitles.sift_unbound.nuzzle.ambient": "Nuzzle hums",
+    "subtitles.sift_unbound.nuzzle.hurt": "Nuzzle hurts",
+    "subtitles.sift_unbound.nuzzle.death": "Nuzzle dies",
+    "subtitles.sift_unbound.slabber.ambient": "Slabber grunts",
+    "subtitles.sift_unbound.slabber.hurt": "Slabber hurts",
+    "subtitles.sift_unbound.slabber.death": "Slabber dies",
+    "subtitles.sift_unbound.echo_golem.ambient": "Echo Golem resonates",
+    "subtitles.sift_unbound.echo_golem.hurt": "Echo Golem hurts",
+    "subtitles.sift_unbound.echo_golem.death": "Echo Golem falls silent",
+    "subtitles.sift_unbound.singer.ambient": "Singer sings",
     "subtitles.sift_unbound.soul_water.ambient": "Ichor bubbles",
     "subtitles.sift_unbound.soul_water.burn": "Soul drains",
     "subtitles.sift_unbound.sift_portal.ambient": "Sift Portal hums",
@@ -373,6 +393,16 @@ SOUNDS = {
     "entity.sculk_prowler.ambient": ["sculk_prowler/click1", "sculk_prowler/click2"],
     "entity.sculk_prowler.hurt": ["sculk_prowler/hurt"],
     "entity.sculk_prowler.death": ["sculk_prowler/death"],
+    "entity.nuzzle.ambient": ["nuzzle/hum1", "nuzzle/hum2", "nuzzle/hum3"],
+    "entity.nuzzle.hurt": ["nuzzle/hurt"],
+    "entity.nuzzle.death": ["nuzzle/death"],
+    "entity.slabber.ambient": ["slabber/grunt1", "slabber/grunt2"],
+    "entity.slabber.hurt": ["slabber/hurt"],
+    "entity.slabber.death": ["slabber/death"],
+    "entity.echo_golem.ambient": ["echo_golem/hum1", "echo_golem/hum2"],
+    "entity.echo_golem.hurt": ["echo_golem/hurt"],
+    "entity.echo_golem.death": ["echo_golem/death"],
+    "entity.singer.ambient": ["singer/song1", "singer/song2"],
     "block.soul_water.ambient": ["soul_water/bubble1", "soul_water/bubble2"],
     "block.soul_water.burn": ["soul_water/burn"],
     "block.sift_portal.ambient": ["portal/hum"],
@@ -421,8 +451,11 @@ def gen_tags():
     tag("block", NS, "sift_ground", GROUND)
     tag("block", NS, "soulshale_ore_replaceables", [rid("soulshale")])
     tag("item", NS, "blub_food", [rid("lullaby_bloom"), rid("teal_sprouts")])
+    tag("item", NS, "nuzzle_food", [rid("short_sift_grass"), rid("tall_sift_grass")])
+    tag("item", NS, "slabber_food", [rid("teal_sprouts")])
     tag("fluid", NS, "soul_water", [rid("soul_water"), rid("flowing_soul_water")])
-    tag("entity_type", NS, "soul_water_immune", [rid("blub"), rid("soul_wisp"), rid("sculk_prowler"), "minecraft:warden"])
+    tag("entity_type", NS, "soul_water_immune", [rid("blub"), rid("soul_wisp"), rid("sculk_prowler"), rid("nuzzle"), rid("slabber"),
+                                                  rid("echo_golem"), rid("singer"), "minecraft:warden"])
     tag("timeline", NS, "in_sift", [rid("sift_tides")])
     tag("worldgen/biome", NS, "is_sift", [rid(b) for b in BIOMES])
 
@@ -511,6 +544,21 @@ def gen_entity_loot():
          "entries": [{"type": "minecraft:item", "name": "minecraft:echo_shard"}]}],
         "random_sequence": rid("entities/sculk_prowler")})
     write_json(f"{D}/loot_table/entities/soul_wisp.json", {"type": "minecraft:entity", "pools": [], "random_sequence": rid("entities/soul_wisp")})
+    write_json(f"{D}/loot_table/entities/nuzzle.json", {"type": "minecraft:entity", "pools": [{"rolls": 1, "entries": [
+        {"type": "minecraft:item", "name": "minecraft:pink_wool"}]}], "random_sequence": rid("entities/nuzzle")})
+    write_json(f"{D}/loot_table/shearing/nuzzle.json", {"type": "minecraft:shearing", "pools": [{"rolls": 1, "entries": [
+        {"type": "minecraft:item", "name": "minecraft:pink_wool", "modifier": [
+            {"type": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": 1, "max": 3}}]}]}],
+        "random_sequence": rid("shearing/nuzzle")})
+    write_json(f"{D}/loot_table/entities/slabber.json", {"type": "minecraft:entity", "pools": [{"rolls": 1, "entries": [
+        {"type": "minecraft:item", "name": rid("cobbled_soulshale"), "modifier": [
+            {"type": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": 1, "max": 2}}]}]}],
+        "random_sequence": rid("entities/slabber")})
+    write_json(f"{D}/loot_table/entities/echo_golem.json", {"type": "minecraft:entity", "pools": [{"rolls": 1, "entries": [
+        {"type": "minecraft:item", "name": rid("soul_shard"), "modifier": [
+            {"type": "minecraft:set_count", "count": {"type": "minecraft:uniform", "min": 1, "max": 3}}]}]}],
+        "random_sequence": rid("entities/echo_golem")})
+    write_json(f"{D}/loot_table/entities/singer.json", {"type": "minecraft:entity", "pools": [], "random_sequence": rid("entities/singer")})
 
 
 # ============================================================================ advancements
@@ -763,6 +811,9 @@ def gen_biomes():
     blub = (rid("blub"), 10, 2, 4)
     prowler = (rid("sculk_prowler"), 100, 1, 2)
     wisp = (rid("soul_wisp"), 10, 1, 3)
+    nuzzle = (rid("nuzzle"), 8, 2, 4)
+    slabber = (rid("slabber"), 5, 1, 2)
+    golem = (rid("echo_golem"), 2, 1, 1)
     common = ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]
 
     # Features in the same step must appear in the same relative order in every biome (else "feature order cycle").
@@ -784,19 +835,19 @@ def gen_biomes():
 
     veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",
                   "sift_unbound:patch_teal_sprouts", "sift_unbound:pallid_trees_sparse"]
-    biome("sift_meadows", 0.6, veg_meadow, spawn=spawns(creature=[blub], monster=[prowler], ambient=[wisp]))
+    biome("sift_meadows", 0.6, veg_meadow, spawn=spawns(creature=[blub, nuzzle, slabber, golem], monster=[prowler], ambient=[wisp]))
     biome("pallid_grove", 0.5, ["sift_unbound:pallid_trees_dense", "sift_unbound:tall_pallid_trees", "sift_unbound:patch_short_sift_grass",
                                 "sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:sculk_soul"}, "probability": 0.0006}], "modifier": "append"}},
           spawn=spawns(creature=[(rid("blub"), 12, 2, 5)], monster=[prowler], ambient=[(rid("soul_wisp"), 16, 1, 3)]))
     biome("soul_wetlands", 0.7, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_short_sift_grass", "sift_unbound:pallid_trees_sparse"],
           extra_attrs={"minecraft:visual/ambient_particles": {"argument": [{"particle": {"type": "minecraft:soul"}, "probability": 0.0009}], "modifier": "append"}},
-          spawn=spawns(creature=[(rid("blub"), 14, 3, 6)], monster=[(rid("sculk_prowler"), 60, 1, 1)], ambient=[(rid("soul_wisp"), 30, 2, 4)]),
+          spawn=spawns(creature=[(rid("blub"), 14, 3, 6), slabber], monster=[(rid("sculk_prowler"), 60, 1, 1)], ambient=[(rid("soul_wisp"), 30, 2, 4)]),
           extra_lakes=True)
     biome("husklands", 1.2, ["sift_unbound:husk_rocks", "sift_unbound:patch_teal_sprouts"],
           spawn=spawns(creature=[(rid("blub"), 6, 1, 3)], monster=[(rid("sculk_prowler"), 120, 1, 3)], ambient=[wisp]))
     biome("lullaby_hills", 0.9, ["sift_unbound:patch_teal_sprouts", "sift_unbound:patch_lullaby_bloom", "sift_unbound:patch_short_sift_grass"],
-          spawn=spawns(creature=[blub], monster=[prowler], ambient=[wisp]))
+          spawn=spawns(creature=[blub, nuzzle, golem], monster=[prowler], ambient=[wisp]))
 
 
 VANILLA = None

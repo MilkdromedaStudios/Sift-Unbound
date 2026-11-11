@@ -238,5 +238,72 @@ def gen_music():
     save("music/sift_lullaby", x, 0.6)
 
 
+# ------------------------------------------------------------------ Sift wildlife (0.3.0)
+def warble(f, dur, depth=0.06, rate=7.0, harm=((1, 1.0), (2, 0.35), (3, 0.12))):
+    """A soft, voiced 'mrr': a few harmonics with vibrato and a gentle envelope."""
+    tt = t(dur)
+    vib = 1 + depth * np.sin(2 * np.pi * rate * tt)
+    ph = 2 * np.pi * np.cumsum(f * vib) / SR
+    x = sum(a * np.sin(k * ph) for k, a in harm)
+    return x * env(len(tt), 0.04, dur * 0.5)
+
+
+def gen_nuzzle():
+    save("nuzzle/hum1", warble(220, 0.5) + 0.3 * lowpass(noise(0.5), 0.9) * env(int(SR * 0.5), 0.05, 0.3), 0.6)
+    save("nuzzle/hum2", np.concatenate([warble(250, 0.25), warble(200, 0.35, depth=0.09)]), 0.6)
+    save("nuzzle/hum3", warble(180, 0.6, depth=0.03, rate=4.5), 0.55)
+    save("nuzzle/hurt", warble(420, 0.25, depth=0.15, rate=18), 0.7)
+    save("nuzzle/death", np.concatenate([warble(330, 0.3, depth=0.12, rate=12), warble(180, 0.5, depth=0.05)]), 0.7)
+
+
+def gen_slabber():
+    def grunt(f, dur, grit=0.5):
+        tt = t(dur)
+        x = chirp(f, f * 0.8, dur, "tri") + grit * lowpass(noise(dur), 0.6)
+        return lowpass(x, 0.85) * env(len(tt), 0.02, dur * 0.6)
+    save("slabber/grunt1", grunt(90, 0.35), 0.6)
+    save("slabber/grunt2", np.concatenate([grunt(80, 0.2), grunt(70, 0.3)]), 0.6)
+    save("slabber/hurt", grunt(140, 0.25, 0.8), 0.7)
+    save("slabber/death", np.concatenate([grunt(120, 0.3, 0.7), grunt(60, 0.6, 0.9)]), 0.7)
+
+
+def gen_echo_golem():
+    def hollow(f, dur):
+        tt = t(dur)
+        x = sum(a * np.sin(2 * np.pi * f * k * tt) for k, a in ((1, 1.0), (1.5, 0.4), (2.02, 0.3), (3.01, 0.1)))
+        return x * env(len(tt), 0.08, dur * 0.6) * (1 + 0.2 * np.sin(2 * np.pi * 3.0 * tt))
+    squish = lowpass(noise(0.18), 0.8) * env(int(SR * 0.18), 0.005, 0.15)
+    save("echo_golem/hum1", layer(1.0, (hollow(196, 0.9), 0, 1.0), (squish, 0.0, 0.4)), 0.55)
+    save("echo_golem/hum2", layer(1.0, (hollow(247, 0.8), 0, 1.0), (hollow(196, 0.5), 0.4, 0.5)), 0.55)
+    save("echo_golem/hurt", layer(0.4, (hollow(330, 0.3), 0, 1.0), (squish, 0, 0.8)), 0.7)
+    save("echo_golem/death", layer(1.4, (hollow(262, 0.5), 0, 1.0), (hollow(196, 0.6), 0.35, 0.8), (hollow(131, 0.7), 0.7, 0.7)), 0.7)
+
+
+def gen_singer():
+    def voice(f, dur, vowel=(700, 1200)):
+        """A sung 'ooh': a buzzy source shaped by two crude formant resonances."""
+        tt = t(dur)
+        vib = 1 + 0.012 * np.sin(2 * np.pi * 5.2 * tt)
+        ph = 2 * np.pi * np.cumsum(f * vib) / SR
+        src = sum(np.sin(k * ph) / k for k in range(1, 12))
+        out = np.zeros_like(src)
+        for fc, gain in ((vowel[0], 1.0), (vowel[1], 0.5)):
+            r = np.exp(-2 * np.pi * 120 / SR); w = 2 * np.pi * fc / SR
+            y1 = y2 = 0.0; y = np.zeros_like(src)
+            for i, xi in enumerate(src):
+                yi = xi + 2 * r * np.cos(w) * y1 - r * r * y2
+                y[i] = yi; y2, y1 = y1, yi
+            out += gain * y / (np.abs(y).max() + 1e-9)
+        return out * env(len(tt), 0.25, dur * 0.5)
+    chord = layer(2.2, (voice(147, 2.0, (500, 900)), 0, 1.0), (voice(220, 1.8, (600, 1000)), 0.2, 0.6), (bell(587, 1.5), 0.5, 0.15))
+    save("singer/song1", chord, 0.55)
+    save("singer/song2", layer(2.0, (voice(165, 1.8, (450, 850)), 0, 1.0), (voice(247, 1.4, (650, 1100)), 0.4, 0.5)), 0.55)
+
+
 if __name__ == "__main__":
-    gen_blub(); gen_wisp(); gen_prowler(); gen_water(); gen_portal(); gen_ambient(); gen_music()
+    import sys
+    if sys.argv[1:] == ["wildlife"]:  # only the 0.3.0 creatures
+        gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()
+    else:
+        gen_blub(); gen_wisp(); gen_prowler(); gen_water(); gen_portal(); gen_ambient(); gen_music()
+        gen_nuzzle(); gen_slabber(); gen_echo_golem(); gen_singer()

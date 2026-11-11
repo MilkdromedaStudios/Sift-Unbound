@@ -49,6 +49,10 @@ public final class ModItems {
 	public static final Item SOUL_WISP_SPAWN_EGG = register("soul_wisp_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SOUL_WISP));
 	public static final Item SCULK_PROWLER_SPAWN_EGG = register("sculk_prowler_spawn_egg", SpawnEggItem::new,
 		new Item.Properties().spawnEgg(ModEntities.SCULK_PROWLER));
+	public static final Item NUZZLE_SPAWN_EGG = register("nuzzle_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.NUZZLE));
+	public static final Item SLABBER_SPAWN_EGG = register("slabber_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SLABBER));
+	public static final Item ECHO_GOLEM_SPAWN_EGG = register("echo_golem_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.ECHO_GOLEM));
+	public static final Item SINGER_SPAWN_EGG = register("singer_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SINGER));
 
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, SiftUnbound.id(name));

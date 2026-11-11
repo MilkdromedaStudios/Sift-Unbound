@@ -18,6 +18,16 @@ public final class ModSounds {
 	public static final SoundEvent SCULK_PROWLER_AMBIENT = register("entity.sculk_prowler.ambient");
 	public static final SoundEvent SCULK_PROWLER_HURT = register("entity.sculk_prowler.hurt");
 	public static final SoundEvent SCULK_PROWLER_DEATH = register("entity.sculk_prowler.death");
+	public static final SoundEvent NUZZLE_AMBIENT = register("entity.nuzzle.ambient");
+	public static final SoundEvent NUZZLE_HURT = register("entity.nuzzle.hurt");
+	public static final SoundEvent NUZZLE_DEATH = register("entity.nuzzle.death");
+	public static final SoundEvent SLABBER_AMBIENT = register("entity.slabber.ambient");
+	public static final SoundEvent SLABBER_HURT = register("entity.slabber.hurt");
+	public static final SoundEvent SLABBER_DEATH = register("entity.slabber.death");
+	public static final SoundEvent ECHO_GOLEM_AMBIENT = register("entity.echo_golem.ambient");
+	public static final SoundEvent ECHO_GOLEM_HURT = register("entity.echo_golem.hurt");
+	public static final SoundEvent ECHO_GOLEM_DEATH = register("entity.echo_golem.death");
+	public static final SoundEvent SINGER_AMBIENT = register("entity.singer.ambient");
 	public static final SoundEvent SOUL_WATER_AMBIENT = register("block.soul_water.ambient");
 	public static final SoundEvent SOUL_WATER_BURN = register("block.soul_water.burn");
 	public static final SoundEvent SIFT_PORTAL_AMBIENT = register("block.sift_portal.ambient");

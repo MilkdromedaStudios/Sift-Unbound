@@ -17,6 +17,17 @@ The Sift, as it really is: this release brings the mod in line with the Sift tha
   chests.
 - Blubs **bathe in ichor**: they wander to nearby pools for a soak and shed **Blub Jelly** when they climb out, and a
   baby blub drops one when it grows up.
+- **The Sift's wildlife**:
+  - **Nuzzle**: the sheep-like grazer of Singer's Meadow. Shear its salmon fleece for pink wool; it grows back when the
+    nuzzle grazes Sift grass. Bred with Sift grass.
+  - **Slabber**: a slow, armoured, turtle-like grazer whose shell is a slab of mossy soulshale. It sleeps through the
+    Endure Tide (the night outside the Sift) and looks just like the ground while it does. Bred with Teal Sprouts.
+  - **Echo Golem**: the Sift's caretaker, powered by the soul block on its head. It runs down slowly and recharges by
+    bathing in ichor. Hand one an Echo Shard near a dormant Warden Portal and it plays the melody and wakes it.
+  - **The Singer**: a healthy warden, keeper of the Singer's Portal. It can't be hurt, sings the Sift's melody now and
+    then (or when you ask), and creates echo golems.
+- **The Singer's Portal**: the first return portal in the Sift is ringed with red sculk and tall grass, with the Singer
+  and two echo golems standing by.
 
 ### Changed
 - **Soul Water is now Ichor**, the Sift's liquid in Dungeons II: thick and slow like lava (it flows 4 blocks instead of 8),
