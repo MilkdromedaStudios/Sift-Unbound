@@ -86,7 +86,7 @@ armor_sets = ("sifter", "humbler", "monarch")
 def png_dimensions(path):
     with open(path, "rb") as image:
         head = image.read(24)
-    if len(head) != 24 or head[:8] != b"\\x89PNG\\r\\n\\x1a\\n" or head[12:16] != b"IHDR":
+    if len(head) != 24 or head[:8] != bytes.fromhex('89504e470d0a1a0a') or head[12:16] != b"IHDR":
         raise ValueError("not a PNG")
     return struct.unpack(">II", head[16:24])
 
