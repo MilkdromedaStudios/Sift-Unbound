@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-12
+
 ### Added
 - Three complete wearable, enchantable and repairable Sift-themed armor sets (Sifter, Humbler and Monarch; 12 pieces), with original inventory pixel-art and armor textures, recipes, item tags, and a wiki guide.
 
