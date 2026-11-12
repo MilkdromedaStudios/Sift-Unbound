@@ -26,6 +26,8 @@ import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
@@ -66,8 +68,32 @@ public final class ModItems {
 	public static final Item SCAVENGER_SPAWN_EGG = register("scavenger_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.SCAVENGER));
 	public static final Item MONARCH_FEATHER = register("monarch_feather", Item::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 	public static final Item MONARCH_SPAWN_EGG = register("monarch_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.MONARCH));
+
+	// SIFTER ARMOR — Dungeons II-inspired, survival-balanced interpretation.
+	public static final Item SIFTER_HOOD = armor("sifter_hood", ModArmorMaterials.SIFTER, ArmorType.HELMET, 16);
+	public static final Item SIFTER_ROBE = armor("sifter_robe", ModArmorMaterials.SIFTER, ArmorType.CHESTPLATE, 16);
+	public static final Item SIFTER_LEGGINGS = armor("sifter_leggings", ModArmorMaterials.SIFTER, ArmorType.LEGGINGS, 16);
+	public static final Item SIFTER_BOOTS = armor("sifter_boots", ModArmorMaterials.SIFTER, ArmorType.BOOTS, 16);
+
+	// HUMBLER ARMOR — Dungeons II-inspired, survival-balanced interpretation.
+	public static final Item HUMBLER_ANTENNA = armor("humbler_antenna", ModArmorMaterials.HUMBLER, ArmorType.HELMET, 24);
+	public static final Item HUMBLER_CARAPACE = armor("humbler_carapace", ModArmorMaterials.HUMBLER, ArmorType.CHESTPLATE, 24);
+	public static final Item HUMBLER_GREAVES = armor("humbler_greaves", ModArmorMaterials.HUMBLER, ArmorType.LEGGINGS, 24);
+	public static final Item HUMBLER_TARSI = armor("humbler_tarsi", ModArmorMaterials.HUMBLER, ArmorType.BOOTS, 24);
+
+	// MONARCH ARMOR — Dungeons II-inspired, survival-balanced interpretation.
+	public static final Item MONARCH_CROWN = armor("monarch_crown", ModArmorMaterials.MONARCH, ArmorType.HELMET, 33);
+	public static final Item MONARCH_MANTLE = armor("monarch_mantle", ModArmorMaterials.MONARCH, ArmorType.CHESTPLATE, 33);
+	public static final Item MONARCH_SASH = armor("monarch_sash", ModArmorMaterials.MONARCH, ArmorType.LEGGINGS, 33);
+	public static final Item MONARCH_TALONS = armor("monarch_talons", ModArmorMaterials.MONARCH, ArmorType.BOOTS, 33);
 	/** Only the look of a Scavenger's soul bolt in flight; not in the creative tab. */
 	public static final Item SOUL_BOLT = registerHidden("soul_bolt");
+
+
+	private static Item armor(String name, ArmorMaterial material, ArmorType type, int baseDurability) {
+		return register(name, Item::new, new Item.Properties().humanoidArmor(material, type)
+			.durability(type.getDurability(baseDurability)));
+	}
 
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, SiftUnbound.id(name));

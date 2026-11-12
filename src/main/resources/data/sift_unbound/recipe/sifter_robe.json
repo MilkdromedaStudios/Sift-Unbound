@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "# #",
+    "#@#",
+    "###"
+  ],
+  "key": {
+    "#": "sift_unbound:teal_sprouts",
+    "@": "sift_unbound:soul_shard"
+  },
+  "result": {
+    "id": "sift_unbound:sifter_robe",
+    "count": 1
+  }
+}

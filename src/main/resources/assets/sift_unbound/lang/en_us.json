@@ -185,7 +185,7 @@
   "advancements.sift_unbound.hum_melody.title": "Hum Along",
   "advancements.sift_unbound.hum_melody.description": "Sneak and use the Echo Tuner to hum the Sift's melody and see its notes",
   "advancements.sift_unbound.note_block_machine.title": "Note Block Machine",
-  "advancements.sift_unbound.note_block_machine.description": "Play the melody (F\u266f A C\u266f B A E C\u266f F\u266f) on eight note blocks by a Warden Portal. Each right note sends up a soul",
+  "advancements.sift_unbound.note_block_machine.description": "Play the melody (F♯ A C♯ B A E C♯ F♯) on eight note blocks by a Warden Portal. Each right note sends up a soul",
   "advancements.sift_unbound.chiseled_soulshale.title": "Singer in Stone",
   "advancements.sift_unbound.chiseled_soulshale.description": "Find Chiseled Soulshale, carved with a singer, in an ancient city chest",
   "advancements.sift_unbound.light_portal.title": "Resonance",
@@ -228,5 +228,17 @@
   "advancements.sift_unbound.scavenger.description": "Defeat a Scavenger. Its soul bolts chase you down and leave pools of soulsickness; get close and it dashes away",
   "advancements.sift_unbound.explore_sift.title": "Sift Explorer",
   "advancements.sift_unbound.explore_sift.description": "Visit every region of the Sift",
-  "commands.sift_unbound.credits": "The Sift Unbound - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios."
+  "commands.sift_unbound.credits": "The Sift Unbound - an unofficial fan mod. The Sift, the Blub, sculk and the ancient city are created by Mojang Studios; Minecraft is a trademark of Mojang Studios / Microsoft. This mod is not affiliated with or endorsed by them. Reference info: minecraft.wiki (CC BY-NC-SA 3.0). All textures and sounds in this mod are original. Made by MilkdromedaStudios.",
+  "item.sift_unbound.sifter_hood": "Sifter Hood",
+  "item.sift_unbound.sifter_robe": "Sifter Robe",
+  "item.sift_unbound.sifter_leggings": "Sifter Leggings",
+  "item.sift_unbound.sifter_boots": "Sifter Boots",
+  "item.sift_unbound.humbler_antenna": "Humbler Antenna",
+  "item.sift_unbound.humbler_carapace": "Humbler Carapace",
+  "item.sift_unbound.humbler_greaves": "Humbler Greaves",
+  "item.sift_unbound.humbler_tarsi": "Humbler Tarsi",
+  "item.sift_unbound.monarch_crown": "Monarch Crown",
+  "item.sift_unbound.monarch_mantle": "Monarch Mantle",
+  "item.sift_unbound.monarch_sash": "Monarch Sash",
+  "item.sift_unbound.monarch_talons": "Monarch Talons"
 }

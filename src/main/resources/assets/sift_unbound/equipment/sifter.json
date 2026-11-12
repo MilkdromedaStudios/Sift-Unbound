@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "sift_unbound:sifter"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "sift_unbound:sifter"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "sift_unbound:sifter"
+      }
+    ]
+  }
+}
