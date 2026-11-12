@@ -75,6 +75,55 @@ for equipment in glob.glob(f"{A}/equipment/*.json"):
                 if not os.path.isfile(png):
                     problems.append(f"missing equipment texture: {os.path.relpath(png, ROOT)}")
 
+
+# Verify Sift equipment completeness and ensure leggings and baby texture atlases do
+# not accidentally reuse the adult atlas. A 64x32 PNG can be syntactically valid yet
+# render nearly invisible if only a couple of pixels have armor artwork.
+import struct
+armor_names = re.findall(r'armor\("([a-z_]+)"', open(f"{JAVA}/ModItems.java").read())
+armor_sets = ("sifter", "humbler", "monarch")
+
+def png_dimensions(path):
+    with open(path, "rb") as image:
+        head = image.read(24)
+    if len(head) != 24 or head[:8] != bytes.fromhex('89504e470d0a1a0a') or head[12:16] != b"IHDR":
+        raise ValueError("not a PNG")
+    return struct.unpack(">II", head[16:24])
+
+for name in armor_names:
+    icon = f"{A}/textures/item/{name}.png"
+    model = f"{A}/models/item/{name}.json"
+    definition = f"{A}/items/{name}.json"
+    recipe = f"{RES}/data/sift_unbound/recipe/{name}.json"
+    if not all(os.path.isfile(p) for p in (icon, model, definition, recipe)):
+        problems.append(f"incomplete armor assets or recipe: {name}")
+        continue
+    try:
+        if png_dimensions(icon) != (16, 16):
+            problems.append(f"armor icon {name}: expected 16x16")
+        obj = json.load(open(recipe))
+        if obj.get("type") != "minecraft:crafting_shaped" or obj.get("result", {}).get("id") != f"sift_unbound:{name}":
+            problems.append(f"incorrect survival recipe: {name}")
+        if not obj.get("pattern") or not obj.get("key"):
+            problems.append(f"empty survival recipe: {name}")
+    except (OSError, ValueError) as exc:
+        problems.append(f"armor {name}: {exc}")
+
+for name in armor_sets:
+    images = {}
+    for layer in ("humanoid", "humanoid_leggings", "humanoid_baby"):
+        location = f"{A}/textures/entity/equipment/{layer}/{name}.png"
+        try:
+            if png_dimensions(location) != (64, 32):
+                problems.append(f"armor atlas {name}/{layer}: expected 64x32")
+            images[layer] = open(location, "rb").read()
+        except (OSError, ValueError) as exc:
+            problems.append(f"armor atlas {name}/{layer}: {exc}")
+    if images.get("humanoid") == images.get("humanoid_leggings"):
+        problems.append(f"{name}: leggings atlas duplicates adult armor (likely invisible leggings)")
+    if images.get("humanoid") == images.get("humanoid_baby"):
+        problems.append(f"{name}: baby armor atlas duplicates adult armor")
+
 if problems:
     print("\n".join(problems))
     print(f"\n{len(problems)} problem(s)")
