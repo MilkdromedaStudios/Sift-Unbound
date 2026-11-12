@@ -52,7 +52,7 @@ for name, has_item in blocks:
         problems.append(f"no blockstate for block {name}")
     if has_item == "true" and not os.path.exists(f"{A}/items/{name}.json"):
         problems.append(f"no item definition for block item {name}")
-for name in re.findall(r'register\("([a-z_]+)"', open(f"{JAVA}/ModItems.java").read()):
+for name in re.findall(r'(?:register|armor)\("([a-z_]+)"', open(f"{JAVA}/ModItems.java").read()):
     if f"item.sift_unbound.{name}" not in lang:
         problems.append(f"no English name for item {name}")
     if not os.path.exists(f"{A}/items/{name}.json"):
@@ -60,6 +60,20 @@ for name in re.findall(r'register\("([a-z_]+)"', open(f"{JAVA}/ModItems.java").r
 for name in re.findall(r'register\("([a-z_]+)",\s*EntityType', open(f"{JAVA}/ModEntities.java").read()):
     if f"entity.sift_unbound.{name}" not in lang:
         problems.append(f"no English name for entity {name}")
+
+# Every equipment asset must reference real armored texture layers, including baby humanoids.
+for equipment in glob.glob(f"{A}/equipment/*.json"):
+    definition = json.load(open(equipment))
+    for layer in ("humanoid", "humanoid_leggings", "humanoid_baby"):
+        entries = definition.get("layers", {}).get(layer, [])
+        if not entries:
+            problems.append(f"missing {layer} layer in {os.path.relpath(equipment, ROOT)}")
+        for entry in entries:
+            texture = entry.get("texture", "")
+            if texture.startswith("sift_unbound:"):
+                png = f"{A}/textures/entity/equipment/{layer}/{texture.split(':', 1)[1]}.png"
+                if not os.path.isfile(png):
+                    problems.append(f"missing equipment texture: {os.path.relpath(png, ROOT)}")
 
 if problems:
     print("\n".join(problems))

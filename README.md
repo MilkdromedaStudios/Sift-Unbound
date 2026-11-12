@@ -19,6 +19,7 @@ Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecr
 * 🐾 **Wildlife** – blubs, nuzzles, slabbers, echo golems and **the Singer** at the Singer's Portal.
 * 🌿 **The Sifters** – seedlings, nesters, pollinators, sentinels and sprouts, the **Harmonizer** mini-boss, and enraging.
 * 🦂 **Sculkers** – stalkers and scavengers, and **the Monarch** boss in its **sculker nest** in the Ravines.
+* 🛡️ **12 wearable armor pieces** – Sifter, Humbler and Monarch sets, with survival crafting, repairs and original pixel art; inspired by *Dungeons II*, **not confirmed** for vanilla Minecraft.
 * 🏆 26 advancements that explain each mechanic as you meet it; all-original textures, models, sounds and music.
 * 🖼 A Sift **title screen**: a 360° panorama of the Lullaby Hills (shot in game with shaders) and Sift splash texts.
 
@@ -27,6 +28,8 @@ Mojang revealed the Sift for *Minecraft Dungeons II* and announced it for Minecr
   [Releases](https://github.com/MilkdromedaStudios/Sift-Unbound/releases) page.
 
 ![The Sift title screen](wiki/screenshots/title_screen.jpg)
+
+See the [Armor & Gear guide](wiki/Armor-and-Gear.md) for crafting and balance. Exact 2027 vanilla recipes, armor and portal access remain unannounced.
 
 Everything (textures, models, sounds, music) is original and made for this project. See the **[GitHub Wiki](https://github.com/MilkdromedaStudios/Sift-Unbound/wiki)**.
 

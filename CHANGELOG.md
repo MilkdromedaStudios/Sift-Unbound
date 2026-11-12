@@ -4,6 +4,13 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Added
+- Three complete wearable, enchantable and repairable Sift-themed armor sets (Sifter, Humbler and Monarch; 12 pieces), with original inventory pixel-art and armor textures, recipes, item tags, and a wiki guide.
+
+### Corrected
+- Research notes no longer present the ancient-city portal, Sift grass names or Soulshale's Sift connection as confirmed for the upcoming vanilla edition.
+- Clearly separate Dungeons II-inspired armor designs from unannounced 2027 Minecraft gameplay.
+
 ## [0.3.3] - 2026-11-11
 
 ### Changed

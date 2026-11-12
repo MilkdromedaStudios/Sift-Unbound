@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "# #",
+    "#@#",
+    "###"
+  ],
+  "key": {
+    "#": "sift_unbound:husk_shell",
+    "@": "sift_unbound:soul_shard"
+  },
+  "result": {
+    "id": "sift_unbound:humbler_carapace",
+    "count": 1
+  }
+}

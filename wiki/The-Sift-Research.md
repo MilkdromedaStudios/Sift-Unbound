@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [The Sift (research)](The-Sift-Research.md) · [Warden Portal](Warden-Portal.md) · [Biomes & Tides](Biomes-and-Tides.md) · [Terrain](Terrain-Blocks.md) · [Soulshale](Soulshale.md) · [Plants](Plants.md) · [Pallid Wood](Pallid-Wood.md) · [Soul Water](Soul-Water.md) · [Mobs](Mobs.md) · [Items](Items.md) · [Advancements](Advancements.md) · [Sounds](Sounds.md) · [Art pipeline](Art-Pipeline.md) · [Credits](Credits.md)
 
-> Compiled on 9 November 2026 from the [Minecraft Wiki](https://minecraft.wiki) (text CC BY-NC-SA 3.0) and Mojang's announcements.
+> Updated on 11 November 2026 from the [Minecraft Wiki](https://minecraft.wiki) (text CC BY-NC-SA 3.0) and Mojang's announcements.
 > Nothing on this page is from game files of an unreleased version. Facts are marked **[vanilla]** (the Sift coming to
 > Minecraft Java & Bedrock) or **[Dungeons II]** (the Sift as it exists today in *Minecraft Dungeons II*). Anything the
 > mod adds on top of these facts is listed in [What the mod adds](#what-the-mod-adds-vs-what-is-official).
@@ -15,15 +15,15 @@
 | 20 Aug 2026 | The dimension's name, **"The Sift"**, is announced with a gameplay trailer (it was codenamed **"Wellspring"**). **[Dungeons II]** | same |
 | 29 Sep 2026 | *Minecraft Dungeons II* releases (Windows, Xbox Series X\|S, PS5, Switch / Switch 2). **[Dungeons II]** | [Minecraft Dungeons II](https://minecraft.wiki/w/Minecraft_Dungeons_II) |
 | 26 Sep 2026 | **Minecraft LIVE – September 2026**: the Sift and the **blub** are announced for Minecraft **Java & Bedrock in 2027**. **[vanilla]** | [The Sift](https://minecraft.wiki/w/The_Sift), [Minecraft LIVE – September 2026](https://minecraft.wiki/w/Minecraft_LIVE_%E2%80%93_September_2026), [video](https://www.youtube.com/watch?v=9njefMDxzqw) |
-| 3 Nov 2026 | **Java Edition 26.4 Snapshot 7** adds **chiseled soulshale**, a Sift-themed decorative block that depicts a *singer*; only found in ancient city chests. **[vanilla]** | [26.4 Snapshot 7](https://minecraft.wiki/w/Java_Edition_26.4_Snapshot_7) |
+| 3 Nov 2026 | **Java Edition 26.4 Snapshot 7** adds **chiseled soulshale**. The block is real in development builds, but Mojang has **not confirmed that it belongs to the Sift**. **[vanilla block; Sift link unconfirmed]** | [26.4 Snapshot 7](https://minecraft.wiki/w/Java_Edition_26.4_Snapshot_7) |
 
 ## The Sift in vanilla Minecraft (planned for 2027)
 
-* A new **dimension** – the first since the End – reached through the ancient city's portal frame (the wiki notes the reinforced-deepslate "portal" leads to the Sift). [Reinforced Deepslate – Trivia](https://minecraft.wiki/w/Reinforced_Deepslate)
+* A new **dimension** – the first since the End. **Access in vanilla is unconfirmed.** An Ancient City frame appears in *Dungeons II*, but Mojang has not announced how the Java/Bedrock entrance will work. [Xbox Wire](https://news.xbox.com/en-us/2026/09/26/minecraft-new-dimension-sift-dungeons-2/)
 * The reveal shows terrain made of **several salmon-coloured blocks** (the audio description calls them orange), "**tufts of soft orange grasses**" under a **teal-blue sky**, and **pale tree-like structures** in the distance.
 * Players on the wiki uploaded renders of a **sift grass block** and **short / tall sift grass** traced from the reveal footage ([File:Sift grass block.png](https://minecraft.wiki/w/File:Sift_grass_block.png), [File:Short sift grass.png](https://minecraft.wiki/w/File:Short_sift_grass.png), [File:Tall sift grass.png](https://minecraft.wiki/w/File:Tall_sift_grass.png)).
 * The only confirmed mob is the **[blub](https://minecraft.wiki/w/Blub)**: a small, rabbit-like, passive mob whose glowing body jiggles as it walks; it squeaks ("creature squeaks" in the captions).
-* **Soulshale** is the only block name confirmed in game code so far (as *chiseled soulshale* in 26.4 Snapshot 7, a dark-teal carved block).
+* **Chiseled Soulshale** appears in 26.4 development builds. Its connection to the Sift is **not confirmed**. Ground blocks visible in Sift footage still lack official names.
 
 ## The Sift in Minecraft Dungeons II (released)
 
@@ -95,12 +95,13 @@ the links go to each file's wiki page. (A private reference ZIP was made for the
 | In the mod | Official? | Notes |
 |---|---|---|
 | Dimension **The Sift** (`sift_unbound:the_sift`) | Name ✔ | Terrain, biomes and sky colours follow the reveal + Dungeons II art; everything else is the mod's guess. |
-| **Warden Portal** = ancient city frame, woken with an **Echo Tuner** | Frame ✔ / tuner ✘ | Dungeons II uses a note block machine; the mod's Echo Tuner "plays the melody". |
+| **Warden Portal** = ancient city frame, woken with an **Echo Tuner** | Unconfirmed for vanilla | Ancient city frame exists, but using it as a Sift gateway is confirmed in Dungeons II only. Echo Tuner is mod original. |
 | **Soul Water** that drains health (**Soulsick**) | Inspired ✔ | The mod's version of ichor ("ouch water"). Blubs, wisps, prowlers and the warden are immune. |
-| Sift Grass Block, Short/Tall Sift Grass | Names ✔ (wiki renders) | Original textures. |
-| Soulshale (+ cobbled, polished, bricks, chiseled…) | Name ✔ (26.4 snapshot) | The full stone family is the mod's. |
+| Sift Grass Block, Short/Tall Sift Grass | Visuals only | The pink/orange grass is visible in the vanilla preview; names are descriptive fan labels, not confirmed Mojang names. |
+| Soulshale (+ cobbled, polished, bricks, chiseled…) | Sift tie unconfirmed | Chiseled Soulshale appears in 26.4 tests; the rest of this stone family is the mod's interpretation. |
 | Sift Sculk, Teal Sprouts, Husk Shell | Inspired ✔ | Red sculk, teal plants and the husks of Humbler Huskland. |
 | Pallid wood set, Lullaby Bloom, Soul Shards | ✘ | Mod originals (names invented). |
 | Flow / Endure / Thrive **tides** | Names ✔ | Implemented as a 24 000-tick sky/fog/light cycle; Endure is dark enough for monsters. |
 | **Blub** (soul, meadows, carapace) | ✔ | Original model, textures and sounds. |
 | **Soul Wisp**, **Sculk Prowler** | ✘ | Mod originals inspired by the souls and sculkers of the Sift. |
+| **Sifter, Humbler and Monarch armor** | Dungeons II names only | Twelve mod-crafted, wearable survival items with original sprites and balance values; [Armor & Gear](Armor-and-Gear.md). No vanilla armor announced. |

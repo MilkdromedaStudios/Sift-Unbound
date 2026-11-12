@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "# #",
+    "#@#",
+    "###"
+  ],
+  "key": {
+    "#": "sift_unbound:monarch_feather",
+    "@": "minecraft:echo_shard"
+  },
+  "result": {
+    "id": "sift_unbound:monarch_mantle",
+    "count": 1
+  }
+}
