@@ -104,5 +104,4 @@ the links go to each file's wiki page. (A private reference ZIP was made for the
 | Flow / Endure / Thrive **tides** | Names ✔ | Implemented as a 24 000-tick sky/fog/light cycle; Endure is dark enough for monsters. |
 | **Blub** (soul, meadows, carapace) | ✔ | Original model, textures and sounds. |
 | **Soul Wisp**, **Sculk Prowler** | ✘ | Mod originals inspired by the souls and sculkers of the Sift. |
-
 | **Sifter, Humbler and Monarch armor** | Dungeons II names only | Twelve mod-crafted, wearable survival items with original sprites and balance values; [Armor & Gear](Armor-and-Gear.md). No vanilla armor announced. |
