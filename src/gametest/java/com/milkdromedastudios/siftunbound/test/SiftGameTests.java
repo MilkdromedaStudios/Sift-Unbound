@@ -40,10 +40,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.GameType;
@@ -566,4 +569,39 @@ public class SiftGameTests {
 			h.assertTrue(plants > 0, Component.literal("bone meal should grow at least one plant"));
 		});
 	}
+
+	/**
+	 * Regression coverage for all twelve survival armor pieces.
+	 * Previous CI exercised portal/world-gen but never checked the actual equipment components.
+	 */
+	@GameTest(maxTicks = 20)
+	public void siftArmorPiecesHaveCorrectSlotsAndDurability(GameTestHelper h) {
+		Item[][] sets = {
+			{ModItems.SIFTER_HOOD, ModItems.SIFTER_ROBE, ModItems.SIFTER_LEGGINGS, ModItems.SIFTER_BOOTS},
+			{ModItems.HUMBLER_ANTENNA, ModItems.HUMBLER_CARAPACE, ModItems.HUMBLER_GREAVES, ModItems.HUMBLER_TARSI},
+			{ModItems.MONARCH_CROWN, ModItems.MONARCH_MANTLE, ModItems.MONARCH_SASH, ModItems.MONARCH_TALONS}
+		};
+		EquipmentSlot[] slots = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
+		ArmorType[] types = {ArmorType.HELMET, ArmorType.CHESTPLATE, ArmorType.LEGGINGS, ArmorType.BOOTS};
+		int[] durabilityBases = {16, 24, 33};
+		for (int set = 0; set < sets.length; set++) {
+			for (int piece = 0; piece < slots.length; piece++) {
+				ItemStack stack = new ItemStack(sets[set][piece]);
+				var equippable = stack.get(DataComponents.EQUIPPABLE);
+				h.assertTrue(equippable != null,
+					Component.literal("missing equippable component: " + stack));
+				h.assertTrue(equippable.slot() == slots[piece],
+					Component.literal("incorrect equipment slot on " + stack));
+				h.assertValueEqual(stack.getMaxStackSize(), 1, Component.literal("armor stack size: " + stack));
+				h.assertValueEqual(stack.getMaxDamage(), types[piece].getDurability(durabilityBases[set]),
+					Component.literal("armor durability: " + stack));
+				h.assertTrue(stack.get(DataComponents.ATTRIBUTE_MODIFIERS) != null,
+					Component.literal("armor missing defense modifiers: " + stack));
+				h.assertTrue(stack.get(DataComponents.REPAIRABLE) != null,
+					Component.literal("armor missing repair component: " + stack));
+			}
+		}
+		h.succeed();
+	}
+
 }
