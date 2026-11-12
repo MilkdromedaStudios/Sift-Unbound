@@ -4,6 +4,11 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-12
+
+### Changed
+- Fix Sift armor visibility and add equipment regression tests
+
 ## [0.4.0] - 2026-11-12
 
 ### Added
