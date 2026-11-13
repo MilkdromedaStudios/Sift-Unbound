@@ -4,6 +4,10 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Changed
+- Replaced all 15 custom creature spawn-egg inventory textures and 8 Sift items with cohesive, higher-detail original 32×32 pixel art. No registry IDs, crafting recipes, or game behavior changed.
+
+
 ## [0.4.1] - 2026-11-12
 
 ### Changed
