@@ -22,6 +22,7 @@ import net.minecraft.util.Mth;
 import com.milkdromedastudios.siftunbound.client.model.NuzzleModel;
 import com.milkdromedastudios.siftunbound.client.model.SingerModel;
 import com.milkdromedastudios.siftunbound.client.model.SlabberModel;
+import com.milkdromedastudios.siftunbound.client.render.IchorTint;
 import com.milkdromedastudios.siftunbound.client.render.SiftMobRenderer;
 import com.milkdromedastudios.siftunbound.entity.EchoGolem;
 import com.milkdromedastudios.siftunbound.entity.Nuzzle;
@@ -104,7 +105,7 @@ public class SiftUnboundClient implements ClientModInitializer {
 			new Material(SiftUnbound.id("block/soul_water_still")),
 			new Material(SiftUnbound.id("block/soul_water_flow")),
 			new Material(SiftUnbound.id("block/soul_water_overlay")),
-			null));
+			new IchorTint()));
 	}
 
 	private static void monarchState(Monarch e, SiftMobRenderState s) {

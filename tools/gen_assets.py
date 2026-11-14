@@ -817,8 +817,8 @@ def gen_advancements():
 
 
 # ============================================================================ dimension + worldgen
-SKY = "#60d5c8"        # vanilla reveal sky (teal) - from palettes.json sift_sky_vanilla
-FOG = "#a8e6dc"
+SKY = "#3fd9cf"        # the reveal's teal sky (palettes.json sift_sky_vanilla), pushed a little richer
+FOG = "#8fe9df"
 BIOMES = ["sift_meadows", "pallid_grove", "soul_wetlands", "husklands", "lullaby_hills", "sifter_canyons"]
 
 
@@ -863,8 +863,8 @@ def gen_dimension():
     # The three Sift tides (Flow -> Endure -> Thrive), each 8000 ticks of the day clock.
     def kf(*pairs):
         return [{"ticks": t, "value": v} for t, v in pairs]
-    flow_sky, endure_sky, thrive_sky = SKY, "#24395c", "#f3a988"
-    flow_fog, endure_fog, thrive_fog = FOG, "#2a3f5a", "#f6c3a6"
+    flow_sky, endure_sky, thrive_sky = SKY, "#1b2f6b", "#ff9a72"
+    flow_fog, endure_fog, thrive_fog = FOG, "#243a6e", "#ffbd98"
     write_json(f"{D}/timeline/sift_tides.json", {
         "clock": "minecraft:overworld",
         "period_ticks": 24000,
@@ -1094,12 +1094,14 @@ def gen_biomes():
                  sorted(local, key=local_order.index), [], [], [],
                  ["sift_unbound:ore_soul_shard", "sift_unbound:dark_sculk_disks"] if name == "husklands" else ["sift_unbound:ore_soul_shard"],
                  [], ["sift_unbound:soul_water_springs"], features_veg, []]
-        attrs = {"minecraft:visual/water_fog_color": "#3f9fa8"}
+        # every region has glowing motes drifting in the air unless it brings its own particles
+        attrs = {"minecraft:visual/water_fog_color": "#2fa7b4", "minecraft:visual/ambient_particles": {
+            "argument": [{"particle": {"type": "minecraft:glow"}, "probability": 0.0005}], "modifier": "append"}}
         attrs.update(extra_attrs or {})
         if spawn:
             attrs["minecraft:gameplay/natural_mob_spawns"] = spawn
         write_json(f"{D}/worldgen/biome/{name}.json", {"attributes": attrs, "carvers": carvers or common, "downfall": 0.4,
-            "effects": {"water_color": water, "grass_color": "#f17582", "foliage_color": "#9fd8ec"},
+            "effects": {"water_color": water, "grass_color": "#f76a7c", "foliage_color": "#8fdcf5"},
             "features": feats, "has_precipitation": False, "temperature": temp})
 
     veg_meadow = ["sift_unbound:patch_short_sift_grass", "sift_unbound:patch_tall_sift_grass", "sift_unbound:patch_lullaby_bloom",

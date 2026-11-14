@@ -11,7 +11,9 @@ const float sunPathRotation = -25.0; // [-40.0 -30.0 -25.0 -15.0 0.0 15.0 25.0]
 // ---- lighting
 #define SIFT_TIDE_LIGHT // In the Sift, the light follows the Flow, Endure and Thrive tides
 #define BLOCKLIGHT_WARMTH 1.0 // [0.0 0.5 1.0 1.5]
-#define WATER_SHINE // Sun glints on water and ichor
+#define WATER_SHINE // Sun glints and sky reflections on water and ichor
+#define SKY_LIGHTING // Surfaces facing the sky pick up its colour; undersides get warm bounced light
+#define EMISSIVE_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
 
 // ---- world
 #define WAVING_PLANTS // Grass, flowers and leaves sway in the wind
@@ -21,8 +23,9 @@ const float sunPathRotation = -25.0; // [-40.0 -30.0 -25.0 -15.0 0.0 15.0 25.0]
 
 // ---- post
 #define EXPOSURE 1.0 // [0.7 0.85 1.0 1.15 1.3]
-#define CONTRAST 1.12 // [0.9 1.0 1.05 1.12 1.2 1.3]
-#define VIBRANCE 1.3 // [0.8 1.0 1.15 1.3 1.5 1.7]
+#define CONTRAST 1.15 // [0.9 1.0 1.05 1.12 1.15 1.2 1.3]
+#define VIBRANCE 1.5 // [0.8 1.0 1.15 1.3 1.5 1.7 2.0]
+#define BLOOM 0.6 // [0.0 0.2 0.4 0.6 0.8 1.0]
 #define SHARPEN 0.4 // [0.0 0.2 0.4 0.6 0.8 1.0]
 #define VIGNETTE 0.25 // [0.0 0.15 0.25 0.4]
 #define FOG_DENSITY 1.0 // [0.0 0.5 1.0 1.5 2.0]

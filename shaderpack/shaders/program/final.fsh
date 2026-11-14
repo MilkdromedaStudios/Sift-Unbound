@@ -5,6 +5,7 @@
 /*
 const int colortex0Format = RGBA16F;
 */
+const bool colortex0MipmapEnabled = true;
 
 uniform sampler2D colortex0;
 uniform float viewWidth;
@@ -26,6 +27,17 @@ void main() {
 	vec3 w = texture2D(colortex0, texcoord - vec2(px.x, 0.0)).rgb;
 	float k = float(SHARPEN) * 0.25;
 	c = max(c * (1.0 + 4.0 * k) - k * (n + s + e + w), vec3(0.0));
+	}
+	if (BLOOM > 0.0) { // bright things bleed light: blurred copies of the picture, keeping only what is bright
+		vec3 glow = vec3(0.0);
+		for (int i = 0; i < 3; i++) {
+			float lod = 3.0 + float(i) * 1.5;
+			float r = exp2(lod) * 0.75;
+			vec3 b = texture2DLod(colortex0, texcoord + px * vec2(r, r), lod).rgb + texture2DLod(colortex0, texcoord + px * vec2(-r, r), lod).rgb
+				+ texture2DLod(colortex0, texcoord + px * vec2(r, -r), lod).rgb + texture2DLod(colortex0, texcoord + px * vec2(-r, -r), lod).rgb;
+			glow += max(b * 0.25 - 0.9, vec3(0.0));
+		}
+		c += glow * BLOOM * 0.22;
 	}
 	c = aces(c * EXPOSURE * 1.1);
 	c = pow(c, vec3(1.0 / 2.2));

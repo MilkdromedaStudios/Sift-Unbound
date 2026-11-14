@@ -4,6 +4,18 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+### Changed
+- **Ichor is an oil film now, not a tiled texture.** Every block of it is tinted by where it is in the world, so ponds
+  drift through teal, blue, violet, pink, gold and green in broad, irregular slicks and no two patches look alike. Its
+  texture is a pale, seamless film. With Sift Unbound Shaders the film also slowly swirls.
+- **A more vivid Sift**: every block texture has richer colour and a little more contrast, the sky and fog of all three
+  tides are deeper (teal Flow, indigo Endure, coral Thrive), grass and leaves are brighter, and glowing motes drift
+  through the air of most regions.
+- **Sift Unbound Shaders overhaul**: bloom (bright things bleed a soft glow), glowing blocks that shine with their own
+  colour (lanterns, glowstone, soul shards, the portal), sky lighting (surfaces facing the sky pick up a hint of its
+  colour, undersides get warm bounce), sunlight glowing through leaves, sky reflections on water and ichor, and more
+  vibrance and contrast by default. New options: Bloom, Sky Lighting, Glowing Blocks.
+
 ## [0.4.2] - 2026-11-13
 
 ### Changed

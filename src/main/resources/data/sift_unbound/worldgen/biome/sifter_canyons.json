@@ -1,6 +1,17 @@
 {
   "attributes": {
-    "minecraft:visual/water_fog_color": "#3f9fa8",
+    "minecraft:visual/water_fog_color": "#2fa7b4",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:glow"
+          },
+          "probability": 0.0005
+        }
+      ],
+      "modifier": "append"
+    },
     "minecraft:gameplay/natural_mob_spawns": {
       "argument": {
         "spawn_costs": {},
@@ -106,8 +117,8 @@
   "downfall": 0.4,
   "effects": {
     "water_color": "#5fd3c8",
-    "grass_color": "#f17582",
-    "foliage_color": "#9fd8ec"
+    "grass_color": "#f76a7c",
+    "foliage_color": "#8fdcf5"
   },
   "features": [
     [],

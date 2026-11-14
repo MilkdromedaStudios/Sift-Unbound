@@ -95,7 +95,26 @@ def from_levels(levels, shades, alpha=None):
     return img
 
 
+def vivid(img, amount=0.32, contrast=0.12):
+    """Makes a block texture pop: more saturation (most on dull pixels, so nothing goes neon) and a touch more contrast."""
+    import colorsys
+    out = img.copy(); px = out.load()
+    for y in range(out.size[1]):
+        for x in range(out.size[0]):
+            r, g, b, a = px[x, y]
+            if a == 0:
+                continue
+            h, l, s_ = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
+            s_ = min(1.0, s_ * (1 + amount * (1 - s_)))
+            l = min(1.0, max(0.0, 0.5 + (l - 0.5) * (1 + contrast)))
+            r, g, b = colorsys.hls_to_rgb(h, l, s_)
+            px[x, y] = (round(r * 255), round(g * 255), round(b * 255), a)
+    return out
+
+
 def save(img, rel):
+    if rel.startswith("block/"):
+        img = vivid(img)
     path = os.path.join(TEX, rel + ".png")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     img.save(path)
@@ -429,29 +448,27 @@ def gen_wood():
 
 # --------------------------------------------------------------------------- soul water + portal (animated)
 def ichor_frame(t, w, seed, flow=False):
-    """One frame of shimmering, oil-on-water style soul water."""
-    ys, xs = np.mgrid[0:w, 0:w] / w
+    """One frame of ichor: a pale, pearly oil film. The colour comes from the game (IchorTint tints every block by its
+    place in the world), so the texture only carries the film's soft bands and streaks, and it tiles without seams."""
     shift = t / 32.0
+    n1 = value_noise(w, w, seed, 2, 2)
+    n2 = value_noise(w, w, seed + 1, 3, 2)
     if flow:
-        ys = (ys - shift) % 1.0
-    n1 = value_noise(w, w, seed, 3, 2)
-    n2 = value_noise(w, w, seed + 1, 2, 2)
-    phase = (n1 * 1.6 + n2 * 0.8 + xs * 0.5 + ys * 0.7 + shift * (1.0 if not flow else 0.3)) % 1.0
-    # rainbow ring of hues taken from the ichor palettes: teal, blue, pink, gold, green
-    stops = [hexrgb("#2fc8d8"), hexrgb("#4a8fe0"), hexrgb("#c45cc0"), hexrgb("#f09ad0"), hexrgb("#e8e070"), hexrgb("#4cc88a"), hexrgb("#2fc8d8")]
+        roll = int(round(shift * w))
+        n1 = np.roll(n1, roll, axis=0); n2 = np.roll(n2, roll, axis=0)
+    phase = (n1 * 1.3 + n2 * 0.7 + (0.0 if flow else shift)) % 1.0
     img = Image.new("RGBA", (w, w)); px = img.load()
     for y in range(w):
         for x in range(w):
-            p = phase[y, x] * (len(stops) - 1)
-            i = int(p)
-            c = mix(stops[i], stops[i + 1], p - i)
-            c = shade(c, 0.85 + 0.25 * n2[y, x])
+            band = 0.5 + 0.5 * np.cos(phase[y, x] * 2 * np.pi)          # soft bright/dark bands
+            streak = 1.0 - 0.35 * max(0.0, 1.0 - abs(phase[y, x] - 0.5) * 14)  # a thin darker oil line
+            v = (0.74 + 0.26 * band) * streak
+            c = (int(255 * v), int(255 * min(1.0, v * 1.02)), int(255 * min(1.0, v * 1.04)))
             px[x, y] = c + (215,)
-    # tiny soul sparkles
     r = rng(seed * 31 + t)
-    for _ in range(3):
+    for _ in range(2):  # tiny soul sparkles
         x, y = int(r.integers(w)), int(r.integers(w))
-        px[x, y] = (240, 255, 255, 230)
+        px[x, y] = (255, 255, 255, 235)
     return img
 
 
