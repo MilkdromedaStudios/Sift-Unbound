@@ -4,6 +4,8 @@ All notable changes to The Sift Unbound. Versions follow `MAJOR.MINOR.PATCH`; th
 
 ## [Unreleased]
 
+## [0.4.3] - 2026-11-14
+
 ### Changed
 - **Ichor is an oil film now, not a tiled texture.** Every block of it is tinted by where it is in the world, so ponds
   drift through teal, blue, violet, pink, gold and green in broad, irregular slicks and no two patches look alike. Its
