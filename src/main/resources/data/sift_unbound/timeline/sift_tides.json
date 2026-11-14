@@ -20,27 +20,27 @@
       "keyframes": [
         {
           "ticks": 600,
-          "value": "#60d5c8"
+          "value": "#3fd9cf"
         },
         {
           "ticks": 7400,
-          "value": "#60d5c8"
+          "value": "#3fd9cf"
         },
         {
           "ticks": 8600,
-          "value": "#24395c"
+          "value": "#1b2f6b"
         },
         {
           "ticks": 15400,
-          "value": "#24395c"
+          "value": "#1b2f6b"
         },
         {
           "ticks": 16600,
-          "value": "#f3a988"
+          "value": "#ff9a72"
         },
         {
           "ticks": 23400,
-          "value": "#f3a988"
+          "value": "#ff9a72"
         }
       ]
     },
@@ -48,27 +48,27 @@
       "keyframes": [
         {
           "ticks": 600,
-          "value": "#a8e6dc"
+          "value": "#8fe9df"
         },
         {
           "ticks": 7400,
-          "value": "#a8e6dc"
+          "value": "#8fe9df"
         },
         {
           "ticks": 8600,
-          "value": "#2a3f5a"
+          "value": "#243a6e"
         },
         {
           "ticks": 15400,
-          "value": "#2a3f5a"
+          "value": "#243a6e"
         },
         {
           "ticks": 16600,
-          "value": "#f6c3a6"
+          "value": "#ffbd98"
         },
         {
           "ticks": 23400,
-          "value": "#f6c3a6"
+          "value": "#ffbd98"
         }
       ]
     },

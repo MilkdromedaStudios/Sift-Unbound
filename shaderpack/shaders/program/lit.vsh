@@ -21,6 +21,7 @@ varying vec3 normal;
 varying vec3 viewPos;
 varying vec4 shadowPos;
 varying float blockId;
+varying vec3 worldPos;
 
 void main() {
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
@@ -48,6 +49,7 @@ void main() {
 #endif
 #endif
 
+	worldPos = playerPos + cameraPosition;
 	viewPos = vpos.xyz;
 	gl_Position = gl_ProjectionMatrix * vpos;
 
